@@ -691,7 +691,7 @@ class Admin extends User {
 	
 		$para = array();
 	
-		if(!empty($var['name'])) {
+		if(!empty($var['name']) && checkHostname($var['name'])) {
 			$para['name'] = $var['name'];
 		}
 	
@@ -823,7 +823,7 @@ class Admin extends User {
 		$vpsList = $this->vpsList();
 		$vps = $vpsList[$id];
 	
-		if(!empty($var['name']) && $var['name'] != $vps['name']) {
+		if(!empty($var['name']) && $var['name'] != $vps['name'] && checkHostname($var['name'])) {
 			$para['name'] = $var['name'];
 		}
 	

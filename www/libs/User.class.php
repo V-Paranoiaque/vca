@@ -255,7 +255,7 @@ class User extends Guest {
 			return null;
 		}
 		
-		if(!empty($var['name']) && $var['name'] != $vps['name']) {
+		if(!empty($var['name']) && $var['name'] != $vps['name'] && checkHostname($var['name'])) {
 			$para['name'] = $var['name'];
 		}
 		

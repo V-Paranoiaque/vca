@@ -117,4 +117,22 @@ function numberSwapSize($size) {
 	}
 }
 
+function checkHostname($name) {
+	//Numeric
+	if(is_numeric($name)) {
+		return false;
+	}
+	//Size
+	elseif(strlen($name) < 3 or strlen($name) > 64) {
+		return false;
+	}
+	//Caracters
+	elseif(!preg_match('/^[a-zA-Z0-9\-]+$/', $name)) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
 ?>
