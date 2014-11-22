@@ -29,9 +29,12 @@ if(!empty($_GET['server']) && is_numeric($_GET['server'])) {
 					_('OS Template').
 				'</div>'.
 				'<div class="col-sm-6"><select name="os" id="os" class="form-control">';
-
-	foreach ($paquet->getAnswer('serverTemplate') as $template) {
-		echo '<option value="'.$template.'">'.$template.'</option>';
+	
+	$templateList = $paquet->getAnswer('serverTemplate');
+	if(!empty($templateList)) {
+		foreach ($templateList as $template) {
+			echo '<option value="'.$template.'">'.$template.'</option>';
+		}
 	}
 	
 	echo
@@ -111,7 +114,7 @@ echo
 		'</div>'.
 	'</div>'.
 	'<div class="center">
-	 	<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button>'.
+	 	<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button> '.
 		 '<button onclick="formVpsAdd('.$_GET['server'].')" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>'.
 	 '</div>';
 

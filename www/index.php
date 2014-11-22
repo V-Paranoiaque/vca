@@ -31,16 +31,6 @@ else {
 	$smarty->assign('vpsNb', 0);
 }
 $smarty->assign('userRank', $paquet->userInfo('rank'));
-$smarty->assign('Togglenavigation', 'Toggle navigation');
-$smarty->assign('Profile', 'Profile');
-$smarty->assign('Help', 'Help');
-$smarty->assign('Logout', 'Logout');
-$smarty->assign('Dashboard', 'Dashboard');
-$smarty->assign('PhysicalServers', 'Physical Servers');
-$smarty->assign('VirtualServers', 'Virtual Servers');
-$smarty->assign('IPAddresses', 'IP Addresses');
-$smarty->assign('Users', 'Users');
-$smarty->assign('Settings', 'Settings');
 
 if($paquet->userInfo('id') == 0) {
 	if(!empty($_GET['page'])) {

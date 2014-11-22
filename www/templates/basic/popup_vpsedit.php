@@ -28,7 +28,7 @@ echo
 _('Vps name').
 			'</div>'.
 			'<div class="col-sm-6">'.
-'<input type="text" class="form-control" name="vps_name" id="vps_name" value="'.$server->name.'">'.
+'<input type="text" class="form-control" name="vps_name" id="vps_name" value="'.$server->name.'" placeholder="'._('Vps name').'">'.
 			'</div>'.
 		'</div>';
 	if($server->serverId > 0) {
@@ -151,7 +151,7 @@ _('CPU units').
 }
 echo 
 '</div><div class="center">
-	 <button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button>'.
+	 <button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button> '.
 	'<button onclick="formVpsEdit('.$server->id.')" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>'.
 '</div>';
 

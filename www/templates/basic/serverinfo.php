@@ -37,10 +37,4 @@ $paquet -> send_actions();
 
 $smarty->assign('serverInfo', $paquet->getAnswer('getServerInfo'));
 
-$smarty->assign('Name',        _('Name'));
-$smarty->assign('Address',     _('Address'));
-$smarty->assign('Save',        _('Save'));
-$smarty->assign('Key',         _('Security key'));
-$smarty->assign('Description', _('Description'));
-
 ?>

@@ -30,15 +30,4 @@ else {
 	$smarty->assign('Title', _('Vps list'));
 }
 
-$smarty->assign('Name', _('Name'));
-$smarty->assign('Ipv4', _('Ipv4'));
-$smarty->assign('Memory', _('Memory'));
-$smarty->assign('Disk', _('Disk'));
-$smarty->assign('OsTemplate', _('Os Template'));
-$smarty->assign('Start', _('Start'));
-$smarty->assign('Stop', _('Stop'));
-$smarty->assign('Restart', _('Restart'));
-$smarty->assign('Delete', _('Delete'));
-$smarty->assign('Informations', _('Informations'))
-
 ?>

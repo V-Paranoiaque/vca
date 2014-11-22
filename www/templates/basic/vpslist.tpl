@@ -1,14 +1,14 @@
 {*Load number modifier*}
 {0|number}
 <div class="col-sm-6">
-	<h2 class="sub-header">{$Title}{if {$userRank>0}} <a href="#" onclick="popupVpsAdd({$serverCurrent})"><span class="glyphicon glyphicon-plus"></span></a>{/if}</h2>
+	<h2 class="sub-header">{$Title}{if {$userRank>0}} <a href="#" onclick="popupVpsAdd({$serverCurrent})" title="{'Create a new Vps'|gettext}"><span class="glyphicon glyphicon-plus"></span></a>{/if}</h2>
 </div>
 
 <div class="col-sm-6">
 	<div id="vpsAll" role="alert" class="alert alert-info center">
-		<a href="#" title="{$Start}"   onclick="popupVpsStartAll({$serverCurrent});"><span class="glyphicon glyphicon-play"></span></a>
-		<a href="#" title="{$Stop}"    onclick="popupVpsStopAll({$serverCurrent});"><span class="glyphicon glyphicon-stop"></span></a>
-		<a href="#" title="{$Restart}" onclick="popupVpsRestartAll({$serverCurrent});"><span class="glyphicon glyphicon-repeat"></span></a>
+		<a href="#" title="{'Start'|gettext}"   onclick="popupVpsStartAll({$serverCurrent});"><span class="glyphicon glyphicon-play"></span></a>
+		<a href="#" title="{'Stop'|gettext}"    onclick="popupVpsStopAll({$serverCurrent});"><span class="glyphicon glyphicon-stop"></span></a>
+		<a href="#" title="{'Restart'|gettext}" onclick="popupVpsRestartAll({$serverCurrent});"><span class="glyphicon glyphicon-repeat"></span></a>
 	</div>
 </div>
 
@@ -20,11 +20,11 @@
 				<tr>
 					<th><input type="checkbox" id="vps_list" /></th>
 					<th></th>
-					<th>{$Name}</th>
-					<th>{$Ipv4}</th>
-					<th>{$Memory}</th>
-					<th>{$Disk}</th>
-					<th>{$OsTemplate}</th>
+					<th>{'Name'|gettext}</th>
+					<th>{'Ipv4'|gettext}</th>
+					<th>{'Memory'|gettext}</th>
+					<th>{'Disk'|gettext}</th>
+					<th>{'Os Template'|gettext}</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -35,23 +35,23 @@
 				  <td>
 				  
 				  {if {$server->nproc} == 0}
-				  	<span class="glyphicon glyphicon-record offline"></span>
+				  	<span class="glyphicon glyphicon-record offline" title="{'Offline'|gettext}"></span>
 				  {else}
-				  	<span class="glyphicon glyphicon-record online"></span>
+				  	<span class="glyphicon glyphicon-record online" title="{'Online'|gettext}"></span>
 				  {/if}
 				  
 				  </td>
-				  <td><a href="/vps/{$server->id}" title="{$Informations}">{$server->name}</a></td>
+				  <td><a href="/vps/{$server->id}" title="{'Informations'|gettext}">{$server->name}</a></td>
 				  <td>{$server->ipv4}</td>
 				  <td>{$server->ramCurrent|numberRamSizeCurrent}/{$server->ram|numberRamSize}</td>
 				  <td>{$server->diskspaceCurrent|numberDiskSpace}/{$server->disk|numberDiskSpace}</td>
 				  <td>{$server->ostemplate}</td>
 				  <td>
-				  	<a href="/vps/{$server->id}" title="{$Informations}"><span class="glyphicon glyphicon-align-justify"></span></a>
-				  	<a href="#" title="{$Start}" onclick="popupVpsStart({$server->serverId}, {$server->id});"><span class="glyphicon glyphicon-play"></span></a>
-				  	<a href="#" title="{$Stop}" onclick="popupVpsStop({$server->serverId}, {$server->id});"><span class="glyphicon glyphicon-stop"></span></a>
-				  	<a href="#" title="{$Restart}" onclick="popupVpsRestart({$server->serverId}, {$server->id});"><span class="glyphicon glyphicon-repeat"></span></a>
-				  	{if {$userRank > 0}}<a href="#" title="{$Delete}" onclick="popupVpsDelete({$server->id});"><span class="glyphicon glyphicon-remove"></span></a>{/if}
+				  	<a href="/vps/{$server->id}" title="{'Informations'|gettext}"><span class="glyphicon glyphicon-align-justify"></span></a>
+				  	<a href="#" title="{'Start'|gettext}" onclick="popupVpsStart({$server->serverId}, {$server->id});"><span class="glyphicon glyphicon-play"></span></a>
+				  	<a href="#" title="{'Stop'|gettext}" onclick="popupVpsStop({$server->serverId}, {$server->id});"><span class="glyphicon glyphicon-stop"></span></a>
+				  	<a href="#" title="{'Restart'|gettext}" onclick="popupVpsRestart({$server->serverId}, {$server->id});"><span class="glyphicon glyphicon-repeat"></span></a>
+				  	{if {$userRank > 0}}<a href="#" title="{'Delete'|gettext}" onclick="popupVpsDelete({$server->id});"><span class="glyphicon glyphicon-remove"></span></a>{/if}
 				  </td>
 				</tr>
 			{/foreach}
@@ -84,44 +84,10 @@ $("#vps_list").change(function () {
 	}
 });
 
-function check_vps_list() {
-	var nb = 0;
-	$(".vps_list").each(function() {
-		if($(this).is(':checked')) {
-			nb = nb + 1
-		}
-	});
-	
-	if(nb == 0) {
-		$("#vpsAll").hide();
-	}
-	else {
-		$("#vpsAll").show();
-	}
-}
-
 $(function() {
 	$("input.vps_list:checked").each(function() {
 		$(this).prop('checked', false);
 	});
 });
-
-function popupVpsStartAll(server_id) {
-	$("input.vps_list:checked").each(function() {
-		popupVpsStart(server_id, $(this).val());
-	});
-}
-
-function popupVpsStopAll(server_id) {
-	$("input.vps_list:checked").each(function() {
-		popupVpsStop(server_id, $(this).val());
-	});
-}
-
-function popupVpsRestartAll(server_id) {
-	$("input.vps_list:checked").each(function() {
-		popupVpsRestart(server_id, $(this).val());
-	});
-}
 
 </script>

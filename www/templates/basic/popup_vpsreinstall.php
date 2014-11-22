@@ -28,7 +28,7 @@ if(!empty($paquet->getAnswer('vpsTemplate'))) {
 	echo '</select>';
 }
 echo '<div class="center">
-	 	<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button>'.
+	 	<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button> '.
 	'<button onclick="formVpsReinstall('.$_GET['vps'].')" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>'.
 	 '</div>';
 

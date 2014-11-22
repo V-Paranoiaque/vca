@@ -33,19 +33,6 @@ else {
 	$smarty->assign('userVps',  null);
 }
 
-$smarty->assign('Userlist', _('User list'));
-$smarty->assign('Modify', _('Modify'));
-$smarty->assign('Vps', _('Vps'));
-$smarty->assign('Name', _('Name'));
-$smarty->assign('Mail', _('Mail'));
-$smarty->assign('Save', _('Save'));
-$smarty->assign('Close', _('Close'));
-$smarty->assign('Novirtualserver', _('No virtual server'));
-$smarty->assign('Userinformations', _('User informations'));
-$smarty->assign('Userpassword', _('User password'));
-$smarty->assign('Newpassword', _('New password'));
-$smarty->assign('Confirm', _('Confirm'));
-$smarty->assign('Informations', _('Informations'));
 $smarty->assign('userUpdate', errorToText($paquet->getAnswer('setUserUpdate')));
 
 ?>

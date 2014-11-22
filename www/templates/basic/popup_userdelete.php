@@ -18,7 +18,7 @@ echo '</div>';
 
 echo '<br/><br/>';
 echo '<div class="center">';
-echo '<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button>';
+echo '<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button> ';
 echo '<button onclick="formUserDelete('.$user->user_id.')" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>';
 echo '</div>';
 

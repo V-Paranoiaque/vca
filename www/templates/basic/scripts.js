@@ -44,6 +44,28 @@ function popupUserDelete(user) {
 
 /*** VPS ***/
 
+function check_vps_list() {
+	var nb = 0;
+	$(".vps_list").each(function() {
+		if($(this).is(':checked')) {
+			nb = nb + 1
+		}
+	});
+	
+	if(nb == 0) {
+		$("#vpsAll").hide();
+	}
+	else {
+		$("#vpsAll").show();
+	}
+}
+
+function popupVpsStartAll(server_id) {
+	$("input.vps_list:checked").each(function() {
+		popupVpsStart(server_id, $(this).val());
+	});
+}
+
 function popupVpsStart(vps) {
 	$.ajax({
 		type: "GET",
@@ -64,6 +86,12 @@ function popupVpsStart(vps) {
 	});
 }
 
+function popupVpsStopAll(server_id) {
+	$("input.vps_list:checked").each(function() {
+		popupVpsStop(server_id, $(this).val());
+	});
+}
+
 function popupVpsStop(vps) {
 	$.ajax({
 		type: "GET",
@@ -81,6 +109,12 @@ function popupVpsStop(vps) {
 		success: function(msg) {
 			setTimeout(function(){ popupVpsReload(vps); }, 2000);
 		}		
+	});
+}
+
+function popupVpsRestartAll(server_id) {
+	$("input.vps_list:checked").each(function() {
+		popupVpsRestart(server_id, $(this).val());
 	});
 }
 
