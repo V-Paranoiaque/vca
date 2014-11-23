@@ -181,7 +181,7 @@ class Server {
 							'quotatime'=> $vps->quotatime,
 							'diskspace'=> $diskspace,
 							'ram'      => $ram,
-							'ram_current' => $vps->physpages,
+							'ram_current' => $vps->ram_current,
 							'swap'     => $swappages,
 							'diskinodes' => $diskinodes,
 							'nproc'    => $vps->nproc,

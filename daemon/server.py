@@ -11,7 +11,7 @@ class Server:
 
     def VpsList():
         VpsList = list()
-        p = subprocess.Popen('vzlist -H -ao ctid,numproc,status,ip,hostname,laverage,diskspace', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        p = subprocess.Popen('vzlist -H -ao ctid,numproc,status,ip,hostname,laverage,diskspace,physpages', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         for line in p.stdout.readlines():
                 vps = re.sub( '\s+', ' ', line.decode()).strip()
                 vpsInfo = vps.split()
@@ -21,8 +21,14 @@ class Server:
                 vpsCurrent.setHostname(vpsInfo[4])
                 vpsCurrent.setLoadavg(vpsInfo[5])
                 vpsCurrent.setDiskspace_current(vpsInfo[6])
+                
+                if vpsInfo[7] == '-':
+                    vpsCurrent.ram_current = 0
+                else:
+                    vpsCurrent.ram_current = int(vpsInfo[7])*4
+                
                 vpsCurrent.loadConf()
-                VpsList.append(vpsCurrent)    
+                VpsList.append(vpsCurrent)
 
         return json.dumps(VpsList, default=encodeVps)
     
