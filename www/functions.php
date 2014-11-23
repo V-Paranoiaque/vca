@@ -67,7 +67,7 @@ function errorToText($erreur_no) {
 		break;
 		
 		case 8:
-			$text = _('new account added');
+			$text = _('New account created');
 		break;
 		
 		case 9:
@@ -105,7 +105,14 @@ function numberRamSize($size) {
 }
 
 function numberRamSizeCurrent($size) {
-	return ceil($size/1024).' '._('MB');
+	$size = $size/1024;
+	
+	if($size < 1024) {
+		return ceil($size).' '._('MB');
+	}
+	else {
+		return (ceil($size/10.24)/100).' '._('GB');
+	}
 }
 
 function numberSwapSize($size) {
