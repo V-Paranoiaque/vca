@@ -21,10 +21,10 @@
 					<th><input type="checkbox" id="vps_list" /></th>
 					<th></th>
 					<th>{'Name'|gettext}</th>
-					<th>{'Ipv4'|gettext}</th>
+					<th>{'IPv4'|gettext}</th>
 					<th>{'Memory'|gettext}</th>
 					<th>{'Disk'|gettext}</th>
-					<th>{'Os Template'|gettext}</th>
+					<th>{'OS Template'|gettext}</th>
 					<th></th>
 				</tr>
 			</thead>

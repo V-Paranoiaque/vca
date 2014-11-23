@@ -1,6 +1,6 @@
 <?php 
 
-$vca_page_title = _('Users Virtual Control Admin');
+$vca_page_title = _('Panel users');
 
 $paquet = new Paquet();
 

@@ -4,7 +4,7 @@ $paquet = new Paquet();
 $paquet -> add_action('ipList');
 $paquet -> send_actions();
 
-$vca_page_title = _('IP Virtual Control Admin');
+$vca_page_title = _('IP management');
 $ipList = $paquet->getAnswer('ipList');
 
 if(!empty($ipList) && sizeof($ipList) > 0) {

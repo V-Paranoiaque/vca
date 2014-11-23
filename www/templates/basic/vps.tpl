@@ -41,7 +41,7 @@
 		</tr>
 		<tr>
 			<td>{'Memory usage'|gettext}</td>
-			<td>{$vps->ramCurrent|numberRamSizeCurrent}/{$vps->ram|numberRamSize} ({'swap'|gettext} : {$vps->swap|numberSwapSize})</td>
+			<td>{$vps->ramCurrent|numberRamSizeCurrent}/{$vps->ram|numberRamSize} ({'Swap'|gettext} : {$vps->swap|numberSwapSize})</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

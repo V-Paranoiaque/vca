@@ -1,6 +1,6 @@
 <?php 
 
-$vca_page_title = _('Add an new User Virtual Control Admin');
+$vca_page_title = _('Add a new user');
 
 if(!empty($_POST['name']) && !empty($_POST['mail'])) {
 	$paquet = new Paquet();

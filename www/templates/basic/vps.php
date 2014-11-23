@@ -1,6 +1,6 @@
 <?php 
 
-$vca_page_title = _('Vps Virtual Control Admin');
+$vca_page_title = _('Virtual server');
 
 $paquet = new Paquet();
 $paquet -> add_action('vpsList');
