@@ -23,7 +23,7 @@ echo
 		'<h3 class="panel-title">'._('General').'</h3>'.
 	'</div>'.
 	'<div class="panel-body">'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Vps name').
 			'</div>'.
@@ -33,7 +33,7 @@ _('Vps name').
 		'</div>';
 	if($server->serverId > 0) {
 echo 
-	'<div class="rows">'.
+	'<div class="row">'.
 			'<div class="col-sm-6">'.
 				_('Owner').
 			'</div>'.
@@ -51,7 +51,7 @@ echo
 		'</div>';
 	}
 echo 
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Start on Boot').
 			'</div>'.
@@ -61,7 +61,7 @@ _('Start on Boot').
 		'</div>';
 	if($server->serverId > 0) {
 echo 
-	'<div class="rows">'.
+	'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Vps IPv4').
 			'</div>'.
@@ -91,7 +91,7 @@ echo
 		'<h3 class="panel-title">'._('Limits').'</h3>'.
 	'</div>'.
 	'<div class="panel-body">'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Ram (MB or GB)').
 			'</div>'.
@@ -99,7 +99,7 @@ _('Ram (MB or GB)').
 '<input type="text" class="form-control" name="ram" id="ram" value="'.numberRamSize($server->ram).'">'.
 			'</div>'.
 		'</div>'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Swap (MB or GB)').
 			'</div>'.
@@ -107,7 +107,7 @@ _('Swap (MB or GB)').
 '<input type="text" class="form-control" name="swap" id="swap" value="'.numberSwapSize($server->swap).'">'.
 			'</div>'.
 		'</div>'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Diskspace (MB or GB)').
 			'</div>'.
@@ -115,7 +115,7 @@ _('Diskspace (MB or GB)').
 '<input type="text" class="form-control" name="diskspace" id="diskspace" value="'.numberDiskSpace($server->diskspace).'">'.
 			'</div>'.
 		'</div>'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Diskinodes').
 			'</div>'.
@@ -123,7 +123,7 @@ _('Diskinodes').
 '<input type="text" class="form-control" name="diskinodes" id="diskinodes" value="'.$server->diskinodes.'">'.
 			'</div>'.
 		'</div>'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Number of CPUs').
 			'</div>'.
@@ -131,7 +131,7 @@ _('Number of CPUs').
 '<input type="text" class="form-control" name="vps_cpus" id="vps_cpus" value="'.$server->cpus.'">'.
 			'</div>'.
 		'</div>'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('CPU limit (100% = 1 CPU)').
 			'</div>'.
@@ -139,7 +139,7 @@ _('CPU limit (100% = 1 CPU)').
 '<input type="text" class="form-control" name="vps_cpulimit" id="vps_cpulimit" value="'.$server->cpulimit.'">'.
 			'</div>'.
 		'</div>'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('CPU units').
 			'</div>'.

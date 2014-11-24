@@ -15,11 +15,11 @@ echo
 		'<h3 class="panel-title">'._('User informations').'</h3>'.
 	'</div>'.
 	'<div class="panel-body">'.
-	  '<div class="rows">'.
+	  '<div class="row">'.
 		  '<div class="col-sm-6">'._('Name').'</div>'.
 		  '<div class="col-sm-6"><input type="text" id="name" class="form-control" name="name" placeholder="'._('Name').'" value="'.$userInfo->user_name.'" required></div>'.
 		  '</div>'.
-	  '<div class="rows">'.
+	  '<div class="row">'.
 		  '<div class="col-sm-6">'._('Mail').'</div>'.
 		  '<div class="col-sm-6"><input type="text" id="mail" class="form-control" name="mail" placeholder="'._('Mail').'" value="'.$userInfo->user_mail.'" required></div>'.
 	  '</div>'.

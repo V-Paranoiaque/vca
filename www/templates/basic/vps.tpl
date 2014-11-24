@@ -7,7 +7,7 @@
 
 	{$vps->name}</h1>
 
-<div class="rows center bs-glyphicons">
+<div class="row center bs-glyphicons">
 	<br/>
 	
 	<a href="#" title="{'Edit'|gettext}"      onclick="popupVpsEdit({$vps->id});"><span class="glyphicon glyphicon-pencil"></span></a>

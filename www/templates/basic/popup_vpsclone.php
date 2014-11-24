@@ -19,13 +19,13 @@ echo
 		'<h3 class="panel-title">'._('Clone').' '.$server->vps_name.'</h3>'.
 	'</div>'.
 	'<div class="panel-body">'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'._('Vps name').'</div>'.
 			'<div class="col-sm-6">'.
 '<input type="text" class="form-control" name="vps_name" id="vps_name" placeholder="'._('Vps name').'">'.
 			'</div>'.
 		'</div>'.
-		'<div class="rows">'.
+		'<div class="row">'.
 			'<div class="col-sm-6">'._('Vps IPv4').'</div>'.
 			'<div class="col-sm-6"><select name="vps_ipv4" id="vps_ipv4" class="form-control"><option value=""></option>';
 			foreach ($ips as $ip) {
