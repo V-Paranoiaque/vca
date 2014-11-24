@@ -489,18 +489,18 @@ msgstr "Limites"
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Ram (MB or GB)"
-msgstr "M&eacute;moire (MB ou GB)"
+msgstr "M&eacute;moire (Mo ou Go)"
 
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Swap (MB or GB)"
-msgstr "M&eacute;moire virtuelle (MB ou GB)"
+msgstr "M&eacute;moire virtuelle (Mo ou Go)"
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Diskspace (MB or GB)"
-msgstr "Espace disque (MB ou GB)"
+msgstr "Espace disque (Mo ou Go)"
 
 #: templates/basic/popup_vpsadd.php
 msgid "Diskspace"
@@ -605,3 +605,15 @@ msgstr "Adresse mail invalide"
 #: functions.php
 msgid "Account username must be between 5 and 25 caracteres"
 msgstr "Les nom des utilisateurs doivent &ecirc;tre entre 5 et 25 caract&egrave;res"
+
+#: functions.php
+msgid "KB"
+msgstr "Ko"
+
+#: functions.php
+msgid "MB"
+msgstr "Mo"
+
+#: functions.php
+msgid "GB"
+msgstr "Go"

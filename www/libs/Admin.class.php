@@ -708,6 +708,9 @@ class Admin extends User {
 	
 		if (!empty($var['ram'])) {
 			$ram = strtolower(str_replace(' ', '', $var['ram']));
+			//Go and Mo compatibility
+			$ram = str_replace('mo', 'mb', $ram);
+			$ram = str_replace('go', 'gb', $ram);
 	
 			//Unlimited
 			if($ram == 0 || $ram == 'unlimited') {
@@ -733,6 +736,9 @@ class Admin extends User {
 	
 		if (!empty($var['swap'])) {
 			$swap = strtolower(str_replace(' ', '', $var['swap']));
+			//Go and Mo compatibility
+			$swap = str_replace('mo', 'mb', $swap);
+			$swap = str_replace('go', 'gb', $swap);
 	
 			//Unlimited
 			if($swap == 0 || $swap == 'unlimited') {
@@ -758,6 +764,9 @@ class Admin extends User {
 	
 		if (!empty($var['diskspace'])) {
 			$diskspace = strtolower(str_replace(' ', '', $var['diskspace']));
+			//Go and Mo compatibility
+			$diskspace = str_replace('mo', 'mb', $diskspace);
+			$diskspace = str_replace('go', 'gb', $diskspace);
 	
 			//Unlimited
 			if($diskspace == 0 || $diskspace == 'unlimited') {
@@ -843,6 +852,9 @@ class Admin extends User {
 	
 		if (isset($var['ram'])) {
 			$ram = strtolower(str_replace(' ', '', $var['ram']));
+			//Go and Mo compatibility
+			$ram = str_replace('mo', 'mb', $ram);
+			$ram = str_replace('go', 'gb', $ram);
 	
 			//Unlimited
 			if($ram == 0 || $ram == 'unlimited') {
@@ -868,6 +880,9 @@ class Admin extends User {
 	
 		if (isset($var['swap'])) {
 			$swap = strtolower(str_replace(' ', '', $var['swap']));
+			//Go and Mo compatibility
+			$swap = str_replace('mo', 'mb', $swap);
+			$swap = str_replace('go', 'gb', $swap);
 	
 			//Unlimited
 			if($swap == 0 || $swap == 'unlimited') {
@@ -893,6 +908,9 @@ class Admin extends User {
 	
 		if (!empty($var['diskspace'])) {
 			$diskspace = strtolower(str_replace(' ', '', $var['diskspace']));
+			//Go and Mo compatibility
+			$diskspace = str_replace('mo', 'mb', $diskspace);
+			$diskspace = str_replace('go', 'gb', $diskspace);
 	
 			//Unlimited
 			if($diskspace == 0 || $diskspace == 'unlimited') {
