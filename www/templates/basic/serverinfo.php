@@ -24,7 +24,7 @@ if(!empty($_GET['server'])) {
 			$para['description'] = $_POST['description'];
 		}
 		
-		$paquet -> add_action('setServerInfo', array($_GET['server'], $para));
+		$paquet -> add_action('serverUpdate', array($_GET['server'], $para));
 	}
 	
 	$paquet -> add_action('getServerInfo', array($_GET['server']));
@@ -35,6 +35,6 @@ else {
 
 $paquet -> send_actions();
 
-$smarty->assign('serverInfo', $paquet->getAnswer('getServerInfo'));
+$smarty->assign('serverInfo', $paquet->getAnswer('serverList')->list->$_GET['server']);
 
 ?>
