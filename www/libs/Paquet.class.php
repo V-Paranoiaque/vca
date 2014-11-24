@@ -81,7 +81,15 @@ class Paquet {
 				define('LANGUAGE', $this->user->language);
 				putenv('LC_ALL='.LANGUAGE);
 				setlocale(LC_ALL, LANGUAGE);
-				bindtextdomain('messages', './lang');
+				
+				//Define current directory
+				$dir = explode("/", $_SERVER["PHP_SELF"]);
+				if($dir[1] == 'templates') {
+					bindtextdomain('messages', '../../lang');
+				}
+				else {
+					bindtextdomain('messages', './lang');
+				}
 				textdomain('messages');
 			}
 		}
