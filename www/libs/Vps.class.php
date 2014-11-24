@@ -3,7 +3,7 @@
 /**
  * VPS class
  * @author mighty
- * Only get/set and display functions
+ * Only get/set functions
  */
 class Vps {
 	
@@ -75,25 +75,12 @@ class Vps {
 		return $this->ram;
 	}
 	
-	function getDisplayRam() {
-		if($this->ram == 0) {
-			return _('unlimited');
-		}
-		else {
-			return $this->ram.' MB';
-		}
-	}
-	
 	function setRam($ram) {
 		$this->ram = $ram;
 	}
 	
 	function getRamCurrent() {
 		return $this->ramCurrent;
-	}
-	
-	function getDisplayRamCurrent() {
-		return ($this->ramCurrent/1024).' MB';
 	}
 	
 	function setRamCurrent($ram) {
@@ -104,36 +91,12 @@ class Vps {
 		return $this->swap;
 	}
 	
-	function getDisplaySwap() {
-		if($this->swap == 0) {
-			return _('unlimited');
-		}
-		else {
-			return ($this->swap/1024).' MB';
-		}
-	}
-	
 	function setSwap($ram) {
 		$this->swap = $ram;
 	}
 	
 	function getDisk() {
 		return nbf(floor($this->disk/1024));
-	}
-	
-	/**
-	 * Return disk space with KB/MB/GB
-	 */
-	function getDisplayDisk() {
-		if($this->disk < 500) {
-			return $this->disk.' KB';
-		}
-		elseif($this->disk < 1000000) {
-			return (ceil($this->disk/10.24)/100).' MB';
-		}
-		else {
-			return (ceil($this->disk/10485.76)/100).' GB';
-		}	
 	}
 	
 	function setDisk($disk) {
@@ -166,23 +129,6 @@ class Vps {
 	
 	function setDiskspaceCurrent($disk) {
 		$this->diskspaceCurrent = $disk;
-	}
-	
-	/**
-	 * Return disk space used, with KB/MB/GB
-	 */
-	function getDiskspaceCurrent() {
-		if($this->diskspaceCurrent < 500) {
-			return $this->diskspaceCurrent.' KB';
-		}
-		elseif($this->diskspaceCurrent < 1000000) {
-			return (ceil($this->diskspaceCurrent/10.24)/100).' MB';
-		}
-		else {
-			return (ceil($this->diskspaceCurrent/10485.76)/100).' GB';
-		}		
-		
-		return $this->diskspaceCurrent;
 	}
 	
 	function getOwner() {
