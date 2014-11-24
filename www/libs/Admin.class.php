@@ -713,7 +713,7 @@ class Admin extends User {
 			$ram = str_replace('go', 'gb', $ram);
 	
 			//Unlimited
-			if($ram == 0 || $ram == 'unlimited') {
+			if($ram == 0 or !preg_match('`[0-9]`', $ram)) {
 				$ram = 0;
 			}
 			//GB
@@ -741,7 +741,7 @@ class Admin extends User {
 			$swap = str_replace('go', 'gb', $swap);
 	
 			//Unlimited
-			if($swap == 0 || $swap == 'unlimited') {
+			if($swap == 0 or !preg_match('`[0-9]`', $swap)) {
 				$swap = 0;
 			}
 			//GB
@@ -769,7 +769,7 @@ class Admin extends User {
 			$diskspace = str_replace('go', 'gb', $diskspace);
 	
 			//Unlimited
-			if($diskspace == 0 || $diskspace == 'unlimited') {
+			if($diskspace == 0 or !preg_match('`[0-9]`', $diskspace)) {
 				$diskspace = 0;
 			}
 			//GB
@@ -857,7 +857,7 @@ class Admin extends User {
 			$ram = str_replace('go', 'gb', $ram);
 	
 			//Unlimited
-			if($ram == 0 || $ram == 'unlimited') {
+			if($ram == 0 or !preg_match('`[0-9]`', $ram)) {
 				$ram = 0;
 			}
 			//GB
@@ -885,7 +885,7 @@ class Admin extends User {
 			$swap = str_replace('go', 'gb', $swap);
 	
 			//Unlimited
-			if($swap == 0 || $swap == 'unlimited') {
+			if($swap == 0 or !preg_match('`[0-9]`', $swap)) {
 				$swap = 0;
 			}
 			//GB
@@ -913,7 +913,7 @@ class Admin extends User {
 			$diskspace = str_replace('go', 'gb', $diskspace);
 	
 			//Unlimited
-			if($diskspace == 0 || $diskspace == 'unlimited') {
+			if($diskspace == 0 or !preg_match('`[0-9]`', $diskspace)) {
 				$diskspace = 0;
 			}
 			//GB

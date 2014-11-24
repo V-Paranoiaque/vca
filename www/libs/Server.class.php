@@ -83,7 +83,7 @@ class Server {
 		if(!empty($data)) {
 			foreach ($data as $vps) {
 				
-				if(empty($vps->diskspace) or $vps->diskspace == 'unlimited') {
+				if(empty($vps->diskspace) or !preg_match('`[0-9]`', $vps->diskspace)) {
 					$diskspace = 0;
 				}
 				else {
@@ -91,14 +91,14 @@ class Server {
 				}
 				
 				//unlimited == 0 memory
-				if(empty($vps->ram) or $vps->ram == 'unlimited') {
+				if(empty($vps->ram) or !preg_match('`[0-9]`', $vps->ram)) {
 					$ram = 0;
 				}
 				else {
 					$ram = $vps->ram;
 				}
 				
-				if(empty($vps->swappages) or $vps->swappages == 'unlimited') {
+				if(empty($vps->swappages) or !preg_match('`[0-9]`', $vps->swappages)) {
 					$swappages = 0;
 				}
 				else {

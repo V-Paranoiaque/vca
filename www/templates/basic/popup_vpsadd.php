@@ -76,7 +76,7 @@ echo
 					_('Ram (MB or GB)').
 				'</div>'.
 				'<div class="col-sm-6">'.
-					'<input type="text" class="form-control" name="ram" id="ram" placeholder="'._('Memory').'" value="unlimited">'.
+					'<input type="text" class="form-control" name="ram" id="ram" placeholder="'._('Memory').'" value="'._('unlimited').'">'.
 				'</div>'.
 			'</div>'.
 			'<div class="rows">'.
@@ -84,7 +84,7 @@ echo
 					_('Swap (MB or GB)').
 				'</div>'.
 				'<div class="col-sm-6">'.
-					'<input type="text" class="form-control" name="swap" id="swap" placeholder="'._('Swap').'" value="unlimited">'.
+					'<input type="text" class="form-control" name="swap" id="swap" placeholder="'._('Swap').'" value="'._('unlimited').'">'.
 				'</div>'.
 			'</div>'.
 			'<div class="rows">'.
