@@ -5,10 +5,10 @@ include('../../functions.php');
 include('../../libs/Paquet.class.php');
 
 $paquet = new Paquet();
-$paquet -> add_action('getUserInfo', array($_GET['user']));
+$paquet -> add_action('userList');
 $paquet -> send_actions();
 
-$user = $paquet->getAnswer('getUserInfo');
+$user = $paquet->getAnswer('userList')->$_GET['user'];
 
 printf('<h3>'._('Delete %s').'</h3>', $user->user);
 
@@ -21,5 +21,9 @@ echo '<div class="center">';
 echo '<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button> ';
 echo '<button onclick="formUserDelete('.$user->user_id.')" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>';
 echo '</div>';
+
+echo '<script type="text/javascript">'.
+'$("#popupTitle").html("'._('Delete an user').'");'.
+'</script>';
 
 ?>

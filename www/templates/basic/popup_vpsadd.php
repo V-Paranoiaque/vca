@@ -119,5 +119,7 @@ echo
 	 '</div>';
 
 }
-
+echo '<script type="text/javascript">'.
+		'$("#popupTitle").html("'._('Create a new Vps').'");'.
+		'</script>';
 ?>

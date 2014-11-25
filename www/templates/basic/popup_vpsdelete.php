@@ -19,4 +19,8 @@ echo '<button onclick="popupclose()" type="button" class="btn btn-danger" data-t
 echo '<button onclick="formVpsDelete('.$server->server_id.', '.$server->id.')" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>';
 echo '</div>';
 
+echo '<script type="text/javascript">'.
+		'$("#popupTitle").html("'._('Delete the Vps').'");'.
+		'</script>';
+
 ?>

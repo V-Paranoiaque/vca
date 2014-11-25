@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+include('../../config.php');
+include('../../functions.php');
+include('../../libs/Paquet.class.php');
 
 if(!empty($_GET['user'])) {
 	$paquet = new Paquet();

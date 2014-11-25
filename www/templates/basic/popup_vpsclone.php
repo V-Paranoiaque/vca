@@ -39,5 +39,7 @@ echo
 	 <button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button> '.
 	'<button onclick="formVpsClone('.$server->server_id.', '.$server->id.')" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>'.
 '</div>';
-
+echo '<script type="text/javascript">'.
+		'$("#popupTitle").html("'._('Clone the Vps').'");'.
+		'</script>';
 ?>

@@ -120,6 +120,7 @@ msgid "User informations"
 msgstr "Informations utilisateur"
 
 #: templates/basic/profile.tpl
+#: templates/basic/popup_profile.php
 msgid "Edit your profile"
 msgstr "Modifier votre profil"
 
@@ -147,6 +148,7 @@ msgid "Server list"
 msgstr "Liste des serveurs"
 
 #: templates/basic/server.tpl
+#: templates/basic/load_serveradd.php
 msgid "Add a new server"
 msgstr "Ajouter un nouveau serveur"
 
@@ -166,6 +168,7 @@ msgid "Reload the server"
 msgstr "Recharger le serveur" 
 
 #: templates/basic/server.tpl
+#: templates/basic/load_serverrestart.php"
 msgid "Restart the server"
 msgstr "Red&eacute;marrer le serveur" 
 
@@ -385,6 +388,8 @@ msgid "Send"
 msgstr "Envoyer"
 
 #: templates/basic/vpslist.tpl
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/load_vpsadd.php
 msgid "Create a new Vps"
 msgstr "Cr&eacute;er un nouveau Vps"
 
@@ -446,7 +451,7 @@ msgstr "Supprimer %s"
 msgid ""
 "If you remove %s from VCA, you will remove all his Vps from VCA but nothing "
 "will be deleted from your server. All informations about this server and his "
-"VPS will be definitly deleted."
+"Vps will be definitly deleted."
 msgstr ""
 "Si vous supprimez %s de VCA, vous allez supprimer toutes les informations des Vps de VCA mais rien"
 "ne sera supprim&eacute; de votre serveur. Toutes les informations &agrave; propos de ce serveur et de ses "
@@ -617,3 +622,116 @@ msgstr "Mo"
 #: functions.php
 msgid "GB"
 msgstr "Go"
+
+#: templates/basic/popup_userdelete.php
+msgid "Delete an user"
+msgstr "Supprimer un utilisateur"
+
+#: templates/basic/popup_ipadd.php
+msgid "Add an IP in VCA"
+msgstr "Ajouter une IP dans VCA"
+
+#: templates/basic/popup_ipdelete.php
+msgid "Remove an IP from VCA"
+msgstr "Supprimer une IP de VCA"
+
+#: templates/basic/popup_vpsdelete.php
+msgid "Delete the Vps"
+msgstr "Supprimer le Vps"
+
+#: templates/basic/popup_vpsedit.php
+msgid "Edit a Vps"
+msgstr "Editer un Vps"
+
+#: templates/basic/popup_vpsreinstall.php
+msgid "Reinstall the Vps"
+msgstr "R&eacute;installer le Vps"
+
+#: templates/basic/popup_serveradd.php
+msgid "Add a new server to VCA"
+msgstr "Ajouter un nouveau serveur dans VCA"
+
+#: templates/basic/popup_serverremove.php
+msgid "Remove the server from VCA"
+msgstr "Supprimer le serveur de VCA"
+
+#: templates/basic/popup_vpsclone.php
+msgid "Clone the Vps"
+msgstr "Cloner le Vps"
+
+#: templates/basic/popup_vpspassword.php
+msgid "Change Vps password"
+msgstr "Changer le mot de passe du Vps"
+
+#: templates/basic/load_vpsstart.php
+msgid "Vps starting"
+msgstr "D&eacute;marrage du Vps en cours"
+
+#: templates/basic/load_vpsstart.php
+msgid "Starting in progress"
+msgstr "D&eacute;marrage en cours"
+
+#: templates/basic/load_vpsstop.php
+msgid "Vps stopping"
+msgstr "Arr&ecirc;t du Vps en cours"
+
+#: templates/basic/load_vpsstop.php
+msgid "Stopping in progress"
+msgstr "Arr&ecirc;t en cours"
+
+#: templates/basic/load_vpsrestart.php
+msgid "Vps restarting"
+msgstr "Red&eacute;marrage du Vps en cours"
+
+#: templates/basic/load_vpsrestart.php
+msgid "Restarting in progress"
+msgstr "Red&eacute;marrage en cours"
+
+#: templates/basic/load_vpscmd.php
+msgid "Send a command"
+msgstr "Envoyer une commande"
+
+#: templates/basic/load_vpscmd.php
+msgid "Command in execution"
+msgstr "Commande en cours d'ex&eacute;cution"
+
+#: templates/basic/load_vpsreinstall.php
+msgid "Vps reinstallation"
+msgstr "R&eacute;installation du Vps"
+
+#: templates/basic/load_vpsreinstall.php
+msgid "Reinstallation in progress"
+msgstr "R&eacute;installation en cours"
+
+#: templates/basic/load_vpsadd.php
+#: templates/basic/load_serveradd.php
+msgid "Creation in progress"
+msgstr "Cr&eacute;ation en cours"
+
+#: templates/basic/load_serverreload.php
+msgid "Server reload"
+msgstr "Rechargement du serveur"
+
+#: templates/basic/load_serverreload.php
+msgid "Reload in progress"
+msgstr "Rechargement en cours"
+
+#: templates/basic/popup_serverrestart.php
+msgid "Do you confirm ?"
+msgstr "Confirmez-vous ?"
+
+#: templates/basic/load_vpsclone.php
+msgid "Cloning Vps"
+msgstr "Clonage d'un Vps"
+
+#: templates/basic/load_vpsclone.php
+msgid "Cloning in progress"
+msgstr "Clonage en cours"
+
+#: templates/basic/load_vpspassword.php
+msgid "Modify Vps root password"
+msgstr "Modifier le mot de passe root du Vps"
+
+#: templates/basic/load_vpspassword.php
+msgid "Modification in progress"
+msgstr "Modification en cours"

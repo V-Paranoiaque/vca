@@ -29,5 +29,7 @@ echo '<div class="center">
 	 	<button onclick="popupclose()" type="button" class="btn btn-danger" data-toggle="dropdown">'._('Cancel').'</button> '.
 	'<button onclick="formProfile()" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>'.
 	 '</div>';
-	
+echo '<script type="text/javascript">'.
+		'$("#popupTitle").html("'._('Edit your profile').'");'.
+		'</script>';
 ?>

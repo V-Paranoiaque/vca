@@ -1,4 +1,11 @@
-<?php 
+<?php
+
+include('../../config.php');
+include('../../functions.php');
+include('../../libs/Paquet.class.php');
+
+$paquet = new Paquet();
+$paquet -> send_actions();
 
 echo '<div class="input-group">
 	<span class="input-group-btn">
@@ -33,6 +40,7 @@ echo '<script type="text/javascript">setTimeout(function() {'.
 '  }'.
 '});'.
 '$(".input-group .input-group-btn .btn").width(width+"px")'.
-'}, 100);</script>';
-
+'}, 100);';
+echo '$("#popupTitle").html("'._('Add a new server to VCA').'");'.
+	'</script>';
 ?>

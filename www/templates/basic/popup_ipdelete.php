@@ -15,4 +15,9 @@ if(!empty($_GET['ip']) && filter_var($_GET['ip'], FILTER_VALIDATE_IP)) {
 else {
 	echo _('Error');
 }
+
+echo '<script type="text/javascript">'.
+		'$("#popupTitle").html("'._('Remove an IP from VCA').'");'.
+		'</script>';
+
 ?>

@@ -35,7 +35,7 @@ function popupUserDelete(user) {
 		data: "user="+user,
 		success: function(msg) {			
 			BootstrapDialog.show({
-				title: 'Delete an user',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -72,12 +72,15 @@ function popupVpsStart(vps) {
 		url: "/templates/basic/form_vpsstart.php",
 		data: "vps="+vps,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Vps starting',
-				message: function(dialog) {
-					var $content = $('<div class="center">Starting in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpsstart.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -98,12 +101,15 @@ function popupVpsStop(vps) {
 		url: "/templates/basic/form_vpsstop.php",
 		data: "vps="+vps,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Vps stoping',
-				message: function(dialog) {
-					var $content = $('<div class="center">Stoping in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpsstart.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -124,12 +130,15 @@ function popupVpsRestart(vps) {
 		url: "/templates/basic/form_vpsrestart.php",
 		data: "vps="+vps,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Vps restarting',
-				message: function(dialog) {
-					var $content = $('<div class="center">Restarting in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpsrestart.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -145,7 +154,7 @@ function popupVpsDelete(vps) {
 		data: "vps="+vps,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Delete the VPS',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -170,7 +179,7 @@ function popupVpsAdd(server) {
 		data: "server="+server,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Create a new VPS',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -184,7 +193,7 @@ function popupVpsEdit(vps) {
 		data: "vps="+vps,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Edit a VPS',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -232,7 +241,7 @@ function popupVpsReinstall(vps) {
 		data: "&vps="+vps,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Reinstall the VPS',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -246,12 +255,15 @@ function formVpsReinstall(vps) {
 		url: "/templates/basic/form_vpsreinstall.php",
 		data: "vps="+vps+"&os="+os,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Vps reinstallation',
-				message: function(dialog) {
-					var $content = $('<div class="center">Reinstallation in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpsreinstall.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -290,12 +302,15 @@ function formVpsAdd(server) {
 		      "&diskspace="+diskspace+"&os="+os+
 		      "&cpus="+vps_cpus+"&cpulimit="+vps_cpulimit,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'New Vps',
-				message: function(dialog) {
-					var $content = $('<div class="center">Creation in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpsadd.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -311,7 +326,7 @@ function popupServerAdd() {
 		url: "/templates/basic/popup_serveradd.php",
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Add a new server to VCA',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -329,12 +344,15 @@ function formServerAdd() {
 		url: "/templates/basic/form_serveradd.php",
 		data: "name="+name+"&address="+address+"&key="+key+"&description="+description,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'New Server',
-				message: function(dialog) {
-					var $content = $('<div class="center">Creation in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_serveradd.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -349,12 +367,15 @@ function popupServerReload(server) {
 		url: "/templates/basic/form_serverreload.php",
 		data: "server="+server,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Server reload',
-				message: function(dialog) {
-					var $content = $('<div class="center">Reload in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_serverreload.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -369,12 +390,15 @@ function popupVpsReload(vps) {
 		url: "/templates/basic/form_vpsreload.php",
 		data: "vps="+vps,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Vps reload',
-				message: function(dialog) {
-					var $content = $('<div class="center">Reload in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_serverreload.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -384,12 +408,16 @@ function popupVpsReload(vps) {
 }
 
 function popupServerRestart(server) {
-	BootstrapDialog.show({
-		title: 'Restart the server',
-		message: function(dialog) {
-			var $content = $('<div class="center">Do you confirm ?<br/><br/><button data-toggle="dropdown" class="btn btn-danger" type="button" onclick="formServerRestart('+server+')">Confirm</button></div>');
-			return $content;
-    	}
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_serverrestart.php",
+		data: "server="+server,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
 	});
 }
 
@@ -411,7 +439,7 @@ function popupServerRemove(server) {
 		data: "server="+server,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Remove the server from VCA',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -435,7 +463,7 @@ function popupIpAdd() {
 		url: "/templates/basic/popup_ipadd.php",
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Add an IP in VCA',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -461,7 +489,7 @@ function popupVpsClone(server, vps) {
 		data: "server="+server+"&vps="+vps,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Clone a Vps in VCA',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -481,12 +509,15 @@ function formVpsClone(server, vps) {
 		url: "/templates/basic/form_vpsclone.php",
 		data: "vps="+vps+"&name="+vps_name+"&ipv4="+vps_ipv4,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Cloning Vps',
-				message: function(dialog) {
-					var $content = $('<div class="center">Cloning in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpsclone.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -502,7 +533,7 @@ function popupIpDelete(ip) {
 		data: "ip="+ip,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Remove an IP from VCA',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -527,7 +558,7 @@ function popupVpsPassword(vps) {
 		data: "vps="+vps,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Change Vps password',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
@@ -541,12 +572,15 @@ function formVpsPassword(vps) {
 		url: "/templates/basic/form_vpspassword.php",
 		data: "vps="+vps+"&password="+password,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Modify Vps root password',
-				message: function(dialog) {
-					var $content = $('<div class="center">Modification in progress</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpspassword.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -562,12 +596,15 @@ function formVpsCmd(server, vps) {
 		url: "/templates/basic/form_vpscmd.php",
 		data: "vps="+vps+"&cmd="+cmd,
 		beforeSend: function(msg) {
-			BootstrapDialog.show({
-				title: 'Send a command',
-				message: function(dialog) {
-					var $content = $('<div class="center">Command in execution</div>');
-					return $content;
-            	}
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_vpscmd.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
 			});
 		},
 		success: function(msg) {
@@ -587,7 +624,7 @@ function popupProfile() {
 		url: "/templates/basic/popup_profile.php",
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: 'Edit your profile',
+				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
 		}
