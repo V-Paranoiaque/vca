@@ -361,6 +361,48 @@ function formServerAdd() {
 	});
 }
 
+function popupServerEdit(server) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_serveredit.php",
+		data: "server="+server,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formServerEdit(server) {
+	var name = $("#name").val();
+	var address = $("#address").val();
+	var key = $("#key").val();
+	var description = $("#description").val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_serveredit.php",
+		data: "server="+server+"&name="+name+"&address="+address+"&key="+key+"&description="+description,
+		beforeSend: function(msg) {
+			$.ajax({
+				type: "GET",
+				url: "templates/basic/load_serveradd.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
+			});
+		},
+		success: function(msg) {
+			location.reload();
+		}
+	});
+}
+
 function popupServerReload(server) {
 	$.ajax({
 		type: "GET",

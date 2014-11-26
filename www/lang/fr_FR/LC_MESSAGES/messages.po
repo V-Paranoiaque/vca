@@ -126,12 +126,12 @@ msgstr "Modifier votre profil"
 
 #: templates/basic/profile.tpl
 #: templates/basic/server.tpl
-#: templates/basic/serverinfo.tpl
 #: templates/basic/user.tpl
 #: templates/basic/useradd.tpl
 #: templates/basic/vpslist.tpl
 #: templates/basic/popup_profile.php
-#: templates/basic/popup_profile.php
+#: templates/basic/popup_serveradd.tpl
+#: templates/basic/popup_serveredit.php
 msgid "Name"
 msgstr "Nom"
 
@@ -153,7 +153,6 @@ msgid "Add a new server"
 msgstr "Ajouter un nouveau serveur"
 
 #: templates/basic/server.tpl
-#: templates/basic/serverinfo.tpl
 msgid "Address"
 msgstr "Addresse"
 
@@ -182,18 +181,16 @@ msgstr "Editer"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: templates/basic/serverinfo.tpl
 #: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
 msgid "Security key"
 msgstr "Cl&eacute; de s&eacute;curit&eacute;"
 
-#: templates/basic/serverinfo.tpl
 #: templates/basic/popup_serveradd.php
-#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
 msgid "Description"
 msgstr "Description"
 
-#: templates/basic/serverinfo.tpl
 #: templates/basic/user.tpl
 #: templates/basic/useradd.tpl
 msgid "Save"
@@ -414,6 +411,7 @@ msgstr "Tableau de bord de Virtual Control Admin"
 #: templates/basic/popup_ipdelete.php
 #: templates/basic/popup_profile.php
 #: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
 #: templates/basic/popup_serverremove.php
 #: templates/basic/popup_userdelete.php
 #: templates/basic/popup_vpsadd.php
@@ -430,16 +428,17 @@ msgid "Delete %s from VCA."
 msgstr "Supprimer % de VCA."
 
 #: templates/basic/popup_serveradd.php
-#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
 msgid "Server name"
 msgstr "Nom du serveur"
 
 #: templates/basic/popup_serveradd.php
-#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
 msgid "IP or Address"
 msgstr "IP ou adresse"
 
 #: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
 msgid "key"
 msgstr "cl&eacute;"
 
@@ -558,10 +557,6 @@ msgstr "R&eacute;installer %s, n'oubliez pas de red&eacute;finir le mot de passe
 #: templates/basic/user.php
 msgid  "Panel users"
 msgstr "Utilisateurs du panel"
-
-#: templates/basic/serverinfo.php
-msgid "Server Virtual Control Admin"
-msgstr "Serveur VCA"
 
 #: templates/basic/server.php
 msgid "Servers Virtual Control Admin"
@@ -735,3 +730,7 @@ msgstr "Modifier le mot de passe root du Vps"
 #: templates/basic/load_vpspassword.php
 msgid "Modification in progress"
 msgstr "Modification en cours"
+
+#: templates/basic/popup_serveredit.php
+msgid "Edit a server"
+msgstr "Editer un serveur"

@@ -51,7 +51,6 @@ else {
 		case 'help':
 		
 		case 'server':
-		case 'serverinfo':
 		case 'ip':
 		
 		case 'vpslist':
