@@ -8,7 +8,6 @@ class Server {
 	private $description;
 	private $nbVps;
 	private $vps;
-	private $owner;
 	private $key;
 	
 	/*** Get/Set ***/
@@ -55,10 +54,6 @@ class Server {
 	
 	function vpsList() {
 		
-	}
-	
-	function setOwner($owner) {
-		$this->owner = $owner;
 	}
 	
 	function getKey() {

@@ -21,7 +21,6 @@ class Vps {
 	private $loadAvg;
 	private $serverId;
 	private $diskspaceCurrent;
-	private $owner=0;
 	
 	function __construct($id) {
 		$this->id = $id;
@@ -133,10 +132,6 @@ class Vps {
 	
 	function getOwner() {
 		return $this->owner;
-	}
-	
-	function setOwner($owner) {
-		$this->owner = $owner;
 	}
 }
 
