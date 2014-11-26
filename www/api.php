@@ -141,7 +141,7 @@ if(!empty($user)) {
 				
 				case 'serverAdd':
 					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2]) && !empty($var[3])) {
-						$user->serverNew($var[0],$var[1],$var[2],$var[3]);
+						$user->serverAdd($var[0],$var[1],$var[2],$var[3]);
 					}
 				break;
 				
@@ -194,7 +194,7 @@ if(!empty($user)) {
 				
 				case 'vpsAdd':
 					if(!empty($var[0]) && !empty($var[1])) {
-						$res = $user->vpsNew($var[0], $var[1]);
+						$res = $user->vpsAdd($var[0], $var[1]);
 					}
 				break;
 				

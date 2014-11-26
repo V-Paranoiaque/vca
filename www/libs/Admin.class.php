@@ -400,7 +400,6 @@ class Admin extends User {
 				'name'        => $name,
 				'address'     => $address,
 				'description' => $description,
-				'owner'       => $this->getId(),
 				'key'         => $key
 		));
 	
