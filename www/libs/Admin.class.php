@@ -430,7 +430,7 @@ class Admin extends User {
 	 * @param all informations
 	 */
 	function serverUpdate($id, $var)  {
-		$servers = $this->serversList();
+		$servers = $this->serverList();
 	
 		if($servers == null) {
 			return null;
