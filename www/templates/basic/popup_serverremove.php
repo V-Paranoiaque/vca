@@ -5,10 +5,10 @@ include('../../functions.php');
 include('../../libs/Paquet.class.php');
 
 $paquet = new Paquet();
-$paquet -> add_action('getServerInfo', array($_GET['server']));
+$paquet -> add_action('serverList');
 $paquet -> send_actions();
 
-$server = $paquet->getAnswer('getServerInfo');
+$server = $paquet->getAnswer('serverList')->list->$_GET['server'];
 
 printf(_('If you remove %s from VCA, you will remove all his Vps from VCA but nothing will be deleted from your server. All informations about this server and his Vps will be definitly deleted.'), '<b>'.$server->name.'</b>'); 
 

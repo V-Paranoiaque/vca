@@ -5,7 +5,7 @@ include('../../functions.php');
 include('../../libs/Paquet.class.php');
 
 $paquet = new Paquet();
-$paquet -> add_action('serverRemove', array($_GET['id']));
+$paquet -> add_action('serverDelete', array($_GET['server']));
 $paquet -> send_actions();
 
 ?>
