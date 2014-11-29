@@ -34,7 +34,7 @@ $smarty->assign('userRank', $paquet->userInfo('rank'));
 
 if($paquet->userInfo('id') == 0) {
 	if(!empty($_GET['page'])) {
-		redirect('');
+		redirect();
 	}
 	else {
 		$page = 'signin';
