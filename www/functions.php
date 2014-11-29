@@ -142,4 +142,26 @@ function checkHostname($name) {
 	}
 }
 
+function tsdate($time, $type=1) {
+	switch (LANGUAGE) {
+		case 'fr_FR':
+			switch($type) {
+				case 1:
+					return strftime('%A %d %B', $time).' à '.
+					strftime('%Hh %M', $time);
+				break;
+			}
+		break;
+		
+		default:
+			switch($type) {
+				case 1:
+					return strftime('%A %d %B', $time).' at '.
+					strftime('%Hh %M', $time);
+				break;
+			}
+		break;
+	}
+}
+
 ?>

@@ -686,3 +686,69 @@ function formProfile() {
 		}
 	});
 }
+
+function popupRequestAdd() {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_requestadd.php",
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formRequestAdd() {
+	var subject = $("#subject").val();
+	var message = $("#message").val();
+	
+	$.ajax({
+		type: "POST",
+		url: "/templates/basic/form_requestadd.php",
+		data: "subject="+subject+"&message="+message,
+		success: function(msg) {
+			location.reload();
+		}		
+	});
+}
+
+function formRequestAnswer(request) {
+	var message = $("#message").val();
+	
+	$.ajax({
+		type: "POST",
+		url: "/templates/basic/form_requestanswer.php",
+		data: "request="+request+"&message="+message,
+		success: function(msg) {
+			$("#message").val('');
+			location.reload();
+		}		
+	});
+}
+
+function popupRequestClose(request) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_requestclose.php",
+		data: "request="+request,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}		
+	});
+}
+
+function formRequestClose(request) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_requestclose.php",
+		data: "request="+request,
+		success: function(msg) {
+			location.reload();
+		}		
+	});
+}

@@ -92,13 +92,22 @@ class User extends Guest {
 		$req->execute(array('user_id' => $this->getId()));
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		$nbVpsStop = $do->nb;
+		
+		$sql = 'SELECT count(request_topic_id) as nb
+		        FROM request_topic
+		        WHERE request_topic_author= :user_id AND request_topic_resolved=0';
+		$req = $link->prepare($sql);
+		$req->execute(array('user_id' => $this->getId()));
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		$request = $do->nb;
 	
 		return array(
 				'nbVps'    => $nbVpsRun+$nbVpsStop,
 				'nbVpsRun' => $nbVpsRun,
 				'nbVpsStop'=> $nbVpsStop,
 				'nbServer' => 0,
-				'nbUser'   => 0
+				'nbUser'   => 0,
+				'request'  => $request
 		);
 	}
 	
@@ -160,6 +169,146 @@ class User extends Guest {
 	function userNew($user_name='', $user_mail='') { return null; }
 	function userDelete($id) { return null; }
 	function userVps($id) { return $this->vpsList(); }
+	
+	/*** Requests ***/
+	
+	function requestList() {
+		$list = array();
+	
+		$link = Db::link();
+		$sql = 'SELECT request_topic_id, request_topic_title, request_topic_created,
+		               request_topic_resolved
+		        FROM request_topic
+		        WHERE request_topic_author=:author
+		        ORDER BY request_topic_id DESC';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+			'author' => $this->getId()
+		));
+		
+		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
+			$list[$do->request_topic_id] = array(
+				'topic'    => $do->request_topic_id,
+				'title'    => $do->request_topic_title,
+				'created'  => $do->request_topic_created,
+				'resolved' => $do->request_topic_resolved
+			);
+		}
+	
+		return $list;
+	}
+	
+	function requestNew($title, $message) {
+		$link = Db::link();
+		
+		$sql = 'INSERT INTO request_topic
+		        (request_topic_title, request_topic_created, request_topic_author)
+		        VALUES
+		        (:title, :created, :author)';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+			'title'   => ucfirst($title),
+			'created' => $_SERVER['REQUEST_TIME'],
+			'author'  => $this->getId()
+		));
+		
+		$request = $link->lastInsertId();
+		
+		$sql = 'INSERT INTO request_message
+		        (request_topic, request_message, request_message_date, request_message_user)
+		        VALUES
+		        (:topic, :message, :date, :user)';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+				'topic'   => $request,
+				'message' => $message,
+				'date'    => $_SERVER['REQUEST_TIME'],
+				'user'    => $this->getId()
+		));
+	}
+	
+	function requestInfo($request) {
+		$link = Db::link();
+		$requestList = $this->requestList();
+		
+		if(empty($requestList[$request])) {
+			return null;
+		}
+		
+		$currentRequest = $requestList[$request];
+		$messages = array();
+
+		$sql = 'SELECT request_message, request_message_date,
+		               user_name, request_message_user,
+		               request_message_read, request_message_id
+		        FROM request_message
+				JOIN user ON request_message_user=user_id
+				WHERE request_topic=:topic
+		        ORDER BY request_message_id DESC';
+		$req = $link->prepare($sql);
+		$req->execute(array('topic' => $request));
+		
+		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
+			$messages[] = array(
+				'message'  => $do->request_message,
+				'date'     => $do->request_message_date,
+				'user_id'  => $do->request_message_user,
+				'user_name'=> $do->user_name
+			);
+			
+			//Unread message
+			if($do->request_message_read == 0 && $do->request_message_user != $this->getId()) {
+				$sql = 'UPDATE request_message
+				        SET request_message_read= :time
+				        WHERE request_message_id= :id';
+				$req = $link->prepare($sql);
+				$req->execute(array(
+						'time' => $_SERVER['REQUEST_TIME'],
+						'id'   => $do->request_message_id
+				));
+			}
+		}
+				
+		return array(
+			'id'       => $request,
+			'title'    => $currentRequest['title'],
+			'resolved' => $currentRequest['resolved'],
+			'messages' => $messages
+		);
+	}
+	
+	function requestAnswer($topic, $message) {
+		$link = Db::link();
+		$requestList = $this->requestList();
+		
+		if(empty($requestList[$topic]) or !empty($requestList[$topic]['resolved'])) {
+			return null;
+		}
+		
+		$sql = 'INSERT INTO request_message
+		        (request_topic, request_message, request_message_date, request_message_user)
+		        VALUES
+		        (:topic, :message, :date, :user)';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+				'topic'   => $topic,
+				'message' => $message,
+				'date'    => $_SERVER['REQUEST_TIME'],
+				'user'    => $this->getId()
+		));
+	}
+	
+	function requestClose($request) {
+		$link = Db::link();
+		$sql = 'UPDATE request_topic
+		        SET request_topic_resolved= :resolved
+		        WHERE request_topic_id= :request';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+			'request'  => $request,
+			'resolved' => $_SERVER['REQUEST_TIME']
+		));
+	}
 	
 	/*** IP ***/
 	function ipFree() { return null; }

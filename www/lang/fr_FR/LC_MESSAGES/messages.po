@@ -734,3 +734,53 @@ msgstr "Modification en cours"
 #: templates/basic/popup_serveredit.php
 msgid "Edit a server"
 msgstr "Editer un serveur"
+
+#: templates/basic/connected_top.tpl
+#: templates/basic/requests.php
+#: templates/basic/requests.tpl
+msgid "Requests"
+msgstr "Requ&ecirc;tes"
+
+#: templates/basic/home.tpl
+msgid "Open requests"
+msgstr "Requ&ecirc;tes ouvertes"
+
+#: templates/basic/requests.tpl
+msgid "Create a new request"
+msgstr "Cr&eacute;er une nouvelle requ&ecirc;te"
+
+#: templates/basic/popup_requestadd.php
+msgid "Your request"
+msgstr "Requ&ecirc;tes"
+
+#: templates/basic/popup_requestadd.php
+msgid "Subject"
+msgstr "Sujet"
+
+#: templates/basic/popup_requestadd.php
+msgid "Message"
+msgstr "Message"
+
+#: templates/basic/requests.tpl
+msgid "You don't have requests"
+msgstr "Vous n'avez pas de requ&circ;te"
+
+#: templates/basic/popup_requestclose.php
+msgid "Close this request"
+msgstr "Fermer cette requ&ecirc;te"
+
+#: templates/basic/requests.tpl
+msgid "Open"
+msgstr "Ouverte"
+
+#: templates/basic/requests.tpl
+msgid "Closed"
+msgstr "Ferm&eacute;e"
+
+#: templates/basic/requests.tpl
+msgid "Author"
+msgstr "Auteur"
+
+#: templates/basic/requests.tpl
+msgid "Status"
+msgstr "Statu"

@@ -37,6 +37,7 @@
 				{else}
 					<li {if $currentPage == 'ip'} class="active" {/if}><a href="/ip" title="{'IP Addresses'|gettext}">{'IP Addresses'|gettext}</a></li>
 				{/if}
+				<li {if $currentPage == 'request'} class="active" {/if}><a href="/request" title="{'Requests'|gettext}">{'Requests'|gettext}</a></li>
 			</ul>
 			{if {$userRank} > 0}
 				<ul class="nav nav-sidebar">

@@ -40,12 +40,21 @@ class Admin extends User {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		$nbVpsStop = $do->nb;
 	
+		$sql = 'SELECT count(request_topic_id) as nb
+		        FROM request_topic
+		        WHERE request_topic_resolved=0';
+		$req = $link->prepare($sql);
+		$req->execute();
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		$request = $do->nb;
+		
 		return array(
 				'nbVps'    => $nbVpsRun+$nbVpsStop,
 				'nbVpsRun' => $nbVpsRun,
 				'nbVpsStop'=> $nbVpsStop,
 				'nbServer' => $nbServer,
-				'nbUser'   => $nbUser
+				'nbUser'   => $nbUser,
+				'request'  => $request
 		);
 	}
 	
@@ -251,6 +260,36 @@ class Admin extends User {
 	function userVps($id) {
 		$user = new User($id);
 		return $user-> vpsList();
+	}
+
+	/*** Requests ***/
+	
+	function requestList() {
+		$list = array();
+	
+		$link = Db::link();
+		$sql = 'SELECT request_topic_id, request_topic_title, request_topic_created,
+		               request_topic_resolved, request_topic_author, user_name, user_id
+		        FROM request_topic
+		        JOIN user ON request_topic_author=user_id
+		        ORDER BY request_topic_id DESC';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+			'author' => $this->getId()
+		));
+		
+		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
+			$list[$do->request_topic_id] = array(
+				'topic'    => $do->request_topic_id,
+				'title'    => $do->request_topic_title,
+				'created'  => $do->request_topic_created,
+				'resolved' => $do->request_topic_resolved,
+				'user_name'=> $do->user_name,
+				'user_id'  => $do->user_id
+			);
+		}
+	
+		return $list;
 	}
 	
 	/*** IP ***/

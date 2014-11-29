@@ -110,6 +110,39 @@ if(!empty($user)) {
 					}
 				break;
 				
+				/*** Requests ***/
+				case 'requestList':
+					$res = $user->requestList();
+				break;
+				
+				case 'requestNew':
+					if(!empty($var[0]) && !empty($var[1])) {
+						$user->requestNew($var[0], $var[1]);
+					}
+				break;
+				
+				case 'requestAnswer':
+					if(!empty($var[0]) && !empty($var[1])) {
+						$user->requestAnswer($var[0], $var[1]);
+					}
+				break;
+				
+				case 'requestInfo':
+					if(!empty($var[0])) {
+						$res = $user->requestInfo($var[0]);
+					}
+				break;
+				
+				case 'requestClose':
+					if(!empty($var[0])) {
+						$requestList = $user->requestList();
+						
+						if(!empty($requestList[$var[0]]) && empty($requestList[$var[0]]['resolved'])) {
+							$user->requestClose($var[0]);
+						}
+					}
+				break;
+				
 				/*** IP ***/
 				
 				case 'ipFree':

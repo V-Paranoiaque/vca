@@ -4,6 +4,9 @@ include('../../config.php');
 include('../../functions.php');
 include('../../libs/Paquet.class.php');
 
+$paquet = new Paquet();
+$paquet -> send_actions();
+
 if(!empty($_GET['ip']) && filter_var($_GET['ip'], FILTER_VALIDATE_IP)) {
 	echo '<div class="center">';
 	printf(_('Delete %s from VCA.'), '<b>'.$_GET['ip'].'</b>'); 

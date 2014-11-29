@@ -772,6 +772,7 @@ class Smarty_Internal_Utility
                 "modifier.truncate.php"                 => true,
                 "modifier.number.php"                   => true,
                 "modifier.gettext.php"                  => true,
+            	"modifier.tsdate.php"                   => true,
                 "modifiercompiler.cat.php"              => true,
                 "modifiercompiler.count_characters.php" => true,
                 "modifiercompiler.count_paragraphs.php" => true,

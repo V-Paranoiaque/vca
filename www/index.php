@@ -52,13 +52,14 @@ else {
 		
 		case 'server':
 		case 'ip':
+		case 'request':
+		case 'requestinfo':
 		
 		case 'vpslist':
 		case 'vps':
 		
 		case 'user':
 		case 'useradd':
-		case 'userdelete':
 			$page = $_GET['page'];
 		break;
 		

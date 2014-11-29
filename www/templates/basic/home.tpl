@@ -16,14 +16,18 @@
 						<td>{'Virtual servers'|gettext}</td>
 						<td>{$vcastats->nbVps}</td>
 					</tr>
+					<tr>
+						<td>{'Open requests'|gettext}</td>
+						<td>{$vcastats->request}</td>
+					</tr>
 				{else}
 					<tr>
 						<td>{'Virtual servers'|gettext}</td>
 						<td>{$vcastats->nbVps}</td>
 					</tr>
 					<tr>
-						<td>&nbsp;</td>
-						<td></td>
+						<td>{'Open requests'|gettext}</td>
+						<td>{$vcastats->request}</td>
 					</tr>
 				{/if}				
 			</tbody></table>
@@ -45,6 +49,9 @@
 					<td>{'Stopped virtual servers'|gettext}</td>
 					<td>{$vcastats->nbVpsStop}</td>
 				</tr>
+				{if {$userRank} > 0}
+					<tr><td>&nbsp;</td><td></td></tr>
+				{/if}
 			</tbody></table>
 			</div>
 		</div>
