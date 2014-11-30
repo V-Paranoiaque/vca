@@ -214,6 +214,23 @@ if(!empty($user)) {
 					}
 				break;
 				
+				/*** Template ***/
+				case 'serverTemplateRename':
+					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {
+						$res = $user->serverTemplateRename($var[0], $var[1], $var[2]);
+					}
+				break;
+				
+				case 'serverTemplateAdd':
+					if(!empty($var[0]) && !empty($var[1])) {
+						$res = $user->serverTemplateAdd($var[0], $var[1]);
+					}
+				
+				case 'serverTemplateDelete':
+					if(!empty($var[0]) && !empty($var[1])) {
+						$res = $user->serverTemplateDelete($var[0], $var[1]);
+					}
+				break;
 				/*** VPS ***/
 				
 				case 'vpsList':

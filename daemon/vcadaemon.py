@@ -134,6 +134,15 @@ def vcaAction(action, serverDest, para):
     elif action == 'templateList':
         if int(serverDest) == 0:
             return Server.templateList()
+    elif action == 'templateRename':
+        if int(serverDest) == 0:
+            Server.templateRename(para['old'], para['new'])
+    elif action == 'templateAdd':
+        if int(serverDest) == 0:
+            Server.templateAdd(para)
+    elif action == 'templateDelete':
+        if int(serverDest) == 0 and para != '':
+            Server.templateDelete(para)
     else:
         return 'Nothing : '+action
     return 'Nothing to return'

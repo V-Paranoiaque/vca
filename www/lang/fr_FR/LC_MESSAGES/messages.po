@@ -288,6 +288,10 @@ msgid "Root password"
 msgstr "Mot de passe root"
 
 #: templates/basic/vps.tpl
+msgid "Backups"
+msgstr "Sauvegardes"
+
+#: templates/basic/vps.tpl
 #: templates/basic/vpslist.tpl
 msgid "Start"
 msgstr "D&eacute;marrer"
@@ -784,3 +788,48 @@ msgstr "Auteur"
 #: templates/basic/requests.tpl
 msgid "Status"
 msgstr "Statu"
+
+#: templates/basic/server.tpl
+msgid "Template list"
+msgstr "Liste des templates"
+
+#: templates/basic/server.php
+msgid "Template management"
+msgstr "Gestion des templates"
+
+#: templates/basic/server.tpl
+#: templates/basic/popup_templateadd.php
+msgid "Add a new template"
+msgstr "Ajouter un nouveau template"
+
+#: templates/basic/popup_templatedelete.php
+msgid "Delete a template"
+msgstr "Supprimer un template"
+
+#: templates/basic/popup_templateedit.php
+msgid "Enter the new name"
+msgstr "Entrer le nouveau nom"
+
+#: templates/basic/popup_templateedit.php
+msgid "Template name"
+msgstr "Nom du template"
+
+#: templates/basic/popup_templateedit.php
+msgid "Rename a template"
+msgstr "Renomer un template"
+
+#: templates/basic/popup_templateedit.php
+msgid "Download this template"
+msgstr "T&eacute;l&eacute;charger ce template"
+
+#: templates/basic/popup_templateedit.php
+msgid "Normal"
+msgstr "Normal"
+
+#: templates/basic/popup_templateedit.php
+msgid "Minimal"
+msgstr "Minimal"
+
+#: templates/basic/popup_templateedit.php
+msgid "Development"
+msgstr "D&eacute;veloppement"

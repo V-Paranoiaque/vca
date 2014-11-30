@@ -31,7 +31,7 @@ function popupUserDelete(user) {
 
 	$.ajax({
 		type: "GET",
-		url: "templates/basic/popup_userdelete.php",
+		url: "/templates/basic/popup_userdelete.php",
 		data: "user="+user,
 		success: function(msg) {			
 			BootstrapDialog.show({
@@ -74,7 +74,7 @@ function popupVpsStart(vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpsstart.php",
+				url: "/templates/basic/load_vpsstart.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -103,7 +103,7 @@ function popupVpsStop(vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpsstart.php",
+				url: "/templates/basic/load_vpsstart.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -132,7 +132,7 @@ function popupVpsRestart(vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpsrestart.php",
+				url: "/templates/basic/load_vpsrestart.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -257,7 +257,7 @@ function formVpsReinstall(vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpsreinstall.php",
+				url: "/templates/basic/load_vpsreinstall.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -304,7 +304,7 @@ function formVpsAdd(server) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpsadd.php",
+				url: "/templates/basic/load_vpsadd.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -346,7 +346,7 @@ function formServerAdd() {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_serveradd.php",
+				url: "/templates/basic/load_serveradd.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -388,7 +388,7 @@ function formServerEdit(server) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_serveradd.php",
+				url: "/templates/basic/load_serveradd.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -411,7 +411,7 @@ function popupServerReload(server) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_serverreload.php",
+				url: "/templates/basic/load_serverreload.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -434,7 +434,7 @@ function popupVpsReload(vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_serverreload.php",
+				url: "/templates/basic/load_serverreload.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -499,6 +499,94 @@ function formServerRemove(server) {
 	});
 }
 
+function popupTemplateAdd(server) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_templateadd.php",
+		data: "server="+server,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formTemplateAdd(server, template) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_templateadd.php",
+		data: "server="+server+"&template="+template,
+		beforeSend: function(msg) {
+			$.ajax({
+				type: "GET",
+				url: "/templates/basic/load_serverreload.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
+			});
+		},
+		success: function(msg) {
+			location.reload();
+		}
+	});
+}
+
+function popupTemplateEdit(server, template) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_templateedit.php",
+		data: "server="+server+"&template="+template,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formTemplateEdit(server, old) {
+	var name = $('#name').val();
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_templateedit.php",
+		data: "server="+server+"&old="+old+"&name="+name,
+		success: function(msg) {
+			location.reload();
+		}		
+	});
+}
+
+function popupTemplateDelete(server, template) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_templatedelete.php",
+		data: "server="+server+"&template="+template,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formTemplateDelete(server, name) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_templatedelete.php",
+		data: "server="+server+"&name="+name,
+		success: function(msg) {
+			location.reload();
+		}		
+	});
+}
+
 function popupIpAdd() {
 	$.ajax({
 		type: "GET",
@@ -553,7 +641,7 @@ function formVpsClone(server, vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpsclone.php",
+				url: "/templates/basic/load_vpsclone.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -616,7 +704,7 @@ function formVpsPassword(vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpspassword.php",
+				url: "/templates/basic/load_vpspassword.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -640,7 +728,7 @@ function formVpsCmd(server, vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "templates/basic/load_vpscmd.php",
+				url: "/templates/basic/load_vpscmd.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',

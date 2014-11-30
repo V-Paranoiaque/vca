@@ -636,6 +636,70 @@ class Admin extends User {
 		return null;
 	}
 	
+	function serverTemplateRename($id, $old, $new) {
+		$link = Db::link();
+		$sql = 'SELECT server_id, server_name, server_address,
+		               server_description, server_key
+		        FROM server
+		        WHERE server_id= :server_id';
+		$req = $link->prepare($sql);
+		$req->execute(array('server_id' => $id));
+		
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(!empty($do->server_id) && checkValideName($old) && checkValideName($new)) {
+			$server = new Server($do->server_id);
+			$server -> setAddress($do->server_address);
+			$server -> setKey($do->server_key);
+			$server -> templateRename($old, $new);
+		}
+	}
+	
+	function serverTemplateAdd($id, $name) {
+		$link = Db::link();
+		$sql = 'SELECT server_id, server_name, server_address,
+		               server_description, server_key
+		        FROM server
+		        WHERE server_id= :server_id';
+		$req = $link->prepare($sql);
+		$req->execute(array('server_id' => $id));
+		
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		if(!empty($do->server_id)) {
+			$ch = curl_init('http://download.openvz.org/template/precreated/'.$name);
+			curl_setopt($ch, CURLOPT_NOBODY, true);
+			curl_exec($ch);
+			$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			curl_close($ch);
+				
+			if($code == 200){
+				$server = new Server($do->server_id);
+				$server -> setAddress($do->server_address);
+				$server -> setKey($do->server_key);
+				$server -> templateAdd($name);
+			}
+		}
+	}
+	
+	function serverTemplateDelete($id, $name) {
+		$link = Db::link();
+		$sql = 'SELECT server_id, server_name, server_address,
+		               server_description, server_key
+		        FROM server
+		        WHERE server_id= :server_id';
+		$req = $link->prepare($sql);
+		$req->execute(array('server_id' => $id));
+		
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(!empty($do->server_id) && checkValideName($name)) {
+			$server = new Server($do->server_id);
+			$server -> setAddress($do->server_address);
+			$server -> setKey($do->server_key);
+			$server -> templateDelete($name);
+		}
+	}
+	
 	/*** VPS ***/
 	
 	/**

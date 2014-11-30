@@ -5,6 +5,7 @@ import json
 import shutil
 import copy
 import time
+import urllib.request
 from vps import Vps 
 
 class Server:
@@ -77,8 +78,16 @@ class Server:
 
         return json.dumps(tpl)
     
-    def templateDelete(self, name):
-        shutil.rmtree('/vz/template/cache/'+name+'.tar.gz')
+    def templateRename(oldName, newName):
+        shutil.move('/vz/template/cache/'+oldName+'.tar.gz', '/vz/template/cache/'+newName+'.tar.gz')
+    
+    def templateAdd(name):
+        g = urllib.request.urlopen('http://download.openvz.org/template/precreated/'+name)
+        with open('/vz/template/cache/'+name, 'b+w') as f:
+            f.write(g.read())
+    
+    def templateDelete(name):
+        os.remove('/vz/template/cache/'+name+'.tar.gz')
         
     def templateDownload(self):
         vps = Vps(newId)

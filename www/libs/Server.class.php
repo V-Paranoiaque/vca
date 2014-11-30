@@ -201,6 +201,35 @@ class Server {
 		return $data;
 	}
 	
+	/**
+	 * Rename a template
+	 * @param old name
+	 * @param new name
+	 */
+	function templateRename($old, $new) {
+		$para = array('old' => $old, 'new' => $new);
+		$connect = new Socket($this->address, PORT, $this->key);
+		$connect -> write('templateRename', 0, $para);
+	}
+	
+	/**
+	 * Add a template
+	 * @param template name
+	 */
+	function templateAdd($name) {
+		$connect = new Socket($this->address, PORT, $this->key);
+		$connect -> write('templateAdd', 0, $name);
+	}
+	
+	/**
+	 * Delete a template
+	 * @param template name
+	 */
+	function templateDelete($name) {
+		$connect = new Socket($this->address, PORT, $this->key);
+		$connect -> write('templateDelete', 0, $name);
+	}
+	
 	/*** Vps functions ***/
 	
 	/**

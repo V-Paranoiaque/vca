@@ -19,6 +19,7 @@
 				  <td>{$server->nbvps}</td>
 				  <td>
 				  	<a href="/vpslist/{$server->id}" title="{'Vps list'|gettext}"><span class="glyphicon glyphicon-align-justify"></span></a>
+				  	<a href="/template/{$server->id}" title="{'Template list'|gettext}"><span class="glyphicon glyphicon-folder-open"></span></a>
 				  	<a href="#" title="{'Reload the server'|gettext}" onclick="popupServerReload({$server->id});"><span class="glyphicon glyphicon-refresh"></span></a>
 				  	<a href="#" title="{'Restart the server'|gettext}" onclick="popupServerRestart({$server->id});"><span class="glyphicon glyphicon-repeat"></span></a>
 				  	<a href="#" title="{'Edit'|gettext}" onclick="popupServerEdit({$server->id});"><span class="glyphicon glyphicon-pencil"></span></a>

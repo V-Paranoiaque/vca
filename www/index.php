@@ -51,6 +51,7 @@ else {
 		case 'help':
 		
 		case 'server':
+		case 'template':
 		case 'ip':
 		case 'request':
 		case 'requestinfo':
