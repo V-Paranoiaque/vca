@@ -713,28 +713,30 @@ class Admin extends User {
 		
 		if($server == 0) {
 			$sql = 'SELECT vps_id, vps_name, vps_ipv4, vps_description,
-			               user_id, server_id, last_maj, ram,
+			               user_id, vps.server_id, last_maj, ram,
 			               ram_current, ostemplate, diskspace, nproc,
 			               vps.server_id, user_name, vps_cpus as cpus,
 			               diskspace_current, loadavg,
 			               swap, onboot, diskinodes, vps_cpulimit,
-					       vps_cpuunits
+					       vps_cpuunits, server_name
 			        FROM vps
-					LEFT JOIN user ON vps_owner=user_id';
+					LEFT JOIN user ON vps_owner=user_id
+			        JOIN server ON server.server_id=vps.server_id';
 			$req = $link->prepare($sql);
 			$req->execute();
 		}
 		else {
 			$sql = 'SELECT vps_id, vps_name, vps_ipv4, vps_description,
-			               user_id, server_id, last_maj, ram,
+			               user_id, vps.server_id, last_maj, ram,
 			               ram_current, ostemplate, diskspace, nproc,
 			               vps.server_id, user_name, vps_cpus as cpus,
 			               diskspace_current, loadavg,
 			               swap, onboot, diskinodes, vps_cpulimit,
-					       vps_cpuunits
+					       vps_cpuunits, server_name
 			        FROM vps
 					LEFT JOIN user ON vps_owner=user_id
-			        WHERE server_id= :server_id';
+			        JOIN server ON server.server_id=vps.server_id
+			        WHERE vps.server_id= :server_id';
 			$req = $link->prepare($sql);
 			$req->execute(array('server_id' => $server));
 		}
@@ -751,6 +753,7 @@ class Admin extends User {
 				'disk'        => $do->diskspace,
 				'nproc'       => $do->nproc,
 				'serverId'    => $do->server_id,
+				'serverName'  => $do->server_name,
 				'ownerId'     => $do->user_id,
 				'ownerName'   => $do->user_name,
 				'loadavg'     => $do->loadavg,
