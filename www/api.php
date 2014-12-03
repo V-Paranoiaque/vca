@@ -313,6 +313,42 @@ if(!empty($user)) {
 						$res = $user->vpsReinstall($var[0],$var[1]);
 					}
 				break;
+				
+				case 'vpsBackup':
+					if(!empty($var[0])) {
+						$list = $user->vpsList();
+						if(!empty($list[$var[0]])) {
+							$res = $user->vpsBackup($var[0]);
+						}
+					}
+				break;
+				
+				case 'vpsBackupAdd':
+					if(!empty($var[0])) {
+						$list = $user->vpsList();
+						if(!empty($list[$var[0]])) {
+							$res = $user->vpsBackupAdd($var[0]);
+						}
+					}
+				break;
+				
+				case 'vpsBackupRestore':
+					if(!empty($var[0]) && !empty($var[1])) {
+						$list = $user->vpsList();
+						if(!empty($list[$var[0]])) {
+							$res = $user->vpsBackupRestore($var[0], $var[1]);
+						}
+					}
+				break;
+				
+				case 'vpsBackupDelete':
+					if(!empty($var[0]) && !empty($var[1])) {
+						$list = $user->vpsList();
+						if(!empty($list[$var[0]])) {
+							$res = $user->vpsBackupDelete($var[0], $var[1]);
+						}
+					}
+				break;
 			}
 			
 			if(isset($res)) {

@@ -166,7 +166,7 @@ function tsdate($time, $type=1) {
 			switch($type) {
 				case 1:
 					return strftime('%A %d %B', $time).' à '.
-					strftime('%Hh %M', $time);
+					strftime('%H:%M', $time);
 				break;
 			}
 		break;
@@ -175,7 +175,7 @@ function tsdate($time, $type=1) {
 			switch($type) {
 				case 1:
 					return strftime('%A %d %B', $time).' at '.
-					strftime('%Hh %M', $time);
+					strftime('%H:%M', $time);
 				break;
 			}
 		break;

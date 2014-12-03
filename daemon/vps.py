@@ -2,6 +2,8 @@ import subprocess
 import json
 import shutil
 import os
+import time
+import uuid
 
 class Vps:
     
@@ -219,4 +221,33 @@ class Vps:
         self.destroy()
         subprocess.call('vzctl create '+str(self.id)+' --ostemplate '+ostpl+' --config '+str(self.id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         os.remove('/etc/vz/conf/ve-'+str(self.id)+'.conf-sample')
+    
+    def backupAdd(self):
+        time = str(int(time.time()))
+        name = "ve-dump."+self.id+"."+time
+        path = "/vz/dump/"+name
+        random = str(uuid.uuid4())
+        os.mkdir(path)
+        subprocess.Popen('cp -r /vz/private/'+self.id+'/root.hdd/* '+path+'/', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        subprocess.Popen('tar cf '+path+'.tar '+path, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        subprocess.Popen('rm -rf '+path, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    
+    def backupDelete(self, name):
+        if os.path.isfile('/vz/dump/ve-dump.'+self.id+'.'+name+'.tar'):
+            os.remove('/vz/dump/ve-dump.'+self.id+'.'+name+'.tar')
         
+    def backupList(self):
+        backup=[]
+        begin = 've-dump.'+self.id+'.'
+        for root, dirnames, files in os.walk('/vz/dump/'):
+            for i in files:
+                if i.endswith(".tar") and i.startswith(begin):
+                    backup.append(i)
+        return json.dumps(backup)
+    
+    def backupRestore(self, name):
+        if os.path.isfile('/vz/dump/ve-dump.'+self.id+'.'+name+'.tar'):
+            subprocess.call('rm -rf /vz/private/'+self.id+'/root.hdd/*', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            subprocess.call('tar -xf /vz/dump/ve-dump.'+self.id+'.'+name+'.tar -C /vz/dump/', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            subprocess.call('cp -r /vz/dump/vz/dump/ve-dump.'+self.id+'.'+name+'/ /vz/private/'+self.id+'/root.hdd/', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            subprocess.call('rm -rf /vz/dump/vz/dump/ve-dump.'+self.id+'.'+name, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

@@ -660,6 +660,82 @@ class User extends Guest {
 		
 		return $do->nb;
 	}
+	
+	function vpsBackup($idVps) {
+		$link = Db::link();
+	
+		$sql = 'SELECT vps_id, server.server_id, server_address,
+		               server_key, vps_owner
+		        FROM vps
+		        JOIN server ON server.server_id=vps.server_id
+		        WHERE vps_id= :id';
+		$req = $link->prepare($sql);
+		$req->execute(array('id' => $idVps));
+		$do = $req->fetch(PDO::FETCH_OBJ);
+	
+		if(!empty($do->server_id)) {
+			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect -> write('backupList', $do->vps_id);
+			return $data = json_decode($connect -> read());
+		}
+	}
+	
+	function vpsBackupAdd($idVps) {
+		$link = Db::link();
+	
+		$sql = 'SELECT vps_id, server.server_id, server_address,
+		               server_key, vps_owner
+		        FROM vps
+		        JOIN server ON server.server_id=vps.server_id
+		        WHERE vps_id= :id';
+		$req = $link->prepare($sql);
+		$req->execute(array('id' => $idVps));
+		$do = $req->fetch(PDO::FETCH_OBJ);
+	
+		if(!empty($do->server_id)) {
+			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect -> write('backupAdd', $do->vps_id);
+			return $data = json_decode($connect -> read());
+		}
+	}
+	
+	function vpsBackupRestore($idVps, $name) {
+		$link = Db::link();
+	
+		$sql = 'SELECT vps_id, server.server_id, server_address,
+		               server_key, vps_owner
+		        FROM vps
+		        JOIN server ON server.server_id=vps.server_id
+		        WHERE vps_id= :id';
+		$req = $link->prepare($sql);
+		$req->execute(array('id' => $idVps));
+		$do = $req->fetch(PDO::FETCH_OBJ);
+	
+		if(!empty($do->server_id)) {
+			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect -> write('backupRestore', $do->vps_id, $name);
+			return $data = json_decode($connect -> read());
+		}
+	}
+	
+	function vpsBackupDelete($idVps, $name) {
+		$link = Db::link();
+	
+		$sql = 'SELECT vps_id, server.server_id, server_address,
+		               server_key, vps_owner
+		        FROM vps
+		        JOIN server ON server.server_id=vps.server_id
+		        WHERE vps_id= :id';
+		$req = $link->prepare($sql);
+		$req->execute(array('id' => $idVps));
+		$do = $req->fetch(PDO::FETCH_OBJ);
+	
+		if(!empty($do->server_id)) {
+			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect -> write('backupDelete', $do->vps_id, $name);
+			return $data = json_decode($connect -> read());
+		}
+	}
 }
 
 ?>

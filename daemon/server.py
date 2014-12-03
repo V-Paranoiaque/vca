@@ -59,13 +59,6 @@ class Server:
         vps = Vps(newId)
         vps.stop()
         vps.destroy()
-
-    def vpsBackup(self, id):
-        subprocess.Popen('vzdump '+id, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        
-    #TODO
-    def vpsBackupList(self, id):
-        vps = Vps(od)
     
     def templateCreate(self, id, name):
         subprocess.Popen('cd /vz/private/'+id+'/ && tar czf /vz/template/cache/'+name+'.tar.gz .', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

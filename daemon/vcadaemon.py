@@ -143,6 +143,34 @@ def vcaAction(action, serverDest, para):
     elif action == 'templateDelete':
         if int(serverDest) == 0 and para != '':
             Server.templateDelete(para)
+    elif action == 'backupAdd':
+        if int(serverDest) > 0 :
+            pid  = subprocess.Popen('vzlist -H -ao numproc '+serverDest, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            pid  = pid.strip()
+            server = Vps(serverDest)
+            if pid != '-':
+                server.stop()
+            server.backupAdd()
+            if pid != '-':
+                server.start()
+    elif action == 'backupDelete':
+        if int(serverDest) > 0 and int(para) > 0:
+            server = Vps(serverDest)
+            server.backupDelete(para)
+    elif action == 'backupList':
+        if int(serverDest) > 0 :
+            server = Vps(serverDest)
+            return server.backupList()
+    elif action == 'backupRestore':
+        if int(serverDest) > 0 and int(para) > 0:
+            pid  = str(subprocess.call('vzlist -H -ao numproc '+serverDest, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT))
+            pid  = pid.strip()
+            server = Vps(serverDest)
+            if pid != '-':
+                server.stop()
+            server.backupRestore(para)
+            if pid != '-':
+                server.start()
     else:
         return 'Nothing : '+action
     return 'Nothing to return'

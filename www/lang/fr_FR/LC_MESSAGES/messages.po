@@ -833,3 +833,35 @@ msgstr "Minimal"
 #: templates/basic/popup_templateedit.php
 msgid "Development"
 msgstr "D&eacute;veloppement"
+
+#: templates/basic/load_backuprestore.php
+msgid "Restoration in progress"
+msgstr "Restauration en cours"
+
+#: templates/basic/load_backupadd.php
+msgid "Backup in progress"
+msgstr "Sauvegarde en cours"
+
+#: templates/basic/popup_backupdelete.php
+msgid "Delete a backup"
+msgstr "Effacer une sauvegarde"
+
+#: templates/basic/popup_backuprestore.php
+msgid "Restore a backup"
+msgstr "Restaurer une sauvegarde"
+
+#: templates/basic/popup_backuprestore.php
+msgid "Restore %s"
+msgstr "Restaurer %s"
+
+#: templates/basic/popup_backuplist.php
+msgid "Backups management"
+msgstr "Gestion des sauvegardes"
+
+#: templates/basic/popup_backuplist.php
+msgid "Create a new backup"
+msgstr "Cr&eacuteer une nouvelle sauvegarde"
+
+#: templates/basic/popup_backuplist.php
+msgid "Restore"
+msgstr "Restaurer"

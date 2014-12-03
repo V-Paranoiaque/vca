@@ -748,6 +748,107 @@ function formVpsCmd(server, vps) {
 	});
 }
 
+function popupBackupList(vps) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_backuplist.php",
+		data: "vps="+vps,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formBackupAdd(vps) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_backupadd.php",
+		data: "vps="+vps,
+		beforeSend: function(msg) {
+			$.ajax({
+				type: "GET",
+				url: "/templates/basic/load_backupadd.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
+			});
+		},
+		success: function(msg) {
+			popupclose();
+			popupBackupList(vps);
+		}
+	});
+}
+
+function popupBackupRestore(vps, name) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_backuprestore.php",
+		data: "vps="+vps+"&name="+name,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formBackupRestore(vps, name) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_backuprestore.php",
+		data: "vps="+vps+"&name="+name,
+		beforeSend: function(msg) {
+			$.ajax({
+				type: "GET",
+				url: "/templates/basic/load_backuprestore.php",
+				success: function(msg) {			
+					BootstrapDialog.show({
+						title: '<div id="popupTitle"></div>',
+						message: msg
+					});
+				}
+			});
+		},
+		success: function(msg) {
+			location.reload()
+		}
+	});
+}
+
+function popupBackupDelete(vps, name) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_backupdelete.php",
+		data: "vps="+vps+"&name="+name,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formBackupDelete(vps, name) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_backupdelete.php",
+		data: "vps="+vps+"&name="+name,
+		success: function(msg) {
+			popupclose();
+			popupBackupList(vps);
+		}
+	});
+}
+
 function popupProfile() {
 	$.ajax({
 		type: "GET",
