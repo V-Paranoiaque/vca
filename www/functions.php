@@ -165,7 +165,7 @@ function tsdate($time, $type=1) {
 		case 'fr_FR':
 			switch($type) {
 				case 1:
-					return strftime('%A %d %B', $time).' à '.
+					return utf8_encode(strftime('%A %d %B', $time)).' à '.
 					strftime('%H:%M', $time);
 				break;
 			}
