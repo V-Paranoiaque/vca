@@ -138,7 +138,7 @@ class User extends Guest {
 	 * @param user mail
 	 * @return error
 	 */
-	function userUpdate($id, $user_name='', $user_mail='') {
+	function userUpdate($id, $user_name='', $user_mail='', $language='') {
 		$link = Db::link();
 		$id = $this->getId();
 		
@@ -152,14 +152,22 @@ class User extends Guest {
 			return 10;
 		}
 		
+		$languageList = self::languageList();
+		
+		if(empty($language) or empty($languageList[$language])) {
+			$language = $this->language;
+		}
+		
 		$sql = 'UPDATE user
 		        SET user_name= :user_name,
-		            user_mail= :user_mail
+		            user_mail= :user_mail,
+		            user_language=:user_language
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
 		$req->execute(array(
 				'user_name' => $user_name,
 				'user_mail' => $user_mail,
+				'user_language' => $language,
 				'user_id'   => $id
 		));
 	
@@ -169,6 +177,31 @@ class User extends Guest {
 	function userNew($user_name='', $user_mail='') { return null; }
 	function userDelete($id) { return null; }
 	function userVps($id) { return $this->vpsList(); }
+	
+	function userLanguage($lang) {
+		$link = Db::link();
+		$langList = self::languageList();
+		
+		if(!empty($langList[$lang])) {
+			$sql = 'UPDATE user
+			        SET user_language= :user_language
+			        WHERE user_id= :user_id';
+			$req = $link->prepare($sql);
+			$req->execute(array(
+					'user_language' => $lang,
+					'user_id'       => $id
+			));
+		}
+	}
+	
+	/*** Language ***/
+	
+	static function languageList() {
+		return array(
+			'en_GB' => 'English',
+			'fr_FR' => 'Français'
+		);
+	}
 	
 	/*** Requests ***/
 	

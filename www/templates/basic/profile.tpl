@@ -15,6 +15,10 @@
 			<td>{'Mail'|gettext}</td>
 			<td>{$userInfo->user_mail}</td>
 		</tr>
+		<tr>
+			<td>{'Language'|gettext}</td>
+			<td>{$languageList->{$language}}</td>
+		</tr>
 	</table>
 	</div>
 </div>

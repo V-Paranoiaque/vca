@@ -865,11 +865,12 @@ function popupProfile() {
 function formProfile() {
 	var name = $("#name").val();
 	var mail = $("#mail").val();
+	var language = $("#language").val();
 	
 	$.ajax({
 		type: "GET",
 		url: "/templates/basic/form_profile.php",
-		data: "name="+name+"&mail="+mail,
+		data: "name="+name+"&mail="+mail+"&language="+language,
 		success: function(msg) {
 			location.reload();
 		}

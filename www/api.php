@@ -76,7 +76,10 @@ if(!empty($user)) {
 						if(empty($var[0])) {
 							$var[0] = 0;
 						}
-						$res = $user->userUpdate($var[0], trim(ucfirst($var[1])), trim(strtolower($var[2])));
+						if(empty($var[3])) {
+							$var[3] = '';
+						}
+						$res = $user->userUpdate($var[0], trim(ucfirst($var[1])), trim(strtolower($var[2])), $var[3]);
 					}
 					else {
 						$res = 4;
@@ -108,6 +111,17 @@ if(!empty($user)) {
 					else {
 						$res = 6;
 					}
+				break;
+				
+				case 'userLanguage':
+					if(!empty($var[0])) {
+						$res = $user->userLanguage($var[0]);
+					}
+				break;
+				
+				/*** Language ***/
+				case 'languageList':
+					$res = User::languageList();
 				break;
 				
 				/*** Requests ***/

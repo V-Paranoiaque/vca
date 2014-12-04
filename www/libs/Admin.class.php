@@ -143,7 +143,7 @@ class Admin extends User {
 	 * @param user mail
 	 * @return error
 	 */
-	function userUpdate($id, $user_name='', $user_mail='') {
+	function userUpdate($id, $user_name='', $user_mail='', $language='') {
 	
 		if(empty($id)) {
 			$id = $this->getId();
@@ -160,25 +160,33 @@ class Admin extends User {
 		}
 		
 		$link = Db::link();
-		$sql = 'SELECT user_id
+		$sql = 'SELECT user_id, user_language
 		        FROM user
 		        WHERE user_name= :user_name';
 		$req = $link->prepare($sql);
 		$req->execute(array('user_name' => $user_name));
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
-		if(!empty($do->user_id)) {
+		if(!empty($do->user_id) && $do->user_id != $id) {
 			return 2;
+		}
+		
+		$languageList = User::languageList();
+		
+		if(empty($language) or empty($languageList[$language])) {
+			$language = $do->user_language;
 		}
 		
 		$sql = 'UPDATE user
 		        SET user_name= :user_name,
-		            user_mail= :user_mail
+		            user_mail= :user_mail,
+		            user_language=:user_language
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
 		$req->execute(array(
 				'user_name' => $user_name,
 				'user_mail' => $user_mail,
+				'user_language' => $language,
 				'user_id'   => $id
 		));
 	

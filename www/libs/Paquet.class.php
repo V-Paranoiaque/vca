@@ -95,6 +95,12 @@ class Paquet {
 		}
 	}
 	
+	function getLanguage() {
+		if(defined('LANGUAGE')) {
+			return LANGUAGE;
+		}
+	}
+	
 	function getAnswer($action='', $num=0) {
 		if(!empty($this->answer) && !empty($this->answer->$action)) {
 			if(!empty($num)) {

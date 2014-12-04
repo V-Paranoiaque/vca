@@ -6,8 +6,10 @@ include('../../libs/Paquet.class.php');
 
 $paquet = new Paquet();
 $paquet -> add_action('userProfile');
+$paquet -> add_action('languageList');
 $paquet -> send_actions();
 $userInfo = $paquet->getAnswer('userProfile');
+$languageList = $paquet->getAnswer('languageList');
 
 echo 
 '<div class="panel panel-danger">'.
@@ -23,6 +25,16 @@ echo
 		  '<div class="col-sm-6">'._('Mail').'</div>'.
 		  '<div class="col-sm-6"><input type="text" id="mail" class="form-control" name="mail" placeholder="'._('Mail').'" value="'.$userInfo->user_mail.'" required></div>'.
 	  '</div>'.
+	  '<div class="row">'.
+		  '<div class="col-sm-6">'._('Langue').'</div>'.
+		  '<div class="col-sm-6"><select id="language" class="form-control">';;
+
+foreach ($languageList as $locale => $name) {
+	echo '<option value="'.$locale.'">'.$name.'</option>';
+}
+
+echo '</select></div>'.
+	  '</div>'.
 	'</div>'.
 '</div>';
 echo '<div class="center">
@@ -30,6 +42,7 @@ echo '<div class="center">
 	'<button onclick="formProfile()" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>'.
 	 '</div>';
 echo '<script type="text/javascript">'.
+		'$("#language").val(\''.$paquet -> getLanguage().'\');'.
 		'$("#popupTitle").html("'._('Edit your profile').'");'.
 		'</script>';
 ?>

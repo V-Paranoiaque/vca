@@ -143,6 +143,10 @@ msgstr "Nom"
 msgid "Mail"
 msgstr "Mail"
 
+#: templates/basic/profile.tpl
+msgid "Language"
+msgstr "Langue"
+
 #: templates/basic/server.tpl
 msgid "Server list"
 msgstr "Liste des serveurs"
