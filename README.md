@@ -22,16 +22,20 @@ This software is licensed under the terms of the MIT license.
 * Create/modify/destroy Vps
 * Template management
 * Users Requests
+* Backups
+* Multilanguage support
 
 ## Future features
 
-* Multilanguage support
-* Backups
 * Moving virtual machines
+* Custom templates
+* Multi-factor authentication
+* Automated backups
+* Limit the number of backup
 
 ## Installation
 
-See doc repertory for the installation instructions.
+See documentation files for the installation instructions.
 
 ## Usage
 
