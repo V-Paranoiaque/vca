@@ -93,22 +93,23 @@ def vcaAction(action, serverDest, para):
             vps.modConf(para)
     elif action == 'setConf':
         if int(serverDest) != 0:
-            server = Vps(serverDest)
-            server.modConf(para)
+            vps = Vps(serverDest)
+            vps.modConf(para)
     elif action == 'start':
         if int(serverDest) != 0:
-            server = Vps(serverDest)
-            server.start()
+            vps = Vps(serverDest)
+            vps.start()
     elif action == 'stop':
         if int(serverDest) != 0:
-            server = Vps(serverDest)
-            server.stop()
+            vps = Vps(serverDest)
+            vps.stop()
     elif action == 'restart':
         if int(serverDest) == 0:
             server = Server()
+            server.restart()
         else:
-            server = Vps(serverDest)
-        server.restart()
+            vps = Vps(serverDest)
+            vps.restart()
     elif action == 'delete':
         if int(serverDest) > 0:
             server = Server()
@@ -119,18 +120,18 @@ def vcaAction(action, serverDest, para):
             server.VpsClone(serverDest, para['dest'], para['ip'], para['hostname'])
     elif action == 'password':
         if int(serverDest) > 0 :
-            server = Vps(serverDest)
-            server.password(para)
+            vps = Vps(serverDest)
+            vps.password(para)
     elif action == 'cmd':
         if int(serverDest) > 0 :
-            server = Vps(serverDest)
-            return server.cmd(para)
+            vps = Vps(serverDest)
+            return vps.cmd(para)
         return ''
     #Templates
     elif action == 'reinstall':
         if int(serverDest) > 0 :
-            server = Vps(serverDest)
-            server.reinstall(para)
+            vps = Vps(serverDest)
+            vps.reinstall(para)
     elif action == 'templateList':
         if int(serverDest) == 0:
             return Server.templateList()
@@ -147,30 +148,30 @@ def vcaAction(action, serverDest, para):
         if int(serverDest) > 0 :
             pid  = subprocess.Popen('vzlist -H -ao numproc '+serverDest, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             pid  = pid.strip()
-            server = Vps(serverDest)
+            vps = Vps(serverDest)
             if pid != '-':
-                server.stop()
-            server.backupAdd()
+                vps.stop()
+            vps.backupAdd()
             if pid != '-':
-                server.start()
+                vps.start()
     elif action == 'backupDelete':
         if int(serverDest) > 0 and int(para) > 0:
-            server = Vps(serverDest)
-            server.backupDelete(para)
+            vps = Vps(serverDest)
+            vps.backupDelete(para)
     elif action == 'backupList':
         if int(serverDest) > 0 :
-            server = Vps(serverDest)
-            return server.backupList()
+            vps = Vps(serverDest)
+            return vps.backupList()
     elif action == 'backupRestore':
         if int(serverDest) > 0 and int(para) > 0:
             pid  = str(subprocess.call('vzlist -H -ao numproc '+serverDest, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT))
             pid  = pid.strip()
-            server = Vps(serverDest)
+            vps = Vps(serverDest)
             if pid != '-':
-                server.stop()
-            server.backupRestore(para)
+                vps.stop()
+            vps.backupRestore(para)
             if pid != '-':
-                server.start()
+                vps.start()
     else:
         return 'Nothing : '+action
     return 'Nothing to return'
