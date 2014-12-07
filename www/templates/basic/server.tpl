@@ -14,7 +14,7 @@
 			<tbody>
 			{foreach from=$serverList item=server}
 				<tr>
-				  <td><a href="/vpslist/{$server->id}" alt="{$server->name}">{$server->name}</a></td>
+				  <td><a href="/vpslist/{$server->id}" title="{$server->name}">{$server->name}</a></td>
 				  <td>{$server->address}</td>
 				  <td>{$server->nbvps}</td>
 				  <td>
