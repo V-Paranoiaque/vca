@@ -61,6 +61,7 @@ class VcaServer(object):
     def start(self):
         if os.path.isfile('vcakey.conf'):
             global vcakey
+            os.chmod('vcakey.conf', 0o400)
             file = open('vcakey.conf','r')
             vcakey = file.readline();
             vcakey = vcakey.replace('\n', '')
