@@ -14,3 +14,6 @@ INSERT INTO `user` (`user_name`, `user_rank`, `user_password`) VALUES
 ALTER TABLE `user`
 ADD PRIMARY KEY (`user_id`);
 
+ALTER TABLE `user`
+MODIFY `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+
