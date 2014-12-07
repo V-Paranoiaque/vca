@@ -708,6 +708,51 @@ class Admin extends User {
 		}
 	}
 	
+	function serverBackup($server) {
+		$link = Db::link();
+		$sql = 'SELECT server_id, server_name, server_address,
+		               server_description, server_key
+		        FROM server
+		        WHERE server_id= :server_id';
+		$req = $link->prepare($sql);
+		$req->execute(array('server_id' => $server));
+		
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(!empty($do->server_id)) {
+			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect -> write('backupList');
+			$data = json_decode($connect -> read());
+			$list = array();
+			foreach ($data as $backup) {
+				$tab = explode('.', $backup);
+				$list[] = array(
+					'date' => $tab[2],
+					'vps'  => $tab[1]
+				);
+			}
+			return $list;
+		}
+	}
+	
+	function serverBackupDelete($server, $idVps, $name) {
+		$link = Db::link();
+	
+		$sql = 'SELECT server.server_id, server_address,
+		               server_key
+		        FROM server
+		        WHERE server.server_id= :id';
+		$req = $link->prepare($sql);
+		$req->execute(array('id' => $server));
+		$do = $req->fetch(PDO::FETCH_OBJ);
+	
+		if(!empty($do->server_id)) {
+			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect -> write('backupDelete', $idVps, $name);
+			return $data = json_decode($connect -> read());
+		}
+	}
+	
 	/*** VPS ***/
 	
 	/**

@@ -162,6 +162,9 @@ def vcaAction(action, serverDest, para):
         if int(serverDest) > 0 :
             vps = Vps(serverDest)
             return vps.backupList()
+        else:
+            server = Server()
+            return server.backupList()
     elif action == 'backupRestore':
         if int(serverDest) > 0 and int(para) > 0:
             pid  = str(subprocess.call('vzlist -H -ao numproc '+serverDest, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT))

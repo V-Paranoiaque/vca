@@ -97,6 +97,15 @@ class Server:
     
     def restart():
         subprocess.Popen('reboot', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        
+    def backupList(self):
+        backup=[]
+        begin = 've-dump.'
+        for root, dirnames, files in os.walk('/vz/dump/'):
+            for i in files:
+                if i.endswith(".tar") and i.startswith(begin):
+                    backup.append(i)
+        return json.dumps(backup)
     
 def encodeVps(obj):
     if isinstance(obj, Vps):

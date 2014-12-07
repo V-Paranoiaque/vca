@@ -849,6 +849,30 @@ function formBackupDelete(vps, name) {
 	});
 }
 
+function popupServerBackupDelete(server, vps, name) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_serverbackupdelete.php",
+		data: "server="+server+"&vps="+vps+"&name="+name,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+function formServerBackupDelete(server, vps, name) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_serverbackupdelete.php",
+		data: "server="+server+"&vps="+vps+"&name="+name,
+		success: function(msg) {
+			location.reload();
+		}
+	});
+}
+
 function popupProfile() {
 	$.ajax({
 		type: "GET",

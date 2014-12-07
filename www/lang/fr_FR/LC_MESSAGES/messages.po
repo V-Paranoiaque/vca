@@ -847,6 +847,7 @@ msgid "Backup in progress"
 msgstr "Sauvegarde en cours"
 
 #: templates/basic/popup_backupdelete.php
+#: templates/basic/popup_serverbackupdelete.php
 msgid "Delete a backup"
 msgstr "Effacer une sauvegarde"
 
@@ -869,3 +870,19 @@ msgstr "Cr&eacuteer une nouvelle sauvegarde"
 #: templates/basic/popup_backuplist.php
 msgid "Restore"
 msgstr "Restaurer"
+
+#: templates/basic/backup.tpl
+msgid "Backup list"
+msgstr "Liste des sauvegardes"
+
+#: templates/basic/backup.tpl
+msgid "Date"
+msgstr "Date"
+
+#: templates/basic/popup_serverbackupdelete.php
+msgid "Delete the backup of %s from %s."
+msgstr "Supprimer la sauvegarde du %s de %s."
+
+#: templates/basic/popup_serverbackupdelete.php
+msgid "Delete the backup of %s."
+msgstr "Supprimer la sauvegarde du %s."

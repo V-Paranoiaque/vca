@@ -228,6 +228,18 @@ if(!empty($user)) {
 					}
 				break;
 				
+				case 'serverBackup':
+					if(!empty($var[0])) {
+						$res = $user->serverBackup($var[0]);
+					}
+				break;
+				
+				case 'serverBackupDelete':
+					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {
+						$res = $user->serverBackupDelete($var[0],$var[1],$var[2]);
+					}
+				break;
+				
 				/*** Template ***/
 				case 'serverTemplateRename':
 					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {

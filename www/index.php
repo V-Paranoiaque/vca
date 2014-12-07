@@ -53,6 +53,7 @@ else {
 		case 'server':
 		case 'template':
 		case 'ip':
+		case 'backup':
 		case 'request':
 		case 'requestinfo':
 		
