@@ -15,14 +15,7 @@ if(!empty($_GET['user'])) {
 $paquet -> add_action('userList');
 $paquet -> send_actions();
 
-if(!empty($paquet->getAnswer('userList'))) {
-	$userList = $paquet->getAnswer('userList');
-}
-else {
-	$userList = null;
-}
-
-$smarty->assign('userList', $userList);
+$smarty->assign('userList', $paquet->getAnswer('userList'));
 
 if(!empty($_GET['user'])) {
 	$smarty->assign('userInfo', $paquet->getAnswer('userList')->$_GET['user']);
@@ -33,6 +26,6 @@ else {
 	$smarty->assign('userVps',  null);
 }
 
-$smarty->assign('userUpdate', errorToText($paquet->getAnswer('setUserUpdate')));
+$smarty->assign('userUpdate', errorToText($paquet->getAnswer('userDelete')));
 
 ?>

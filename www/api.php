@@ -86,7 +86,7 @@ if(!empty($user)) {
 					}
 				break;
 				
-				case 'userNew':
+				case 'userAdd':
 					if(!empty($var[0]) && !empty($var[1])) {
 						$res = $user->userNew(trim(ucfirst($var[0])), trim(strtolower($var[1])));
 					}
@@ -129,7 +129,7 @@ if(!empty($user)) {
 					$res = $user->requestList();
 				break;
 				
-				case 'requestNew':
+				case 'requestAdd':
 					if(!empty($var[0]) && !empty($var[1])) {
 						$user->requestNew($var[0], $var[1]);
 					}
@@ -167,7 +167,7 @@ if(!empty($user)) {
 					$res = $user->ipList();
 				break;
 				
-				case 'ipNew':
+				case 'ipAdd':
 					if(!empty($var[0])) {
 						$user->ipNew($var[0]);
 					}
