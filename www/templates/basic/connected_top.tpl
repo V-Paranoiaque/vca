@@ -26,11 +26,11 @@
 		<div class="col-sm-3 col-md-2 sidebar">
 			<ul class="nav nav-sidebar">
 				<li {if $currentPage == 'home'} class="active" {/if}><a href="/" title="{'Dashboard'|gettext}">{'Dashboard'|gettext}</a></li>
+				<li {if $currentPage == 'server'} class="active" {/if}><a href="/server" title="{'Physical servers'|gettext}">{'Physical servers'|gettext}</a></li>
 				{if isset($serverList) }
-					<li {if $currentPage == 'server'} class="active" {/if}><a href="/server" title="{'Physical servers'|gettext}">{'Physical servers'|gettext}</a></li>
-						{foreach from=$serverList item=server}
-							<li class="smenu {if $currentPage == 'vpslist' and ${vpsCurrent} == {$server->id} } active {/if}"><a href="/vpslist/{$server->id}" title="{$server->name}">{$server->name} <span class="badge">{$server->nbvps}</span></a></li>
-						{/foreach}
+					{foreach from=$serverList item=server}
+						<li class="smenu {if $currentPage == 'vpslist' and ${vpsCurrent} == {$server->id} } active {/if}"><a href="/vpslist/{$server->id}" title="{$server->name}">{$server->name} <span class="badge">{$server->nbvps}</span></a></li>
+					{/foreach}
 				{/if}
 				{if {$userRank} == 0}
 					<li {if $currentPage == 'vpslist' and ${vpsCurrent} == 0 } class="active" {/if}><a href="/vpslist" title="{'Virtual servers'|gettext}">{'Virtual servers'|gettext} <span class="badge">{$vpsNb}</span></a></li>
