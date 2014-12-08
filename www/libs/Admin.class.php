@@ -837,8 +837,11 @@ class Admin extends User {
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
 		$req->execute(array('server_id' => $id));
-	
 		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(empty($do->server_id)) {
+			return null;
+		}
 	
 		$server = new Server($do->server_id);
 		$server -> setAddress($do->server_address);
@@ -970,7 +973,7 @@ class Admin extends User {
 	
 		$vpsId=self::vpsNextId();
 	
-		if(!empty($server->getId()) && $vpsId > 0) {
+		if($vpsId > 0) {
 			$server -> setVpsAdd($vpsId, $para);
 		}
 	}
