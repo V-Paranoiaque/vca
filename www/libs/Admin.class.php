@@ -435,7 +435,7 @@ class Admin extends User {
 	 * @param key
 	 * @param description
 	 */
-	function serverAdd($name,$address,$key,$description) {
+	function serverAdd($name,$address,$key,$description='') {
 		$link = Db::link();
 	
 		$sql = 'INSERT INTO server

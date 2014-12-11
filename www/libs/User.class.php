@@ -351,7 +351,7 @@ class User extends Guest {
 	
 	/*** Serveur ***/
 	function serverList() { return null; }
-	function serverAdd($name,$address,$key,$description) { return null; }
+	function serverAdd($name,$address,$key,$description='') { return null; }
 	function serverDelete($id) { }
 	function serverUpdate($id, $var)  { return null; }
 	function serverReload($id=0) { return null; }

@@ -5,7 +5,11 @@ include('../../functions.php');
 include('../../libs/Paquet.class.php');
 
 if(!empty($_GET['name']) && !empty($_GET['address']) && 
-   !empty($_GET['key'])  && !empty($_GET['description'])) {
+   !empty($_GET['key'])) {
+	
+	if(empty($_GET['description'])) {
+		$_GET['description'] = '';
+	}
 	
 	$paquet = new Paquet();
 	$paquet -> add_action('serverAdd', 

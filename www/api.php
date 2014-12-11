@@ -187,7 +187,10 @@ if(!empty($user)) {
 				break;
 				
 				case 'serverAdd':
-					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2]) && !empty($var[3])) {
+					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {
+						if(empty($var[3])) {
+							$var[3] = '';
+						}
 						$user->serverAdd($var[0],$var[1],$var[2],$var[3]);
 					}
 				break;
