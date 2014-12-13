@@ -124,39 +124,39 @@ class Vps:
     def modConf(self, para):
         for (index, val) in para.items():
             if index == 'name':
-                subprocess.Popen('vzctl set '+str(self.id)+' --hostname "'+str(val)+'" --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                subprocess.call('vzctl set '+str(self.id)+' --hostname "'+str(val)+'" --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'onboot':
                 if int(val) == 1:
-                    subprocess.Popen('vzctl set '+str(self.id)+' --onboot yes --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --onboot yes --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 else:
-                    subprocess.Popen('vzctl set '+str(self.id)+' --onboot no --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --onboot no --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'ipv4':
                 subprocess.call('vzctl set '+str(self.id)+' --ipdel all --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 subprocess.call('vzctl set '+str(self.id)+' --ipadd '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'ram':
                 if int(val) == 0:
-                    subprocess.Popen('vzctl set '+str(self.id)+' --vmguarpages unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                    subprocess.Popen('vzctl set '+str(self.id)+' --oomguarpages unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                    subprocess.Popen('vzctl set '+str(self.id)+' --privvmpages unlimited:unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --vmguarpages unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --oomguarpages unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --privvmpages unlimited:unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 else:
-                    subprocess.Popen('vzctl set '+str(self.id)+' --vmguarpages '+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                    subprocess.Popen('vzctl set '+str(self.id)+' --oomguarpages '+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                    subprocess.Popen('vzctl set '+str(self.id)+' --privvmpages '+str(val)+'M:'+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --vmguarpages '+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --oomguarpages '+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --privvmpages '+str(val)+'M:'+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'swap':
                 if int(val) == 0:
-                    subprocess.Popen('vzctl set '+str(self.id)+' --swappages 0:unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --swappages 0:unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 else:
-                    subprocess.Popen('vzctl set '+str(self.id)+' --swappages 0:'+str(int(val)*4)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                    subprocess.call('vzctl set '+str(self.id)+' --swappages 0:'+str(int(val)*4)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'diskspace':
-                subprocess.Popen('vzctl set '+str(self.id)+' --diskspace '+str(val)+'M:'+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                subprocess.call('vzctl set '+str(self.id)+' --diskspace '+str(val)+'M:'+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'diskinodes':
-                subprocess.Popen('vzctl set '+str(self.id)+' --diskinodes '+str(val)+':'+str(int(int(val)*1.1))+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                subprocess.call('vzctl set '+str(self.id)+' --diskinodes '+str(val)+':'+str(int(int(val)*1.1))+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'cpus':
-                subprocess.Popen('vzctl set '+str(self.id)+' --cpus '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                subprocess.call('vzctl set '+str(self.id)+' --cpus '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'cpulimit':
-                subprocess.Popen('vzctl set '+str(self.id)+' --cpulimit '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                subprocess.call('vzctl set '+str(self.id)+' --cpulimit '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'cpuunits':
-                subprocess.Popen('vzctl set '+str(self.id)+' --cpuunits '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                subprocess.call('vzctl set '+str(self.id)+' --cpuunits '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
     def setConf(self):
         conf = open("/etc/sysconfig/vz-scripts/"+self.id+".conf", "w+")
