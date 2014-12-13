@@ -81,6 +81,7 @@ class Paquet {
 				define('LANGUAGE', $this->user->language);
 				putenv('LC_ALL='.LANGUAGE);
 				setlocale(LC_ALL, LANGUAGE);
+				bind_textdomain_codeset("messages", "UTF-8");
 				
 				//Define current directory
 				$dir = explode("/", $_SERVER["PHP_SELF"]);

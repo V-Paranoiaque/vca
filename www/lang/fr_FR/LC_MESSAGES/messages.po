@@ -31,7 +31,7 @@ msgstr "Virtual Control Admin"
 
 #: templates/basic/connected_top.tpl
 msgid "Settings"
-msgstr "Param&egrave;tres"
+msgstr "Paramètres"
 
 #: templates/basic/connected_top.tpl
 msgid "Profile"
@@ -44,7 +44,7 @@ msgstr "Aide"
 
 #: templates/basic/connected_top.tpl
 msgid "Logout"
-msgstr "D&eacute;connexion"
+msgstr "Déconnexion"
 
 #: templates/basic/connected_top.tpl
 msgid "Dashboard"
@@ -53,7 +53,7 @@ msgstr "Tableau de bord"
 #: templates/basic/connected_top.tpl
 #: templates/basic/home.tpl
 msgid "Physical servers"
-msgstr "Serveurs d&eacute;di&eacute;s"
+msgstr "Serveurs dédiés"
 
 #: templates/basic/vps.php
 msgid "Virtual server"
@@ -83,7 +83,7 @@ msgstr "Serveurs virtuels en fonctionnement"
 
 #: templates/basic/home.tpl
 msgid "Stopped virtual servers"
-msgstr "Serveurs virtuels arr&ecirc;t&eacute;s"
+msgstr "Serveurs virtuels arrêtés"
 
 #: templates/basic/ip.tpl
 #: templates/basic/ip.php
@@ -116,7 +116,7 @@ msgstr "Vous n'avez aucune IP"
 #: templates/basic/profile.tpl
 #: templates/basic/user.tpl
 #: templates/basic/popup_profile.php
-msgid "User informations"
+msgid "User information"
 msgstr "Informations utilisateur"
 
 #: templates/basic/profile.tpl
@@ -173,7 +173,7 @@ msgstr "Recharger le serveur"
 #: templates/basic/server.tpl
 #: templates/basic/load_serverrestart.php"
 msgid "Restart the server"
-msgstr "Red&eacute;marrer le serveur" 
+msgstr "Redémarrer le serveur" 
 
 #: templates/basic/server.tpl
 #: templates/basic/user.tpl
@@ -188,7 +188,7 @@ msgstr "Supprimer"
 #: templates/basic/popup_serveradd.php
 #: templates/basic/popup_serveredit.php
 msgid "Security key"
-msgstr "Cl&eacute; de s&eacute;curit&eacute;"
+msgstr "Clé de sécurité"
 
 #: templates/basic/popup_serveradd.php
 #: templates/basic/popup_serveredit.php
@@ -226,7 +226,7 @@ msgstr "Utilisateurs"
 #: templates/basic/useradd.tpl
 #: templates/basic/useradd.php
 msgid "Add a new user"
-msgstr "Cr&eacute;er un nouvel utilisateur"
+msgstr "Créer un nouvel utilisateur"
 
 #: templates/basic/user.tpl
 #: templates/basic/vps.tpl
@@ -276,7 +276,7 @@ msgstr "En ligne"
 
 #: templates/basic/user.tpl
 #: templates/basic/vpslist.tpl
-msgid "Informations"
+msgid "Information"
 msgstr "Informations"
 
 #: templates/basic/user.tpl
@@ -285,7 +285,7 @@ msgstr "Aucun serveur virtuel"
 
 #: templates/basic/vps.tpl
 msgid "Reinstall"
-msgstr "R&eacute;installer"
+msgstr "Réinstaller"
 
 #: templates/basic/vps.tpl
 msgid "Root password"
@@ -298,17 +298,17 @@ msgstr "Sauvegardes"
 #: templates/basic/vps.tpl
 #: templates/basic/vpslist.tpl
 msgid "Start"
-msgstr "D&eacute;marrer"
+msgstr "Démarrer"
 
 #: templates/basic/vps.tpl
 #: templates/basic/vpslist.tpl
 msgid "Stop"
-msgstr "Arr&ecirc;ter"
+msgstr "Arrêter"
 
 #: templates/basic/vps.tpl
 #: templates/basic/vpslist.tpl
 msgid "Restart"
-msgstr "Red&eacute;marrer"
+msgstr "Redémarrer"
 
 #: templates/basic/vps.tpl
 msgid "Reload"
@@ -337,7 +337,7 @@ msgstr "Utilisation disque"
 
 #: templates/basic/vps.tpl
 msgid "Memory usage"
-msgstr "Utilisation m&eacute;moire"
+msgstr "Utilisation mémoire"
 
 #: templates/basic/vps.tpl
 #: templates/basic/popup_vpsadd.php
@@ -345,13 +345,13 @@ msgid "Swap"
 msgstr "Swap"
 
 #: templates/basic/vps.tpl
-msgid "Vps informations"
+msgid "Vps information"
 msgstr "Informations sur le Vps"
 
 #: templates/basic/vps.tpl
 #: templates/basic/popup_vpsedit.php:38
 msgid "Owner"
-msgstr "Propri&eacute;taire"
+msgstr "Propriétaire"
 
 #: templates/basic/vps.tpl
 msgid "Nobody"
@@ -359,7 +359,7 @@ msgstr "Personne"
 
 #: templates/basic/vps.tpl
 msgid "On boot"
-msgstr "Au d&eacute;marrage"
+msgstr "Au démarrage"
 
 #: templates/basic/vps.tpl
 msgid "No"
@@ -396,12 +396,12 @@ msgstr "Envoyer"
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/load_vpsadd.php
 msgid "Create a new Vps"
-msgstr "Cr&eacute;er un nouveau Vps"
+msgstr "Créer un nouveau Vps"
 
 #: templates/basic/vpslist.tpl
 #: templates/basic/popup_vpsadd.php
 msgid "Memory"
-msgstr "M&eacute;moire"
+msgstr "Mémoire"
 
 #: templates/basic/vpslist.tpl
 msgid "Disk"
@@ -448,7 +448,7 @@ msgstr "IP ou adresse"
 #: templates/basic/popup_serveradd.php
 #: templates/basic/popup_serveredit.php
 msgid "key"
-msgstr "cl&eacute;"
+msgstr "clé"
 
 #: templates/basic/popup_userdelete.php
 msgid "Delete %s"
@@ -457,21 +457,21 @@ msgstr "Supprimer %s"
 #: templates/basic/popup_serverremove.php
 msgid ""
 "If you remove %s from VCA, you will remove all his Vps from VCA but nothing "
-"will be deleted from your server. All informations about this server and his "
+"will be deleted from your server. All information about this server and his "
 "Vps will be definitly deleted."
 msgstr ""
 "Si vous supprimez %s de VCA, vous allez supprimer toutes les informations des Vps de VCA mais rien"
-"ne sera supprim&eacute; de votre serveur. Toutes les informations &agrave; propos de ce serveur et de ses "
-"Vps seront d&eacute;finitivement supprim&eacute;es"
+"ne sera supprimé de votre serveur. Toutes les informations à propos de ce serveur et de ses "
+"Vps seront définitivement supprimées"
 
 #: templates/basic/popup_userdelete.php
 msgid "If you delete this account, every servers of %s will be unattributed."
-msgstr "Si vous supprimez ce compte, tous les serveurs de %s ne seront plus attribu&eacute;s"
+msgstr "Si vous supprimez ce compte, tous les serveurs de %s ne seront plus attribués"
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "General"
-msgstr "G&eacute;n&eacute;ral"
+msgstr "Général"
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsadd.php
@@ -485,7 +485,7 @@ msgstr "Nom du serveur virtuel"
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Start on Boot"
-msgstr "Lancer au d&eacute;marrage"
+msgstr "Lancer au démarrage"
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsclone.php
@@ -501,13 +501,13 @@ msgstr "Limites"
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Ram (MB or GB)"
-msgstr "M&eacute;moire (Mo ou Go)"
+msgstr "Mémoire (Mo ou Go)"
 
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Swap (MB or GB)"
-msgstr "M&eacute;moire virtuelle (Mo ou Go)"
+msgstr "Mémoire virtuelle (Mo ou Go)"
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
@@ -538,7 +538,7 @@ msgstr "Limite"
 
 #: templates/basic/popup_vpsdelete.php
 msgid "If you delete %s from %s, you will definitly delete all datas"
-msgstr "Si vous supprimez %s de %, vous supprimerez &eacute;galement toutes ses donn&eacute;es"
+msgstr "Si vous supprimez %s de %, vous supprimerez également toutes ses données"
 
 #: templates/basic/popup_vpsedit.php
 msgid "Diskinodes"
@@ -559,7 +559,7 @@ msgstr "Nouveau mot de passe root"
 
 #: templates/basic/popup_vpsreinstall.php
 msgid "Reinstall %s, don't forget to redefine the root password."
-msgstr "R&eacute;installer %s, n'oubliez pas de red&eacute;finir le mot de passe root."
+msgstr "Réinstaller %s, n'oubliez pas de redéfinir le mot de passe root."
 
 #: templates/basic/profile.php
 #: templates/basic/user.php
@@ -572,15 +572,15 @@ msgstr "Serveurs VCA"
 
 #: functions.php
 msgid "unlimited"
-msgstr "illimit&eacute;"
+msgstr "illimité"
 
 #: functions.php
-msgid "Bad informations"
+msgid "Bad information"
 msgstr "Mauvaises informations"
 
 #: functions.php
 msgid "An user already exist with this username"
-msgstr "Utilisateur existe d&eacute;j&agrave; avec cet identifiant"
+msgstr "Utilisateur existe déjà avec cet identifiant"
 
 #: functions.php
 msgid "This user does not exist"
@@ -588,11 +588,11 @@ msgstr "Cet utilisateur n'existe pas"
 
 #: functions.php
 msgid "Error during account update"
-msgstr "Erreur durant la mise &agrave; jour du compte"
+msgstr "Erreur durant la mise à jour du compte"
 
 #: functions.php
 msgid "Account updated"
-msgstr "Compte mis &agrave; jour"
+msgstr "Compte mis à jour"
 
 #: functions.php
 msgid "You can't delete this account"
@@ -600,11 +600,11 @@ msgstr "Vous ne pouvez pas supprimer ce compte"
 
 #: functions.php
 msgid "Account deleted"
-msgstr "Compte supprim&eacute;"
+msgstr "Compte supprimé"
 
 #: functions.php
 msgid "new account created"
-msgstr "Nouveau compte cr&eacute;&eacute;"
+msgstr "Nouveau compte créé"
 
 #: functions.php
 msgid "Invalid mail"
@@ -612,7 +612,7 @@ msgstr "Adresse mail invalide"
 
 #: functions.php
 msgid "Account username must be between 5 and 25 caracteres"
-msgstr "Les nom des utilisateurs doivent &ecirc;tre entre 5 et 25 caract&egrave;res"
+msgstr "Les nom des utilisateurs doivent être entre 5 et 25 caractères"
 
 #: functions.php
 msgid "KB"
@@ -648,7 +648,7 @@ msgstr "Editer un Vps"
 
 #: templates/basic/popup_vpsreinstall.php
 msgid "Reinstall the Vps"
-msgstr "R&eacute;installer le Vps"
+msgstr "Réinstaller le Vps"
 
 #: templates/basic/popup_serveradd.php
 msgid "Add a new server to VCA"
@@ -668,27 +668,27 @@ msgstr "Changer le mot de passe du Vps"
 
 #: templates/basic/load_vpsstart.php
 msgid "Vps starting"
-msgstr "D&eacute;marrage du Vps en cours"
+msgstr "Démarrage du Vps en cours"
 
 #: templates/basic/load_vpsstart.php
 msgid "Starting in progress"
-msgstr "D&eacute;marrage en cours"
+msgstr "Démarrage en cours"
 
 #: templates/basic/load_vpsstop.php
 msgid "Vps stopping"
-msgstr "Arr&ecirc;t du Vps en cours"
+msgstr "Arrêt du Vps en cours"
 
 #: templates/basic/load_vpsstop.php
 msgid "Stopping in progress"
-msgstr "Arr&ecirc;t en cours"
+msgstr "Arrêt en cours"
 
 #: templates/basic/load_vpsrestart.php
 msgid "Vps restarting"
-msgstr "Red&eacute;marrage du Vps en cours"
+msgstr "Redémarrage du Vps en cours"
 
 #: templates/basic/load_vpsrestart.php
 msgid "Restarting in progress"
-msgstr "Red&eacute;marrage en cours"
+msgstr "Redémarrage en cours"
 
 #: templates/basic/load_vpscmd.php
 msgid "Send a command"
@@ -696,20 +696,20 @@ msgstr "Envoyer une commande"
 
 #: templates/basic/load_vpscmd.php
 msgid "Command in execution"
-msgstr "Commande en cours d'ex&eacute;cution"
+msgstr "Commande en cours d'exécution"
 
 #: templates/basic/load_vpsreinstall.php
 msgid "Vps reinstallation"
-msgstr "R&eacute;installation du Vps"
+msgstr "Réinstallation du Vps"
 
 #: templates/basic/load_vpsreinstall.php
 msgid "Reinstallation in progress"
-msgstr "R&eacute;installation en cours"
+msgstr "Réinstallation en cours"
 
 #: templates/basic/load_vpsadd.php
 #: templates/basic/load_serveradd.php
 msgid "Creation in progress"
-msgstr "Cr&eacute;ation en cours"
+msgstr "Création en cours"
 
 #: templates/basic/load_serverreload.php
 msgid "Server reload"
@@ -747,19 +747,19 @@ msgstr "Editer un serveur"
 #: templates/basic/requests.php
 #: templates/basic/requests.tpl
 msgid "Requests"
-msgstr "Requ&ecirc;tes"
+msgstr "Requêtes"
 
 #: templates/basic/home.tpl
 msgid "Open requests"
-msgstr "Requ&ecirc;tes ouvertes"
+msgstr "Requêtes ouvertes"
 
 #: templates/basic/requests.tpl
 msgid "Create a new request"
-msgstr "Cr&eacute;er une nouvelle requ&ecirc;te"
+msgstr "Créer une nouvelle requête"
 
 #: templates/basic/popup_requestadd.php
 msgid "Your request"
-msgstr "Requ&ecirc;tes"
+msgstr "Requêtes"
 
 #: templates/basic/popup_requestadd.php
 msgid "Subject"
@@ -771,11 +771,11 @@ msgstr "Message"
 
 #: templates/basic/requests.tpl
 msgid "You don't have requests"
-msgstr "Vous n'avez pas de requ&circ;te"
+msgstr "Vous n'avez pas de requête"
 
 #: templates/basic/popup_requestclose.php
 msgid "Close this request"
-msgstr "Fermer cette requ&ecirc;te"
+msgstr "Fermer cette requête"
 
 #: templates/basic/requests.tpl
 msgid "Open"
@@ -783,7 +783,7 @@ msgstr "Ouverte"
 
 #: templates/basic/requests.tpl
 msgid "Closed"
-msgstr "Ferm&eacute;e"
+msgstr "Fermée"
 
 #: templates/basic/requests.tpl
 msgid "Author"
@@ -791,7 +791,7 @@ msgstr "Auteur"
 
 #: templates/basic/requests.tpl
 msgid "Status"
-msgstr "Statu"
+msgstr "Statut"
 
 #: templates/basic/server.tpl
 msgid "Template list"
@@ -824,7 +824,7 @@ msgstr "Renomer un template"
 
 #: templates/basic/popup_templateedit.php
 msgid "Download this template"
-msgstr "T&eacute;l&eacute;charger ce template"
+msgstr "Télécharger ce template"
 
 #: templates/basic/popup_templateedit.php
 msgid "Normal"
@@ -836,7 +836,7 @@ msgstr "Minimal"
 
 #: templates/basic/popup_templateedit.php
 msgid "Development"
-msgstr "D&eacute;veloppement"
+msgstr "Développement"
 
 #: templates/basic/load_backuprestore.php
 msgid "Restoration in progress"
@@ -865,7 +865,7 @@ msgstr "Gestion des sauvegardes"
 
 #: templates/basic/popup_backuplist.php
 msgid "Create a new backup"
-msgstr "Cr&eacuteer une nouvelle sauvegarde"
+msgstr "Créer une nouvelle sauvegarde"
 
 #: templates/basic/popup_backuplist.php
 msgid "Restore"
