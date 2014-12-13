@@ -60,9 +60,9 @@ function check_vps_list() {
 	}
 }
 
-function popupVpsStartAll(server_id) {
+function popupVpsStartAll() {
 	$("input.vps_list:checked").each(function() {
-		popupVpsStart(server_id, $(this).val());
+		popupVpsStart($(this).val());
 	});
 }
 
@@ -89,9 +89,9 @@ function popupVpsStart(vps) {
 	});
 }
 
-function popupVpsStopAll(server_id) {
+function popupVpsStopAll() {
 	$("input.vps_list:checked").each(function() {
-		popupVpsStop(server_id, $(this).val());
+		popupVpsStop($(this).val());
 	});
 }
 
@@ -103,7 +103,7 @@ function popupVpsStop(vps) {
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
-				url: "/templates/basic/load_vpsstart.php",
+				url: "/templates/basic/load_vpsstop.php",
 				success: function(msg) {			
 					BootstrapDialog.show({
 						title: '<div id="popupTitle"></div>',
@@ -118,9 +118,9 @@ function popupVpsStop(vps) {
 	});
 }
 
-function popupVpsRestartAll(server_id) {
+function popupVpsRestartAll() {
 	$("input.vps_list:checked").each(function() {
-		popupVpsRestart(server_id, $(this).val());
+		popupVpsRestart($(this).val());
 	});
 }
 
