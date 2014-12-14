@@ -1034,7 +1034,7 @@ class Admin extends User {
 				$ram = substr($ram, 0, -1);
 			}
 	
-			if(is_numeric($ram) && $ram >= 0 && $ram*1024 != $vps['ram']) {
+			if(is_numeric($ram) && $ram >= 0 && $ram != $vps['ram']) {
 				$para['ram'] = $ram;
 			}
 		}
@@ -1062,7 +1062,7 @@ class Admin extends User {
 				$swap = substr($swap, 0, -1);
 			}
 	
-			if(is_numeric($swap) && $swap >= 0 && $swap*1024 != $vps['swap']) {
+			if(is_numeric($swap) && $swap >= 0 && $swap != $vps['swap']) {
 				$para['swap'] = $swap;
 			}
 		}
@@ -1090,7 +1090,7 @@ class Admin extends User {
 				$diskspace = substr($diskspace, 0, -1);
 			}
 	
-			if(is_numeric($diskspace) && $diskspace >= 0 && $diskspace*1024 != $vps['diskspace']) {
+			if(is_numeric($diskspace) && $diskspace >= 0 && $diskspace != $vps['diskspace']) {
 				$para['diskspace'] = $diskspace;
 			}
 		}
