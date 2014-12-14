@@ -127,7 +127,6 @@ msgstr "Modifier votre profil"
 #: templates/basic/profile.tpl
 #: templates/basic/server.tpl
 #: templates/basic/user.tpl
-#: templates/basic/useradd.tpl
 #: templates/basic/vpslist.tpl
 #: templates/basic/popup_profile.php
 #: templates/basic/popup_serveradd.tpl
@@ -137,7 +136,6 @@ msgstr "Nom"
 
 #: templates/basic/profile.tpl
 #: templates/basic/user.tpl
-#: templates/basic/useradd.tpl
 #: templates/basic/popup_profile.php
 #: templates/basic/popup_profile.php
 msgid "Mail"
@@ -196,13 +194,11 @@ msgid "Description"
 msgstr "Description"
 
 #: templates/basic/user.tpl
-#: templates/basic/useradd.tpl
 msgid "Save"
 msgstr "Sauvegarder"
 
 #: templates/basic/signin.tpl
 #: templates/basic/user.tpl
-#: templates/basic/useradd.tpl
 msgid "Close"
 msgstr "Fermer"
 
@@ -223,8 +219,6 @@ msgid "User list"
 msgstr "Utilisateurs"
 
 #: templates/basic/user.tpl
-#: templates/basic/useradd.tpl
-#: templates/basic/useradd.php
 msgid "Add a new user"
 msgstr "Créer un nouvel utilisateur"
 

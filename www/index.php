@@ -61,7 +61,6 @@ else {
 		case 'vps':
 		
 		case 'user':
-		case 'useradd':
 			$page = $_GET['page'];
 		break;
 		

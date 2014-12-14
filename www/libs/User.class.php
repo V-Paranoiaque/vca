@@ -174,7 +174,7 @@ class User extends Guest {
 		return 5;
 	}
 	
-	function userNew($user_name='', $user_mail='') { return null; }
+	function userNew($user_name='', $user_mail='', $user_password='') { return null; }
 	function userDelete($id) { return null; }
 	function userVps($id) { return $this->vpsList(); }
 	

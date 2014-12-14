@@ -87,8 +87,8 @@ if(!empty($user)) {
 				break;
 				
 				case 'userAdd':
-					if(!empty($var[0]) && !empty($var[1])) {
-						$res = $user->userNew(trim(ucfirst($var[0])), trim(strtolower($var[1])));
+					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {
+						$res = $user->userNew(trim(ucfirst($var[0])), trim(strtolower($var[1])), trim($var[2]));
 					}
 					else {
 						$res = 1;

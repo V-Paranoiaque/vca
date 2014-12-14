@@ -1,5 +1,5 @@
 {if !isset($userInfo)}
-	<h2 class="sub-header">{'User list'|gettext} <a href="/useradd" title="{'Add a new user'|gettext}"><span class="glyphicon glyphicon-plus"></span></a></h2>
+	<h2 class="sub-header">{'User list'|gettext} <a onclick="popupUserAdd()" title="{'Add a new user'|gettext}"><span class="glyphicon glyphicon-plus"></span></a></h2>
 	
 	<div class="table-responsive">
 		<table class="table table-striped">

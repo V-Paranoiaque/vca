@@ -16,6 +16,20 @@ function logout() {
 }
 
 /*** Users ***/
+function popupUserDelete(user) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_userdelete.php",
+		data: "user="+user,
+		success: function(msg) {			
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
 function formUserDelete(user) {
 	$.ajax({
 		type: "GET",
@@ -27,17 +41,30 @@ function formUserDelete(user) {
 	});
 }
 
-function popupUserDelete(user) {
-
+function popupUserAdd() {
 	$.ajax({
 		type: "GET",
-		url: "/templates/basic/popup_userdelete.php",
-		data: "user="+user,
+		url: "/templates/basic/popup_useradd.php",
 		success: function(msg) {			
 			BootstrapDialog.show({
 				title: '<div id="popupTitle"></div>',
 				message: msg
 			});
+		}
+	});
+}
+
+function formUserAdd() {
+	var name = $("#name").val();
+	var mail = $("#mail").val();
+	var password = $("#password").val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_useradd.php",
+		data: "name="+name+"&mail="+mail+"&password="+password,
+		success: function(msg) {
+			document.location.href="/user";
 		}
 	});
 }

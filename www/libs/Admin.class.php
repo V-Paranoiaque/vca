@@ -199,9 +199,9 @@ class Admin extends User {
 	 * @param user mail
 	 * @return error
 	 */
-	function userNew($user_name='', $user_mail='') {
+	function userNew($user_name='', $user_mail='', $user_password='') {
 	
-		if(empty($user_name) or empty($user_mail)) {
+		if(empty($user_name) or empty($user_mail) or empty($user_password)) {
 			return 1;
 		}
 	
@@ -226,7 +226,18 @@ class Admin extends User {
 				'user_name' => $user_name,
 				'user_mail' => $user_mail
 		));
-	
+		
+		$user_id = $link->lastInsertId();
+		
+		$sql = 'UPDATE user
+		        SET user_password=:user_password
+		        WHERE user_id=:user_id';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+				'user_password' => hash('sha512', $user_id.$user_password),
+				'user_id'       => $user_id
+		));
+		
 		return 8;
 	}
 	
