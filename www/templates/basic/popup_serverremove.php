@@ -10,7 +10,7 @@ $paquet -> send_actions();
 
 $server = $paquet->getAnswer('serverList')->list->$_GET['server'];
 
-printf(_('If you remove %s from VCA, you will remove all his Vps from VCA but nothing will be deleted from your server. All informations about this server and his Vps will be definitly deleted.'), '<b>'.$server->name.'</b>'); 
+printf(_('If you remove %s from VCA, you will remove all his Vps from VCA but nothing will be deleted from your server. All information about this server and his Vps will be definitly deleted.'), '<b>'.$server->name.'</b>'); 
 
 echo '<br/><br/>';
 echo '<div class="center">';

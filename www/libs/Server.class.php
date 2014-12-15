@@ -67,7 +67,7 @@ class Server {
 	/*** Server functions ***/
 	
 	/**
-	 * Reload all Vps informations
+	 * Reload all Vps information
 	 */
 	function vpsReload() {
 		$link = Db::link();

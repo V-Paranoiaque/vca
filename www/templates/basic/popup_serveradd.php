@@ -10,7 +10,7 @@ $paquet -> send_actions();
 echo 
 '<div class="panel panel-danger">'.
 	'<div class="panel-heading">'.
-		'<h3 class="panel-title">'._('Informations').'</h3>'.
+		'<h3 class="panel-title">'._('Information').'</h3>'.
 	'</div>'.
 	'<div class="panel-body">'.
 		'<div class="row">'.

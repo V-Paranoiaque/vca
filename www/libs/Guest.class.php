@@ -49,7 +49,7 @@ class Guest {
 	}
 	
 	/**
-	 * Load user informations
+	 * Load user information
 	 * @param user token
 	 * @return user (NULL, User, Admin, SuperAdmin)
 	 */

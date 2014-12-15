@@ -39,7 +39,7 @@ function errorToText($erreur_no) {
 	
 	switch($erreur_no) {
 		case 1:
-			$text = _('Bad informations'); 
+			$text = _('Bad information'); 
 		break;
 		
 		case 2:

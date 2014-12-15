@@ -30,7 +30,7 @@
 	<h1 class="sub-header">{$userInfo->user_name}</h1>
 	<div class="row">
 	<div class="col-sm-12 col-md-6">
-		<h2 class="sub-header">{'User informations'|gettext}</h2>
+		<h2 class="sub-header">{'User information'|gettext}</h2>
 		<form method="post" role="form" action="/user/{$userInfo->user_id}">
 			{if {$userUpdate} != ''}
 			
@@ -92,7 +92,7 @@
 						  {else}
 						  	<span class="glyphicon glyphicon-record online" title="{'Online'|gettext}"></span>
 						  {/if}
-					      <a href="/vps/{$server->id}" title="{'Informations'|gettext}">{$server->name}</a></td>
+					      <a href="/vps/{$server->id}" title="{'Information'|gettext}">{$server->name}</a></td>
 					</tr>
 				{/foreach}
 				</table>

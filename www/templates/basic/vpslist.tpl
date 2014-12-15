@@ -41,13 +41,13 @@
 				  {/if}
 				  
 				  </td>
-				  <td><a href="/vps/{$server->id}" title="{'Informations'|gettext}">{$server->name}</a></td>
+				  <td><a href="/vps/{$server->id}" title="{'Information'|gettext}">{$server->name}</a></td>
 				  <td>{$server->ipv4}</td>
 				  <td>{$server->ramCurrent|numberRamSizeCurrent}/{$server->ram|numberRamSize}</td>
 				  <td>{$server->diskspaceCurrent|numberDiskSpace}/{$server->disk|numberDiskSpace}</td>
 				  <td>{$server->ostemplate}</td>
 				  <td>
-				  	<a href="/vps/{$server->id}" title="{'Informations'|gettext}"><span class="glyphicon glyphicon-align-justify"></span></a>
+				  	<a href="/vps/{$server->id}" title="{'Information'|gettext}"><span class="glyphicon glyphicon-align-justify"></span></a>
 				  	<a href="#" title="{'Start'|gettext}" onclick="popupVpsStart({$server->id});"><span class="glyphicon glyphicon-play"></span></a>
 				  	<a href="#" title="{'Stop'|gettext}" onclick="popupVpsStop({$server->id});"><span class="glyphicon glyphicon-stop"></span></a>
 				  	<a href="#" title="{'Restart'|gettext}" onclick="popupVpsRestart({$server->id});"><span class="glyphicon glyphicon-repeat"></span></a>

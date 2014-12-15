@@ -56,7 +56,7 @@
 <div class="col-sm-6">
 <div class="panel panel-danger">
 	<div class="panel-heading">
-		<h3 class="panel-title center">{'Vps informations'|gettext}</h3>
+		<h3 class="panel-title center">{'Vps information'|gettext}</h3>
 	</div>
 	<div class="panel-body">
 	<table>

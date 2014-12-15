@@ -137,7 +137,7 @@ class Admin extends User {
 	}
 		
 	/**
-	 * Update user informations
+	 * Update user information
 	 * @param user id
 	 * @param user name
 	 * @param user mail
@@ -483,9 +483,9 @@ class Admin extends User {
 	}
 	
 	/**
-	 * Update server informations
+	 * Update server information
 	 * @param server id
-	 * @param all informations
+	 * @param all information
 	 */
 	function serverUpdate($id, $var)  {
 		$servers = $this->serverList();

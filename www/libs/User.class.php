@@ -132,7 +132,7 @@ class User extends Guest {
 	function userList() { return null; }
 	
 	/**
-	 * Update user informations
+	 * Update user information
 	 * @param user id
 	 * @param user name
 	 * @param user mail
