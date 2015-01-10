@@ -15,7 +15,7 @@ rpm --import http://download.openvz.org/RPM-GPG-Key-OpenVZ
 yum install centos-release-SCL -y
 
 # All needed packages
-yum install python33-python python33-python-devel python33-python-setuptools gcc gmp-devel vzkernel vzctl -y
+yum install python33-python python33-python-devel python33-python-setuptools gcc gmp-devel screen vzkernel vzctl -y
 
 # Python install
 scl enable python33 bash
