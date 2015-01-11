@@ -42,6 +42,8 @@ On Debian 7 (wheezy) :
 bash vca-daemon-debian7.bash
 ```
 
+Define your secret key in /usr/share/vca/daemon/vcakey.conf
+
 Run VCA daemon in a screen
 ```bash
 cd /usr/share/vca/daemon
