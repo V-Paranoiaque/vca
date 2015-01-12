@@ -26,6 +26,13 @@ class Paquet {
 	}
 	
 	function send_actions() {
+		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+			$protocol = 'https';
+		}
+		else {
+			$protocol = 'http';
+		}
+		
 		$var = array('token'     => $this->token,
 		             'actions'   => $this->actions);
 		
@@ -39,7 +46,7 @@ class Paquet {
 		);
 		
 		$context = stream_context_create($opts);
-		$data    = json_decode(file_get_contents('http://'.$_SERVER['HTTP_HOST'].'/api.php', false, $context));
+		$data    = json_decode(file_get_contents($protocol.'://'.$_SERVER['HTTP_HOST'].'/api.php', false, $context));
 		
 		if(!empty($data->user)) {
 			$this->user = $data->user;
