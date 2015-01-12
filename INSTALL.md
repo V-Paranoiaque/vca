@@ -15,7 +15,7 @@ Table of contents:
 
 You can install VCA directly or by git. The two part of VCA can be installed
 in different servers. For the moment, update is not supported.
-
+Don't forget to disable SELINUX.
 
 ## 2. Files
 
@@ -52,6 +52,26 @@ screen python3 vcadaemon.py
 
 
 ## 4. Install panel
+
+Go to /usr/share/vca/conf and run the script for your OS and your web server.
+
+On Centos 6 :
+```bash
+bash vca-panel-centos6-nginx.bash
+```
+Or
+```bash
+bash vca-panel-centos6-apache.bash
+```
+
+On Debian 7 (wheezy) :
+```bash
+bash vca-panel-debian7-nginx.bash
+```
+Or
+```bash
+bash vca-panel-debian7-apache.bash
+```
 
 
 You need apache or nginx, PHP, MySQL and gettext.
