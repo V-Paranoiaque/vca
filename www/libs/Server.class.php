@@ -100,7 +100,8 @@ class Server {
 					$swappages = $vps->swappages;
 				}
 				
-				$diskinodes = explode(':', $vps->diskinodes)[0];
+				$tmp = explode(':', $vps->diskinodes);
+				$diskinodes = $tmp[0];
 				
 				$sql = 'UPDATE vps
 				        SET vps_name= :vps_name,
