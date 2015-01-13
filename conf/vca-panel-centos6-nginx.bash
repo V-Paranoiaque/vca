@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ ! -d "/usr/share/vca/daemon" ];then
+if [ ! -d "/usr/share/vca/www" ];then
 	echo "VCA is not present !";
 	exit 0
 fi
