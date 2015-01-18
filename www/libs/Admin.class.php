@@ -72,6 +72,10 @@ class Admin extends User {
 		$req = $link->prepare($sql);
 		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(empty($do->max)) {
+			return 1;
+		}
 	
 		$vps_max = $do->max;
 	
