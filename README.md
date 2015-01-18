@@ -39,6 +39,6 @@ See documentation files for the installation instructions.
 
 ## Usage
 
-Visit http://your-ip/vca/ and use admin:admin. You should change the default
+Visit http://your-domain and use admin:admin. You should change the default
 password and the default user name. Add your server and enjoy.
 
