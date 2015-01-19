@@ -1359,7 +1359,7 @@ class Admin extends User {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
-			$templates = $this->getServerTemplate($do->server_id);
+			$templates = $this->serverTemplate($do->server_id);
 	
 			if(in_array($os, $templates)) {
 				$connect = new Socket($do->server_address, PORT, $do->server_key);
