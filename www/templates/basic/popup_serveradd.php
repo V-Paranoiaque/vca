@@ -28,7 +28,7 @@ echo
 		'<div class="row">'.
 			'<div class="col-sm-6">'._('Security key').'</div>'.
 			'<div class="col-sm-6">'.
-				'<input id="key" type="text" class="form-control" placeholder="'._('key').'">'.
+				'<input id="key" type="password" class="form-control" placeholder="'._('key').'">'.
 			'</div>'.
 		'</div>'.
 		'<div class="row">'.
