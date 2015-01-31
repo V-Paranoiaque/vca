@@ -771,6 +771,65 @@ class User extends Guest {
 			return $data = json_decode($connect -> read());
 		}
 	}
+	
+	function vpsSchedule($idVps) {
+		$link = Db::link();
+		$list = array();
+		
+		$sql = 'SELECT schedule_id, name, minute, hour, dayw, dayn, month
+		        FROM schedule
+		        WHERE schedule_vps= :id';
+		$req = $link->prepare($sql);
+		$req->execute(array('id' => $idVps));
+		
+		while($do = $req->fetch(PDO::FETCH_OBJ)) {
+			$list[$do->schedule_id] = clone $do;
+		}
+		
+		return $list;
+	}
+	
+	function vpsScheduleAdd($vps, $save, $name, $minute, $hour, $dayw, $dayn, $month) {
+		$link = Db::link();
+		
+		if(empty($save)) {
+			$sql = 'INSERT INTO schedule
+			        (schedule_vps, name, minute, hour, dayw, dayn, month)
+			        VALUES
+			        (:vps, :name, :minute, :hour, :dayw, :dayn, :month)';
+			$req = $link->prepare($sql);
+			$req->execute(array(
+				'vps'   => $vps,
+				'name'  => $name,
+				'minute'=> $minute,
+				'hour'  => $hour,
+				'dayw'  => $dayw,
+				'dayn'  => $dayn,
+				'month' => $month
+			));
+		}
+		else {
+			$sql = 'UPDATE schedule
+			        SET name= :name,
+			            minute= :minute,
+			            hour= :hour,
+			            dayw= :dayw,
+			            dayn= :dayn,
+			            month= :month
+			        WHERE schedule_id=:save AND schedule_vps=:vps';
+			$req = $link->prepare($sql);
+			$req->execute(array(
+				'save'  => $save,
+				'vps'   => $vps,
+				'name'  => $name,
+				'minute'=> $minute,
+				'hour'  => $hour,
+				'dayw'  => $dayw,
+				'dayn'  => $dayn,
+				'month' => $month
+			));
+		}
+	}
 }
 
 ?>

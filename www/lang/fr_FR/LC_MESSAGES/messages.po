@@ -764,7 +764,7 @@ msgid "Message"
 msgstr "Message"
 
 #: templates/basic/requests.tpl
-msgid "You don't have requests"
+msgid "You don't have request"
 msgstr "Vous n'avez pas de requête"
 
 #: templates/basic/popup_requestclose.php
@@ -880,3 +880,11 @@ msgstr "Supprimer la sauvegarde du %s de %s."
 #: templates/basic/popup_serverbackupdelete.php
 msgid "Delete the backup of %s."
 msgstr "Supprimer la sauvegarde du %s."
+
+#: templates/basic/popup_backupschedule.php
+msgid "Backup schedule"
+msgstr "Programmation des sauvegardes" 
+
+#: templates/basic/popup_backupschedule.php
+msgid "Modify backup schedule"
+msgstr "Modifier la programmation des sauvegardes" 

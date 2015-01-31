@@ -1,0 +1,4 @@
+# VCA cron
+0 * * * * root /usr/bin/php /usr/share/vca/cron/vca.cron.hour.php
+* * * * * root /usr/bin/php /usr/share/vca/cron/vca.cron.min.php
+

@@ -2,6 +2,7 @@
 
 define('TEMPLATE', 'basic');
 define('TEMPS_CO', 31);
+define('PATH', '/usr/share/vca/');
 
 //DB
 define('DB_HOST', 'localhost');

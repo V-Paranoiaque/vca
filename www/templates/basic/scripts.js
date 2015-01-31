@@ -993,3 +993,84 @@ function formRequestClose(request) {
 		}		
 	});
 }
+
+function popupBackupSchedule(vps, saveId) {
+	popupclose();
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_backupschedule.php",
+		data: "vps="+vps+"&save="+saveId,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function displayScheduleList() {
+	$("#panel-backupschedule-add").hide('slow');
+	$("#panel-backupschedule-list").show('slow');
+}
+
+function displayScheduleAdd() {
+	$("#panel-backupschedule-list").hide('slow');
+	$("#panel-backupschedule-add").show('slow');
+}
+
+function formScheduleAdd(vps, saveId) {
+	var name = $("#name").val();
+	if(name == '') {
+		return '';
+	}
+
+	var minute = $("#minute").val();
+	
+	if(!(minute >= 0 && minute <= 59)) {
+		minute = 0;
+	}
+	
+	var hour = $("#hour").val();
+	
+	if(!(hour >= 0 && hour <= 23)) {
+		hour = 0;
+	}
+	
+	var dayw = 0;
+	
+	if($("#sunday").is(':checked')) { dayw += 64; }
+	if($("#monday").is(':checked')) { dayw += 32; }
+	if($("#tuesday").is(':checked')) { dayw += 16; }
+	if($("#wednesday").is(':checked')) { dayw += 8; }
+	if($("#thursday").is(':checked')) { dayw += 4; }
+	if($("#friday").is(':checked')) { dayw += 2; }
+	if($("#saturday").is(':checked')) { dayw += 1; }
+	
+	var dayn   = 0;
+	var i;
+	
+	for(i=1;i<=31;i++) {
+		if($("#day_"+i).is(':checked')) {
+			dayn += Math.pow(2, 31-i);
+		}
+	}
+	
+	var month  = 0;
+	for(i=1;i<=12;i++) {
+		if($("#month_"+i).is(':checked')) {
+			month += Math.pow(2, 12-i);
+		}
+	}
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_backupschedule.php",
+		data: "vps="+vps+"&save="+saveId+"&name="+name+"&minute="+minute+"&hour="+hour+"&dayw="+dayw+"&dayn="+dayn+"&month="+month,
+		success: function(msg) {
+			popupclose();
+			popupBackupSchedule(vps, saveId);
+		}
+	});
+}

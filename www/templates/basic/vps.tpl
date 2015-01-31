@@ -14,6 +14,7 @@
 	<a href="#" title="{'Reinstall'|gettext}" onclick="popupVpsReinstall({$vps->id});"><span class="glyphicon glyphicon-cog"></span></a>
 	<a href="#" title="{'Root password'|gettext}" onclick="popupVpsPassword({$vps->id});"><span class="glyphicon glyphicon-lock"></span></a>
 	<a href="#" title="{'Backups'|gettext}" onclick="popupBackupList({$vps->id});"><span aria-hidden="true" class="glyphicon glyphicon-hdd"></span></a>
+	<a href="#" title="{'Schedule backups'|gettext}" onclick="popupBackupSchedule({$vps->id}, 0);"><span aria-hidden="true" class="glyphicon glyphicon-time"></span></a>
 	<a href="#" title="{'Start'|gettext}"   onclick="popupVpsStart({$vps->id});"><span class="glyphicon glyphicon-play"></span></a>
 	<a href="#" title="{'Stop'|gettext}"    onclick="popupVpsStop({$vps->id});"><span class="glyphicon glyphicon-stop"></span></a>
 	<a href="#" title="{'Restart'|gettext}" onclick="popupVpsRestart({$vps->id});"><span class="glyphicon glyphicon-repeat"></span></a>

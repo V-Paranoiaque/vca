@@ -299,6 +299,10 @@ class Server {
 		$sql = 'DELETE FROM vps WHERE vps_id= :id';
 		$req = $link->prepare($sql);
 		$req->execute(array('id' => $id));
+		
+		$sql = 'DELETE FROM schedule WHERE vps_id= :id';
+		$req = $link->prepare($sql);
+		$req->execute(array('id' => $id));
 	}
 }
 

@@ -378,6 +378,34 @@ if(!empty($user)) {
 						}
 					}
 				break;
+				
+				case 'vpsSchedule':
+					if(!empty($var[0])) {
+						$list = $user->vpsList();
+						if(!empty($list[$var[0]])) {
+							$res = $user->vpsSchedule($var[0]);
+						}
+					}
+				break;
+				
+				case 'vpsScheduleAdd':
+					if(!empty($var[0]) && !empty($var[2]) && !empty($var[5]) && 
+					   !empty($var[6]) && !empty($var[7])) {
+						
+						if(empty($var[1])) { $var[1] = 0; }
+						if(empty($var[3])) { $var[3] = 0; }
+						if(empty($var[4])) { $var[4] = 0; }
+						
+						$list = $user->vpsList();
+						
+						if(!empty($list[$var[0]])) {
+							$user->vpsScheduleAdd($var[0], $var[1], 
+							                      ucfirst(trim($var[2])),
+							                      $var[3], $var[4], $var[5],
+							                      $var[6], $var[7]);
+						}
+					}
+				break;
 			}
 			
 			if(isset($res)) {
