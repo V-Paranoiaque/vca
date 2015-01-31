@@ -5,9 +5,9 @@ include('../../functions.php');
 include('../../libs/Paquet.class.php');
 
 $paquet = new Paquet();
-$paquet -> add_action('vpsScheduleList', array($_GET['vps']));
+$paquet -> add_action('vpsSchedule', array($_GET['vps']));
 $paquet -> send_actions();
-$vpsScheduleList = $paquet->getAnswer('vpsScheduleList');
+$vpsScheduleList = $paquet->getAnswer('vpsSchedule');
 
 if(!empty($vpsScheduleList) && !empty($_GET['save']) && 
    !empty($vpsScheduleList->$_GET['save'])) {
