@@ -715,7 +715,7 @@ class User extends Guest {
 		}
 	}
 	
-	function vpsBackupAdd($idVps) {
+	static function vpsBackupAdd($idVps) {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,

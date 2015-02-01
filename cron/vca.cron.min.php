@@ -11,11 +11,11 @@ include(PATH.'www/libs/User.class.php');
 $link = Db::link();
 $now = $_SERVER['REQUEST_TIME'];
 
-$month = date('m', $now);
+$month= date('m', $now);
 $dayn = date('d', $now);
 $dayw = date('w', $now);
-$hour = date('H', $now)
-$min = date('i', $now);
+$hour = date('H', $now);
+$min  = date('i', $now);
 
 $sql = 'SELECT schedule_vps, minute, hour, dayw, dayn, month
         FROM schedule';

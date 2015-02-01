@@ -356,7 +356,7 @@ if(!empty($user)) {
 					if(!empty($var[0])) {
 						$list = $user->vpsList();
 						if(!empty($list[$var[0]])) {
-							$res = $user->vpsBackupAdd($var[0]);
+							$res = User::vpsBackupAdd($var[0]);
 						}
 					}
 				break;
