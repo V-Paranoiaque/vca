@@ -7,6 +7,7 @@
 				<tr>
 					<th>{'Name'|gettext}</th>
 					<th>{'Address'|gettext}</th>
+					<th>{'Port'|gettext}</th>
 					<th>{'Vps'|gettext}</th>
 					<th></th>
 				</tr>
@@ -16,6 +17,7 @@
 				<tr>
 				  <td><a href="/vpslist/{$server->id}" title="{$server->name}">{$server->name}</a></td>
 				  <td>{$server->address}</td>
+				  <td>{$server->port}</td>
 				  <td>{$server->nbvps}</td>
 				  <td>
 				  	<a href="/vpslist/{$server->id}" title="{'Vps list'|gettext}"><span class="glyphicon glyphicon-align-justify"></span></a>&nbsp;

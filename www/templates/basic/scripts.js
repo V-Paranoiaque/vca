@@ -245,6 +245,7 @@ function formVpsEdit(vps) {
 	var vps_cpus     = $('#vps_cpus').val();
 	var vps_cpulimit = $('#vps_cpulimit').val();
 	var vps_cpuunits = $('#vps_cpuunits').val();
+	var backup_limit = $('#backup_limit').val();
 	var owner        = $('#owner').val();
 	
 	$.ajax({
@@ -254,7 +255,8 @@ function formVpsEdit(vps) {
 		      "&ipv4="+vps_ipv4+"&ram="+ram+"&swap="+swap+
 		      "&diskspace="+diskspace+"&diskinodes="+diskinodes+
 		      "&cpus="+vps_cpus+"&cpulimit="+vps_cpulimit+
-		      "&cpuunits="+vps_cpuunits+"&owner="+owner,
+		      "&cpuunits="+vps_cpuunits+"&backup_limit="+backup_limit+
+		      "&owner="+owner,
 		success: function(msg) {
 			popupVpsReload(vps);
 		}
@@ -363,13 +365,14 @@ function popupServerAdd() {
 function formServerAdd() {
 	var name = $("#name").val();
 	var address = $("#address").val();
+	var port = $("#port").val();
 	var key = $("#key").val();
 	var description = $("#description").val();
 	
 	$.ajax({
 		type: "GET",
 		url: "/templates/basic/form_serveradd.php",
-		data: "name="+name+"&address="+address+"&key="+key+"&description="+description,
+		data: "name="+name+"&address="+address+"&port="+port+"&key="+key+"&description="+description,
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
@@ -405,13 +408,14 @@ function popupServerEdit(server) {
 function formServerEdit(server) {
 	var name = $("#name").val();
 	var address = $("#address").val();
+	var port = $("#port").val();
 	var key = $("#key").val();
 	var description = $("#description").val();
 	
 	$.ajax({
 		type: "GET",
 		url: "/templates/basic/form_serveredit.php",
-		data: "server="+server+"&name="+name+"&address="+address+"&key="+key+"&description="+description,
+		data: "server="+server+"&name="+name+"&address="+address+"&port="+port+"&key="+key+"&description="+description,
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",

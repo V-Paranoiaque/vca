@@ -351,7 +351,7 @@ class User extends Guest {
 	
 	/*** Serveur ***/
 	function serverList() { return null; }
-	function serverAdd($name,$address,$key,$description='') { return null; }
+	function serverAdd($name,$address,$port,$key,$description='') { return null; }
 	function serverDelete($id) { }
 	function serverUpdate($id, $var)  { return null; }
 	function serverReload($id=0) { return null; }
@@ -380,7 +380,7 @@ class User extends Guest {
 		               vps.server_id, user_name, vps_cpus as cpus,
 		               diskspace_current, loadavg,
 		               swap, onboot, diskinodes, vps_cpulimit,
-				       vps_cpuunits
+				       vps_cpuunits, backup_limit
 		        FROM vps
 				LEFT JOIN user ON vps_owner=user_id
 				WHERE vps_owner=:id';
@@ -409,7 +409,8 @@ class User extends Guest {
 				'onboot'      => $do->onboot,
 				'diskinodes'  => $do->diskinodes,
 				'cpulimit'    => $do->vps_cpulimit,
-				'cpuunits'    => $do->vps_cpuunits
+				'cpuunits'    => $do->vps_cpuunits,
+				'backup_limit'=> $do->backup_limit
 			);
 		}
 	
@@ -456,7 +457,7 @@ class User extends Guest {
 		}
 		
 		$sql = 'SELECT server.server_id, server_address, vps_id,
-		               server_key
+		               server_key, server_port
 		        FROM vps
 				JOIN server ON vps.server_id=server.server_id
 		        WHERE vps_id=:vps_id';
@@ -467,6 +468,7 @@ class User extends Guest {
 		if(!empty($do->vps_id)) {
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
+			$server -> setPort($do->server_port);
 			$server -> setKey($do->server_key);
 			$server -> vpsUpdate($do->vps_id, $para);
 		}
@@ -480,7 +482,7 @@ class User extends Guest {
 	
 		$link = Db::link();
 		$sql = 'SELECT vps.server_id, server_name, server_address,
-	               server_description, server_key
+	               server_description, server_key, server_port
 		        FROM vps
 				JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :vps_id';
@@ -490,6 +492,7 @@ class User extends Guest {
 		while($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
+			$server -> setPort($do->server_port);
 			$server -> setKey($do->server_key);
 			$server -> vpsReload();
 		}
@@ -505,7 +508,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -516,6 +519,7 @@ class User extends Guest {
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
+			$server -> setPort($do->server_port);
 			$server -> setKey($do->server_key);
 			$server -> start($do->vps_id);
 		}
@@ -529,7 +533,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -540,6 +544,7 @@ class User extends Guest {
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
+			$server -> setPort($do->server_port);
 			$server -> setKey($do->server_key);
 			$server -> stop($do->vps_id);
 		}
@@ -553,7 +558,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -564,6 +569,7 @@ class User extends Guest {
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
+			$server -> setPort($do->server_port);
 			$server -> setKey($do->server_key);
 			$server -> restart($do->vps_id);
 		}
@@ -581,7 +587,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -590,7 +596,7 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
-			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
 			$connect -> write('password', $do->vps_id, $password);
 			$data = json_decode($connect -> read());
 		}
@@ -604,7 +610,7 @@ class User extends Guest {
 	function vpsTemplate($id=0) {
 		$link = Db::link();
 		$sql = 'SELECT vps.server_id, server_name, server_address,
-		               server_description, server_key
+		               server_description, server_key, server_port
 		        FROM vps
 				JOIN server ON vps.server_id=server.server_id
 		        WHERE vps_id= :server_id';
@@ -616,6 +622,7 @@ class User extends Guest {
 		if(!empty($do->server_id)) {
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
+			$server -> setPort($do->server_port);
 			$server -> setKey($do->server_key);
 			$list = array();
 	
@@ -662,7 +669,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -674,7 +681,7 @@ class User extends Guest {
 			$templates = $this->vpsTemplate($do->vps_id);
 	
 			if(!empty($templates) && in_array($os, $templates)) {
-				$connect = new Socket($do->server_address, PORT, $do->server_key);
+				$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
 				$connect -> write('reinstall', $do->vps_id, $os);
 				return $data = json_decode($connect -> read());
 			}
@@ -700,7 +707,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -709,7 +716,7 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
-			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
 			$connect -> write('backupList', $do->vps_id);
 			return $data = json_decode($connect -> read());
 		}
@@ -719,7 +726,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -728,7 +735,7 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
-			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
 			$connect -> write('backupAdd', $do->vps_id);
 			return $data = json_decode($connect -> read());
 		}
@@ -738,7 +745,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -747,7 +754,7 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
-			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
 			$connect -> write('backupRestore', $do->vps_id, $name);
 			return $data = json_decode($connect -> read());
 		}
@@ -757,7 +764,7 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner
+		               server_key, vps_owner, server_port
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -766,7 +773,7 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
-			$connect = new Socket($do->server_address, PORT, $do->server_key);
+			$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
 			$connect -> write('backupDelete', $do->vps_id, $name);
 			return $data = json_decode($connect -> read());
 		}

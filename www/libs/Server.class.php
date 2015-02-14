@@ -5,6 +5,7 @@ class Server {
 	private $id;
 	private $name;
 	private $address;
+	private $port;
 	private $description;
 	private $nbVps;
 	private $vps;
@@ -64,6 +65,14 @@ class Server {
 		$this->key = $key;
 	}
 	
+	function getPort() {
+		return $this->port;
+	}
+	
+	function setPort($port) {
+		$this->port = $port;
+	}
+	
 	/*** Server functions ***/
 	
 	/**
@@ -71,7 +80,7 @@ class Server {
 	 */
 	function vpsReload() {
 		$link = Db::link();
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('VpsList');
 		$data = json_decode($connect -> read());
 		
@@ -195,7 +204,7 @@ class Server {
 	 * @return unknown
 	 */
 	function templateList() {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('templateList');
 		$data = json_decode($connect -> read());
 	
@@ -209,7 +218,7 @@ class Server {
 	 */
 	function templateRename($old, $new) {
 		$para = array('old' => $old, 'new' => $new);
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('templateRename', 0, $para);
 	}
 	
@@ -218,7 +227,7 @@ class Server {
 	 * @param template name
 	 */
 	function templateAdd($name) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('templateAdd', 0, $name);
 	}
 	
@@ -227,7 +236,7 @@ class Server {
 	 * @param template name
 	 */
 	function templateDelete($name) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('templateDelete', 0, $name);
 	}
 	
@@ -239,7 +248,7 @@ class Server {
 	 * @param all parameters
 	 */
 	function setVpsAdd($id, $para) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('create', $id, $para);
 		$data = json_decode($connect -> read());
 	}
@@ -250,7 +259,7 @@ class Server {
 	 * @param parameters
 	 */
 	function vpsUpdate($id, $para) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('setConf', $id, $para);
 		$data = json_decode($connect -> read());
 	}
@@ -260,7 +269,7 @@ class Server {
 	 * @param vps id
 	 */
 	function start($id=0) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('start', $id);
 		$data = json_decode($connect -> read());
 	}
@@ -270,7 +279,7 @@ class Server {
 	 * @param vps id
 	 */
 	function stop($id=0) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('stop', $id);
 		$data = json_decode($connect -> read());
 	}
@@ -280,7 +289,7 @@ class Server {
 	 * @param vps id
 	 */
 	function restart($id=0) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('restart', $id);
 		$data = json_decode($connect -> read());
 	}
@@ -290,7 +299,7 @@ class Server {
 	 * @param vps id
 	 */
 	function delete($id) {
-		$connect = new Socket($this->address, PORT, $this->key);
+		$connect = new Socket($this->address, $this->port, $this->key);
 		$connect -> write('delete', $id);
 		$data = json_decode($connect -> read());
 		

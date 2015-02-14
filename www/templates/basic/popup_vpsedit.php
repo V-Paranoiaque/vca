@@ -147,6 +147,14 @@ _('CPU units').
 '<input type="text" class="form-control" name="vps_cpuunits" id="vps_cpuunits" value="'.$server->cpuunits.'">'.
 			'</div>'.
 		'</div>'.
+		'<div class="row">'.
+			'<div class="col-sm-6">'.
+				_('Backup max number').
+			'</div>'.
+			'<div class="col-sm-6">'.
+'<input type="text" class="form-control" name="backup_limit" id="backup_limit" value="'.$server->backup_limit.'">'.
+			'</div>'.
+		'</div>'.
 	'</div>';
 }
 echo 

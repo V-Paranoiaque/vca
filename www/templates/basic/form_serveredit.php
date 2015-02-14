@@ -5,11 +5,12 @@ include('../../functions.php');
 include('../../libs/Paquet.class.php');
 
 if(!empty($_GET['server']) && !empty($_GET['name']) && !empty($_GET['address']) && 
-   !empty($_GET['key'])  && !empty($_GET['description'])) {
+   !empty($_GET['port']) && !empty($_GET['key']) && !empty($_GET['description'])) {
 	
 	$para = array(
 		'name'    => $_GET['name'],
 		'address' => $_GET['address'],
+		'port'    => $_GET['port'],
 		'key'     => $_GET['key'],
 		'description' => $_GET['description']
 	);

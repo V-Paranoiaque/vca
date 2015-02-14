@@ -51,6 +51,13 @@ if(!empty($_GET['vps'])) {
 		$var['cpuunits'] = $_GET['cpuunits'];
 	}
 	
+	if(!empty($_GET['backup_limit'])) {
+		$var['backup_limit'] = $_GET['backup_limit'];
+	}
+	else {
+		$var['backup_limit'] = 0;
+	}
+	
 	if(!empty($_GET['owner'])) {
 		$var['owner'] = $_GET['owner'];
 	}

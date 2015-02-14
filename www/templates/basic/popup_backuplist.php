@@ -7,16 +7,34 @@ include('../../libs/Paquet.class.php');
 if(!empty($_GET['vps']) && is_numeric($_GET['vps'])) {
 	$paquet = new Paquet();
 	$paquet -> add_action('vpsBackup', array($_GET['vps']));
+	$paquet -> add_action('vpsList');
 	$paquet -> send_actions();
 	
 	$backupList = $paquet->getAnswer('vpsBackup');
+	$vpsList = $paquet->getAnswer('vpsList');
+	$server     = $vpsList->$_GET['vps'];
+	$nbCurrent  = sizeof((array) $backupList);
 	
-	echo 
-'<div class="row center">'.
+	if($server->backup_limit > 0 && $nbCurrent >= $server->backup_limit) {
+		echo 
+'<div role="alert" class="alert alert-danger">'.
+'<span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>';
+printf(_('You can\'t have more than %s backups'), $server->backup_limit);
+echo '</div>';
+	}
+	else {
+		echo 
+'<div class="row center">';
+		if($server->backup_limit > 0) {
+			printf(_('You can\'t have more than %s backups'), $server->backup_limit);
+			echo '<br/>';
+		}
+echo 
 '<button class="btn btn-danger" type="button" onclick="formBackupAdd('.$_GET['vps'].');">'._('Create a new backup').'</button>'.
 '</div>';
+	}
 	
-	if(!empty($backupList) && sizeof($backupList) > 0) {
+	if(!empty($backupList) && $nbCurrent > 0) {
 		echo 
 '<table class="table table-striped">'.
 '<thead>'.
