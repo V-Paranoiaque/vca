@@ -575,7 +575,7 @@ class Admin extends User {
 		}
 		else {
 			$sql = 'SELECT server_id, server_name, server_address,
-		               server_description, server_key
+		               server_description, server_key, server_port
 			        FROM server
 			        WHERE server_id= :server_id';
 			$req = $link->prepare($sql);
