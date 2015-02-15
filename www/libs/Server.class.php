@@ -109,6 +109,20 @@ class Server {
 					$swappages = $vps->swappages;
 				}
 				
+				if(empty($vps->ostemplate)) {
+					$ostemplate = '';
+				}
+				else {
+					$ostemplate = $vps->ostemplate;
+				}
+				
+				if(empty($vps->origin_sample)) {
+					$origin_sample = '';
+				}
+				else {
+					$origin_sample = $vps->origin_sample;
+				}
+				
 				$tmp = explode(':', $vps->diskinodes);
 				$diskinodes = $tmp[0];
 				
@@ -143,8 +157,8 @@ class Server {
 					'vps_cpulimit' => $vps->cpulimit,
 					'vps_cpus' => $vps->cpus,
 					'vps_cpuunits' => $vps->cpuunits,
-					'ostemplate' => $vps->ostemplate,
-					'origin_sample' => $vps->origin_sample,
+					'ostemplate' => $ostemplate,
+					'origin_sample' => $origin_sample,
 					'onboot'   => $vps->onboot,
 					'quotatime'=> $vps->quotatime,
 					'diskspace'=> $diskspace,
@@ -180,8 +194,8 @@ class Server {
 							'vps_cpulimit' => $vps->cpulimit,
 							'vps_cpus' => $vps->cpus,
 							'vps_cpuunits' => $vps->cpuunits,
-							'ostemplate' => $vps->ostemplate,
-							'origin_sample' => $vps->origin_sample,
+							'ostemplate' => $ostemplate,
+							'origin_sample' => $origin_sample,
 							'onboot'   => $vps->onboot,
 							'quotatime'=> $vps->quotatime,
 							'diskspace'=> $diskspace,
