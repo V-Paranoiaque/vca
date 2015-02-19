@@ -124,6 +124,15 @@ function numberSwapSize($size) {
 	}
 }
 
+function numberOrUnlimited($num) {
+	if($num == 0) {
+		return _('unlimited');
+	}
+	else {
+		return nbf($num);
+	}
+}
+
 function checkHostname($name) {
 	//Numeric
 	if(is_numeric($name)) {

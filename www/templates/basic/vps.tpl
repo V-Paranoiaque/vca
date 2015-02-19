@@ -46,8 +46,8 @@
 			<td>{$vps->ramCurrent|numberRamSizeCurrent}/{$vps->ram|numberRamSize} ({'Swap'|gettext} : {$vps->swap|numberSwapSize})</td>
 		</tr>
 		<tr>
-			<td>&nbsp;</td>
-			<td></td>
+			<td>{'Backups'|gettext}</td>
+			<td>{$nbCurrent}/{$vps->backup_limit|numberOrUnlimited}</td>
 		</tr>
 	</table>
 	</div>

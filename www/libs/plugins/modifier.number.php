@@ -20,4 +20,8 @@ function smarty_modifier_numberSwapSize($size) {
 	return numberSwapSize($size);
 }
 
+function smarty_modifier_numberOrUnlimited($num) {
+	return numberOrUnlimited($num);
+}
+
 ?>
