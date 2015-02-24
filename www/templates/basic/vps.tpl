@@ -11,7 +11,9 @@
 	<br/>
 	
 	<a href="#" title="{'Edit'|gettext}"      onclick="popupVpsEdit({$vps->id});"><span class="glyphicon glyphicon-pencil"></span></a>
-	<a href="#" title="{'Reinstall'|gettext}" onclick="popupVpsReinstall({$vps->id});"><span class="glyphicon glyphicon-cog"></span></a>
+	{if $vps->protected == 0}
+		<a href="#" title="{'Reinstall'|gettext}" onclick="popupVpsReinstall({$vps->id});"><span class="glyphicon glyphicon-cog"></span></a>
+	{/if}
 	<a href="#" title="{'Root password'|gettext}" onclick="popupVpsPassword({$vps->id});"><span class="glyphicon glyphicon-lock"></span></a>
 	<a href="#" title="{'Backups'|gettext}" onclick="popupBackupList({$vps->id});"><span aria-hidden="true" class="glyphicon glyphicon-hdd"></span></a>
 	<a href="#" title="{'Schedule backups'|gettext}" onclick="popupBackupSchedule({$vps->id}, 0);"><span aria-hidden="true" class="glyphicon glyphicon-time"></span></a>
@@ -21,7 +23,9 @@
 	{if $vps->serverId > 0}
 	  <a href="#" title="{'Reload'|gettext}"  onclick="popupVpsReload({$vps->id});"><span class="glyphicon glyphicon-refresh"></span></a>
 	  <a href="#" title="{'Clone'|gettext}"   onclick="popupVpsClone({$vps->id});"><span class="glyphicon glyphicon-tags"></span></a>
-	  <a href="#" title="{'Delete'|gettext}"  onclick="popupVpsDelete({$vps->id});"><span class="glyphicon glyphicon-remove"></span></a>
+	  {if $vps->protected == 0}
+	  	<a href="#" title="{'Delete'|gettext}"  onclick="popupVpsDelete({$vps->id});"><span class="glyphicon glyphicon-remove"></span></a>
+	  {/if}
 	{/if}
 	<br/><br/><br/>
 </div>

@@ -60,7 +60,13 @@ _('Start on Boot').
 			'</div>'.
 		'</div>';
 	if($server->serverId > 0) {
-echo 
+echo
+	'<div class="row">'.
+		'<div class="col-sm-6">'._('Protected').'</div>'.
+		'<div class="col-sm-6">'.
+			'<input type="checkbox" class="form-control" name="protected" id="protected" '.(($server->protected == 1)?'checked="checked"':'').'>'.
+		'</div>'.
+	'</div>'.
 	'<div class="row">'.
 			'<div class="col-sm-6">'.
 _('Vps IPv4').

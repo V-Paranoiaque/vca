@@ -18,7 +18,14 @@ if(!empty($_GET['vps'])) {
 	else {
 		$var['onboot'] = 0;
 	}
-
+	
+	if(!empty($_GET['protected'])) {
+		$var['protected'] = 1;
+	}
+	else {
+		$var['protected'] = 0;
+	}
+	
 	if(!empty($_GET['ipv4'])) {
 		$var['ipv4'] = $_GET['ipv4'];
 	}

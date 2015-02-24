@@ -198,6 +198,28 @@ class Admin extends User {
 	}
 	
 	/**
+	 * Update password
+	 * @param new password
+	 * @param user id
+	 */
+	function userPassword($password, $id=0) {
+		$link = Db::link();
+		
+		if(empty($id)) {
+			$id = $this->getId();
+		}
+		
+		$sql = 'UPDATE user
+		        SET user_password=:user_password
+		        WHERE user_id=:user_id';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+				'user_password' => hash('sha512', $id.$password),
+				'user_id'       => $id
+		));
+	}
+	
+	/**
 	 * Create a new user
 	 * @param user name
 	 * @param user mail
@@ -803,7 +825,8 @@ class Admin extends User {
 			               vps.server_id, user_name, vps_cpus as cpus,
 			               diskspace_current, loadavg,
 			               swap, onboot, diskinodes, vps_cpulimit,
-					       vps_cpuunits, backup_limit, server_name
+					       vps_cpuunits, backup_limit, server_name,
+			               vps_protected
 			        FROM vps
 					LEFT JOIN user ON vps_owner=user_id
 			        JOIN server ON server.server_id=vps.server_id';
@@ -817,7 +840,8 @@ class Admin extends User {
 			               vps.server_id, user_name, vps_cpus as cpus,
 			               diskspace_current, loadavg,
 			               swap, onboot, diskinodes, vps_cpulimit,
-					       vps_cpuunits, backup_limit, server_name
+					       vps_cpuunits, backup_limit, server_name,
+			               vps_protected
 			        FROM vps
 					LEFT JOIN user ON vps_owner=user_id
 			        JOIN server ON server.server_id=vps.server_id
@@ -847,6 +871,7 @@ class Admin extends User {
 				'diskspaceCurrent' => $do->diskspace_current,
 				'swap'        => $do->swap,
 				'onboot'      => $do->onboot,
+				'protected'   => $do->vps_protected,
 				'diskinodes'  => $do->diskinodes,
 				'cpulimit'    => $do->vps_cpulimit,
 				'cpuunits'    => $do->vps_cpuunits,
@@ -1039,7 +1064,11 @@ class Admin extends User {
 				$para['onboot'] = 0;
 			}
 		}
-	
+		
+		if(empty($var['protected']) or $var['protected'] != 1) {
+			$var['protected'] = 0;
+		}
+		
 		if(!empty($var['ipv4']) && $var['ipv4'] != $vps['ipv4'] &&
 		filter_var($var['ipv4'], FILTER_VALIDATE_IP)) {
 			$para['ipv4'] = $var['ipv4'];
@@ -1175,24 +1204,28 @@ class Admin extends User {
 				if(!empty($list[$var['owner']])) {
 					$sql = 'UPDATE vps
 					        SET vps_owner=:owner,
-					            backup_limit=:backup_limit
+					            backup_limit=:backup_limit,
+					            vps_protected=:protected
 					        WHERE vps_id= :vps';
 					$req = $link->prepare($sql);
 					$req->execute(array(
 						'owner' => $var['owner'],
 						'vps'   => $vps['id'],
-						'backup_limit' => $var['backup_limit']
+						'backup_limit' => $var['backup_limit'],
+						'protected' => $var['protected']
 					));
 				}
 			}
 			else {
 				$sql = 'UPDATE vps
-					        SET backup_limit=:backup_limit
-					        WHERE vps_id= :vps';
+				        SET backup_limit=:backup_limit,
+				            vps_protected=:protected
+				        WHERE vps_id= :vps';
 				$req = $link->prepare($sql);
 				$req->execute(array(
 						'vps'   => $vps['id'],
-						'backup_limit' => $var['backup_limit']
+						'backup_limit' => $var['backup_limit'],
+						'protected' => $var['protected']
 				));
 			}
 		}
@@ -1206,7 +1239,7 @@ class Admin extends User {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, server_port
+		               server_key, server_port, vps_protected
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -1214,7 +1247,7 @@ class Admin extends User {
 		$req->execute(array('id' => $id));
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
-		if(!empty($do->server_id)) {
+		if(!empty($do->server_id) && empty($do->vps_protected)) {
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
 			$server -> setPort($do->server_port);
@@ -1390,7 +1423,7 @@ class Admin extends User {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, server_port
+		               server_key, server_port, vps_protected
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -1398,7 +1431,7 @@ class Admin extends User {
 		$req->execute(array('id' => $idVps));
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
-		if(!empty($do->server_id)) {
+		if(!empty($do->server_id) && empty($do->vps_protected)) {
 			$templates = $this->serverTemplate($do->server_id);
 	
 			if(in_array($os, $templates)) {

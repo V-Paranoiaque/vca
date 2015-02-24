@@ -236,7 +236,14 @@ function formVpsEdit(vps) {
 	else {
 		var onboot   = 0;
 	}
- 
+	
+	if($('#protected').is(':checked')) {
+		var vps_protected   = 1;
+	}
+	else {
+		var vps_protected   = 0;
+	}
+	
 	var vps_ipv4     = $('#vps_ipv4').val();
 	var ram          = $('#ram').val();
 	var swap         = $('#swap').val();
@@ -256,7 +263,7 @@ function formVpsEdit(vps) {
 		      "&diskspace="+diskspace+"&diskinodes="+diskinodes+
 		      "&cpus="+vps_cpus+"&cpulimit="+vps_cpulimit+
 		      "&cpuunits="+vps_cpuunits+"&backup_limit="+backup_limit+
-		      "&owner="+owner,
+		      "&protected="+vps_protected+"&owner="+owner,
 		success: function(msg) {
 			popupVpsReload(vps);
 		}

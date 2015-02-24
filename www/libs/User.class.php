@@ -174,6 +174,25 @@ class User extends Guest {
 		return 5;
 	}
 	
+	/**
+	 * Update password
+	 * @param new password
+	 * @param unused parameter
+	 */
+	function userPassword($password, $id=0) {
+		$link = Db::link();
+		$id = $this->getId();
+		
+		$sql = 'UPDATE user
+		        SET user_password=:user_password
+		        WHERE user_id=:user_id';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+				'user_password' => hash('sha512', $id.$password),
+				'user_id'       => $id
+		));
+	}
+	
 	function userNew($user_name='', $user_mail='', $user_password='') { return null; }
 	function userDelete($id) { return null; }
 	function userVps($id) { return $this->vpsList(); }
@@ -380,7 +399,7 @@ class User extends Guest {
 		               vps.server_id, user_name, vps_cpus as cpus,
 		               diskspace_current, loadavg,
 		               swap, onboot, diskinodes, vps_cpulimit,
-				       vps_cpuunits, backup_limit
+				       vps_cpuunits, backup_limit, vps_protected
 		        FROM vps
 				LEFT JOIN user ON vps_owner=user_id
 				WHERE vps_owner=:id';
@@ -407,6 +426,7 @@ class User extends Guest {
 				'diskspaceCurrent' => $do->diskspace_current,
 				'swap'        => $do->swap,
 				'onboot'      => $do->onboot,
+				'protected'   => $do->vps_protected,
 				'diskinodes'  => $do->diskinodes,
 				'cpulimit'    => $do->vps_cpulimit,
 				'cpuunits'    => $do->vps_cpuunits,
@@ -669,7 +689,8 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner, server_port
+		               server_key, vps_owner, server_port,
+		               vps_protected
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -677,7 +698,7 @@ class User extends Guest {
 		$req->execute(array('id' => $idVps));
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
-		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
+		if(!empty($do->server_id) && $do->vps_owner == $this->getId() && empty($do->vps_protected)) {
 			$templates = $this->vpsTemplate($do->vps_id);
 	
 			if(!empty($templates) && in_array($os, $templates)) {

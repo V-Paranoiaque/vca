@@ -887,4 +887,8 @@ msgstr "Programmation des sauvegardes"
 
 #: templates/basic/popup_backupschedule.php
 msgid "Modify backup schedule"
-msgstr "Modifier la programmation des sauvegardes" 
+msgstr "Modifier la programmation des sauvegardes"
+
+#: templates/basic/popup_vpsedit.php
+msgid "Protected"
+msgstr "Protégé"

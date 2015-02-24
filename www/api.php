@@ -86,6 +86,15 @@ if(!empty($user)) {
 					}
 				break;
 				
+				case 'userPassword':
+					if(!empty($var[0])) {
+						if(empty($var[1])) {
+							$var[1] = 0;
+						}
+						$user->userPassword(trim($var[0]), $var[1]);
+					}
+				break;
+				
 				case 'userAdd':
 					if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {
 						$res = $user->userNew(trim(ucfirst($var[0])), trim(strtolower($var[1])), trim($var[2]));

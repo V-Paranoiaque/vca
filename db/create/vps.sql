@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `vps` (
   `vps_ipv4` varchar(15) NOT NULL,
   `vps_description` text NOT NULL,
   `vps_owner` int(10) unsigned NOT NULL,
+  `vps_protected` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `server_id` int(10) unsigned NOT NULL DEFAULT '0',
   `last_maj` bigint(20) unsigned NOT NULL DEFAULT '0',
   `vps_cpulimit` int(10) unsigned NOT NULL,

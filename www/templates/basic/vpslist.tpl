@@ -51,7 +51,7 @@
 				  	<a href="#" title="{'Start'|gettext}" onclick="popupVpsStart({$server->id});"><span class="glyphicon glyphicon-play"></span></a>
 				  	<a href="#" title="{'Stop'|gettext}" onclick="popupVpsStop({$server->id});"><span class="glyphicon glyphicon-stop"></span></a>
 				  	<a href="#" title="{'Restart'|gettext}" onclick="popupVpsRestart({$server->id});"><span class="glyphicon glyphicon-repeat"></span></a>
-				  	{if {$userRank > 0}}<a href="#" title="{'Delete'|gettext}" onclick="popupVpsDelete({$server->id});"><span class="glyphicon glyphicon-remove"></span></a>{/if}
+				  	{if {$userRank > 0} && {$server->protected} == 0}<a href="#" title="{'Delete'|gettext}" onclick="popupVpsDelete({$server->id});"><span class="glyphicon glyphicon-remove"></span></a>{/if}
 				  </td>
 				</tr>
 			{/foreach}
