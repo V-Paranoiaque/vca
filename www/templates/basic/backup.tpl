@@ -16,7 +16,7 @@
 				  <td>{$backup->date|tsdate}</td>
 				  <td>
 				  {if isset($vpsList->{$backup->vps})}
-  				  {$vpsList->{$backup->vps}->name}
+  				  <a href="/vps/{$backup->vps}" title="{'Information'|gettext}">{$vpsList->{$backup->vps}->name}</a>
 				  {/if}
 				  </td>
 				  <td>
