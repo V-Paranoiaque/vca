@@ -724,7 +724,7 @@ class User extends Guest {
 		return $do->nb;
 	}
 	
-	function vpsBackup($idVps) {
+	static function vpsBackup($idVps) {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
@@ -757,7 +757,7 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->backup_limit)) {
-			$list = $this->vpsBackup($do->vps_id);
+			$list = self::vpsBackup($do->vps_id);
 			if(sizeof($list) >= $do->backup_limit) {
 				return null;
 			}
