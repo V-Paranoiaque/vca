@@ -149,7 +149,7 @@ class Server {
 				        WHERE vps_id= :vps_id';
 				$req = $link->prepare($sql);
 				$req->execute(array(
-					'vps_id'   => $vps->id,
+					'vps_id'   => $vps->_id,
 					'vps_name' => $vps->hostname,
 					'vps_ipv4' => $vps->ip,
 					'server_id'=> $this->id,
@@ -186,7 +186,7 @@ class Server {
 					         :nproc, :loadavg, :diskspace_current)';
 					$req = $link->prepare($sql);
 					$req->execute(array(
-							'vps_id'   => $vps->id,
+							'vps_id'   => $vps->_id,
 							'vps_name' => $vps->hostname,
 							'vps_ipv4' => $vps->ip,
 							'server_id'=> $this->id,
@@ -274,7 +274,7 @@ class Server {
 	 */
 	function vpsUpdate($id, $para) {
 		$connect = new Socket($this->address, $this->port, $this->key);
-		$connect -> write('setConf', $id, $para);
+		$connect -> write('modConf', $id, $para);
 		$data = json_decode($connect -> read());
 	}
 	

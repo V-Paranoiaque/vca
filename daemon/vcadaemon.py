@@ -6,12 +6,14 @@ import time
 import os.path
 import base64
 import hashlib
+import configparser
 from Crypto.Cipher import AES
 from Crypto import Random
 from server import Server 
 from vps import Vps 
 
 vcakey = ''
+localserver = Server()
 
 def handle(connection, address):
     import logging
@@ -52,47 +54,45 @@ def handle(connection, address):
         connection.close()
 
 class VcaServer(object):
-    def __init__(self, hostname, port):
+    def __init__(self):
         import logging
         self.logger = logging.getLogger("server")
-        self.hostname = hostname
-        self.port = port
-
+    
     def start(self):
-        if os.path.isfile('vcakey.conf'):
+        if os.path.isfile('vca.cfg'):
             global vcakey
-            os.chmod('vcakey.conf', 0o400)
-            file = open('vcakey.conf','r')
-            vcakey = file.readline();
-            vcakey = vcakey.replace('\n', '')
-            vcakey = hashlib.md5(vcakey.encode()).hexdigest()
-            file.close()
-        
-        self.logger.debug("listening")
-        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.bind((self.hostname, self.port))
-        self.socket.listen(1)
-
-        while True:
-            conn, address = self.socket.accept()
-            self.logger.debug("Got connection")
-            process = multiprocessing.Process(target=handle, args=(conn, address))
-            process.daemon = True
-            process.start()
-            self.logger.debug("Started process %r", process)
+            os.chmod('vca.cfg', 0o400)
+            config = configparser.ConfigParser()
+            config.read("vca.cfg")
+            vcakey = hashlib.md5(config.get('DEFAULT', 'key').encode()).hexdigest()
+            self.port = int(config.get('DEFAULT', 'port'))
+            self.host = config.get('DEFAULT', 'host')
+            
+            self.logger.debug("listening")
+            self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.socket.bind((self.host, self.port))
+            self.socket.listen(1)
+            
+            while True:
+                conn, address = self.socket.accept()
+                self.logger.debug("Got connection")
+                process = multiprocessing.Process(target=handle, args=(conn, address))
+                process.daemon = True
+                process.start()
+                self.logger.debug("Started process %r", process)
 
 def vcaAction(action, serverDest, para):
+    global localserver
     
     # Server And VPS
     if action == 'VpsList':
-        return Server.VpsList()
+        return localserver.VpsList()
     elif action == 'create':
         if serverDest != 0:
-            server = Server()
-            server.VpsNew(serverDest, para['os'], para['name'])
+            localserver.VpsNew(serverDest, para['os'], para['name'])
             vps = Vps(serverDest)
             vps.modConf(para)
-    elif action == 'setConf':
+    elif action == 'modConf':
         if int(serverDest) != 0:
             vps = Vps(serverDest)
             vps.modConf(para)
@@ -106,19 +106,16 @@ def vcaAction(action, serverDest, para):
             vps.stop()
     elif action == 'restart':
         if int(serverDest) == 0:
-            server = Server()
-            server.restart()
+            localserver.restart()
         else:
             vps = Vps(serverDest)
             vps.restart()
     elif action == 'delete':
         if int(serverDest) > 0:
-            server = Server()
-            server.VpsDelete(serverDest)
+            localserver.VpsDelete(serverDest)
     elif action == 'clone':
         if int(serverDest) > 0 and int(para['dest']) > 0 :
-            server = Server()
-            server.VpsClone(serverDest, para['dest'], para['ip'], para['hostname'])
+            localserver.VpsClone(serverDest, para['dest'], para['ip'], para['hostname'])
     elif action == 'password':
         if int(serverDest) > 0 :
             vps = Vps(serverDest)
@@ -135,26 +132,20 @@ def vcaAction(action, serverDest, para):
             vps.reinstall(para)
     elif action == 'templateList':
         if int(serverDest) == 0:
-            return Server.templateList()
+            return localserver.templateList()
     elif action == 'templateRename':
         if int(serverDest) == 0:
-            Server.templateRename(para['old'], para['new'])
+            localserver.templateRename(para['old'], para['new'])
     elif action == 'templateAdd':
         if int(serverDest) == 0:
-            Server.templateAdd(para)
+            localserver.templateAdd(para)
     elif action == 'templateDelete':
         if int(serverDest) == 0 and para != '':
-            Server.templateDelete(para)
+            localserver.templateDelete(para)
     elif action == 'backupAdd':
         if int(serverDest) > 0 :
-            pid  = subprocess.Popen('vzlist -H -ao numproc '+serverDest, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            pid  = pid.strip()
             vps = Vps(serverDest)
-            if pid != '-':
-                vps.stop()
             vps.backupAdd()
-            if pid != '-':
-                vps.start()
     elif action == 'backupDelete':
         if int(serverDest) > 0 and int(para) > 0:
             vps = Vps(serverDest)
@@ -164,8 +155,7 @@ def vcaAction(action, serverDest, para):
             vps = Vps(serverDest)
             return vps.backupList()
         else:
-            server = Server()
-            return server.backupList()
+            return localserver.backupList()
     elif action == 'backupRestore':
         if int(serverDest) > 0 and int(para) > 0:
             pid  = str(subprocess.call('vzlist -H -ao numproc '+serverDest, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT))
@@ -183,10 +173,10 @@ def vcaAction(action, serverDest, para):
 if __name__ == "__main__":
     import logging
     logging.basicConfig(level=logging.DEBUG)
-    server = VcaServer("0.0.0.0", 10000)
+    vcaserver = VcaServer()
     try:
         logging.info("Listening")
-        server.start()
+        vcaserver.start()
     except:
         logging.exception("Unexpected exception")
     finally:

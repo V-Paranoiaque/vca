@@ -18,9 +18,10 @@ yum install centos-release-SCL -y
 yum install python33-python python33-python-devel python33-python-setuptools gcc gmp-devel screen vzkernel vzctl -y
 
 # Python install
+cd ~
 scl enable python33 bash
 easy_install-3.3 pip
-pip3 install pycrypto
+pip3 install pycrypto configparser
 
 # Create vcakey.conf
 touch /usr/share/vca/daemon/vcakey.conf

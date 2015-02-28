@@ -747,7 +747,8 @@ class User extends Guest {
 		$link = Db::link();
 	
 		$sql = 'SELECT vps_id, server.server_id, server_address,
-		               server_key, vps_owner, server_port
+		               server_key, vps_owner, server_port,
+		               backup_limit
 		        FROM vps
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
@@ -755,6 +756,13 @@ class User extends Guest {
 		$req->execute(array('id' => $idVps));
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
+		if(!empty($do->backup_limit)) {
+			$list = $this->vpsBackup($do->vps_id);
+			if(sizeof($list) >= $do->backup_limit) {
+				return null;
+			}
+		}
+		
 		if(!empty($do->server_id)) {
 			$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
 			$connect -> write('backupAdd', $do->vps_id);
