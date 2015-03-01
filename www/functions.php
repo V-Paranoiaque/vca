@@ -99,8 +99,11 @@ function numberRamSize($size) {
 	if($size == 0) {
 		return _('unlimited');
 	}
+	elseif($size < 1024) {
+		return ceil($size).' '._('MB');
+	}
 	else {
-		return $size.' '._('MB');
+		return (ceil($size/10.24)/100).' '._('GB');
 	}
 }
 
