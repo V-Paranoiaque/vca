@@ -6,6 +6,7 @@ include(PATH.'www/functions.php');
 include(PATH.'www/libs/Db.class.php');
 include(PATH.'www/libs/Socket.class.php');
 include(PATH.'www/libs/Server.class.php');
+include(PATH.'www/libs/Guest.class.php');
 include(PATH.'www/libs/User.class.php');
 
 $link = Db::link();
@@ -23,13 +24,13 @@ $req = $link->prepare($sql);
 $req->execute();
 while ($do = $req->fetch(PDO::FETCH_OBJ)) {
   if($do->minute == $min && $do->hour == $hour) {
-    $schedule_dayw = sprintf('%07d', decbin($do->dayw));
-    $schedule_dayn = str_pad(decbin($do->dayn), 31, '0', STR_PAD_LEFT);
+    $schedule_daysw = sprintf('%07d', decbin($do->dayw));
+    $schedule_daysn = str_pad(decbin($do->dayn), 31, '0', STR_PAD_LEFT);
     $schedule_month= sprintf('%12d', decbin($do->month));
     
     if(!empty($schedule_month[$month-1]) && 
        !empty($schedule_daysn[$dayn-1]) && 
-       !empty($schedule_daysw[$dayw-1])) {
+       !empty($schedule_daysw[$dayw])) {
       User::vpsBackupAdd($do->schedule_vps);
     }
   }
