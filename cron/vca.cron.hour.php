@@ -1,15 +1,16 @@
 <?php 
 
-include('../www/config.php');
-include('../www/functions.php');
+include('/usr/share/vca/www/config.php');
+include(PATH.'www/functions.php');
 
-include('../www/libs/Db.class.php');
-include('../www/libs/Socket.class.php');
-include('../www/libs/Server.class.php');
-include('../www/libs/Guest.class.php');
-include('../www/libs/User.class.php');
-include('../www/libs/Admin.class.php');
+include(PATH.'www/libs/Db.class.php');
+include(PATH.'www/libs/Socket.class.php');
+include(PATH.'www/libs/Server.class.php');
+include(PATH.'www/libs/Guest.class.php');
+include(PATH.'www/libs/User.class.php');
+include(PATH.'www/libs/Admin.class.php');
 
-Admin::serverReload();
+$admin = new Admin(0);
+$admin->serverReload();
 
 ?>
