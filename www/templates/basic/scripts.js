@@ -1085,3 +1085,29 @@ function formScheduleAdd(vps, saveId) {
 		}
 	});
 }
+
+function popupBackupScheduleDelete(vps, saveId) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_backupscheduledelete.php",
+		data: "vps="+vps+"&saveId="+saveId,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formBackupScheduleDelete(vps, saveId) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_backupscheduledelete.php",
+		data: "vps="+vps+"&saveId="+saveId,
+		success: function(msg) {
+			popupclose();
+			popupBackupSchedule(vps, 0);
+		}
+	});
+}

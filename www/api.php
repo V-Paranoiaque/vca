@@ -415,6 +415,16 @@ if(!empty($user)) {
 						}
 					}
 				break;
+				
+				case 'vpsScheduleDelete':
+					if(!empty($var[0]) && !empty($var[1])) {
+						$list = $user->vpsList();
+						
+						if(!empty($list[$var[0]])) {
+							$user->vpsScheduleDelete($var[1]);
+						}
+					}
+				break;
 			}
 			
 			if(isset($res)) {

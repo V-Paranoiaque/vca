@@ -866,6 +866,17 @@ class User extends Guest {
 			));
 		}
 	}
+	
+	function vpsScheduleDelete($save) {
+		$link = Db::link();
+		
+		$sql = 'DELETE FROM schedule
+		        WHERE schedule_id=:save';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+			'save'  => $save
+		));
+	}
 }
 
 ?>
