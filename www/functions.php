@@ -77,6 +77,18 @@ function errorToText($erreur_no) {
 		case 10:
 			$text = _('Account username must be between 5 and 25 caracteres');
 		break;
+		
+		case 11:
+			$text = _('Bad current password');
+		break;
+		
+		case 12:
+			$text = _('Both passwords are differents');
+		break;
+		
+		case 13:
+			$text = _('Password updated');
+		break;
 	}
 	
 	return $text;

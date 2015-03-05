@@ -87,11 +87,17 @@ if(!empty($user)) {
 				break;
 				
 				case 'userPassword':
+					if(!empty($var[0])&& !empty($var[1])) {
+						$res = $user->userPassword(trim($var[0]), trim($var[1]));
+					}
+				break;
+				
+				case 'userDefinePassword':
 					if(!empty($var[0])) {
 						if(empty($var[1])) {
 							$var[1] = 0;
 						}
-						$user->userPassword(trim($var[0]), $var[1]);
+						$user->userDefinePassword(trim($var[0]), $var[1]);
 					}
 				break;
 				

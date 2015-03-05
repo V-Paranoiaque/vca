@@ -202,11 +202,11 @@ class Admin extends User {
 	 * @param new password
 	 * @param user id
 	 */
-	function userPassword($password, $id=0) {
+	function userDefinePassword($password, $id=0) {
 		$link = Db::link();
 		
 		if(empty($id)) {
-			$id = $this->getId();
+			return null;
 		}
 		
 		$sql = 'UPDATE user

@@ -13,7 +13,7 @@ if(!empty($_GET['user'])) {
 	
 	if(!empty($_POST['password']) && !empty($_POST['confirm']) && 
 	   $_POST['password'] == $_POST['confirm']) {
-		$paquet -> add_action('userPassword',
+		$paquet -> add_action('userDefinePassword',
 		                      array($_POST['password'],$_GET['user']));
 	}
 }

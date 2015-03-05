@@ -3,7 +3,9 @@
 <div class="col-sm-6">
 <div class="panel panel-danger">
 	<div class="panel-heading">
-		<h3 class="panel-title center">{'User information'|gettext} <a onclick="popupProfile()" href="#" title="{'Edit your profile'|gettext}"><span class="glyphicon glyphicon-pencil"></span></a></h3>
+		<h3 class="panel-title center">{'User information'|gettext} 
+		<a onclick="popupProfile()" href="#" title="{'Edit your profile'|gettext}"><span class="glyphicon glyphicon-pencil"></span></a>
+		<a onclick="popupUserPassword()" href="#" title="{'User password'|gettext}"><span class="glyphicon glyphicon-lock"></span></a></h3>
 	</div>
 	<div class="panel-body">
 	<table>

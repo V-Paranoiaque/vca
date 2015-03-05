@@ -62,7 +62,7 @@ function formUserAdd() {
 	$.ajax({
 		type: "GET",
 		url: "/templates/basic/form_useradd.php",
-		data: "name="+name+"&mail="+mail+"&password="+password,
+		data: "name="+encodeURI(name)+"&mail="+encodeURI(mail)+"&password="+encodeURI(password),
 		success: function(msg) {
 			document.location.href="/user";
 		}
@@ -738,7 +738,7 @@ function formVpsPassword(vps) {
 	$.ajax({
 		type: "GET",
 		url: "/templates/basic/form_vpspassword.php",
-		data: "vps="+vps+"&password="+password,
+		data: "vps="+vps+"&password="+encodeURI(password),
 		beforeSend: function(msg) {
 			$.ajax({
 				type: "GET",
@@ -937,6 +937,42 @@ function formProfile() {
 			location.reload();
 		}
 	});
+}
+
+function popupUserPassword() {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_userpassword.php",
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formUserPassword() {
+	var current         = $("#current").val();
+	var newpassword     = $("#newpassword").val();
+	var confirmpassword = $("#confirmpassword").val();
+	
+	if(current != '' && newpassword != '' && confirmpassword != '') {
+		$.ajax({
+			type: "GET",
+			url: "/templates/basic/form_userpassword.php",
+			data: "current="+encodeURI(current)+"&new="+encodeURI(newpassword)+"&confirm="+encodeURI(confirmpassword),
+			success: function(msg) {
+				if(msg != "") {
+					$("#error_userpassword").html(msg);
+					$("#alert_userpassword").show();
+				}
+				else {
+					location.reload();
+				}
+			}
+		});
+	}
 }
 
 function popupRequestAdd() {

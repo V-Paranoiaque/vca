@@ -174,23 +174,37 @@ class User extends Guest {
 		return 5;
 	}
 	
+	function userDefinePassword($password, $id=0) {}
+	
 	/**
 	 * Update password
 	 * @param new password
 	 * @param unused parameter
 	 */
-	function userPassword($password, $id=0) {
+	function userPassword($old, $new) {
 		$link = Db::link();
-		$id = $this->getId();
 		
-		$sql = 'UPDATE user
-		        SET user_password=:user_password
+		$sql = 'SELECT user_id, user_password
+		        FROM user
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_password' => hash('sha512', $id.$password),
-				'user_id'       => $id
-		));
+		$req->execute(array('user_id' => $this->getId()));
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if($do->user_password == hash('sha512', $this->getId().$old)) {
+			$sql = 'UPDATE user
+			        SET user_password=:user_password
+			        WHERE user_id=:user_id';
+			$req = $link->prepare($sql);
+			$req->execute(array(
+					'user_password' => hash('sha512', $this->getId().$new),
+					'user_id'       => $this->getId()
+			));
+			return 13;
+		}
+		else {
+			return 11;
+		}
 	}
 	
 	function userNew($user_name='', $user_mail='', $user_password='') { return null; }
