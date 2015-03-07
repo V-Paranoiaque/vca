@@ -24,14 +24,13 @@ This software is licensed under the terms of the MIT license.
 * Users Requests
 * Backups
 * Multilanguage support
+* Automated backups
 
 ## Future features
 
 * Moving virtual machines
 * Custom templates
 * Multi-factor authentication
-
-* Limit the number of backup
 
 ## Installation
 
