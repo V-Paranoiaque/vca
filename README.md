@@ -30,7 +30,7 @@ This software is licensed under the terms of the MIT license.
 * Moving virtual machines
 * Custom templates
 * Multi-factor authentication
-* Automated backups
+
 * Limit the number of backup
 
 ## Installation
