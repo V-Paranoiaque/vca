@@ -9,24 +9,28 @@
 				<tbody>
 				{if {$userRank} > 0}
 					<tr>
-						<td>{'Physical servers'|gettext}</td>
+						<td><a href="/server" class="normal">{'Physical servers'|gettext}</a></td>
 						<td>{$vcastats->nbServer}</td>
 					</tr>
 					<tr>
-						<td>{'Virtual servers'|gettext}</td>
+						<td><a href="/vpslist" class="normal">{'Virtual servers'|gettext}</a></td>
 						<td>{$vcastats->nbVps}</td>
 					</tr>
 					<tr>
-						<td>{'Open requests'|gettext}</td>
+						<td><a href="/ip" class="normal">{'IP Addresses'|gettext}</a></td>
+						<td>{$vcastats->nbIp}</td>
+					</tr>
+					<tr>
+						<td><a href="/request" class="normal">{'Open requests'|gettext}</a></td>
 						<td>{$vcastats->request}</td>
 					</tr>
 				{else}
 					<tr>
-						<td>{'Virtual servers'|gettext}</td>
+						<td><a href="/vpslist" class="normal">{'Virtual servers'|gettext}</a></td>
 						<td>{$vcastats->nbVps}</td>
 					</tr>
 					<tr>
-						<td>{'Open requests'|gettext}</td>
+						<td><a href="/request" class="normal">{'Open requests'|gettext}</a></td>
 						<td>{$vcastats->request}</td>
 					</tr>
 				{/if}				
@@ -50,6 +54,7 @@
 					<td>{$vcastats->nbVpsStop}</td>
 				</tr>
 				{if {$userRank} > 0}
+					<tr><td>&nbsp;</td><td></td></tr>
 					<tr><td>&nbsp;</td><td></td></tr>
 				{/if}
 			</tbody></table>

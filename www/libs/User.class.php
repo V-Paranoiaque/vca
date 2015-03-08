@@ -107,6 +107,7 @@ class User extends Guest {
 				'nbVpsStop'=> $nbVpsStop,
 				'nbServer' => 0,
 				'nbUser'   => 0,
+				'nbIp'     => 0,
 				'request'  => $request
 		);
 	}

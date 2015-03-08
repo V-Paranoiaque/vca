@@ -48,12 +48,20 @@ class Admin extends User {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		$request = $do->nb;
 		
+		$sql = 'SELECT count(ip) as nb
+		        FROM ipv4';
+		$req = $link->prepare($sql);
+		$req->execute();
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		$nbIp = $do->nb;
+		
 		return array(
 				'nbVps'    => $nbVpsRun+$nbVpsStop,
 				'nbVpsRun' => $nbVpsRun,
 				'nbVpsStop'=> $nbVpsStop,
 				'nbServer' => $nbServer,
 				'nbUser'   => $nbUser,
+				'nbIp'     => $nbIp,
 				'request'  => $request
 		);
 	}

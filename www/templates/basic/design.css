@@ -53,6 +53,12 @@ span.offline {
     padding-right:10px;
 }
 
+.panel-body table td a.normal,
+.panel-body table td a.normal:focus,
+.panel-body table td a.normal:hover {
+	color:#333;
+}
+
 /*** Bootstrap overlay***/
 .navbar-logo {
   float:left;
