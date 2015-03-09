@@ -113,6 +113,23 @@ class User extends Guest {
 	}
 	
 	/*** Users ***/
+	
+	/**
+	 * Update activity
+	 */
+	function update() {
+		$link = Db::link();
+		
+		$sql = 'UPDATE user
+		        SET user_activity= :user_activity
+		        WHERE user_id= :user_id';
+		$req = $link->prepare($sql);
+		$req->execute(array(
+				'user_activity' => $_SERVER['REQUEST_TIME'],
+				'user_id'       => $this->getId()
+		));
+	}
+	
 	function userProfile() {
 		$link = Db::link();
 		
@@ -223,7 +240,7 @@ class User extends Guest {
 			$req = $link->prepare($sql);
 			$req->execute(array(
 					'user_language' => $lang,
-					'user_id'       => $id
+					'user_id'       => $this->getId()
 			));
 		}
 	}

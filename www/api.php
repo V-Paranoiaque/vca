@@ -52,6 +52,8 @@ if(!empty($token)) {
 }
 
 if(!empty($user)) {
+	$user->update();
+	
 	if(!empty($actions)) {
 		foreach ($actions as $action => $var) {
 			$res = '';

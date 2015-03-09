@@ -252,13 +252,14 @@ class Admin extends User {
 		}
 	
 		$sql = 'INSERT INTO user
-		        (user_name, user_mail)
+		        (user_name, user_mail, user_created)
 		        VALUES
-		        (:user_name, :user_mail)';
+		        (:user_name, :user_mail, :user_created)';
 		$req = $link->prepare($sql);
 		$req->execute(array(
 				'user_name' => $user_name,
-				'user_mail' => $user_mail
+				'user_mail' => $user_mail,
+				'user_created' => $_SERVER['REQUEST_TIME']
 		));
 		
 		$user_id = $link->lastInsertId();

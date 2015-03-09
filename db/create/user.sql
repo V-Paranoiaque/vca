@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_rank` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `user_password` varchar(128) NOT NULL,
   `user_token` varchar(128) NOT NULL,
-  `user_language` varchar(15) NOT NULL DEFAULT 'en_GB'
+  `user_language` varchar(15) NOT NULL DEFAULT 'en_GB',
+  `user_created` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `user_activity` bigint(20) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `user` (`user_name`, `user_rank`, `user_password`) VALUES
