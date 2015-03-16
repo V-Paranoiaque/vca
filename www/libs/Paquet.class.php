@@ -26,27 +26,10 @@ class Paquet {
 	}
 	
 	function send_actions() {
-		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
-			$protocol = 'https';
-		}
-		else {
-			$protocol = 'http';
-		}
-		
-		$var = array('token'     => $this->token,
-		             'actions'   => $this->actions);
-		
-		$postvar = http_build_query($var);
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => $postvar
-		    )
-		);
-		
-		$context = stream_context_create($opts);
-		$data    = json_decode(file_get_contents($protocol.'://'.$_SERVER['HTTP_HOST'].'/api.php', false, $context));
+		$data = self::vcaAction($this->actions, $this->token);
+	 	
+		//Force object
+		$data = json_decode (json_encode ($data));
 		
 		if(!empty($data->user)) {
 			$this->user = $data->user;
