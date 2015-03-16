@@ -24,4 +24,4 @@ easy_install-3.3 pip
 pip3 install pycrypto configparser
 
 # Create vcakey.conf
-touch /usr/share/vca/daemon/vcakey.conf
+touch /usr/share/vca/daemon/vca.cfg

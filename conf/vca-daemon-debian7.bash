@@ -20,4 +20,4 @@ aptitude update
 aptitude install python3 python3-devel python3-crypto python3-dev vzkernel vzctl -y
 
 # Create vcakey.conf
-touch /usr/share/vca/daemon/vcakey.conf
+touch /usr/share/vca/daemon/vca.cfg
