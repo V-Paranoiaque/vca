@@ -14,7 +14,8 @@ class Guest {
 		        WHERE user_name= :user_name';
 		$link = Db::link();
 		$req = $link->prepare($sql);
-		$req->execute(array('user_name' => $login));
+		$req->bindValue(':user_name', $login, PDO::PARAM_STR);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 
 		//If user does not exist or the passwords missmatch
@@ -40,11 +41,10 @@ class Guest {
 		        WHERE user_id= :user_id';
 		$link = Db::link();
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_token' => $newToken,
-				'user_id'    => $id
-		));
-	
+		$req->bindValue(':user_token', $newToken, PDO::PARAM_STR);
+		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
+		$req->execute();
+		
 		return $newToken;
 	}
 	
@@ -59,7 +59,8 @@ class Guest {
 		        WHERE user_token= :user_token';
 		$link = Db::link();
 		$req = $link->prepare($sql);
-		$req->execute(array('user_token' => $token));
+		$req->bindValue(':user_token', $token, PDO::PARAM_STR);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(empty($do)) {

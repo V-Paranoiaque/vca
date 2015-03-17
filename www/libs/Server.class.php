@@ -148,28 +148,27 @@ class Server {
 				            diskspace_current= :diskspace_current
 				        WHERE vps_id= :vps_id';
 				$req = $link->prepare($sql);
-				$req->execute(array(
-					'vps_id'   => $vps->_id,
-					'vps_name' => $vps->hostname,
-					'vps_ipv4' => $vps->ip,
-					'server_id'=> $this->id,
-					'last_maj' => $_SERVER['REQUEST_TIME'],
-					'vps_cpulimit' => $vps->cpulimit,
-					'vps_cpus' => $vps->cpus,
-					'vps_cpuunits' => $vps->cpuunits,
-					'ostemplate' => $ostemplate,
-					'origin_sample' => $origin_sample,
-					'onboot'   => $vps->onboot,
-					'quotatime'=> $vps->quotatime,
-					'diskspace'=> $diskspace,
-					'ram'=> $ram,
-					'ram_current' => $vps->ram_current,
-					'swap' => $swappages,
-					'diskinodes' => $diskinodes,
-					'nproc' => $vps->nproc,
-					'loadavg'=> $vps->loadavg,
-				    'diskspace_current' => $vps->diskspace_current
-				));
+				$req->bindValue(':vps_id', $vps->_id, PDO::PARAM_INT);
+				$req->bindValue(':vps_name', $vps->hostname, PDO::PARAM_STR);
+				$req->bindValue(':vps_ipv4', $vps->ip, PDO::PARAM_STR);
+				$req->bindValue(':server_id', $this->id, PDO::PARAM_INT);
+				$req->bindValue(':last_maj', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+				$req->bindValue(':vps_cpulimit', $vps->cpulimit, PDO::PARAM_INT);
+				$req->bindValue(':vps_cpus', $vps->cpus, PDO::PARAM_INT);
+				$req->bindValue(':vps_cpuunits', $vps->cpuunits, PDO::PARAM_INT);
+				$req->bindValue(':ostemplate', $ostemplate, PDO::PARAM_STR);
+				$req->bindValue(':origin_sample', $origin_sample, PDO::PARAM_STR);
+				$req->bindValue(':onboot', $vps->onboot, PDO::PARAM_INT);
+				$req->bindValue(':quotatime', $vps->quotatime, PDO::PARAM_INT);
+				$req->bindValue(':diskspace', $diskspace, PDO::PARAM_INT);
+				$req->bindValue(':ram', $ram, PDO::PARAM_INT);
+				$req->bindValue(':ram_current', $vps->ram_current, PDO::PARAM_INT);
+				$req->bindValue(':swap', $swappages, PDO::PARAM_INT);
+				$req->bindValue(':diskinodes', $diskinodes, PDO::PARAM_INT);
+				$req->bindValue(':nproc', $vps->nproc, PDO::PARAM_INT);
+				$req->bindValue(':loadavg', $vps->loadavg, PDO::PARAM_STR);
+				$req->bindValue(':diskspace_current', $vps->diskspace_current, PDO::PARAM_INT);
+				$req->execute();
 				
 				if($req->rowCount() == 0) {
 					$sql = 'INSERT INTO vps
@@ -185,28 +184,28 @@ class Server {
 					         :diskspace, :ram, :ram_current, :swap, :diskinodes,
 					         :nproc, :loadavg, :diskspace_current)';
 					$req = $link->prepare($sql);
-					$req->execute(array(
-							'vps_id'   => $vps->_id,
-							'vps_name' => $vps->hostname,
-							'vps_ipv4' => $vps->ip,
-							'server_id'=> $this->id,
-							'last_maj' => $_SERVER['REQUEST_TIME'],
-							'vps_cpulimit' => $vps->cpulimit,
-							'vps_cpus' => $vps->cpus,
-							'vps_cpuunits' => $vps->cpuunits,
-							'ostemplate' => $ostemplate,
-							'origin_sample' => $origin_sample,
-							'onboot'   => $vps->onboot,
-							'quotatime'=> $vps->quotatime,
-							'diskspace'=> $diskspace,
-							'ram'      => $ram,
-							'ram_current' => $vps->ram_current,
-							'swap'     => $swappages,
-							'diskinodes' => $diskinodes,
-							'nproc'    => $vps->nproc,
-							'loadavg'  => $vps->loadavg,
-					        'diskspace_current' => $vps->diskspace_current
-					));
+					$req = $link->prepare($sql);
+					$req->bindValue(':vps_id', $vps->_id, PDO::PARAM_INT);
+					$req->bindValue(':vps_name', $vps->hostname, PDO::PARAM_STR);
+					$req->bindValue(':vps_ipv4', $vps->ip, PDO::PARAM_STR);
+					$req->bindValue(':server_id', $this->id, PDO::PARAM_INT);
+					$req->bindValue(':last_maj', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+					$req->bindValue(':vps_cpulimit', $vps->cpulimit, PDO::PARAM_INT);
+					$req->bindValue(':vps_cpus', $vps->cpus, PDO::PARAM_INT);
+					$req->bindValue(':vps_cpuunits', $vps->cpuunits, PDO::PARAM_INT);
+					$req->bindValue(':ostemplate', $ostemplate, PDO::PARAM_STR);
+					$req->bindValue(':origin_sample', $origin_sample, PDO::PARAM_STR);
+					$req->bindValue(':onboot', $vps->onboot, PDO::PARAM_INT);
+					$req->bindValue(':quotatime', $vps->quotatime, PDO::PARAM_INT);
+					$req->bindValue(':diskspace', $diskspace, PDO::PARAM_INT);
+					$req->bindValue(':ram', $ram, PDO::PARAM_INT);
+					$req->bindValue(':ram_current', $vps->ram_current, PDO::PARAM_INT);
+					$req->bindValue(':swap', $swappages, PDO::PARAM_INT);
+					$req->bindValue(':diskinodes', $diskinodes, PDO::PARAM_INT);
+					$req->bindValue(':nproc', $vps->nproc, PDO::PARAM_INT);
+					$req->bindValue(':loadavg', $vps->loadavg, PDO::PARAM_STR);
+					$req->bindValue(':diskspace_current', $vps->diskspace_current, PDO::PARAM_INT);
+					$req->execute();
 				}
 			}
 		}
@@ -321,11 +320,13 @@ class Server {
 		
 		$sql = 'DELETE FROM vps WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		
 		$sql = 'DELETE FROM schedule WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 	}
 }
 

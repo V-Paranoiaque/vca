@@ -176,7 +176,8 @@ class Admin extends User {
 		        FROM user
 		        WHERE user_name= :user_name';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_name' => $user_name));
+		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->user_id) && $do->user_id != $id) {
@@ -195,13 +196,12 @@ class Admin extends User {
 		            user_language=:user_language
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_name' => $user_name,
-				'user_mail' => $user_mail,
-				'user_language' => $language,
-				'user_id'   => $id
-		));
-	
+		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+		$req->bindValue(':user_mail', $user_mail, PDO::PARAM_STR);
+		$req->bindValue(':user_language', $language, PDO::PARAM_STR);
+		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
+		$req->execute();
+		
 		return 5;
 	}
 	
@@ -221,10 +221,9 @@ class Admin extends User {
 		        SET user_password=:user_password
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_password' => hash('sha512', $id.$password),
-				'user_id'       => $id
-		));
+		$req->bindValue(':user_password', hash('sha512', $id.$password), PDO::PARAM_STR);
+		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
+		$req->execute();
 	}
 	
 	/**
@@ -244,7 +243,8 @@ class Admin extends User {
 		        FROM user
 		        WHERE user_name= :user_name';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_name' => $user_name));
+		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->user_id)) {
@@ -256,11 +256,10 @@ class Admin extends User {
 		        VALUES
 		        (:user_name, :user_mail, :user_created)';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_name' => $user_name,
-				'user_mail' => $user_mail,
-				'user_created' => $_SERVER['REQUEST_TIME']
-		));
+		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+		$req->bindValue(':user_mail', $user_mail, PDO::PARAM_STR);
+		$req->bindValue(':user_created', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$req->execute();
 		
 		$user_id = $link->lastInsertId();
 		
@@ -268,10 +267,9 @@ class Admin extends User {
 		        SET user_password=:user_password
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_password' => hash('sha512', $user_id.$user_password),
-				'user_id'       => $user_id
-		));
+		$req->bindValue(':user_password', hash('sha512', $user_id.$user_password), PDO::PARAM_STR);
+		$req->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		$req->execute();
 		
 		return 8;
 	}
@@ -292,12 +290,14 @@ class Admin extends User {
 		        SET vps_owner=0
 		        WHERE vps_owner= :user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $id));
+		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
+		$req->execute();
 		
 		$sql = 'DELETE FROM user
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $id));
+		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
+		$req->execute();
 	
 		if($req->rowCount() == 0) {
 			return 3;
@@ -328,9 +328,7 @@ class Admin extends User {
 		        JOIN user ON request_topic_author=user_id
 		        ORDER BY request_topic_id DESC';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-			'author' => $this->getId()
-		));
+		$req->execute();
 		
 		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$list[$do->request_topic_id] = array(
@@ -412,7 +410,8 @@ class Admin extends User {
 		if(!empty($ip) && filter_var($ip, FILTER_VALIDATE_IP)) {
 			$sql = 'SELECT ip FROM ipv4 WHERE ip= :ip';
 			$req = $link->prepare($sql);
-			$req->execute(array('ip' => $ip));
+			$req->bindValue(':ip', $ip, PDO::PARAM_STR);
+			$req->execute();
 			$do = $req->fetch(PDO::FETCH_OBJ);
 	
 			if(empty($do->ip)) {
@@ -421,7 +420,8 @@ class Admin extends User {
 				        VALUES
 				        (:ip)';
 				$req = $link->prepare($sql);
-				$req->execute(array('ip' => $ip));
+				$req->bindValue(':ip', $ip, PDO::PARAM_STR);
+				$req->execute();
 			}
 		}
 	}
@@ -439,7 +439,8 @@ class Admin extends User {
 			$sql = 'DELETE FROM ipv4
 			        WHERE ip= :ip';
 			$req = $link->prepare($sql);
-			$req->execute(array('ip' => $ip));
+			$req->bindValue(':ip', $ip, PDO::PARAM_STR);
+			$req->execute();
 		}
 	}
 	
@@ -490,14 +491,13 @@ class Admin extends User {
 		        VALUES
 				(:name, :address, :port, :description, :key)';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'name'        => $name,
-				'address'     => $address,
-				'port'        => $port,
-				'description' => $description,
-				'key'         => $key
-		));
-	
+		$req->bindValue(':name', $name, PDO::PARAM_STR);
+		$req->bindValue(':address', $address, PDO::PARAM_STR);
+		$req->bindValue(':port', $port, PDO::PARAM_INT);
+		$req->bindValue(':description', $description, PDO::PARAM_STR);
+		$req->bindValue(':key', $key, PDO::PARAM_STR);
+		$req->execute();
+		
 		$this->serverReload($link->lastInsertId());
 	}
 	
@@ -511,12 +511,14 @@ class Admin extends User {
 		$sql = 'DELETE FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 	
 		$sql = 'DELETE FROM vps
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 	}
 	
 	/**
@@ -574,21 +576,20 @@ class Admin extends User {
 		
 		$link = Db::link();
 		$sql = 'UPDATE server
-		        SET server_name= :server_name,
-		            server_address= :server_address,
-		            server_port= :server_port,
-		            server_description= :server_description,
-		            server_key = :server_key
+		        SET server_name= :name,
+		            server_address= :address,
+		            server_port= :port,
+		            server_description= :description,
+		            server_key = :key
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'server_name'    => $serverInfo['name'],
-				'server_address' => $serverInfo['address'],
-				'server_port'    => $serverInfo['port'],
-				'server_description' => $serverInfo['description'],
-				'server_key'  => $serverInfo['key'],
-				'server_id'   => $server['id']
-		));
+		$req->bindValue(':name', $serverInfo['name'], PDO::PARAM_STR);
+		$req->bindValue(':address', $serverInfo['address'], PDO::PARAM_STR);
+		$req->bindValue(':port', $serverInfo['port'], PDO::PARAM_INT);
+		$req->bindValue(':description', $serverInfo['description'], PDO::PARAM_STR);
+		$req->bindValue(':key', $serverInfo['key'], PDO::PARAM_STR);
+		$req->bindValue(':server_id', $server['id'], PDO::PARAM_INT);
+		$req->execute();
 	}
 	
 	/**
@@ -610,7 +611,8 @@ class Admin extends User {
 			        FROM server
 			        WHERE server_id= :server_id';
 			$req = $link->prepare($sql);
-			$req->execute(array('server_id' => $id));
+			$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+			$req->execute();
 		}
 	
 		while($do = $req->fetch(PDO::FETCH_OBJ)) {
@@ -634,7 +636,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 	
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
@@ -659,7 +662,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 	
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
@@ -711,7 +715,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 		
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
@@ -731,7 +736,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 		
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		if(!empty($do->server_id)) {
@@ -758,7 +764,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 		
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
@@ -778,7 +785,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $server));
+		$req->bindValue(':server_id', $server, PDO::PARAM_INT);
+		$req->execute();
 		
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
@@ -806,7 +814,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server.server_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $server));
+		$req->bindValue(':id', $server, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -856,7 +865,8 @@ class Admin extends User {
 			        JOIN server ON server.server_id=vps.server_id
 			        WHERE vps.server_id= :server_id';
 			$req = $link->prepare($sql);
-			$req->execute(array('server_id' => $server));
+			$req->bindValue(':server_id', $server, PDO::PARAM_INT);
+			$req->execute();
 		}
 	
 			while ($do = $req->fetch(PDO::FETCH_OBJ)) {
@@ -903,7 +913,8 @@ class Admin extends User {
 		        FROM server
 		        WHERE server_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		if(empty($do->server_id)) {
@@ -1198,7 +1209,8 @@ class Admin extends User {
 					JOIN server ON vps.server_id=server.server_id
 			        WHERE vps_id=:vps_id';
 			$req = $link->prepare($sql);
-			$req->execute(array('vps_id' => $vps['id']));
+			$req->bindValue(':vps_id', $vps['id'], PDO::PARAM_INT);
+			$req->execute();
 			$do = $req->fetch(PDO::FETCH_OBJ);
 			
 			$server = new Server($do-> server_id);
@@ -1217,12 +1229,11 @@ class Admin extends User {
 					            vps_protected=:protected
 					        WHERE vps_id= :vps';
 					$req = $link->prepare($sql);
-					$req->execute(array(
-						'owner' => $var['owner'],
-						'vps'   => $vps['id'],
-						'backup_limit' => $var['backup_limit'],
-						'protected' => $var['protected']
-					));
+					$req->bindValue(':owner', $var['owner'], PDO::PARAM_INT);
+					$req->bindValue(':vps', $vps['id'], PDO::PARAM_INT);
+					$req->bindValue(':backup_limit', $var['backup_limit'], PDO::PARAM_INT);
+					$req->bindValue(':protected', $var['protected'], PDO::PARAM_INT);
+					$req->execute();
 				}
 			}
 			else {
@@ -1231,11 +1242,10 @@ class Admin extends User {
 				            vps_protected=:protected
 				        WHERE vps_id= :vps';
 				$req = $link->prepare($sql);
-				$req->execute(array(
-						'vps'   => $vps['id'],
-						'backup_limit' => $var['backup_limit'],
-						'protected' => $var['protected']
-				));
+				$req->bindValue(':vps', $vps['id'], PDO::PARAM_INT);
+				$req->bindValue(':backup_limit', $var['backup_limit'], PDO::PARAM_INT);
+				$req->bindValue(':protected', $var['protected'], PDO::PARAM_INT);
+				$req->execute();
 			}
 		}
 	}
@@ -1253,7 +1263,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && empty($do->vps_protected)) {
@@ -1278,7 +1289,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -1303,7 +1315,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -1328,7 +1341,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -1355,7 +1369,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && in_array($ip, $this->ipFree())) {
@@ -1388,7 +1403,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -1413,7 +1429,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -1437,7 +1454,8 @@ class Admin extends User {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && empty($do->vps_protected)) {

@@ -81,7 +81,8 @@ class User extends Guest {
 		        FROM vps
 		        WHERE vps_owner= :user_id AND nproc>0';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $this->getId()));
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		$nbVpsRun = $do->nb;
 	
@@ -89,7 +90,8 @@ class User extends Guest {
 		        FROM vps
 		        WHERE vps_owner= :user_id AND nproc=0';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $this->getId()));
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		$nbVpsStop = $do->nb;
 		
@@ -97,7 +99,8 @@ class User extends Guest {
 		        FROM request_topic
 		        WHERE request_topic_author= :user_id AND request_topic_resolved=0';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $this->getId()));
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		$request = $do->nb;
 	
@@ -124,10 +127,9 @@ class User extends Guest {
 		        SET user_activity= :user_activity
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_activity' => $_SERVER['REQUEST_TIME'],
-				'user_id'       => $this->getId()
-		));
+		$req->bindValue(':user_activity', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 	}
 	
 	function userProfile() {
@@ -141,7 +143,8 @@ class User extends Guest {
 		        ON v.vps_owner=user.user_id
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $this->getId()));
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		return $do;
@@ -182,13 +185,12 @@ class User extends Guest {
 		            user_language=:user_language
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'user_name' => $user_name,
-				'user_mail' => $user_mail,
-				'user_language' => $language,
-				'user_id'   => $id
-		));
-	
+		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+		$req->bindValue(':user_mail', $user_mail, PDO::PARAM_STR);
+		$req->bindValue(':user_language', $language, PDO::PARAM_STR);
+		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
+		$req->execute();
+		
 		return 5;
 	}
 	
@@ -206,7 +208,8 @@ class User extends Guest {
 		        FROM user
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $this->getId()));
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		if($do->user_password == hash('sha512', $this->getId().$old)) {
@@ -214,10 +217,10 @@ class User extends Guest {
 			        SET user_password=:user_password
 			        WHERE user_id=:user_id';
 			$req = $link->prepare($sql);
-			$req->execute(array(
-					'user_password' => hash('sha512', $this->getId().$new),
-					'user_id'       => $this->getId()
-			));
+			$req->bindValue(':user_password', hash('sha512', $this->getId().$new), PDO::PARAM_STR);
+			$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+			$req->execute();
+			
 			return 13;
 		}
 		else {
@@ -238,10 +241,9 @@ class User extends Guest {
 			        SET user_language= :user_language
 			        WHERE user_id= :user_id';
 			$req = $link->prepare($sql);
-			$req->execute(array(
-					'user_language' => $lang,
-					'user_id'       => $this->getId()
-			));
+			$req->bindValue(':user_language', $lang, PDO::PARAM_STR);
+			$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+			$req->execute();
 		}
 	}
 	
@@ -266,9 +268,8 @@ class User extends Guest {
 		        WHERE request_topic_author=:author
 		        ORDER BY request_topic_id DESC';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-			'author' => $this->getId()
-		));
+		$req->bindValue(':author', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		
 		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$list[$do->request_topic_id] = array(
@@ -290,11 +291,10 @@ class User extends Guest {
 		        VALUES
 		        (:title, :created, :author)';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-			'title'   => ucfirst($title),
-			'created' => $_SERVER['REQUEST_TIME'],
-			'author'  => $this->getId()
-		));
+		$req->bindValue(':title', ucfirst($title), PDO::PARAM_STR);
+		$req->bindValue(':created', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$req->bindValue(':author', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		
 		$request = $link->lastInsertId();
 		
@@ -303,12 +303,11 @@ class User extends Guest {
 		        VALUES
 		        (:topic, :message, :date, :user)';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'topic'   => $request,
-				'message' => $message,
-				'date'    => $_SERVER['REQUEST_TIME'],
-				'user'    => $this->getId()
-		));
+		$req->bindValue(':topic', $request, PDO::PARAM_INT);
+		$req->bindValue(':message', $message, PDO::PARAM_STR);
+		$req->bindValue(':date', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$req->bindValue(':user', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 	}
 	
 	function requestInfo($request) {
@@ -322,15 +321,23 @@ class User extends Guest {
 		$currentRequest = $requestList[$request];
 		$messages = array();
 
+		$sql = 'UPDATE request_message
+				        SET request_message_read= :time
+				        WHERE request_message_id= :id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':time', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$sth->bindParam(':id', $messagesId, PDO::PARAM_INT);
+		
 		$sql = 'SELECT request_message, request_message_date,
 		               user_name, request_message_user,
 		               request_message_read, request_message_id
 		        FROM request_message
-				JOIN user ON request_message_user=user_id
-				WHERE request_topic=:topic
+		        JOIN user ON request_message_user=user_id
+		        WHERE request_topic=:topic
 		        ORDER BY request_message_id DESC';
 		$req = $link->prepare($sql);
-		$req->execute(array('topic' => $request));
+		$req->bindValue(':topic', $request, PDO::PARAM_INT);
+		$req->execute();
 		
 		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$messages[] = array(
@@ -342,14 +349,8 @@ class User extends Guest {
 			
 			//Unread message
 			if($do->request_message_read == 0 && $do->request_message_user != $this->getId()) {
-				$sql = 'UPDATE request_message
-				        SET request_message_read= :time
-				        WHERE request_message_id= :id';
-				$req = $link->prepare($sql);
-				$req->execute(array(
-						'time' => $_SERVER['REQUEST_TIME'],
-						'id'   => $do->request_message_id
-				));
+				$messagesId = $do->request_message_id;
+				$req->execute();
 			}
 		}
 				
@@ -374,12 +375,11 @@ class User extends Guest {
 		        VALUES
 		        (:topic, :message, :date, :user)';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-				'topic'   => $topic,
-				'message' => $message,
-				'date'    => $_SERVER['REQUEST_TIME'],
-				'user'    => $this->getId()
-		));
+		$req->bindValue(':topic', $topic, PDO::PARAM_INT);
+		$req->bindValue(':message', $message, PDO::PARAM_STR);
+		$req->bindValue(':date', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$req->bindValue(':user', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 	}
 	
 	function requestClose($request) {
@@ -388,10 +388,9 @@ class User extends Guest {
 		        SET request_topic_resolved= :resolved
 		        WHERE request_topic_id= :request';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-			'request'  => $request,
-			'resolved' => $_SERVER['REQUEST_TIME']
-		));
+		$req->bindValue(':request',  $request, PDO::PARAM_INT);
+		$req->bindValue(':resolved', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$req->execute();
 	}
 	
 	/*** IP ***/
@@ -436,7 +435,8 @@ class User extends Guest {
 				LEFT JOIN user ON vps_owner=user_id
 				WHERE vps_owner=:id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $this->getId()));
+		$req->bindValue(':id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		
 		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$list[$do->vps_id] = array(
@@ -514,7 +514,8 @@ class User extends Guest {
 				JOIN server ON vps.server_id=server.server_id
 		        WHERE vps_id=:vps_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('vps_id' => $vps['id']));		
+		$req->bindValue(':vps_id', $vps['id'], PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		if(!empty($do->vps_id)) {
@@ -539,7 +540,8 @@ class User extends Guest {
 				JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :vps_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('vps_id' => $id));
+		$req->bindValue(':vps_id', $id, PDO::PARAM_INT);
+		$req->execute();
 		
 		while($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$server = new Server($do->server_id);
@@ -565,7 +567,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
@@ -590,7 +593,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
@@ -615,7 +619,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $id));
+		$req->bindValue(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
@@ -644,7 +649,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId()) {
@@ -667,8 +673,9 @@ class User extends Guest {
 				JOIN server ON vps.server_id=server.server_id
 		        WHERE vps_id= :server_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('server_id' => $id));
-	
+		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+		$req->execute();
+		
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -727,7 +734,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id) && $do->vps_owner == $this->getId() && empty($do->vps_protected)) {
@@ -750,7 +758,8 @@ class User extends Guest {
 		        FROM vps
 		        WHERE vps_owner= :user_id';
 		$req = $link->prepare($sql);
-		$req->execute(array('user_id' => $this->getId()));
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		return $do->nb;
@@ -765,7 +774,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -785,7 +795,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->backup_limit)) {
@@ -811,7 +822,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -830,7 +842,8 @@ class User extends Guest {
 		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
@@ -848,7 +861,8 @@ class User extends Guest {
 		        FROM schedule
 		        WHERE schedule_vps= :id';
 		$req = $link->prepare($sql);
-		$req->execute(array('id' => $idVps));
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
 		
 		while($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$list[$do->schedule_id] = clone $do;
@@ -866,15 +880,14 @@ class User extends Guest {
 			        VALUES
 			        (:vps, :name, :minute, :hour, :dayw, :dayn, :month)';
 			$req = $link->prepare($sql);
-			$req->execute(array(
-				'vps'   => $vps,
-				'name'  => $name,
-				'minute'=> $minute,
-				'hour'  => $hour,
-				'dayw'  => $dayw,
-				'dayn'  => $dayn,
-				'month' => $month
-			));
+			$req->bindValue(':vps', $vps, PDO::PARAM_INT);
+			$req->bindValue(':name', $name, PDO::PARAM_STR);
+			$req->bindValue(':minute', $minute, PDO::PARAM_INT);
+			$req->bindValue(':month', $hour, PDO::PARAM_INT);
+			$req->bindValue(':dayw', $dayw, PDO::PARAM_INT);
+			$req->bindValue(':dayn', $dayn, PDO::PARAM_INT);
+			$req->bindValue(':month', $month, PDO::PARAM_INT);
+			$req->execute();
 		}
 		else {
 			$sql = 'UPDATE schedule
@@ -886,16 +899,15 @@ class User extends Guest {
 			            month= :month
 			        WHERE schedule_id=:save AND schedule_vps=:vps';
 			$req = $link->prepare($sql);
-			$req->execute(array(
-				'save'  => $save,
-				'vps'   => $vps,
-				'name'  => $name,
-				'minute'=> $minute,
-				'hour'  => $hour,
-				'dayw'  => $dayw,
-				'dayn'  => $dayn,
-				'month' => $month
-			));
+			$req->bindValue(':save', $save, PDO::PARAM_INT);
+			$req->bindValue(':vps', $vps, PDO::PARAM_INT);
+			$req->bindValue(':name', $name, PDO::PARAM_STR);
+			$req->bindValue(':minute', $minute, PDO::PARAM_INT);
+			$req->bindValue(':month', $hour, PDO::PARAM_INT);
+			$req->bindValue(':dayw', $dayw, PDO::PARAM_INT);
+			$req->bindValue(':dayn', $dayn, PDO::PARAM_INT);
+			$req->bindValue(':month', $month, PDO::PARAM_INT);
+			$req->execute();
 		}
 	}
 	
@@ -905,9 +917,8 @@ class User extends Guest {
 		$sql = 'DELETE FROM schedule
 		        WHERE schedule_id=:save';
 		$req = $link->prepare($sql);
-		$req->execute(array(
-			'save'  => $save
-		));
+		$req->bindValue(':save', $save, PDO::PARAM_INT);
+		$req->execute();
 	}
 }
 
