@@ -36,7 +36,7 @@ echo
 		'<div class="row">'.
 			'<div class="col-sm-6">'._('Port').'</div>'.
 			'<div class="col-sm-6">'.
-				'<input id="port" type="text" class="form-control" placeholder="'._('Port').'" value="'.$server->port.'">'.
+				'<input id="port" type="text" class="form-control" placeholder="'._('Port').'">'.
 			'</div>'.
 		'</div>'.
 		'<div class="row">'.
