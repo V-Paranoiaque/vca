@@ -7,6 +7,10 @@ fi
 
 yum install wget -y
 
+#Disable SELinux
+sed -i s/SELINUX=enforcing/SELINUX=disabled/g /etc/selinux/config
+sed -i s/SELINUX=permissive/SELINUX=disabled/g /etc/selinux/config
+
 # OpenVZ repo
 wget -O /etc/yum.repos.d/openvz.repo http://download.openvz.org/openvz.repo
 rpm --import http://download.openvz.org/RPM-GPG-Key-OpenVZ
