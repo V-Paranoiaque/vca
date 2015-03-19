@@ -10,7 +10,7 @@ class Guest {
 	 */
 	static function connect($login, $password) {
 		$sql = 'SELECT user_id, user_password
-		        FROM user
+		        FROM uservca
 		        WHERE user_name= :user_name';
 		$link = Db::link();
 		$req = $link->prepare($sql);
@@ -36,7 +36,7 @@ class Guest {
 		$newToken = hash('sha512', $id.mt_rand());
 	
 		//Update token
-		$sql = 'UPDATE user
+		$sql = 'UPDATE uservca
 		        SET user_token= :user_token
 		        WHERE user_id= :user_id';
 		$link = Db::link();
@@ -55,7 +55,7 @@ class Guest {
 	 */
 	static function loadUser($token) {
 		$sql = 'SELECT user_id, user_rank, user_language
-		        FROM user
+		        FROM uservca
 		        WHERE user_token= :user_token';
 		$link = Db::link();
 		$req = $link->prepare($sql);

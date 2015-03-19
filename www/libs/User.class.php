@@ -123,7 +123,7 @@ class User extends Guest {
 	function update() {
 		$link = Db::link();
 		
-		$sql = 'UPDATE user
+		$sql = 'UPDATE uservca
 		        SET user_activity= :user_activity
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
@@ -137,10 +137,10 @@ class User extends Guest {
 		
 		$sql = 'SELECT user_id, user_name, user_rank, user_mail,
 		               if(v.nb IS NULL, 0, v.nb) as nb
-		        FROM user
+		        FROM uservca
 		        LEFT JOIN (SELECT vps_owner, count(vps_owner) as nb
 		                   FROM vps GROUP BY vps_owner) v
-		        ON v.vps_owner=user.user_id
+		        ON v.vps_owner=uservca.user_id
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
@@ -179,7 +179,7 @@ class User extends Guest {
 			$language = $this->language;
 		}
 		
-		$sql = 'UPDATE user
+		$sql = 'UPDATE uservca
 		        SET user_name= :user_name,
 		            user_mail= :user_mail,
 		            user_language=:user_language
@@ -205,7 +205,7 @@ class User extends Guest {
 		$link = Db::link();
 		
 		$sql = 'SELECT user_id, user_password
-		        FROM user
+		        FROM uservca
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
@@ -213,7 +213,7 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		if($do->user_password == hash('sha512', $this->getId().$old)) {
-			$sql = 'UPDATE user
+			$sql = 'UPDATE uservca
 			        SET user_password=:user_password
 			        WHERE user_id=:user_id';
 			$req = $link->prepare($sql);
@@ -237,7 +237,7 @@ class User extends Guest {
 		$langList = self::languageList();
 		
 		if(!empty($langList[$lang])) {
-			$sql = 'UPDATE user
+			$sql = 'UPDATE uservca
 			        SET user_language= :user_language
 			        WHERE user_id= :user_id';
 			$req = $link->prepare($sql);
@@ -332,7 +332,7 @@ class User extends Guest {
 		               user_name, request_message_user,
 		               request_message_read, request_message_id
 		        FROM request_message
-		        JOIN user ON request_message_user=user_id
+		        JOIN uservca ON request_message_user=user_id
 		        WHERE request_topic=:topic
 		        ORDER BY request_message_id DESC';
 		$req = $link->prepare($sql);
@@ -432,7 +432,7 @@ class User extends Guest {
 		               swap, onboot, diskinodes, vps_cpulimit,
 				       vps_cpuunits, backup_limit, vps_protected
 		        FROM vps
-				LEFT JOIN user ON vps_owner=user_id
+				LEFT JOIN uservca ON vps_owner=user_id
 				WHERE vps_owner=:id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':id', $this->getId(), PDO::PARAM_INT);

@@ -77,7 +77,7 @@ bash vca-panel-debian7-apache.bash
 You need apache or nginx, PHP, MySQL and gettext.
 Use apache or nginx conf file from /usr/share/vca/conf to configure your access.
 Create your database and import /usr/share/vca/db/create
-Create database user and configure his rights.
+Create database's user and configure his rights.
 Modify /usr/share/vca/www/config.php and define database access.
 
 

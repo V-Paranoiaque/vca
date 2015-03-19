@@ -11,7 +11,7 @@ class Admin extends User {
 		$link = Db::link();
 	
 		$sql = 'SELECT count(user_id) as nb
-		        FROM user';
+		        FROM uservca';
 		$req = $link->prepare($sql);
 		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
@@ -130,10 +130,10 @@ class Admin extends User {
 			
 		$sql = 'SELECT user_id, user_name, user_rank, user_mail,
 		               if(v.nb IS NULL, 0, v.nb) as nb
-		        FROM user
+		        FROM uservca
 		        LEFT JOIN (SELECT vps_owner, count(vps_owner) as nb
 		                   FROM vps GROUP BY vps_owner) v
-		        ON v.vps_owner=user.user_id';
+		        ON v.vps_owner=uservca.user_id';
 		$res = $link->query($sql);
 		while($do = $res->fetch(PDO::FETCH_OBJ)) {
 			$list[$do->user_id] = array(
@@ -173,7 +173,7 @@ class Admin extends User {
 		
 		$link = Db::link();
 		$sql = 'SELECT user_id, user_language
-		        FROM user
+		        FROM uservca
 		        WHERE user_name= :user_name';
 		$req = $link->prepare($sql);
 		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
@@ -190,7 +190,7 @@ class Admin extends User {
 			$language = $do->user_language;
 		}
 		
-		$sql = 'UPDATE user
+		$sql = 'UPDATE uservca
 		        SET user_name= :user_name,
 		            user_mail= :user_mail,
 		            user_language=:user_language
@@ -217,7 +217,7 @@ class Admin extends User {
 			return null;
 		}
 		
-		$sql = 'UPDATE user
+		$sql = 'UPDATE uservca
 		        SET user_password=:user_password
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
@@ -240,7 +240,7 @@ class Admin extends User {
 	
 		$link = Db::link();
 		$sql = 'SELECT user_id
-		        FROM user
+		        FROM uservca
 		        WHERE user_name= :user_name';
 		$req = $link->prepare($sql);
 		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
@@ -251,7 +251,7 @@ class Admin extends User {
 			return 2;
 		}
 	
-		$sql = 'INSERT INTO user
+		$sql = 'INSERT INTO uservca
 		        (user_name, user_mail, user_created)
 		        VALUES
 		        (:user_name, :user_mail, :user_created)';
@@ -263,7 +263,7 @@ class Admin extends User {
 		
 		$user_id = $link->lastInsertId();
 		
-		$sql = 'UPDATE user
+		$sql = 'UPDATE uservca
 		        SET user_password=:user_password
 		        WHERE user_id=:user_id';
 		$req = $link->prepare($sql);
@@ -293,7 +293,7 @@ class Admin extends User {
 		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
 		$req->execute();
 		
-		$sql = 'DELETE FROM user
+		$sql = 'DELETE FROM uservca
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
@@ -325,7 +325,7 @@ class Admin extends User {
 		$sql = 'SELECT request_topic_id, request_topic_title, request_topic_created,
 		               request_topic_resolved, request_topic_author, user_name, user_id
 		        FROM request_topic
-		        JOIN user ON request_topic_author=user_id
+		        JOIN uservca ON request_topic_author=user_id
 		        ORDER BY request_topic_id DESC';
 		$req = $link->prepare($sql);
 		$req->execute();
@@ -846,7 +846,7 @@ class Admin extends User {
 					       vps_cpuunits, backup_limit, server_name,
 			               vps_protected
 			        FROM vps
-					LEFT JOIN user ON vps_owner=user_id
+					LEFT JOIN uservca ON vps_owner=user_id
 			        JOIN server ON server.server_id=vps.server_id';
 			$req = $link->prepare($sql);
 			$req->execute();
@@ -858,10 +858,10 @@ class Admin extends User {
 			               vps.server_id, user_name, vps_cpus as cpus,
 			               diskspace_current, loadavg,
 			               swap, onboot, diskinodes, vps_cpulimit,
-					       vps_cpuunits, backup_limit, server_name,
+			               vps_cpuunits, backup_limit, server_name,
 			               vps_protected
 			        FROM vps
-					LEFT JOIN user ON vps_owner=user_id
+			        LEFT JOIN uservca ON vps_owner=user_id
 			        JOIN server ON server.server_id=vps.server_id
 			        WHERE vps.server_id= :server_id';
 			$req = $link->prepare($sql);
