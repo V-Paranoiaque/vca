@@ -128,14 +128,16 @@ class Admin extends User {
 		$link = Db::link();
 		$list = array();
 			
-		$sql = 'SELECT user_id, user_name, user_rank, user_mail,
-		               if(v.nb IS NULL, 0, v.nb) as nb
+		$sql = 'SELECT user_id, user_name, user_rank, user_mail, v.nb
 		        FROM uservca
 		        LEFT JOIN (SELECT vps_owner, count(vps_owner) as nb
 		                   FROM vps GROUP BY vps_owner) v
 		        ON v.vps_owner=uservca.user_id';
 		$res = $link->query($sql);
 		while($do = $res->fetch(PDO::FETCH_OBJ)) {
+			if(empty($do->nb)) {
+				$do->nb = 0;
+			}
 			$list[$do->user_id] = array(
 					'user_id'   => $do->user_id,
 					'user_name' => $do->user_name,
@@ -381,15 +383,34 @@ class Admin extends User {
 	function ipList() {
 		$link = Db::link();
 		$list = array();
-	
-		$sql = 'SELECT ip, if(vps_id>0,vps_id,0) as vps_id,
-		               if(vps_name IS NULL,\'\', vps_name) as vps_name
-				FROM ipv4
-		        LEFT JOIN vps ON vps.vps_ipv4=ip
-		        ORDER BY INET_ATON(ip)';
+		
+		if(DB_TYPE == 'MYSQL') {
+			$sql = 'SELECT ip, vps_id, vps_name
+			        FROM ipv4
+			        LEFT JOIN vps ON vps.vps_ipv4=ip
+			        ORDER BY INET_ATON(ip)';
+		}
+		elseif(DB_TYPE == 'PGSQL') {
+			$sql = 'SELECT ip, vps_id, vps_name
+			        FROM ipv4
+			        LEFT JOIN vps ON vps.vps_ipv4=ip
+			        ORDER BY INET(ip)';
+		}
+		else {
+			$sql = 'SELECT ip, vps_id, vps_name
+			        FROM ipv4
+			        LEFT JOIN vps ON vps.vps_ipv4=ip
+			        ORDER BY ip';
+		}
 		$req = $link->prepare($sql);
 		$req->execute();
 		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
+			if(empty($do->vps_name)) {
+				$do->vps_name = '';
+			}
+			if(empty($do->vps_id)) {
+				$do->vps_id = 0;
+			}
 			$list[$do->ip] = array(
 					'ip'   => $do->ip,
 					'id'   => $do->vps_id,
@@ -454,14 +475,16 @@ class Admin extends User {
 	
 		$link = Db::link();
 		$sql = 'SELECT server.server_id, server_name, server_address,
-		               server_description, if(v.nb IS NULL,0, v.nb) as nb,
-		               server_key, server_port
+		               server_description, v.nb, server_key, server_port
 		        FROM server
 		        LEFT JOIN (SELECT server_id, count(server_id) as nb
-		                  FROM `vps` GROUP BY server_id) v
+		                  FROM vps GROUP BY server_id) v
 		        ON v.server_id=server.server_id';
 		$res = $link->query($sql);
 		while($do = $res->fetch(PDO::FETCH_OBJ)) {
+			if(empty($do->nb)) {
+				$do->nb = 0;
+			}
 			$list[$do->server_id] = array(
 					'id'          => $do->server_id,
 					'name'        => $do->server_name,

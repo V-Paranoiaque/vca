@@ -135,8 +135,7 @@ class User extends Guest {
 	function userProfile() {
 		$link = Db::link();
 		
-		$sql = 'SELECT user_id, user_name, user_rank, user_mail,
-		               if(v.nb IS NULL, 0, v.nb) as nb
+		$sql = 'SELECT user_id, user_name, user_rank, user_mail, v.nb
 		        FROM uservca
 		        LEFT JOIN (SELECT vps_owner, count(vps_owner) as nb
 		                   FROM vps GROUP BY vps_owner) v
@@ -146,6 +145,10 @@ class User extends Guest {
 		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
 		$req->execute();
 		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(empty($do->nb)) {
+			$do->nb = 0;
+		}
 		
 		return $do;
 	}
