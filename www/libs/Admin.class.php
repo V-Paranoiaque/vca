@@ -263,7 +263,18 @@ class Admin extends User {
 		$req->bindValue(':user_created', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
 		$req->execute();
 		
-		$user_id = $link->lastInsertId();
+		if(DB_TYPE == 'PGSQL') {
+			$sql = 'SELECT currval(\'uservca_user_id_seq\') as user_id
+			        FROM uservca';
+			$req = $link->prepare($sql);
+			$req->execute();
+			$do = $req->fetch(PDO::FETCH_OBJ);
+			
+			$user_id = $do->user_id;
+		}
+		else {
+			$user_id = $link->lastInsertId();
+		}
 		
 		$sql = 'UPDATE uservca
 		        SET user_password=:user_password
@@ -521,7 +532,20 @@ class Admin extends User {
 		$req->bindValue(':key', $key, PDO::PARAM_STR);
 		$req->execute();
 		
-		$this->serverReload($link->lastInsertId());
+		if(DB_TYPE == 'PGSQL') {
+			$sql = 'SELECT currval(\'server_server_id_seq\') as server_id
+			        FROM server';
+			$req = $link->prepare($sql);
+			$req->execute();
+			$do = $req->fetch(PDO::FETCH_OBJ);
+			
+			$server_id = $do->server_id;
+		}
+		else {
+			$server_id = $link->lastInsertId();
+		}
+		
+		$this->serverReload($server_id);
 	}
 	
 	/**

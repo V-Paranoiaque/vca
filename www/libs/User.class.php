@@ -299,14 +299,25 @@ class User extends Guest {
 		$req->bindValue(':author', $this->getId(), PDO::PARAM_INT);
 		$req->execute();
 		
-		$request = $link->lastInsertId();
+		if(DB_TYPE == 'PGSQL') {
+			$sql = 'SELECT currval(\'request_topic_request_topic_id_seq\') as request_id
+			        FROM request_topic';
+			$req = $link->prepare($sql);
+			$req->execute();
+			$do = $req->fetch(PDO::FETCH_OBJ);
+			
+			$requestId = $do->request_id;
+		}
+		else {
+			$requestId = $link->lastInsertId();
+		}
 		
 		$sql = 'INSERT INTO request_message
 		        (request_topic, request_message, request_message_date, request_message_user)
 		        VALUES
 		        (:topic, :message, :date, :user)';
 		$req = $link->prepare($sql);
-		$req->bindValue(':topic', $request, PDO::PARAM_INT);
+		$req->bindValue(':topic', $requestId, PDO::PARAM_INT);
 		$req->bindValue(':message', $message, PDO::PARAM_STR);
 		$req->bindValue(':date', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
 		$req->bindValue(':user', $this->getId(), PDO::PARAM_INT);
