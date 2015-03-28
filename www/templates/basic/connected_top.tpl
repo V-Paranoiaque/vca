@@ -8,7 +8,10 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-logo"  href="/" title="{'Virtual Control Admin'|gettext}"><img src="/images/logo.png" alt="{'Virtual Control Admin'|gettext}" /></a> 
-			<a class="navbar-brand" href="/" title="{'Virtual Control Admin'|gettext}">{'Virtual Control Admin'|gettext}</a>
+			<a class="navbar-brand" href="/" title="{'Virtual Control Admin'|gettext}">
+			  <span class="invisible-xs">{'Virtual Control Admin'|gettext}</span>
+			  <span class="display-xs">{'VCA'}</span>
+			</a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -23,26 +26,63 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-3 col-md-2 sidebar">
+		<div class="col-xs-1 col-sm-3 col-md-3 sidebar">
 			<ul class="nav nav-sidebar">
-				<li {if $currentPage == 'home'} class="active" {/if}><a href="/" title="{'Dashboard'|gettext}">{'Dashboard'|gettext}</a></li>
-				<li {if $currentPage == 'server'} class="active" {/if}><a href="/server" title="{'Physical servers'|gettext}">{'Physical servers'|gettext}</a></li>
+				<li {if $currentPage == 'home'} class="active" {/if}>
+				  <a href="/" title="{'Dashboard'|gettext}">
+				    <span aria-hidden="true" class="glyphicon glyphicon-th-large"></span> 
+				    <span class="invisible-xs">{'Dashboard'|gettext}</span>
+				  </a>
+				</li>
+				{if {$userRank} > 0}
+				<li {if $currentPage == 'server'} class="active" {/if}>
+				  <a href="/server" title="{'Physical servers'|gettext}">
+				    <span aria-hidden="true" class="glyphicon glyphicon-th-list"></span> 
+				    <span class="invisible-xs">{'Physical servers'|gettext}</span>
+				  </a>
+				</li>
+				{/if}
 				{if isset($serverList) }
 					{foreach from=$serverList item=server}
-						<li class="smenu {if $currentPage == 'vpslist' and ${vpsCurrent} == {$server->id} } active {/if}"><a href="/vpslist/{$server->id}" title="{$server->name}">{$server->name} <span class="badge">{$server->nbvps}</span></a></li>
+						<li class="smenu {if $currentPage == 'vpslist' and ${vpsCurrent} == {$server->id} } active {/if}">
+						  <a href="/vpslist/{$server->id}" title="{$server->name}">
+						    <span aria-hidden="true" class="glyphicon glyphicon-hdd"></span>
+						    <span class="invisible-xs">{$server->name} <span class="badge">{$server->nbvps}</span></span>
+						  </a>
+						</li>
 					{/foreach}
 				{/if}
 				{if {$userRank} == 0}
-					<li {if $currentPage == 'vpslist' and ${vpsCurrent} == 0 } class="active" {/if}><a href="/vpslist" title="{'Virtual servers'|gettext}">{'Virtual servers'|gettext} <span class="badge">{$vpsNb}</span></a></li>
+					<li {if $currentPage == 'vpslist' and ${vpsCurrent} == 0 } class="active" {/if}>
+					  <a href="/vpslist" title="{'Virtual servers'|gettext}">
+					    <span aria-hidden="true" class="glyphicon glyphicon-hdd"></span> 
+					    <span class="invisible-xs">{'Virtual servers'|gettext} <span class="badge">{$vpsNb}</span></span>
+					  </a>
+					</li>
 				{else}
-					<li {if $currentPage == 'ip'} class="active" {/if}><a href="/ip" title="{'IP Addresses'|gettext}">{'IP Addresses'|gettext}</a></li>
+					<li {if $currentPage == 'ip'} class="active" {/if}>
+					  <a href="/ip" title="{'IP Addresses'|gettext}">
+					    <span aria-hidden="true" class="glyphicon glyphicon-globe"></span>
+					    <span class="invisible-xs">{'IP Addresses'|gettext}</span>
+					  </a>
+					</li>
 				{/if}
-				<li {if $currentPage == 'request'} class="active" {/if}><a href="/request" title="{'Requests'|gettext}">{'Requests'|gettext}</a></li>
+				<li {if $currentPage == 'request'} class="active" {/if}>
+				  <a href="/request" title="{'Requests'|gettext}">
+				    <span aria-hidden="true" class="glyphicon glyphicon-tags"></span>
+				    <span class="invisible-xs">{'Requests'|gettext}</span>
+				  </a>
+				</li>
 			</ul>
 			{if {$userRank} > 0}
 				<ul class="nav nav-sidebar">
-					<li {if $currentPage == 'user'} class="active" {/if}><a href="/user" title="{'Users'|gettext}">{'Users'|gettext}</a></li>
+					<li {if $currentPage == 'user'} class="active" {/if}>
+					  <a href="/user" title="{'Users'|gettext}">
+					    <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
+					    <span class="invisible-xs">{'Users'|gettext}</span>
+					  </a>
+					</li>
 				</ul>
 			{/if}
 		</div>
-    	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    	<div class="col-xs-offset-1 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
