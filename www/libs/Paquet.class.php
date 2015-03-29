@@ -183,7 +183,7 @@ class Paquet {
 								if(empty($var[1])) {
 									$var[1] = 0;
 								}
-								$user->userDefinePassword(trim($var[0]), $var[1]);
+								$res = $user->userDefinePassword(trim($var[0]), $var[1]);
 							}
 							break;
 	

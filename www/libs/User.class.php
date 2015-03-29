@@ -897,7 +897,7 @@ class User extends Guest {
 			$req->bindValue(':vps', $vps, PDO::PARAM_INT);
 			$req->bindValue(':name', $name, PDO::PARAM_STR);
 			$req->bindValue(':minute', $minute, PDO::PARAM_INT);
-			$req->bindValue(':month', $hour, PDO::PARAM_INT);
+			$req->bindValue(':hour', $hour, PDO::PARAM_INT);
 			$req->bindValue(':dayw', $dayw, PDO::PARAM_INT);
 			$req->bindValue(':dayn', $dayn, PDO::PARAM_INT);
 			$req->bindValue(':month', $month, PDO::PARAM_INT);
@@ -917,7 +917,7 @@ class User extends Guest {
 			$req->bindValue(':vps', $vps, PDO::PARAM_INT);
 			$req->bindValue(':name', $name, PDO::PARAM_STR);
 			$req->bindValue(':minute', $minute, PDO::PARAM_INT);
-			$req->bindValue(':month', $hour, PDO::PARAM_INT);
+			$req->bindValue(':hour', $hour, PDO::PARAM_INT);
 			$req->bindValue(':dayw', $dayw, PDO::PARAM_INT);
 			$req->bindValue(':dayn', $dayn, PDO::PARAM_INT);
 			$req->bindValue(':month', $month, PDO::PARAM_INT);
