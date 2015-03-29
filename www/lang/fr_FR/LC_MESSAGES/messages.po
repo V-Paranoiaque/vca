@@ -480,7 +480,7 @@ msgstr "Nom du serveur virtuel"
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Start on Boot"
-msgstr "Lancer au démarrage"
+msgstr "Lancé au démarrage"
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsclone.php
@@ -889,6 +889,10 @@ msgstr "Programmation des sauvegardes"
 #: templates/basic/popup_backupschedule.php
 msgid "Modify backup schedule"
 msgstr "Modifier la programmation des sauvegardes"
+
+#: templates/basic/popup_backupschedule.php
+msgid "Delete backup schedule"
+msgstr "Supprimer la programmation d'une sauvegarde"
 
 #: templates/basic/popup_vpsedit.php
 msgid "Protected"

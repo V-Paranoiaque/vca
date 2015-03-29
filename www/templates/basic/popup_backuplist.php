@@ -57,8 +57,16 @@ echo
 '<tr>'.
 	'<td>'.tsdate($info[2]).'</td>'.
 	'<td>'.
-		'<a href="#" title="'._('Restore').'" onclick="popupBackupRestore('.$_GET['vps'].', '.$info[2].');"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span></a> '.
-		'<a href="#" title="'._('Remove').'"  onclick="popupBackupDelete('.$_GET['vps'].', '.$info[2].');"><span class="glyphicon glyphicon-remove"></span></a>'.
+		'<a href="#" title="'._('Restore').'" onclick="popupBackupRestore('.$_GET['vps'].', '.$info[2].');">'.
+			'<button class="btn btn-info" type="button">'.
+				'<span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>'.
+			'</button>'.
+		'</a> '.
+		'<a href="#" title="'._('Remove').'" onclick="popupBackupDelete('.$_GET['vps'].', '.$info[2].');">'.
+			'<button class="btn btn-danger" type="button">'.
+				'<span class="glyphicon glyphicon-remove"></span>'.
+			'</button>'.
+		'</a>'.
 	'</td>'.
 '</tr>';
 }

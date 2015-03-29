@@ -1,4 +1,4 @@
-<h2>{$requestInfo->title}{if $requestInfo->resolved == 0} <a href="#" onclick="popupRequestClose({$requestInfo->id})" title="{'Close this request'|gettext}"><span aria-hidden="true" class="glyphicon glyphicon-ok"></span></a>{/if}</h2>
+<h2 class="sub-header">{$requestInfo->title}{if $requestInfo->resolved == 0} <a href="#" onclick="popupRequestClose({$requestInfo->id})" title="{'Close this request'|gettext}"><span aria-hidden="true" class="glyphicon glyphicon-ok"></span></a>{/if}</h2>
 <br/>
 {if $requestInfo->resolved == 0}
 <div class="row">

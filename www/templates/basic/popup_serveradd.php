@@ -58,15 +58,7 @@ echo
 	'<button onclick="formServerAdd()" type="button" class="btn btn-success" data-toggle="dropdown">'._('Confirm').'</button>
 </div>';
 
-echo '<script type="text/javascript">setTimeout(function() {'.
-'var width=0;'.
-'$(".input-group .input-group-btn .btn").each(function( i ) {'.
-'  if(width < $(this).width()) {'.
-'    width=$(this).width();'.
-'  }'.
-'});'.
-'$(".input-group .input-group-btn .btn").width(width+"px")'.
-'}, 100);';
-echo '$("#popupTitle").html("'._('Add a new server to VCA').'");'.
+echo '<script type="text/javascript">'.
+		'$("#popupTitle").html("'._('Add a new server to VCA').'");'.
 	'</script>';
 ?>

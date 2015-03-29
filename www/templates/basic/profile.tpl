@@ -1,11 +1,22 @@
-<h1 class="sub-header">{$userInfo->user_name}</h1>
+<h1 class="sub-header">{$userInfo->user_name}
+	<a onclick="popupProfile()" href="#" title="{'Edit your profile'|gettext}">
+		<button class="btn btn-primary" type="button">
+			<span class="glyphicon glyphicon-pencil"></span>
+		</button>
+	</a>
+	<a onclick="popupUserPassword()" href="#" title="{'User password'|gettext}">
+		<button class="btn btn-warning" type="button">
+			<span class="glyphicon glyphicon-lock"></span>
+		</button>
+	</a>
+</h1>
 
 <div class="col-sm-6">
 <div class="panel panel-danger">
 	<div class="panel-heading">
-		<h3 class="panel-title center">{'User information'|gettext} 
-		<a onclick="popupProfile()" href="#" title="{'Edit your profile'|gettext}"><span class="glyphicon glyphicon-pencil"></span></a>
-		<a onclick="popupUserPassword()" href="#" title="{'User password'|gettext}"><span class="glyphicon glyphicon-lock"></span></a></h3>
+		<h3 class="panel-title center">
+			{'User information'|gettext} 
+		</h3>
 	</div>
 	<div class="panel-body">
 	<table>

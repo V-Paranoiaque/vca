@@ -1,4 +1,11 @@
-<h2 class="sub-header">{'Requests'|gettext} <a href="#" onclick="popupRequestAdd()" title="{'Create a new request'|gettext}"><span class="glyphicon glyphicon-plus"></span></a></h2>
+<h2 class="sub-header">
+	{'Requests'|gettext} 
+	<a href="#" onclick="popupRequestAdd()" title="{'Create a new request'|gettext}">
+		<button class="btn btn-success" type="button">
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
+	</a>
+</h2>
 
 {if $requestList != ''}
 	<div class="table-responsive">
@@ -16,18 +23,24 @@
 			<tbody>
 			{foreach from=$requestList item=request}
 				<tr>
-				  <td><a href="/request/{$request->topic}" alt="{$request->title}">{$request->title}</a></td>
-				  {if {$userRank} > 0}
-				  	<td><a href="/user/{$request->user_id}">{$request->user_name}</a></td>
-				  {/if}
-				  <td>
-				  {if $request->resolved == 0}
-				  	{'Open'|gettext}
-				  {else}
-				  	{'Closed'|gettext}
-				  {/if}
-				  </td>
-				  <td><a href="/request/{$request->topic}" title="{$request->title}"><span class="glyphicon glyphicon-align-justify"></span></a></td>
+					<td><a href="/request/{$request->topic}" alt="{$request->title}">{$request->title}</a></td>
+						{if {$userRank} > 0}
+							<td><a href="/user/{$request->user_id}">{$request->user_name}</a></td>
+						{/if}
+					<td>
+						{if $request->resolved == 0}
+							{'Open'|gettext}
+						{else}
+							{'Closed'|gettext}
+						{/if}
+					</td>
+					<td>
+						<a href="/request/{$request->topic}" title="{$request->title}">
+							<button class="btn btn-success" type="button">
+								<span class="glyphicon glyphicon-align-justify"></span>
+							</button>
+						</a>
+					</td>
 				</tr>
 			{/foreach}
 			</tbody>

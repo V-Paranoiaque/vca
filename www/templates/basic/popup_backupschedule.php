@@ -28,22 +28,30 @@ if(!empty($vpsScheduleList) && !empty($_GET['save']) &&
 	echo
 	'<div class="panel panel-danger">'.
 		'<div class="panel-heading">'.
-			'<h3 class="panel-title">'._('Schedule').' <span class="glyphicon glyphicon-align-justify cursor" onclick="displayvpsScheduleList()"></span></h3>'.
+			'<h3 class="panel-title">'._('Schedule').' <span class="glyphicon glyphicon-align-justify cursor" onclick="displayScheduleList()"></span></h3>'.
 		'</div>'.
 		'<div class="panel-body" id="panel-backupschedule-list">';
 if(empty($vpsScheduleList) or sizeof($vpsScheduleList) == 0) {
   echo '<div class="row center">'._('No scheduled backup').'</div>';
 }
 else {
-  echo '<table class="table">';
-  foreach($vpsScheduleList as $schedule) {
-    echo 
-    '<tr><td>'.$schedule->name.'</td><td>'.
-    '<a onclick="popupBackupSchedule('.$_GET['vps'].', '.$schedule->schedule_id.');" title="Editer" href="#"><span class="glyphicon glyphicon-pencil"></span></a> '.
-    '<a onclick="popupBackupScheduleDelete('.$_GET['vps'].', '.$schedule->schedule_id.');" title="Supprimer" href="#"><span class="glyphicon glyphicon-remove"></span></a>'.
-    '</td></tr>';
-  }
-  echo '</table>';
+	echo '<table class="table">';
+	foreach($vpsScheduleList as $schedule) {
+		echo 
+		'<tr><td>'.$schedule->name.'</td><td>'.
+			'<a onclick="popupBackupSchedule('.$_GET['vps'].', '.$schedule->schedule_id.');" title="'._('Edit').'" href="#">'.
+				'<button class="btn btn-info" type="button">'.
+					'<span class="glyphicon glyphicon-pencil"></span>'.
+				'</button>'.
+			'</a> '.
+			'<a onclick="popupBackupScheduleDelete('.$_GET['vps'].', '.$schedule->schedule_id.');" title="'._('Remove').'" href="#">'.
+				'<button class="btn btn-danger" type="button">'.
+					'<span class="glyphicon glyphicon-remove"></span>'.
+				'</button>'.
+			'</a>'.
+		'</td></tr>';
+	}
+	echo '</table>';
 }
 
 echo 

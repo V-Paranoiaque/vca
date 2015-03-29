@@ -7,25 +7,78 @@
 
 	{$vps->name}</h1>
 
-<div class="row center bs-glyphicons">
+<div class="row center">
 	<br/>
 	
-	<a href="#" title="{'Edit'|gettext}"      onclick="popupVpsEdit({$vps->id});"><span class="glyphicon glyphicon-pencil"></span></a>
+	<a href="#" title="{'Edit'|gettext}" onclick="popupVpsEdit({$vps->id});">
+		<button class="btn btn-lg btn-primary" type="button">
+			<span class="glyphicon glyphicon-pencil"></span>
+		</button>
+	</a>
+	
 	{if $vps->protected == 0}
-		<a href="#" title="{'Reinstall'|gettext}" onclick="popupVpsReinstall({$vps->id});"><span class="glyphicon glyphicon-cog"></span></a>
+		<a href="#" title="{'Reinstall'|gettext}" onclick="popupVpsReinstall({$vps->id});">
+			<button class="btn btn-lg btn-warning" type="button">
+				<span class="glyphicon glyphicon-cog"></span>
+			</button>
+		</a>
 	{/if}
-	<a href="#" title="{'Root password'|gettext}" onclick="popupVpsPassword({$vps->id});"><span class="glyphicon glyphicon-lock"></span></a>
-	<a href="#" title="{'Backups'|gettext}" onclick="popupBackupList({$vps->id});"><span aria-hidden="true" class="glyphicon glyphicon-hdd"></span></a>
-	<a href="#" title="{'Schedule backups'|gettext}" onclick="popupBackupSchedule({$vps->id}, 0);"><span aria-hidden="true" class="glyphicon glyphicon-time"></span></a>
-	<a href="#" title="{'Start'|gettext}"   onclick="popupVpsStart({$vps->id});"><span class="glyphicon glyphicon-play"></span></a>
-	<a href="#" title="{'Stop'|gettext}"    onclick="popupVpsStop({$vps->id});"><span class="glyphicon glyphicon-stop"></span></a>
-	<a href="#" title="{'Restart'|gettext}" onclick="popupVpsRestart({$vps->id});"><span class="glyphicon glyphicon-repeat"></span></a>
+	
+	<a href="#" title="{'Root password'|gettext}" onclick="popupVpsPassword({$vps->id});">
+		<button class="btn btn-lg btn-warning" type="button">
+			<span class="glyphicon glyphicon-lock"></span>
+		</button>
+	</a>
+	
+	<a href="#" title="{'Backups'|gettext}" onclick="popupBackupList({$vps->id});">
+		<button class="btn btn-lg btn-info" type="button">
+			<span aria-hidden="true" class="glyphicon glyphicon-hdd"></span>
+		</button>
+	</a>
+	
+	<a href="#" title="{'Schedule backups'|gettext}" onclick="popupBackupSchedule({$vps->id}, 0);">
+		<button class="btn btn-lg btn-info" type="button">
+			<span aria-hidden="true" class="glyphicon glyphicon-time"></span>
+		</button>
+	</a>
+	
+	<a href="#" title="{'Start'|gettext}" onclick="popupVpsStart({$vps->id});">
+		<button class="btn btn-lg btn-success" type="button">
+			<span class="glyphicon glyphicon-play"></span>
+		</button>
+	</a>
+	<a href="#" title="{'Stop'|gettext}" onclick="popupVpsStop({$vps->id});">
+		<button class="btn btn-lg btn-danger" type="button">
+			<span class="glyphicon glyphicon-stop"></span>
+		</button>
+	</a>
+	
+	<a href="#" title="{'Restart'|gettext}" onclick="popupVpsRestart({$vps->id});">
+		<button class="btn btn-lg btn-warning" type="button">
+			<span class="glyphicon glyphicon-repeat"></span>
+		</button>
+	</a>
+
 	{if $vps->serverId > 0}
-	  <a href="#" title="{'Reload'|gettext}"  onclick="popupVpsReload({$vps->id});"><span class="glyphicon glyphicon-refresh"></span></a>
-	  <a href="#" title="{'Clone'|gettext}"   onclick="popupVpsClone({$vps->id});"><span class="glyphicon glyphicon-tags"></span></a>
-	  {if $vps->protected == 0}
-	  	<a href="#" title="{'Delete'|gettext}"  onclick="popupVpsDelete({$vps->id});"><span class="glyphicon glyphicon-remove"></span></a>
-	  {/if}
+		<a href="#" title="{'Reload'|gettext}" onclick="popupVpsReload({$vps->id});">
+			<button class="btn btn-lg btn-primary" type="button">
+				<span class="glyphicon glyphicon-refresh"></span>
+			</button>
+		</a>
+		
+		<a href="#" title="{'Clone'|gettext}" onclick="popupVpsClone({$vps->serverId}, {$vps->id});">
+			<button class="btn btn-lg btn-info" type="button">
+				<span class="glyphicon glyphicon-tags"></span>
+			</button>
+		</a>
+		
+		{if $vps->protected == 0}
+			<a href="#" title="{'Delete'|gettext}" onclick="popupVpsDelete({$vps->id});">
+				<button class="btn btn-lg btn-danger" type="button">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</a>
+		{/if}
 	{/if}
 	<br/><br/><br/>
 </div>
@@ -106,9 +159,9 @@
 		<div class="panel-body">
 			<div id="shell-result"></div>	
 			<div id="shell-cmd"><div class="input-group">
-	      <input type="text" id="shell-input" placeholder="{'Command'|gettext}" class="form-control">
-	      <span class="input-group-addon" id="shell-send" onclick="formVpsCmd({$vps->id})">{'Send'|gettext}</span>
-	    </div></div>
+				<input type="text" id="shell-input" placeholder="{'Command'|gettext}" class="form-control">
+				<span class="input-group-addon" id="shell-send" onclick="formVpsCmd({$vps->id})">{'Send'|gettext}</span>
+		</div></div>
 		</div>
 	</div>
 	</div>

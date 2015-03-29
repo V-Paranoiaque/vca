@@ -13,14 +13,12 @@ include('../../libs/User.class.php');
 include('../../libs/Admin.class.php');
 
 $paquet = new Paquet();
-$paquet -> add_action('getVpsInfo', array($_GET['vps']));
 $paquet -> add_action('ipFree');
 $paquet -> add_action('userList');
 $paquet -> add_action('vpsList');
 $paquet -> send_actions();
 
 $vpsList = $paquet->getAnswer('vpsList');
-
 $users  = $paquet->getAnswer('userList');
 $ips    = $paquet->getAnswer('ipFree');
 $server = $vpsList->$_GET['vps'];

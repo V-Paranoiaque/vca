@@ -1129,7 +1129,7 @@ function popupBackupScheduleDelete(vps, saveId) {
 		data: "vps="+vps+"&saveId="+saveId,
 		success: function(msg) {
 			BootstrapDialog.show({
-				title: '<div id="popupTitle"></div>',
+				title: '<div id="popupTitle2"></div>',
 				message: msg
 			});
 		}

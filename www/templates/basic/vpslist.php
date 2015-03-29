@@ -23,7 +23,7 @@ if(!empty($vps)) {
 if(!empty($_GET['server'])) {
 	$smarty->assign('serverCurrent', $_GET['server']);
 	$smarty->assign('Title', $paquet->getAnswer('serverList')->list->$_GET['server']->name.
-	                         ' <a onclick="popupServerReload('.$paquet->getAnswer('serverList')->list->$_GET['server']->id.');" title="'._('Reload the server').'" href="#"><span class="glyphicon glyphicon-refresh"></span></a>');
+	                         ' <a onclick="popupServerReload('.$paquet->getAnswer('serverList')->list->$_GET['server']->id.');" title="'._('Reload the server').'" href="#"><button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-refresh"></span></button></a>');
 }
 else {
 	$smarty->assign('serverCurrent', 0);

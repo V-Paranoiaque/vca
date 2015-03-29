@@ -30,4 +30,7 @@ if(!empty($info)) {
 	echo '</div>';
 }
 
+echo '<script type="text/javascript">'.
+		'$("#popupTitle2").html("'._('Delete backup schedule').'");'.
+		'</script>';
 ?>
