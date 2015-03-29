@@ -128,7 +128,8 @@ class Admin extends User {
 		$link = Db::link();
 		$list = array();
 			
-		$sql = 'SELECT user_id, user_name, user_rank, user_mail, v.nb
+		$sql = 'SELECT user_id, user_name, user_rank, user_mail, v.nb,
+		               user_language
 		        FROM uservca
 		        LEFT JOIN (SELECT vps_owner, count(vps_owner) as nb
 		                   FROM vps GROUP BY vps_owner) v
@@ -143,6 +144,7 @@ class Admin extends User {
 					'user_name' => $do->user_name,
 					'user_rank' => $do->user_rank,
 					'user_mail' => $do->user_mail,
+					'user_language' => $do->user_language,
 					'nb_vps'    => $do->nb
 			);
 		}
@@ -226,6 +228,8 @@ class Admin extends User {
 		$req->bindValue(':user_password', hash('sha512', $id.$password), PDO::PARAM_STR);
 		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
 		$req->execute();
+		
+		return 13;
 	}
 	
 	/**

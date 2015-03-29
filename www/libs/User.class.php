@@ -335,12 +335,12 @@ class User extends Guest {
 		$currentRequest = $requestList[$request];
 		$messages = array();
 
-		$sql = 'UPDATE request_message
-				        SET request_message_read= :time
-				        WHERE request_message_id= :id';
-		$req = $link->prepare($sql);
-		$req->bindValue(':time', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
-		$sth->bindParam(':id', $messagesId, PDO::PARAM_INT);
+		$sql2 = 'UPDATE request_message
+		         SET request_message_read= :time
+		         WHERE request_message_id= :id';
+		$req2 = $link->prepare($sql2);
+		$req2->bindValue(':time', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
+		$req2->bindParam(':id', $messagesId, PDO::PARAM_INT);
 		
 		$sql = 'SELECT request_message, request_message_date,
 		               user_name, request_message_user,
@@ -364,7 +364,7 @@ class User extends Guest {
 			//Unread message
 			if($do->request_message_read == 0 && $do->request_message_user != $this->getId()) {
 				$messagesId = $do->request_message_id;
-				$req->execute();
+				$req2->execute();
 			}
 		}
 				
