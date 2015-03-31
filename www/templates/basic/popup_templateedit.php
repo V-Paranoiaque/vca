@@ -21,7 +21,7 @@ echo
 		'<h3 class="panel-title">'._('Enter the new name').'</h3>'.
 	'</div>'.
 	'<div class="panel-body">'.
-		'<table><tr>'.
+		'<table class="table table-invisible"><tr>'.
 			'<td>'._('Template name').'</td>'.
 			'<td>'.
 				'<input id="name" type="text" class="form-control" placeholder="'._('Template name').'" value="'.$_GET['template'].'">'.

@@ -89,7 +89,7 @@
 		<h3 class="panel-title center">{'Vps Statistics'|gettext}</h3>
 	</div>
 	<div class="panel-body">
-	<table>
+	<table class="table table-invisible">
 		<tr>
 			<td>{'Cpu load'|gettext}</td>
 			<td>{$vps->loadavg} ({'core'|gettext} : {$vps->cpus})</td>
@@ -117,7 +117,7 @@
 		<h3 class="panel-title center">{'Vps information'|gettext}</h3>
 	</div>
 	<div class="panel-body">
-	<table>
+	<table class="table table-invisible">
 		<tr>
 			<td>{'Owner'|gettext}</td>
 			<td>

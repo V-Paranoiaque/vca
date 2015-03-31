@@ -19,7 +19,7 @@
 		</h3>
 	</div>
 	<div class="panel-body">
-	<table>
+	<table class="table table-invisible">
 		<tr>
 			<td>{'Name'|gettext}</td>
 			<td>{$userInfo->user_name}</td>

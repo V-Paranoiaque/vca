@@ -5,7 +5,7 @@
 				<h3 class="panel-title center">{'Statistics'|gettext}</h3>
 			</div>
 			<div class="panel-body">
-			<table>
+			<table class="table table-invisible">
 				<tbody>
 				{if {$userRank} > 0}
 					<tr>
@@ -44,7 +44,7 @@
 				<h3 class="panel-title center">{'Virtual servers'|gettext}</h3>
 			</div>
 			<div class="panel-body">
-			<table>
+			<table class="table table-invisible">
 				<tbody><tr>
 					<td>{'Running virtual servers'|gettext}</td>
 					<td>{$vcastats->nbVpsRun}</td>

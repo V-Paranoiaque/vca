@@ -117,6 +117,14 @@ span.offline {
   background-color:#A94442;
 }
 
+.table.table-invisible > tbody > tr > td {
+  border:0;
+}
+
+.table.table-invisible tbody tr td {
+  padding: 4px;
+}
+
 @media (max-width: 767px) {
   .invisible-xs {
     display:none;

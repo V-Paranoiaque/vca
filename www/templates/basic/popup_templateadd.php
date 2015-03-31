@@ -29,7 +29,7 @@ echo '<div class="col-xs-12 col-sm-4"><a href="#" onclick="displayTemplate(\'nor
 echo '<div class="col-xs-12 col-sm-4"><a href="#" onclick="displayTemplate(\'minimal\')">'._('Minimal').'</a></div>';
 echo '<div class="col-xs-12 col-sm-4"><a href="#" onclick="displayTemplate(\'devel\')">'._('Development').'</a></div>';
 
-echo '<div class="row"><br/><br/><table class="table">';
+echo '<div><br/><br/><table class="table">';
 for($i=3;$i<$rowNb;$i++) {
 	if(substr($rows[$i], -7) == '.tar.gz') {
 		if(substr($rows[$i], -15) == '-minimal.tar.gz') {
