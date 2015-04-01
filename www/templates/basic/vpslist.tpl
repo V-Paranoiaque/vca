@@ -90,12 +90,18 @@
 							</button>
 						</a>
 						
-						{if {$userRank > 0} && {$server->protected} == 0}
-							<a href="#" title="{'Delete'|gettext}" onclick="popupVpsDelete({$server->id});">
-								<button class="btn btn-danger" type="button">
-								  <span class="glyphicon glyphicon-remove"></span>
+						{if $userRank > 0}
+							{if $server->protected} == 0}
+								<a href="#" title="{'Delete'|gettext}" onclick="popupVpsDelete({$server->id});">
+									<button class="btn btn-danger" type="button">
+									  <span class="glyphicon glyphicon-remove"></span>
+									</button>
+								</a>
+							{else}
+								<button type="button" class="btn btn-invisible">
+									<span class="glyphicon glyphicon-remove"></span>
 								</button>
-							</a>
+							{/if}
 						{/if}
 				  </td>
 				</tr>

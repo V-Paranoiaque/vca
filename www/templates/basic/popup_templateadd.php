@@ -25,9 +25,15 @@ preg_match_all("/<a[^>]*>(.*)<\/a>/isU", $table[1], $rows);
 $rows = $rows[1];
 $rowNb = sizeof($rows);
 
-echo '<div class="col-xs-12 col-sm-4"><a href="#" onclick="displayTemplate(\'normal\')">'._('Normal').'</a></div>';
-echo '<div class="col-xs-12 col-sm-4"><a href="#" onclick="displayTemplate(\'minimal\')">'._('Minimal').'</a></div>';
-echo '<div class="col-xs-12 col-sm-4"><a href="#" onclick="displayTemplate(\'devel\')">'._('Development').'</a></div>';
+echo '<div class="col-xs-12 col-sm-4 center">'.
+'<a href="#" onclick="displayTemplate(\'normal\')" class="badge">'._('Normal').'</a>'.
+'</div>';
+echo '<div class="col-xs-12 col-sm-4 center">'.
+'<a href="#" onclick="displayTemplate(\'minimal\')" class="badge">'._('Minimal').'</a>'.
+'</div>';
+echo '<div class="col-xs-12 col-sm-4 center">'.
+'<a href="#" onclick="displayTemplate(\'devel\')" class="badge">'._('Development').'</a>'.
+'</div>';
 
 echo '<div><br/><br/><table class="table">';
 for($i=3;$i<$rowNb;$i++) {
@@ -42,7 +48,12 @@ for($i=3;$i<$rowNb;$i++) {
 			$class = 'normal';
 		}
 		echo '<tr class="template '.$class.'"><td>'.$rows[$i].'</td>'.
-		     '<td><a href="#" title="'._('Download this template').'" onclick="formTemplateAdd('.$_GET['server'].', \''.$rows[$i].'\');"><span aria-hidden="true" class="glyphicon glyphicon-download-alt"></span></a></td></tr>';
+		     '<td>'.
+		     '<a href="#" title="'._('Download this template').'" onclick="formTemplateAdd('.$_GET['server'].', \''.$rows[$i].'\');">'.
+		     '<button type="button" class="btn btn-success">'.
+		     '<span aria-hidden="true" class="glyphicon glyphicon-download-alt"></span>'.
+		     '</button>'.
+		     '</a></td></tr>';
 	}
 }
 echo '</table></div>';

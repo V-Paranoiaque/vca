@@ -68,7 +68,7 @@
 		
 		<a href="#" title="{'Clone'|gettext}" onclick="popupVpsClone({$vps->serverId}, {$vps->id});">
 			<button class="btn btn-lg btn-info" type="button">
-				<span class="glyphicon glyphicon-tags"></span>
+				<span class="glyphicon glyphicon-duplicate"></span>
 			</button>
 		</a>
 		

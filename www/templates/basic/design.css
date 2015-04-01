@@ -140,7 +140,8 @@ span.offline {
   }
 }
 
-button .glyphicon {
+button .glyphicon,
+a.btn .glyphicon {
 	color:white;
 }
 
