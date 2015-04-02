@@ -91,7 +91,7 @@
 						</a>
 						
 						{if $userRank > 0}
-							{if $server->protected} == 0}
+							{if $server->protected == 0}
 								<a href="#" title="{'Delete'|gettext}" onclick="popupVpsDelete({$server->id});">
 									<button class="btn btn-danger" type="button">
 									  <span class="glyphicon glyphicon-remove"></span>
