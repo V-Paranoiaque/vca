@@ -237,9 +237,6 @@ if [ "${PANEL}" == "1" ] ; then
 		fi
 		
 		apt-get install mysql-server php5-mysql php5-mcrypt gettext openssl -y
-		
-		#MySQL
-		apt-get install mysql-server -y
 	fi
 	
 	#Template cache
