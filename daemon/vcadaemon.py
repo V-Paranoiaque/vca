@@ -18,7 +18,7 @@ localserver = Server()
 def handle(connection, address):
     import logging
     global vcakey
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.ERROR)
     logger = logging.getLogger("process-%r" % (address,))
     try:
         logger.debug("Connected %r at %r", connection, address)
@@ -172,7 +172,7 @@ def vcaAction(action, serverDest, para):
 
 if __name__ == "__main__":
     import logging
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.ERROR)
     vcaserver = VcaServer()
     try:
         logging.info("Listening")
