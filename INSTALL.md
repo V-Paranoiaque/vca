@@ -27,10 +27,16 @@ cd /usr/share
 git clone https://github.com/V-Paranoiaque/vca.git vca
 ```
 
-## 3. Install daemon on Centos 6 or Debian 7 (wheezy) 
+## 3. Install daemon
+
+
+Supported systems
+* Centos 6
+* Debian 7
+* Ubuntu 12.04 and 14.04
 
 ```bash
-cd /usr/share/vca/conf
+cd /usr/share/vca/scripts
 bash vca-linux.bash
 ```
 Answer yes to the question "Would you like to install VCA daemon ?".
@@ -44,12 +50,17 @@ screen python3 vcadaemon.py
 
 ## 4. Install panel
 
-Go to /usr/share/vca/conf and run the installation script.
 
-VCA panel can be installed on Centos, Debian, Fedora, Raspbian and Ubuntu
+Supported systems
+* Centos 6, 7
+* Debian 7
+* Fedora
+* Raspbian
+* Ubuntu 12.04 and 14.04
 
+Go to /usr/share/vca/scripts and run the installation script.
 ```bash
-cd /usr/share/vca/conf
+cd /usr/share/vca/scripts
 bash vca-linux.bash
 ```
 
