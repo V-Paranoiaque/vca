@@ -12,3 +12,5 @@ ADD KEY `request_topic_author` (`request_topic_author`),
 ADD KEY `request_topic_resolved` (`request_topic_resolved`),
 ADD KEY `request_topic_created` (`request_topic_created`);
 
+ALTER TABLE `request_topic`
+MODIFY `request_topic_id` int(10) unsigned NOT NULL AUTO_INCREMENT;

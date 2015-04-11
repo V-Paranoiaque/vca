@@ -13,3 +13,5 @@ ADD KEY `request_topic` (`request_topic`),
 ADD KEY `request_message_user` (`request_message_user`),
 ADD KEY `request_message_read` (`request_message_read`);
 
+ALTER TABLE `request_message`
+MODIFY `request_message_id` int(10) unsigned NOT NULL AUTO_INCREMENT;

@@ -10,3 +10,5 @@ CREATE TABLE IF NOT EXISTS `server` (
 ALTER TABLE `server`
 ADD PRIMARY KEY (`server_id`);
 
+ALTER TABLE `server`
+MODIFY `server_id` int(10) unsigned NOT NULL AUTO_INCREMENT;

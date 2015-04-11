@@ -30,3 +30,5 @@ ADD PRIMARY KEY (`vps_id`),
 ADD KEY `vps_owner` (`vps_owner`),
 ADD KEY `server_id` (`server_id`);
 
+ALTER TABLE `vps`
+MODIFY `vps_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
