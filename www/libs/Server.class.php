@@ -328,6 +328,55 @@ class Server {
 		$req->bindValue(':id', $id, PDO::PARAM_INT);
 		$req->execute();
 	}
+	
+	/**
+	 * Scan server
+	 */
+	function avScan() {
+		$link = Db::link();
+		$connect = new Socket($this->address, $this->port, $this->key);
+		$connect -> write('avScan');
+		$data = json_decode($connect -> read());
+		
+		$logFile = '/usr/share/vca/www/scanlogs/'.$this->getId().'.log';
+		$file = fopen($logFile, 'w+');
+		
+		if(!empty($data) && sizeof($data) > 0) {
+			foreach ($data as $line) {
+				$line = preg_replace('/\//', ':', $line, 1);
+				
+				//Write info
+				fputs($file, $line);
+				fputs($file, "\n");
+			}
+		}
+		
+		fclose($file);
+	}
+	
+	function scanResult() {
+		$logFile = '/usr/share/vca/www/scanlogs/'.$this->getId().'.log';
+		
+		if(!file_exists($logFile)) {
+			return '';
+		}
+		
+		$result = array();
+		$file = fopen($logFile, 'r');
+		
+		while (($buffer = fgets($file, 4096)) !== false) {
+			$info = explode(':', $buffer);
+			$result[] = array(
+				'vps'  => $info[0],
+				'msg'  => $info[1],
+				'info' => $info[2]
+			);
+		}
+		
+		fclose($file);
+		
+		return $result;
+	}
 }
 
 ?>

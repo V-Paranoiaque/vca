@@ -1,3 +1,4 @@
 # VCA cron
-0 * * * * root /usr/bin/php /usr/share/vca/cron/vca.cron.hour.php >> /var/log/vca_cron.log
-* * * * * root /usr/bin/php /usr/share/vca/cron/vca.cron.min.php >> /var/log/vca_cron.log
+0 * * * * root /usr/bin/php /usr/share/vca/cron/vca.cron.hour.php >> /var/log/vca/vca_hour.log
+* * * * * root /usr/bin/php /usr/share/vca/cron/vca.cron.min.php >> /var/log/vca/vca_min.log
+0 2 0 0 0 root /usr/bin/php /usr/share/vca/cron/vca.cron.night.php >> /var/log/vca/vca_night.log

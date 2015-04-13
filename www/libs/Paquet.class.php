@@ -343,6 +343,12 @@ class Paquet {
 								$res = $user->serverBackupDelete($var[0],$var[1],$var[2]);
 							}
 							break;
+							
+						case 'serverScan':
+							if(!empty($var[0])) {
+								$res = $user->serverScan($var[0]);
+							}
+							break;
 	
 							/*** Template ***/
 						case 'serverTemplateRename':
@@ -517,6 +523,17 @@ class Paquet {
 								}
 							}
 							break;
+							
+						/*** Backup password ***/
+						case 'bkppassStatus':
+							$res = $user->bkppassStatus();
+						break;
+						
+						case 'bkppassDefine':
+							if(!empty($var[0])) {
+								$res = $user->bkppassDefine($var[0]);
+							}
+						break;
 					}
 						
 					if(isset($res)) {

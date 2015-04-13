@@ -110,6 +110,15 @@ class Server:
                     backup.append(i)
         return json.dumps(backup)
     
+    def avScan(self):
+        errorList = list()
+        scanTesult = subprocess.Popen('clamscan -ri /vz/root/', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        for line in scanTesult.stdout.readlines():
+            current = re.sub( '\s+', ' ', line.decode()).strip()
+            if current.startswith('/vz/root/'):
+                errorList.append(current[9:])
+        return json.dumps(errorList)
+    
 def encodeVps(obj):
     if isinstance(obj, Vps):
         return obj.__dict__

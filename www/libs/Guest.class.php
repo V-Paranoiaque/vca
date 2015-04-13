@@ -54,7 +54,7 @@ class Guest {
 	 * @return user (NULL, User, Admin, SuperAdmin)
 	 */
 	static function loadUser($token) {
-		$sql = 'SELECT user_id, user_rank, user_language
+		$sql = 'SELECT user_id, user_rank, user_language, user_bkppass
 		        FROM uservca
 		        WHERE user_token= :user_token';
 		$link = Db::link();
@@ -70,11 +70,13 @@ class Guest {
 			$user = new User($do->user_id);
 			$user->setRank($do->user_rank);
 			$user->setLanguage($do->user_language);
+			$user->setBkppass($do->user_bkppass);
 		}
 		elseif($do->user_rank == 1) {
 			$user = new Admin($do->user_id);
 			$user->setRank($do->user_rank);
 			$user->setLanguage($do->user_language);
+			$user->setBkppass($do->user_bkppass);
 		}
 		else {
 			exit();

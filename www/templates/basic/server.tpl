@@ -1,9 +1,7 @@
 <h2 class="sub-header">
 	{'Server list'|gettext} 
-	<a href="#" onclick="popupServerAdd()" title="{'Add a new server'|gettext}">
-		<button class="btn btn-success" type="button">
-			<span class="glyphicon glyphicon-plus"></span>
-		</button>
+	<a href="#" onclick="popupServerAdd()" title="{'Add a new server'|gettext}" class="btn btn-success">
+		<span class="glyphicon glyphicon-plus"></span>
 	</a>
 </h2>
 
@@ -27,40 +25,29 @@
 					<td>{$server->port}</td>
 					<td>{$server->nbvps}</td>
 					<td>
-						<a href="/vpslist/{$server->id}" title="{'Vps list'|gettext}">
-							<button class="btn btn-success" type="button">
-								<span class="glyphicon glyphicon-align-justify"></span>
-							</button>
+						<a href="/vpslist/{$server->id}" title="{'Vps list'|gettext}" class="btn btn-success">
+							<span class="glyphicon glyphicon-align-justify"></span>
 						</a>
-						<a href="/template/{$server->id}" title="{'Template list'|gettext}">
-							<button class="btn btn-info" type="button">
-								<span class="glyphicon glyphicon-folder-open"></span>
-							</button>
+						<a href="/template/{$server->id}" title="{'Template list'|gettext}" class="btn btn-info">
+							<span class="glyphicon glyphicon-folder-open"></span>
 						</a>
-						<a href="/backup/{$server->id}" title="{'Backup list'|gettext}">
-							<button class="btn btn-info" type="button">
-								<span class="glyphicon glyphicon-hdd"></span>
-							</button>
+						<a href="/backup/{$server->id}" title="{'Backup list'|gettext}" class="btn btn-info">
+							<span class="glyphicon glyphicon-hdd"></span>
 						</a>
-						<a href="#" title="{'Reload the server'|gettext}" onclick="popupServerReload({$server->id});">
-							<button class="btn btn-primary" type="button">
-								<span class="glyphicon glyphicon-refresh"></span>
-							</button>
+						<a href="/avscan/{$server->id}" title="{'Antivirus scan'|gettext}" class="btn btn-danger">
+							<span aria-hidden="true" class="glyphicon glyphicon-screenshot"></span>
 						</a>
-						<a href="#" title="{'Restart the server'|gettext}" onclick="popupServerRestart({$server->id});">
-							<button class="btn btn-warning" type="button">
-								<span class="glyphicon glyphicon-repeat"></span>
-							</button>
+						<a href="#" title="{'Reload the server'|gettext}" onclick="popupServerReload({$server->id});" class="btn btn-primary">
+							<span class="glyphicon glyphicon-refresh"></span>
 						</a>
-						<a href="#" title="{'Edit'|gettext}" onclick="popupServerEdit({$server->id});">
-							<button class="btn btn-primary" type="button">
-								<span class="glyphicon glyphicon-pencil"></span>
-							</button>
+						<a href="#" title="{'Restart the server'|gettext}" onclick="popupServerRestart({$server->id});" class="btn btn-warning">
+							<span class="glyphicon glyphicon-repeat"></span>
 						</a>
-						<a href="#" title="{'Remove'|gettext}" onclick="popupServerRemove({$server->id});">
-							<button class="btn btn-danger" type="button">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
+						<a href="#" title="{'Edit'|gettext}" onclick="popupServerEdit({$server->id});" class="btn btn-primary">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+						<a href="#" title="{'Remove'|gettext}" onclick="popupServerRemove({$server->id});" class="btn btn-danger">
+							<span class="glyphicon glyphicon-remove"></span>
 						</a>
 					</td>
 				</tr>

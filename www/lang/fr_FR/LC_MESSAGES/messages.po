@@ -921,3 +921,27 @@ msgstr "Les mots de passe sont différents"
 #: templates/basic/form_userpassword.php
 msgid "Password updated"
 msgstr "Mot de passe mis à jour"
+
+#: templates/basic/popup_userbkppass.php
+msgid "Define the backup password"
+msgstr "Modifier le mot de passe des mises à jour"
+
+#: templates/basic/popup_userbkppass.php
+msgid "Backup password"
+msgstr "Mot de passe des mises à jour"
+
+#: templates/basic/avscan.php
+msgid "Antivirus scan"
+msgstr "Scan antivirus"
+
+#: templates/basic/avscan.php
+msgid "File"
+msgstr "Fichier"
+
+#: templates/basic/avscan.php
+msgid "Danger"
+msgstr "Danger"
+
+#: templates/basic/avscan.php
+msgid "No antivirus scan informations for this server"
+msgstr "Pas de rapport d'analyse antivirus pour ce serveur"

@@ -62,6 +62,7 @@ else {
 		case 'template':
 		case 'ip':
 		case 'backup':
+		case 'avscan':
 		case 'request':
 		case 'requestinfo':
 		

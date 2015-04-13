@@ -18,7 +18,7 @@ localserver = Server()
 def handle(connection, address):
     import logging
     global vcakey
-    logging.basicConfig(level=logging.ERROR)
+    logging.basicConfig(level=logging.DEBUG)
     logger = logging.getLogger("process-%r" % (address,))
     try:
         logger.debug("Connected %r at %r", connection, address)
@@ -166,13 +166,15 @@ def vcaAction(action, serverDest, para):
             vps.backupRestore(para)
             if pid != '-':
                 vps.start()
+    elif action == "avScan":
+        return localserver.avScan()
     else:
         return 'Nothing : '+action
     return 'Nothing to return'
 
 if __name__ == "__main__":
     import logging
-    logging.basicConfig(level=logging.ERROR)
+    logging.basicConfig(level=logging.DEBUG)
     vcaserver = VcaServer()
     try:
         logging.info("Listening")

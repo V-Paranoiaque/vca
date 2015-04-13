@@ -876,6 +876,27 @@ class Admin extends User {
 		}
 	}
 	
+	function serverScan($server) {
+		$link = Db::link();
+		
+		$sql = 'SELECT server.server_id, server_address,
+		               server_key, server_port
+		        FROM server
+		        WHERE server.server_id= :id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':id', $server, PDO::PARAM_INT);
+		$req->execute();
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(empty($do->server_id)) {
+			return '';
+		}
+		else {
+			$server = new Server($do->server_id);
+			return $server->scanResult();
+		}
+	}
+	
 	/*** VPS ***/
 	
 	/**
@@ -1520,6 +1541,36 @@ class Admin extends User {
 		}
 	
 		return null;
+	}
+	
+	/**
+	 * Scan server with Clamav
+	 */
+	function avScan($id=0) {
+		$link = Db::link();
+		if($id == 0) {
+			$sql = 'SELECT server_id, server_name, server_address,
+	               server_description, server_key, server_port
+		        FROM server';
+			$req = $link->query($sql);
+		}
+		else {
+			$sql = 'SELECT server_id, server_name, server_address,
+	               server_description, server_key, server_port
+		        FROM server
+		        WHERE server_id= :server_id';
+			$req = $link->prepare($sql);
+			$req->bindValue(':server_id', $id, PDO::PARAM_INT);
+			$req->execute();
+		}
+	
+		while($do = $req->fetch(PDO::FETCH_OBJ)) {
+			$server = new Server($do->server_id);
+			$server -> setAddress($do->server_address);
+			$server -> setPort($do->server_port);
+			$server -> setKey($do->server_key);
+			$server -> avScan();
+		}
 	}
 }
 

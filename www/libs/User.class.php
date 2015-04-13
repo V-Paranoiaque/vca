@@ -9,6 +9,7 @@ class User extends Guest {
 	private $nbVps;
 	private $key;
 	private $language;
+	private $bkppass;
 	
 	/*** Get/Set ***/
 	
@@ -67,6 +68,14 @@ class User extends Guest {
 	
 	function setLanguage($language) {
 		$this->language = $language;
+	}
+	
+	function getBkppass() {
+		return $this->bkppass;
+	}
+	
+	function setBkppass($pass) {
+		$this->bkppass = $pass;
 	}
 	
 	/*** VCA ***/
@@ -426,6 +435,7 @@ class User extends Guest {
 	function serverTemplateDelete($id, $name) { return null; }
 	function serverBackup($server) { return null; }
 	function serverBackupDelete($server, $idVps, $name) { return null; }
+	function serverScan($server) { return null; }
 	
 	/*** VPS ***/
 	
@@ -933,6 +943,30 @@ class User extends Guest {
 		$req = $link->prepare($sql);
 		$req->bindValue(':save', $save, PDO::PARAM_INT);
 		$req->execute();
+	}
+	
+	/*** Backup password ***/
+	function bkppassStatus() {
+		if($this->bkppass == '') {
+			return 0;
+		}
+		else {
+			return 1;
+		}
+	}
+	
+	function bkppassDefine($bkppass) {
+		$link = Db::link();
+		
+		$sql = 'UPDATE uservca
+		        SET user_bkppass= :bkppass
+		        WHERE user_id= :user_id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':bkppass', $bkppass, PDO::PARAM_STR);
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
+		
+		$this->bkppass = $bkppass;
 	}
 }
 
