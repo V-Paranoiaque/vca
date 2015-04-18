@@ -91,7 +91,7 @@ if [ "${DAEMON}" == "1" ] ; then
 	
 	source /root/.bashrc
 	easy_install-3.3 pip
-	pip3 install pycrypto
+	pip3 install dropbox pycrypto
 	
 	if [ ! -f /usr/share/vca/daemon/vca.cfg ] ; then 
 		DAEMON_KEY=`date +%s | sha512sum | base64 | head -c 32 ; echo`
@@ -153,7 +153,7 @@ if [ "${PANEL}" == "1" ] ; then
 		sed -i s/127.0.0.1:9000/\\\/var\\\/run\\\/php5-fpm.sock/g /etc/php-fpm.d/www.conf
 	fi
 	
-	yum install php-mysql php-mcrypt gettext openssl crontabs -y
+	yum install php-curl php-mysql php-mcrypt gettext openssl crontabs -y
 	
 	# Iptables
 	firewall-cmd --zone=public --add-port=80/tcp --permanent

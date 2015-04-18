@@ -58,8 +58,9 @@ if [ "${DAEMON}" == "1" ] ; then
 	apt-get update
 	
 	# All needed packages
-	apt-get install clamav python3 python3-crypto python3-dev vzctl screen -y
-
+	apt-get install clamav python3 python3-crypto python3-dev python3-pip vzctl screen -y
+	pip3 install dropbox
+	
 	if [ ! -f /usr/share/vca/daemon/vca.cfg ] ; then 
 		DAEMON_KEY=`date +%s | sha512sum | base64 | head -c 32 ; echo`
 		echo "[DEFAULT]" >> /usr/share/vca/daemon/vca.cfg
@@ -124,7 +125,8 @@ if [ "${PANEL}" == "1" ] ; then
 	fi
 	
 	apt-get install bsdutils -y
-	apt-get install mysql-server php5-mysql gettext openssl php5-mcrypt -y
+	apt-get install mysql-server php5-mysql gettext openssl php5-curl php5-mcrypt -y
+	php5enmod curl
 	php5enmod mcrypt
 	
 	#Template cache
