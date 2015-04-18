@@ -10,6 +10,7 @@ class User extends Guest {
 	private $key;
 	private $language;
 	private $bkppass;
+	private $dropbox;
 	
 	/*** Get/Set ***/
 	
@@ -76,6 +77,14 @@ class User extends Guest {
 	
 	function setBkppass($pass) {
 		$this->bkppass = $pass;
+	}
+	
+	function getDropbox() {
+		return $this->dropbox;
+	}
+	
+	function setDropbox($token) {
+		$this->dropbox = $token;
 	}
 	
 	/*** VCA ***/
@@ -877,6 +886,32 @@ class User extends Guest {
 		}
 	}
 	
+	function vpsDropboxAdd($idVps, $protected=1) {
+		$link = Db::link();
+	
+		$sql = 'SELECT vps_id, server.server_id, server_address,
+		               server_key, vps_owner, server_port
+		        FROM vps
+		        JOIN server ON server.server_id=vps.server_id
+		        WHERE vps_id= :id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(!empty($do->server_id)) {
+			$para = array('token' => $this->dropbox, 'pass' => '');
+			
+			if($protected == 1 && $this->bkppass != '') {
+				$para['pass'] = $this->bkppass;
+			}
+			
+			$connect = new Socket($do->server_address, $do->server_port, $do->server_key);
+			$connect -> write('backupDropbox', $do->vps_id, $para);
+			return $data = json_decode($connect -> read());
+		}
+	}
+	
 	function vpsSchedule($idVps) {
 		$link = Db::link();
 		$list = array();
@@ -967,6 +1002,45 @@ class User extends Guest {
 		$req->execute();
 		
 		$this->bkppass = $bkppass;
+	}
+	
+	function dropboxGetUrl() {
+		$appInfo = new Dropbox\AppInfo(APP_KEY, APP_SECRET);
+		$clientIdentifier = "VCA";
+		
+		$webAuth = new Dropbox\WebAuthNoRedirect($appInfo, $clientIdentifier);
+		$authorizeUrl = $webAuth->start();
+		
+		return $authorizeUrl;
+	}
+	
+	function dropboxGetToken($authCode) {
+		$link = Db::link();
+		$appInfo = new Dropbox\AppInfo(APP_KEY, APP_SECRET);
+		$clientIdentifier = "VCA";
+		
+		$webAuth = new Dropbox\WebAuthNoRedirect($appInfo, $clientIdentifier);
+		
+		list($accessToken, $dropboxUserId) = $webAuth->finish($authCode);
+		
+		if(!empty($accessToken)) {
+			$sql = 'UPDATE uservca
+			        SET user_dropbox= :dropbox
+			        WHERE user_id= :user_id';
+			$req = $link->prepare($sql);
+			$req->bindValue(':dropbox', trim($accessToken), PDO::PARAM_STR);
+			$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+			$req->execute();
+		}
+	}
+	
+	function dropboxStatus() {
+		if($this->dropbox == '') {
+			return 0;
+		}
+		else {
+			return 1;
+		}
 	}
 }
 

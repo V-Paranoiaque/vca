@@ -166,6 +166,10 @@ def vcaAction(action, serverDest, para):
             vps.backupRestore(para)
             if pid != '-':
                 vps.start()
+    elif action == 'backupDropbox':
+        if int(serverDest) > 0 :
+            vps = Vps(serverDest)
+            vps.backupDropbox(para['token'], para['pass'])
     elif action == "avScan":
         return localserver.avScan()
     else:

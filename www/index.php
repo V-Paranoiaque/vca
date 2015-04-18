@@ -2,6 +2,8 @@
 
 include('config.php');
 include('functions.php');
+require_once "dropbox-sdk/Dropbox/autoload.php";
+
 include('libs/Paquet.class.php');
 include('libs/Smarty.class.php');
 

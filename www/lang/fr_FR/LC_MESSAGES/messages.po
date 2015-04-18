@@ -863,6 +863,14 @@ msgid "Create a new backup"
 msgstr "Créer une nouvelle sauvegarde"
 
 #: templates/basic/popup_backuplist.php
+msgid "Save on Dropbox with password"
+msgstr "Sauvegarder sur Dropbox avec un mot de passe"
+
+#: templates/basic/popup_backuplist.php
+msgid "Save on Dropbox without password"
+msgstr "Sauvegarder sur Dropbox sans mot de passe"
+
+#: templates/basic/popup_backuplist.php
 msgid "Restore"
 msgstr "Restaurer"
 
@@ -924,11 +932,11 @@ msgstr "Mot de passe mis à jour"
 
 #: templates/basic/popup_userbkppass.php
 msgid "Define the backup password"
-msgstr "Modifier le mot de passe des mises à jour"
+msgstr "Modifier le mot de passe des sauvegardes"
 
 #: templates/basic/popup_userbkppass.php
 msgid "Backup password"
-msgstr "Mot de passe des mises à jour"
+msgstr "Mot de passe des sauvegardes"
 
 #: templates/basic/avscan.php
 msgid "Antivirus scan"
@@ -945,3 +953,27 @@ msgstr "Danger"
 #: templates/basic/avscan.php
 msgid "No antivirus scan informations for this server"
 msgstr "Pas de rapport d'analyse antivirus pour ce serveur"
+
+#: templates/basic/profile.tpl
+msgid "Accounts"
+msgstr "Comptes"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Define a Dropbox account"
+msgstr "Définir un compte Dropbox"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Bad authorization code"
+msgstr "Mauvais code d'autorisation"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Authorization code"
+msgstr "Code d'autorisation"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Generate code"
+msgstr "Générer un code"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Configure Dropbox"
+msgstr "Configurer Dropbox"

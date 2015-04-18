@@ -30,6 +30,10 @@ table tr td.left {
 	text-align:left;
 }
 
+.right {
+	text-align:right;
+}
+
 span.online {
 	color:green;
 }
@@ -101,6 +105,14 @@ span.offline {
 
 .glyphicon {
   color:#A94442;
+}
+
+.glyphicon.text-success {
+    color: #3c763d;
+}
+
+.glyphicon.text-danger {
+    color: #a94442;
 }
 
 .table-striped > tbody > tr:nth-child(2n+1) > td,
@@ -188,7 +200,7 @@ a.btn .glyphicon {
   border-top-right-radius: 0;
 }
 
-.form-signin .alert {
+.alert-hide {
 	display:none;
 }
 
@@ -310,6 +322,20 @@ a.btn .glyphicon {
 
 .main .page-header {
   margin-top: 0;
+}
+
+.dropdown-menu-danger {
+	background-color: #d9534f;
+}
+
+.dropdown-menu-danger > li > a {
+	color:white;
+}
+
+.dropdown-menu-danger > li > a:focus,
+.dropdown-menu-danger > li > a:hover {
+	background-color: #c9302c;
+	color:white;
 }
 
 /*

@@ -3,6 +3,7 @@ import json
 import shutil
 import os
 import time
+import dropbox
 
 class Vps:
     
@@ -238,6 +239,25 @@ class Vps:
         #Clean
         self.snapshotClean()        
         shutil.rmtree(vzprivate+'/dump')
+    
+    def backupDropbox(self, access_token, password):
+        vzbackup = "/vz/dump/"
+        file = self.backupAdd()
+        
+        if password != '':
+            new_file = file+'.openssl'
+            subprocess.call('openssl aes-256-cbc -in '+vzbackup+file+' -out '+vzbackup+new_file+' -k '+password, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            os.remove(vzbackup+file)
+            file = new_file
+        
+        client = dropbox.client.DropboxClient(access_token)
+        print('linked account: ', client.account_info())
+        f = open(vzbackup+file, 'rb')
+        response = client.put_file('/'+file, f)
+        
+        os.remove(vzbackup+file)
+        
+        return response
     
     def snapshotClean(self):
         list = subprocess.Popen('vzctl snapshot-list '+self._id+' -H -o UUID', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

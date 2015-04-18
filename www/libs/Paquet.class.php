@@ -485,6 +485,18 @@ class Paquet {
 								}
 							}
 							break;
+							
+						case 'vpsDropboxAdd':
+							if(!empty($var[0])) {
+								$list = $user->vpsList();
+								if(!empty($list[$var[0]])) {
+									if(empty($var[1]) or ($var[1] != 1)) {
+										$var[1] = 0;
+									}
+									$res = $user->vpsDropboxAdd($var[0], $var[1]);
+								}
+							}
+							break;
 	
 						case 'vpsSchedule':
 							if(!empty($var[0])) {
@@ -533,6 +545,20 @@ class Paquet {
 							if(!empty($var[0])) {
 								$res = $user->bkppassDefine($var[0]);
 							}
+						break;
+						
+						case 'dropboxGetUrl':
+							$res = $user->dropboxGetUrl();
+						break;
+						
+						case 'dropboxGetToken':
+							if(!empty($var[0])) {
+								$user->dropboxGetToken($var[0]);
+							}
+						break;
+						
+						case 'dropboxStatus':
+							$res = $user->dropboxStatus();
 						break;
 					}
 						

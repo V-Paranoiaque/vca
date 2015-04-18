@@ -11,4 +11,8 @@ define('DB_USER', '');
 define('DB_PASS', '');
 define('DB_TYPE', 'MYSQL');
 
+//Dropxbox
+define('APP_KEY', '');
+define('APP_SECRET', '');
+
 ?>

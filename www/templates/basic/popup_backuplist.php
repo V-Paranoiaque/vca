@@ -6,10 +6,12 @@ if(!empty($_GET['vps']) && is_numeric($_GET['vps'])) {
 	$paquet = new Paquet();
 	$paquet -> add_action('vpsBackup', array($_GET['vps']));
 	$paquet -> add_action('vpsList');
+	$paquet -> add_action('bkppassStatus');
 	$paquet -> send_actions();
 	
 	$backupList = $paquet->getAnswer('vpsBackup');
 	$vpsList = $paquet->getAnswer('vpsList');
+	$bkppassStatus = $paquet->getAnswer('bkppassStatus');
 	$server     = $vpsList->$_GET['vps'];
 	$nbCurrent  = sizeof((array) $backupList);
 	
@@ -27,9 +29,21 @@ echo '</div>';
 			printf(_('You can\'t have more than %s backups'), $server->backup_limit);
 			echo '<br/>';
 		}
-echo 
-'<button class="btn btn-danger" type="button" onclick="formBackupAdd('.$_GET['vps'].');">'._('Create a new backup').'</button>'.
-'</div>';
+echo '<div class="btn-group">'.
+      '<button class="btn btn-danger" type="button" onclick="formBackupAdd('.$_GET['vps'].');">'._('Create a new backup').'</button>'.
+      '<button aria-expanded="false" data-toggle="dropdown" class="btn btn-danger dropdown-toggle" type="button">'.
+        '<span class="caret"></span>'.
+      '</button>'.
+      '<ul role="menu" class="dropdown-menu dropdown-menu-danger">';
+
+		if($bkppassStatus == 1) {
+			echo '<li><a href="#" onclick="formDropbox('.$_GET['vps'].', 1)">'._('Save on Dropbox with password').'</a></li>';
+		}
+		
+		echo 
+        '<li><a href="#" onclick="formDropbox('.$_GET['vps'].', 0)">'._('Save on Dropbox without password').'</a></li>'.
+      '</ul>'.
+    '</div>';
 	}
 	
 	if(!empty($backupList) && $nbCurrent > 0) {

@@ -2,7 +2,7 @@
 	<form method="post" class="form-signin" role="form">
 		<h2 class="form-signin-heading">{'Virtual Control Admin'|gettext}</h2>
 		
-		<div class="alert alert-warning alert-dismissible" role="alert">
+		<div class="alert alert-warning alert-dismissible alert-hide" role="alert">
 		  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{'Close'|gettext}</span></button>
 		  <div id="error"></div>
 		</div>

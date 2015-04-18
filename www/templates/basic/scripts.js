@@ -911,6 +911,17 @@ function formServerBackupDelete(server, vps, name) {
 	});
 }
 
+function formDropbox(vps, password) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_dropbox.php",
+		data: "vps="+vps+"&password="+password,
+		success: function(msg) {
+			location.reload();
+		}
+	});
+}
+
 function popupProfile() {
 	$.ajax({
 		type: "GET",
@@ -973,6 +984,44 @@ function formUserPassword() {
 			}
 		});
 	}
+}
+
+function popupUserBkppass() {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_userbkppass.php",
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formUserBkppass() {
+	var password = $("#password").val();
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_userbkppass.php",
+		data: "password="+encodeURI(password),
+		success: function(msg) {
+			location.reload();
+		}
+	});
+}
+
+function popupUserDropbox() {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_userdropbox.php",
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
 }
 
 function popupRequestAdd() {
@@ -1144,6 +1193,23 @@ function formBackupScheduleDelete(vps, saveId) {
 		success: function(msg) {
 			popupclose();
 			popupBackupSchedule(vps, 0);
+		}
+	});
+}
+
+function formDropboxToken() {
+	var authorization = $("#authorization").val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_dropboxtoken.php",
+		data: "authorization="+authorization,
+		success: function(msg) {
+			popupclose();
+			popupBackupSchedule(vps, 0);
+		},
+		error: function(xhr,status,error) {
+			$("#errorDropbox").show()
 		}
 	});
 }
