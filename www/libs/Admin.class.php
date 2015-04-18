@@ -1572,6 +1572,15 @@ class Admin extends User {
 			$server -> avScan();
 		}
 	}
+	
+	static function dropboxPossible() {
+		if(APP_KEY == '' or APP_SECRET == '') {
+			return 0;
+		}
+		else {
+			return 1;
+		}
+	}
 }
 
 ?>

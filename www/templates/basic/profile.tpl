@@ -61,21 +61,23 @@
 				</a>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<span class="glyphicon glyphicon-hdd"></span> {'Dropbox'|gettext} 
-				{if $dropboxStatus == 0}
-					<span aria-hidden="true" class="glyphicon glyphicon-remove text-danger"></span>
-				{else}
-					<span aria-hidden="true" class="glyphicon glyphicon-ok text-success"></span>
-				{/if}
-			</td>
-			<td>
-				<a href="#" onclick="popupUserDropbox()" class="btn btn-primary">
-					<span class="glyphicon glyphicon-pencil"></span>
-				</a>
-			</td>
-		</tr>
+		{if $dropboxPossible == 1}
+			<tr>
+				<td>
+					<span class="glyphicon glyphicon-hdd"></span> {'Dropbox'|gettext} 
+					{if $dropboxStatus == 0}
+						<span aria-hidden="true" class="glyphicon glyphicon-remove text-danger"></span>
+					{else}
+						<span aria-hidden="true" class="glyphicon glyphicon-ok text-success"></span>
+					{/if}
+				</td>
+				<td>
+					<a href="#" onclick="popupUserDropbox()" class="btn btn-primary">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+				</td>
+			</tr>
+		{/if}
 	</div>
 </div>
 </div>

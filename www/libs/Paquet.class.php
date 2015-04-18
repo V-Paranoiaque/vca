@@ -547,6 +547,10 @@ class Paquet {
 							}
 						break;
 						
+						case 'dropboxPossible':
+							$res = Admin::dropboxPossible();
+						break;
+						
 						case 'dropboxGetUrl':
 							$res = $user->dropboxGetUrl();
 						break;
