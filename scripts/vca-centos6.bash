@@ -97,6 +97,13 @@ if [ "${DAEMON}" == "1" ] ; then
 			echo "host = 0.0.0.0" >> /usr/share/vca/daemon/vca.cfg
 		fi
 	fi
+	
+	mkdir -p /root/.ssh
+	chmod 700 /root/.ssh
+	
+	if [ ! -f /root/.ssh/id_rsa ] ; then
+		ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
+	fi
 fi
 
 if [ "${PANEL}" == "1" ] ; then 
