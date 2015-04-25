@@ -80,6 +80,15 @@ class VcaServer(object):
                 process.daemon = True
                 process.start()
                 self.logger.debug("Started process %r", process)
+    
+    def loadModules(self):
+        tun = subprocess.Popen('lsmod | grep tun | wc -l', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        if tun.stdout.readline().decode().strip() == '1':
+            subprocess.call('modprobe tun', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        
+        fuse = subprocess.Popen('lsmod | grep fuse | wc -l', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        if tun.stdout.readline().decode().strip() == '1':
+            subprocess.call('modprobe fuse', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 def vcaAction(action, serverDest, para):
     global localserver
@@ -182,6 +191,7 @@ if __name__ == "__main__":
     vcaserver = VcaServer()
     try:
         logging.info("Listening")
+        vcaserver.loadModules()
         vcaserver.start()
     except:
         logging.exception("Unexpected exception")
