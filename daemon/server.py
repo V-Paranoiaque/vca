@@ -68,9 +68,8 @@ class Server:
     
     def templateList(self):
         tpl=[]  
-        for files in os.walk('/vz/template/cache/'):  
-            for i in files:
-                tpl.append(i)
+        for files in os.listdir('/vz/template/cache/'):  
+            tpl.append(files)  
 
         return json.dumps(tpl)
     
@@ -83,7 +82,8 @@ class Server:
             f.write(g.read())
     
     def templateDelete(self, name):
-        os.remove('/vz/template/cache/'+name+'.tar.gz')
+        if os.path.isfile('/vz/template/cache/'+name+'.tar.gz'):
+            os.remove('/vz/template/cache/'+name+'.tar.gz')
         
     def templateDownload(self):
         vps = Vps(newId)

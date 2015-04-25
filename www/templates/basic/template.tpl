@@ -7,7 +7,7 @@
 	</a>
 </h2>
 
-{if isset($serverList) }
+{if isset($serverTemplate) && $serverTemplate != '' }
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>

@@ -732,7 +732,7 @@ class Admin extends User {
 			}
 				
 			//Get all templates names without extension
-			foreach ($tpl_list[2] as $template) {
+			foreach ($tpl_list as $template) {
 				if(substr($template, -7) == '.tar.gz') {
 					$list[] = substr($template, 0, -7);
 				}
