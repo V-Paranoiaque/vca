@@ -52,8 +52,9 @@ if(!empty($_GET['server']) && is_numeric($_GET['server'])) {
 				'</div>'.
 				'<div class="col-sm-6"><select name="vps_ipv4" id="vps_ipv4" class="form-control">';
 
-	if(!empty($paquet->getAnswer('ipFree'))) {
-		foreach ($paquet->getAnswer('ipFree') as $ip) {
+	$ipFree = $paquet->getAnswer('ipFree');
+	if(!empty($ipFree)) {
+		foreach ($ipFree as $ip) {
 			echo '<option value="'.$ip.'">'.$ip.'</option>';
 		}
 	}
