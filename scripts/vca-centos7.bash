@@ -77,7 +77,7 @@ if [ "${DAEMON}" == "1" ] ; then
 	fi
 	
 	# All needed packages
-	yum install clamav python33-python python33-python-devel python33-python-setuptools gcc gmp-devel screen vzctl -y
+	yum install clamav fuse ploop python33-python python33-python-devel python33-python-setuptools gcc gmp-devel screen vzctl -y
 	
 	# Python install
 	cd /root/

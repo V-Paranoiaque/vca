@@ -58,7 +58,7 @@ if [ "${DAEMON}" == "1" ] ; then
 	apt-get update
 	
 	# All needed packages
-	apt-get install clamav python3 python3-crypto python3-dev python3-pip vzctl screen -y
+	apt-get install clamav fuse ploop python3 python3-crypto python3-dev python3-pip vzctl screen -y
 	pip-3.2 install dropbox
 	
 	if [ ! -f /usr/share/vca/daemon/vca.cfg ] ; then 

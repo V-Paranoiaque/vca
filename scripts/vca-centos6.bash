@@ -67,7 +67,7 @@ if [ "${DAEMON}" == "1" ] ; then
 	yum install centos-release-SCL epel-release -y
 	
 	# All needed packages
-	yum install clamav python33-python python33-python-devel python33-python-setuptools gcc gmp-devel screen vzctl -y
+	yum install clamav fuse ploop python33-python python33-python-devel python33-python-setuptools gcc gmp-devel screen vzctl -y
 	ln -s /opt/rh/python33/root/usr/bin/python3 /usr/bin/python3
 	
 	# Python install
@@ -154,8 +154,8 @@ if [ "${PANEL}" == "1" ] ; then
 	yum install php-curl php-mysql php-mcrypt gettext openssl crontabs -y
 	
 	# Iptables
-	iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-	iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+	iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+	iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 	/sbin/service iptables save
 	
 	# MySQL

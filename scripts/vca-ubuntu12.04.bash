@@ -58,7 +58,7 @@ if [ "${DAEMON}" == "1" ] ; then
 	apt-get update
 	
 	# All needed packages
-	apt-get install clamav python3 python3-crypto python3-dev python3-setuptools vzctl screen -y
+	apt-get install clamav fuse ploop python3 python3-crypto python3-dev python3-setuptools vzctl screen -y
 	easy_install3 pip
 	pip3 install dropbox
 	
