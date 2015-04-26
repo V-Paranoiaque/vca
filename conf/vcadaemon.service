@@ -1,0 +1,11 @@
+[Unit]
+Description=VCA daemon
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/vcadaemon start
+ExecStop=/etc/init.d/vcadaemon stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

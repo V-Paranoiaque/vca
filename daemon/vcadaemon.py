@@ -3,10 +3,11 @@ import socket
 import subprocess
 import json
 import time
-import os.path
 import base64
 import hashlib
 import configparser
+import sys, os, time, atexit
+from signal import SIGTERM
 from Crypto.Cipher import AES
 from Crypto import Random
 from server import Server 
@@ -18,7 +19,7 @@ localserver = Server()
 def handle(connection, address):
     import logging
     global vcakey
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.ERROR)
     logger = logging.getLogger("process-%r" % (address,))
     try:
         logger.debug("Connected %r at %r", connection, address)
@@ -54,16 +55,91 @@ def handle(connection, address):
         connection.close()
 
 class VcaServer(object):
-    def __init__(self):
+    def __init__(self, pidfile='/var/run/vcadaemon.pid', stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
         import logging
         self.logger = logging.getLogger("server")
-    
+        self.stdin = stdin
+        self.stdout = stdout
+        self.stderr = stderr
+        self.pidfile = pidfile
+   
+    def daemonize(self):
+        try:
+            pid = os.fork()
+            if pid > 0:
+                return 0
+        except OSError as e:
+            sys.stderr.write("fork #1 failed: %d (%s)\n" % (e.errno, e.strerror))
+            return 0
+        
+        sys.stdout.flush()
+        sys.stderr.flush()
+        si = open(self.stdin, 'rb')
+        so = open(self.stdout, 'ab+')
+        se = open(self.stderr, 'ab+', 0)
+        os.dup2(si.fileno(), sys.stdin.fileno())
+        os.dup2(so.fileno(), sys.stdout.fileno())
+        os.dup2(se.fileno(), sys.stderr.fileno())
+
+        atexit.register(self.delpid)
+        pid = str(os.getpid())
+        open(self.pidfile,'w+').write("%s\n" % pid)
+        return 1
+   
+    def delpid(self):
+        os.remove(self.pidfile)
+
     def start(self):
-        if os.path.isfile('vca.cfg'):
+        try:
+            pf = open(self.pidfile,'r')
+            pid = int(pf.read().strip())
+            pf.close()
+        except IOError:
+            pid = None
+
+        if pid:
+            message = "pidfile %s already exist. vcadaemon already running?\n"
+            sys.stderr.write(message % self.pidfile)
+            sys.exit(1)
+        
+        if self.daemonize() > 0:
+            self.run()
+
+    def stop(self):
+        try:
+            pf = open(self.pidfile,'r')
+            pid = int(pf.read().strip())
+            pf.close()
+        except IOError:
+            pid = None
+        if not pid:
+            message = "pidfile %s does not exist. vcadaemon not running?\n"
+            sys.stderr.write(message % self.pidfile)
+            return
+
+        try:
+            while 1:
+                os.kill(pid, SIGTERM)
+                time.sleep(0.1)
+        except OSError as err:
+            err = str(err)
+            if err.find("No such process") > 0:
+                if os.path.exists(self.pidfile):
+                    os.remove(self.pidfile)
+            else:
+                print(str(err))
+                sys.exit(1)
+
+    def restart(self):
+        self.stop()
+        self.start()
+
+    def run(self):
+        if os.path.isfile('/usr/share/vca/daemon/vca.cfg'):
             global vcakey
-            os.chmod('vca.cfg', 0o400)
+            os.chmod('/usr/share/vca/daemon/vca.cfg', 0o400)
             config = configparser.ConfigParser()
-            config.read("vca.cfg")
+            config.read("/usr/share/vca/daemon/vca.cfg")
             vcakey = hashlib.md5(config.get('DEFAULT', 'key').encode()).hexdigest()
             self.port = int(config.get('DEFAULT', 'port'))
             self.host = config.get('DEFAULT', 'host')
@@ -187,7 +263,7 @@ def vcaAction(action, serverDest, para):
 
 if __name__ == "__main__":
     import logging
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.ERROR)
     vcaserver = VcaServer()
     try:
         logging.info("Listening")

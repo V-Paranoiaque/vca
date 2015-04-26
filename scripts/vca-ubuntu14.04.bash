@@ -81,6 +81,11 @@ if [ "${DAEMON}" == "1" ] ; then
 	if [ ! -f /root/.ssh/id_rsa ] ; then
 		ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 	fi
+	
+	#Startup script
+	cp /usr/share/vca/conf/vcadaemon.upstart /etc/init.d/vcadaemon
+	chmod 755 /etc/init.d/vcadaemon
+	update-rc.d vcadaemon defaults
 fi
 
 if [ "${PANEL}" == "1" ] ; then 

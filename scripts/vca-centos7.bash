@@ -113,6 +113,12 @@ if [ "${DAEMON}" == "1" ] ; then
 	if [ ! -f /root/.ssh/id_rsa ] ; then
 		ssh-keygen -t rsa -f /root/.ssh/id_rsa -P ""
 	fi
+	
+	#Startup script
+	cp /usr/share/vca/conf/vcadaemon.service /usr/lib/systemd/system/vcadaemon.service
+	cp /usr/share/vca/conf/vcadaemon.chkconfig /etc/init.d/vcadaemon
+	chmod 755 /etc/init.d/vcadaemon
+	systemctl enable vcadaemon
 fi
 
 if [ "${PANEL}" == "1" ] ; then 
@@ -137,7 +143,7 @@ if [ "${PANEL}" == "1" ] ; then
 	#apache
 	if [ "${SERVER}" == "1" ] ; then 
 		yum install httpd php mod_ssl -y
-		chkconfig --levels 235 httpd on
+		systemctl enable httpd
 		
 		#Configure
 		cp /usr/share/vca/conf/vca-apache-example.conf /etc/httpd/conf.d/vca-panel.conf
@@ -145,8 +151,8 @@ if [ "${PANEL}" == "1" ] ; then
 	#nginx
 	elif [ "${SERVER}" == "2" ] ; then 
 		yum install nginx php-fpm -y
-		chkconfig --levels 235 nginx on
-		chkconfig --levels 235 php-fpm on
+		systemctl enable nginx
+		systemctl enable php-fpm
 		
 		if [ ! -f /etc/nginx/conf.d/php5-fpm.conf ] ; then 
 			echo "upstream php5-fpm-sock {" > /etc/nginx/conf.d/php5-fpm.conf
@@ -166,19 +172,15 @@ if [ "${PANEL}" == "1" ] ; then
 	firewall-cmd --zone=public --add-port=80/tcp --permanent
 	firewall-cmd --zone=public --add-port=443/tcp --permanent
 	firewall-cmd --reload
-
-	iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-	iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-	/sbin/service iptables save
 	
-	# MySQL
+	# MariaDB
 	if [ ! -f /usr/bin/mariadb ] ; then
 		yum install mariadb-server -y
 		service mariadb start
 		sleep 2
 		mysql_secure_installation
 	fi
-	chkconfig --levels 235 mariadb on
+	systemctl enable mariadb
 	
 	#Template cache
 	chmod 777 /usr/share/vca/www/templates_c

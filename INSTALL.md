@@ -42,10 +42,9 @@ bash vca-linux.bash
 Answer yes to the question "Would you like to install VCA daemon ?".
 
 
-Run VCA daemon in a screen
+To run VCA daemon:
 ```bash
-cd /usr/share/vca/daemon
-screen python3 vcadaemon.py 
+service vcadaemon start
 ```
 
 ## 4. Install panel
@@ -76,7 +75,7 @@ Modify /usr/share/vca/www/config.php and define database access.
 ## 5. Uninstallation
 
 
-To uninstall vca, remove /usr/share/vca and delete the database.
+To uninstall vca, remove /usr/share/vca, startup script and delete the database.
 ```bash
 rm -rf /usr/share/vca
 ```
