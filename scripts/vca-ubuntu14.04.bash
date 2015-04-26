@@ -141,6 +141,7 @@ if [ "${PANEL}" == "1" ] ; then
 	
 	#Cron
 	cp /usr/share/vca/conf/vca.cron /etc/cron.d/
+	mkdir -p /var/log/vca
 	
 	#Gettext
 	for r in /usr/share/vca/www/lang/*; do
