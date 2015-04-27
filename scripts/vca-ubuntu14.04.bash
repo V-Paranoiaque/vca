@@ -137,7 +137,7 @@ if [ "${PANEL}" == "1" ] ; then
 	fi
 	
 	apt-get install bsdutils -y
-	apt-get install mysql-server php5-mysql gettext openssl php5-curl php5-mcrypt -y
+	apt-get install mysql-server php5-apcu php5-mysql gettext openssl php5-curl php5-mcrypt -y
 	php5enmod curl
 	php5enmod mcrypt
 	

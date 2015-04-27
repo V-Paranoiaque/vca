@@ -719,6 +719,11 @@ class Admin extends User {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
+			
+			if(apc_exists(CACHE.'_TPL_'.$do->server_id)) {
+				return unserialize(apc_fetch(CACHE.'_TPL_'.$do->server_id));
+			}
+			
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
 			$server -> setPort($do->server_port);
@@ -752,7 +757,11 @@ class Admin extends User {
 					$list[] = $template;
 				}
 			}
-	
+			
+			if(!empty($list) && sizeof($list) > 0) {
+				apc_store(CACHE.'_TPL_'.$do->server_id, serialize($list));
+			}
+			
 			return $list;
 		}
 	
@@ -772,6 +781,9 @@ class Admin extends User {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		if(!empty($do->server_id) && checkValideName($old) && checkValideName($new)) {
+			if(apc_exists(CACHE.'_TPL_'.$do->server_id)) {
+				apc_delete(CACHE.'_TPL_'.$do->server_id);
+			}
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
 			$server -> setPort($do->server_port);
@@ -792,6 +804,9 @@ class Admin extends User {
 		
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		if(!empty($do->server_id)) {
+			if(apc_exists(CACHE.'_TPL_'.$do->server_id)) {
+				apc_delete(CACHE.'_TPL_'.$do->server_id);
+			}
 			$ch = curl_init('http://download.openvz.org/template/precreated/'.$name);
 			curl_setopt($ch, CURLOPT_NOBODY, true);
 			curl_exec($ch);
@@ -821,6 +836,9 @@ class Admin extends User {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 		
 		if(!empty($do->server_id) && checkValideName($name)) {
+			if(apc_exists(CACHE.'_TPL_'.$do->server_id)) {
+				apc_delete(CACHE.'_TPL_'.$do->server_id);
+			}
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
 			$server -> setPort($do->server_port);

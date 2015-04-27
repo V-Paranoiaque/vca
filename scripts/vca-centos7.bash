@@ -51,8 +51,8 @@ if [ -f /etc/selinux/config ] ; then
 	sed -i s/SELINUX=permissive/SELINUX=disabled/g /etc/selinux/config
 fi
 
-#Install wget
-yum install wget -y
+#Install wget & Epel repo
+yum install wget epel-release -y
 
 if [ "${DAEMON}" == "1" ] ; then
 	#For Openvz
@@ -62,9 +62,6 @@ if [ "${DAEMON}" == "1" ] ; then
 	# OpenVZ repo
 	wget -O /etc/yum.repos.d/openvz.repo http://download.openvz.org/openvz.repo
 	rpm --import http://download.openvz.org/RPM-GPG-Key-OpenVZ
-	
-	# Epl repo
-	yum install epel-release -y
 	
 	# Python repo
 	yum install https://www.softwarecollections.org/en/scls/rhscl/python33/epel-7-x86_64/download/rhscl-python33-epel-7-x86_64.noarch.rpm -y
@@ -166,7 +163,7 @@ if [ "${PANEL}" == "1" ] ; then
 		sed -i s/127.0.0.1:9000/\\\/var\\\/run\\\/php5-fpm.sock/g /etc/php-fpm.d/www.conf
 	fi
 	
-	yum install php-curl php-mysql php-mcrypt gettext openssl crontabs -y
+	yum install php-curl php-mysql php-mcrypt php-pecl-apcu gettext openssl crontabs -y
 	
 	# Iptables
 	firewall-cmd --zone=public --add-port=80/tcp --permanent

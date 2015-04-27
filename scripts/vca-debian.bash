@@ -136,7 +136,7 @@ if [ "${PANEL}" == "1" ] ; then
 		ln -s /etc/nginx/sites-available/vca-panel.conf /etc/nginx/sites-enabled/vca-panel.conf
 	fi
 	
-	apt-get install mysql-server php5-curl php5-mysql php5-mcrypt gettext openssl -y
+	apt-get install mysql-server php-apc php5-curl php5-mysql php5-mcrypt gettext openssl -y
 	php5enmod curl
 	php5enmod mcrypt
 	

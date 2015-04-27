@@ -11,6 +11,9 @@ define('DB_USER', '');
 define('DB_PASS', '');
 define('DB_TYPE', 'MYSQL');
 
+//Cache prefix
+define('CACHE', 'VCA_CACHE');
+
 //Dropxbox
 define('APP_KEY', '');
 define('APP_SECRET', '');

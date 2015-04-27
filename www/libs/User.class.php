@@ -712,6 +712,11 @@ class User extends Guest {
 		$do = $req->fetch(PDO::FETCH_OBJ);
 	
 		if(!empty($do->server_id)) {
+			
+			if(apc_exists(CACHE.'_TPL_'.$do->server_id)) {
+				return unserialize(apc_fetch(CACHE.'_TPL_'.$do->server_id));
+			}
+			
 			$server = new Server($do->server_id);
 			$server -> setAddress($do->server_address);
 			$server -> setPort($do->server_port);
@@ -745,7 +750,11 @@ class User extends Guest {
 					$list[] = $template;
 				}
 			}
-	
+			
+			if(!empty($list) && sizeof($list) > 0) {
+				apc_store(CACHE.'_TPL_'.$do->server_id, serialize($list));
+			}
+			
 			return $list;
 		}
 	
