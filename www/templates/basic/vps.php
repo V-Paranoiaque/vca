@@ -8,10 +8,11 @@ $paquet -> add_action('vpsBackup', array($_GET['vps']));
 $paquet -> send_actions();
 
 $vpsList = $paquet->getAnswer('vpsList');
+$vpsBackup = $paquet->getAnswer('vpsBackup');
 $smarty->assign('vps', $vpsList->$_GET['vps']);
 
-if(!empty($paquet->getAnswer('vpsBackup'))) {
-	$smarty->assign('nbCurrent', sizeof((array) $paquet->getAnswer('vpsBackup')));
+if(!empty($vpsBackup)) {
+	$smarty->assign('nbCurrent', sizeof((array) $vpsBackup));
 }
 else {
 	$smarty->assign('nbCurrent', 0);
