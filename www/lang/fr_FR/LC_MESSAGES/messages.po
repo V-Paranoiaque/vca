@@ -309,6 +309,10 @@ msgid "Reload"
 msgstr "Recharger"
 
 #: templates/basic/vps.tpl
+msgid "Move"
+msgstr "Transferer"
+
+#: templates/basic/vps.tpl
 #: templates/basic/popup_vpsclone.php
 msgid "Clone"
 msgstr "Cloner"

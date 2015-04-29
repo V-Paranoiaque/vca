@@ -60,6 +60,12 @@
 	</a>
 
 	{if $vps->serverId > 0}
+		{if $vps->protected == 0}
+			<a href="#" title="{'Move'|gettext}" onclick="popupVpsMove({$vps->serverId}, {$vps->id});" class="btn btn-lg btn-warning">
+				<span class="glyphicon glyphicon-share-alt"></span>
+			</a>
+		{/if}
+		
 		<a href="#" title="{'Reload'|gettext}" onclick="popupVpsReload({$vps->id});">
 			<button class="btn btn-lg btn-primary" type="button">
 				<span class="glyphicon glyphicon-refresh"></span>

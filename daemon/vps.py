@@ -164,6 +164,9 @@ class Vps:
         subprocess.call('vzctl create '+str(self._id)+' --ostemplate '+ostpl+' --config '+str(self._id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         os.remove('/etc/vz/conf/ve-'+str(self._id)+'.conf-sample')
     
+    def move(self, destination):
+        subprocess.Popen('vzmigrate '+destination+' '+str(self._id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    
     def backupAdd(self):
         #Sys var
         vzprivate = "/vz/private/"+self._id

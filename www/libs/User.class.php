@@ -793,6 +793,13 @@ class User extends Guest {
 		return null;
 	}
 	
+	/**
+	 * Move a VPS
+	 */
+	function vpsMove($serverFrom, $vps, $serverDest) {
+		return null;
+	}
+	
 	function vpsNb() {
 		$link = Db::link();
 		

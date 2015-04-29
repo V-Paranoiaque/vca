@@ -449,7 +449,13 @@ class Paquet {
 								$res = $user->vpsReinstall($var[0],$var[1]);
 							}
 							break;
-	
+						
+						case 'vpsMove';
+							if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {
+								$res = $user->vpsMove($var[0],$var[1],$var[2]);
+							}
+						break;
+							
 						case 'vpsBackup':
 							if(!empty($var[0])) {
 								$list = $user->vpsList();

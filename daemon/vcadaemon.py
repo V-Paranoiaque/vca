@@ -215,6 +215,10 @@ def vcaAction(action, serverDest, para):
         if int(serverDest) > 0 :
             vps = Vps(serverDest)
             vps.reinstall(para)
+    elif action == 'move':
+        if int(serverDest) > 0 :
+            vps = Vps(serverDest)
+            vps.move(para)
     elif action == 'templateList':
         if int(serverDest) == 0:
             return localserver.templateList()

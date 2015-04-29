@@ -1562,6 +1562,43 @@ class Admin extends User {
 	}
 	
 	/**
+	 * Move a VPS
+	 */
+	function vpsMove($serverFrom, $vps, $serverDest) {
+		$link = Db::link();
+		
+		$sql = 'SELECT vps_id, server.server_id, server_address,
+		               server_key, server_port, vps_protected
+		        FROM vps
+		        JOIN server ON server.server_id=vps.server_id
+		        WHERE vps_id= :id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':id', $idVps, PDO::PARAM_INT);
+		$req->execute();
+		$do_from = $req->fetch(PDO::FETCH_OBJ);
+		
+		$sql = 'SELECT server_id, server_address
+		        FROM server
+		        WHERE server_id= :server_id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':server_id', $serverDest, PDO::PARAM_INT);
+		$req->execute();
+		$do_dest = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(empty($do_from->server_id) or //Vps does not exist
+		   empty($do_dest->server_id) or //Server dest does not exist
+		   !empty($do_from->vps_protected) or //Vps protected
+		   $serverFrom != $do_from->server_id or //Server !=
+		   $serverFrom == $serverDest) { // Same server{
+			return null;
+		}
+		
+		$connect = new Socket($do_from->server_address, $do_from->server_port, $do_from->server_key);
+		$connect -> write('move', $do_from->vps_id, $do_dest->server_address);
+		$data = json_decode($connect -> read());
+	}
+	
+	/**
 	 * Scan server with Clamav
 	 */
 	function avScan($id=0) {

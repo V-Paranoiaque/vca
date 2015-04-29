@@ -487,6 +487,33 @@ function popupVpsReload(vps) {
 	});
 }
 
+function popupVpsMove(server, vps) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_vpsmove.php",
+		data: "server="+server+"&vps="+vps,
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formVpsMove(server, vps) {
+	var dest = $("#server").val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_vpsmove.php",
+		data: "server="+server+"&vps="+vps+"&dest="+dest,
+		success: function(msg) {
+			document.location.href="/vpslist/"+dest;
+		}		
+	});
+}
+
 function popupServerRestart(server) {
 	$.ajax({
 		type: "GET",
