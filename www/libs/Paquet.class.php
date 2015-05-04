@@ -361,6 +361,7 @@ class Paquet {
 							if(!empty($var[0]) && !empty($var[1])) {
 								$res = $user->serverTemplateAdd($var[0], $var[1]);
 							}
+							break;
 	
 						case 'serverTemplateDelete':
 							if(!empty($var[0]) && !empty($var[1])) {
