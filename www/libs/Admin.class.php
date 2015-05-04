@@ -847,6 +847,22 @@ class Admin extends User {
 		}
 	}
 	
+	function serverTemplateRefresh($server) {
+		$link = Db::link();
+		$sql = 'SELECT server_id
+		        FROM server
+		        WHERE server_id= :server_id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':server_id', $server, PDO::PARAM_INT);
+		$req->execute();
+		
+		$do = $req->fetch(PDO::FETCH_OBJ);
+		
+		if(!empty($do->server_id) && apc_exists(CACHE.'_TPL_'.$do->server_id)) {
+			apc_delete(CACHE.'_TPL_'.$do->server_id);
+		}
+	}
+	
 	function serverBackup($server) {
 		$link = Db::link();
 		$sql = 'SELECT server_id, server_name, server_address,

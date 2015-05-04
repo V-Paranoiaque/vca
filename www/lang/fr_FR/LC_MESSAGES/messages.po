@@ -980,3 +980,7 @@ msgstr "Générer un code"
 #: templates/basic/popup_userdropbox.php
 msgid "Configure Dropbox"
 msgstr "Configurer Dropbox"
+
+#: templates/basic/template.tpl
+msgid "Refresh templates"
+msgstr "Rafraichir la liste des templates"

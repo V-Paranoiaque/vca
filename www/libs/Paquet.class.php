@@ -368,6 +368,12 @@ class Paquet {
 								$res = $user->serverTemplateDelete($var[0], $var[1]);
 							}
 							break;
+							
+						case 'serverTemplateRefresh':
+							if(!empty($var[0])) {
+								$user->serverTemplateRefresh($var[0]);
+							}
+						break;
 							/*** VPS ***/
 	
 						case 'vpsList':

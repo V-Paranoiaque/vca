@@ -442,6 +442,7 @@ class User extends Guest {
 	function serverTemplateRename($id, $old, $new) { return null; }
 	function serverTemplateAdd($id, $name) { return null; }
 	function serverTemplateDelete($id, $name) { return null; }
+	function serverTemplateRefresh($server) { return null; }
 	function serverBackup($server) { return null; }
 	function serverBackupDelete($server, $idVps, $name) { return null; }
 	function serverScan($server) { return null; }

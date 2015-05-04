@@ -1,5 +1,12 @@
 <h2 class="sub-header">
 	{'Template list'|gettext} 
+
+	<a href="#" onclick="formTemplateRefresh({$server})" title="{'Refresh templates'|gettext}">
+		<button type="button" class="btn btn-primary">
+			<span class="glyphicon glyphicon-refresh"></span>
+		</button>
+	</a>
+	
 	<a href="#" onclick="popupTemplateAdd({$server})" title="{'Add a new template'|gettext}">
 		<button class="btn btn-success" type="button">
 			<span class="glyphicon glyphicon-plus"></span>

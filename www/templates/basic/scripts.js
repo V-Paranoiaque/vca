@@ -652,6 +652,17 @@ function formTemplateDelete(server, name) {
 	});
 }
 
+function formTemplateRefresh(server) {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_templaterefresh.php",
+		data: "server="+server,
+		success: function(msg) {
+			location.reload();
+		}		
+	});
+}
+
 function popupIpAdd() {
 	$.ajax({
 		type: "GET",
