@@ -28,9 +28,16 @@ elif [ -f /etc/debian_version ] ; then
 			SCRIPT="vca-ubuntu12.04.bash"
 		elif [ "${VERSION}" == "14.04" ] ; then
 			SCRIPT="vca-ubuntu14.04.bash"
+		else
+			SCRIPT="vca-ubuntulast.bash"
 		fi
 	else
-		SCRIPT="vca-debian.bash"
+		case $SEL in
+			7.*) SCRIPT="vca-debian7.bash" ;;
+			8.*) SCRIPT="vca-debian8.bash" ;;
+			9.*) SCRIPT="vca-debian8.bash" ;;
+			*) SCRIPT="vca-debian7.bash ;;
+		esac
 	fi
 fi
 
