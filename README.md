@@ -25,10 +25,10 @@ This software is licensed under the terms of the MIT license.
 * Backups
 * Multilanguage support
 * Automated backups
+* Moving virtual machines
 
 ## Future features
 
-* Moving virtual machines
 * Custom templates
 * Multi-factor authentication
 
