@@ -44,7 +44,7 @@ fi
 #Detection by package type
 if [ "${SCRIPT}" == "" ] ; then
 	if [ -f /usr/bin/apt-get ] ; then
-		SCRIPT="vca-debian.bash"
+		SCRIPT="vca-debian7.bash"
 	elif [ -f /usr/bin/yum ] ; then
 		SCRIPT="vca-centos6.bash"
 	fi
