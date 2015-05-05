@@ -32,11 +32,11 @@ elif [ -f /etc/debian_version ] ; then
 			SCRIPT="vca-ubuntulast.bash"
 		fi
 	else
-		case $SEL in
+		case $VERSION in
 			7.*) SCRIPT="vca-debian7.bash" ;;
 			8.*) SCRIPT="vca-debian8.bash" ;;
 			9.*) SCRIPT="vca-debian8.bash" ;;
-			*) SCRIPT="vca-debian7.bash ;;
+			*) SCRIPT="vca-debian7.bash" ;;
 		esac
 	fi
 fi

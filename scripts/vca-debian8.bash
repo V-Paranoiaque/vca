@@ -59,7 +59,7 @@ if [ "${DAEMON}" == "1" ] ; then
 	
 	# All needed packages
 	apt-get install clamav fuse ploop python3 python3-crypto python3-dev python3-pip vzctl screen -y
-	pip-3.4 install dropbox
+	pip3 install dropbox
 	
 	if [ ! -f /usr/share/vca/daemon/vca.cfg ] ; then 
 		DAEMON_KEY=`date +%s | sha512sum | base64 | head -c 32 ; echo`
@@ -83,7 +83,6 @@ if [ "${DAEMON}" == "1" ] ; then
 	fi
 	
 	#Startup script
-	cp /usr/share/vca/conf/vcadaemon.service /usr/lib/systemd/system/vcadaemon.service
 	cp /usr/share/vca/conf/vcadaemon.upstart /etc/init.d/vcadaemon
 	chmod 755 /etc/init.d/vcadaemon
 	systemctl enable vcadaemon
@@ -138,7 +137,6 @@ if [ "${PANEL}" == "1" ] ; then
 	fi
 	
 	apt-get install mariadb-server php5-apcu php5-mysql gettext openssl php5-curl php5-mcrypt -y
-	mysql_secure_installation
 	php5enmod curl
 	php5enmod mcrypt
 	
