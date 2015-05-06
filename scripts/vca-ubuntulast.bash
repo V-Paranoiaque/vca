@@ -84,7 +84,6 @@ if [ "${DAEMON}" == "1" ] ; then
 	fi
 	
 	#Startup script
-	cp /usr/share/vca/conf/vcadaemon.service /usr/lib/systemd/system/vcadaemon.service
 	cp /usr/share/vca/conf/vcadaemon.upstart /etc/init.d/vcadaemon
 	chmod 755 /etc/init.d/vcadaemon
 	systemctl enable vcadaemon
