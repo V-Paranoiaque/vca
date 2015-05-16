@@ -39,7 +39,7 @@ Supported systems
 cd /usr/share/vca/scripts
 bash vca-linux.bash
 ```
-Answer yes to the question "Would you like to install VCA daemon ?".
+Answer yes to the question "Would you like to install VCA daemon?".
 
 
 To run VCA daemon:
@@ -63,7 +63,7 @@ cd /usr/share/vca/scripts
 bash vca-linux.bash
 ```
 
-Answer yes to the question "Would you like to install VCA panel ?".
+Answer yes to the question "Would you like to install VCA panel?".
 
 If you want to install VCA panel by your self, you need apache or nginx, PHP, MySQL and gettext.
 Use apache or nginx conf file from /usr/share/vca/conf to configure your access.

@@ -310,7 +310,7 @@ msgstr "Recharger"
 
 #: templates/basic/vps.tpl
 msgid "Move"
-msgstr "Transferer"
+msgstr "Transférer"
 
 #: templates/basic/vps.tpl
 #: templates/basic/popup_vpsclone.php
@@ -431,7 +431,7 @@ msgstr "Annuler"
 
 #: templates/basic/popup_ipdelete.php:9
 msgid "Delete %s from VCA."
-msgstr "Supprimer % de VCA."
+msgstr "Supprimer %s de VCA."
 
 #: templates/basic/popup_serveradd.php
 #: templates/basic/popup_serveredit.php
@@ -456,7 +456,7 @@ msgstr "Supprimer %s"
 msgid ""
 "If you remove %s from VCA, you will remove all his Vps from VCA but nothing "
 "will be deleted from your server. All information about this server and his "
-"Vps will be definitly deleted."
+"Vps will be definitely deleted."
 msgstr ""
 "Si vous supprimez %s de VCA, vous allez supprimer toutes les informations des Vps de VCA mais rien"
 "ne sera supprimé de votre serveur. Toutes les informations à propos de ce serveur et de ses "
@@ -535,7 +535,7 @@ msgid "Limit"
 msgstr "Limite"
 
 #: templates/basic/popup_vpsdelete.php
-msgid "If you delete %s from %s, you will definitly delete all datas"
+msgid "If you delete %s from %s, you will definitely delete all datas"
 msgstr "Si vous supprimez %s de %, vous supprimerez également toutes ses données"
 
 #: templates/basic/popup_vpsedit.php
@@ -578,7 +578,7 @@ msgstr "Mauvaises informations"
 
 #: functions.php
 msgid "An user already exist with this username"
-msgstr "Utilisateur existe déjà avec cet identifiant"
+msgstr "Un utilisateur existe déjà avec cet identifiant"
 
 #: functions.php
 msgid "This user does not exist"
@@ -718,7 +718,7 @@ msgid "Reload in progress"
 msgstr "Rechargement en cours"
 
 #: templates/basic/popup_serverrestart.php
-msgid "Do you confirm ?"
+msgid "Do you confirm?"
 msgstr "Confirmez-vous ?"
 
 #: templates/basic/load_vpsclone.php
@@ -757,7 +757,7 @@ msgstr "Créer une nouvelle requête"
 
 #: templates/basic/popup_requestadd.php
 msgid "Your request"
-msgstr "Requêtes"
+msgstr "Votre requête"
 
 #: templates/basic/popup_requestadd.php
 msgid "Subject"
@@ -818,7 +818,7 @@ msgstr "Nom du template"
 
 #: templates/basic/popup_templateedit.php
 msgid "Rename a template"
-msgstr "Renomer un template"
+msgstr "Renommer un template"
 
 #: templates/basic/popup_templateedit.php
 msgid "Download this template"

@@ -16,7 +16,7 @@ fi
 
 if [ "${DAEMON}" == "1" ] && [ "${ARCH}" = "x86_64" ] ; then
 	while [ "${INSTALL_DAEMON}" != "y" ] && [ "${INSTALL_DAEMON}" != "n" ]; do
-		echo "Would you like to install VCA daemon ? y/n"
+		echo "Would you like to install VCA daemon? y/n"
 		read INSTALL_DAEMON
 	done
 
@@ -30,7 +30,7 @@ fi
 
 if [ "${PANEL}" == "1" ] ; then
 	while [ "${INSTALL_PANEL}" != "y" ] && [ "${INSTALL_PANEL}" != "n" ]; do
-		echo "Would you like to install VCA panel ? y/n"
+		echo "Would you like to install VCA panel? y/n"
 		read INSTALL_PANEL
 	done
 
@@ -94,7 +94,7 @@ if [ "${PANEL}" == "1" ] ; then
 	# 2 nginx
 	SERVER=0
 	while [ ${SERVER} != 1 ] && [ ${SERVER} != 2 ]; do
-		echo "Which server do you use ?"
+		echo "Which server do you use?"
 		echo "1 apache"
 		echo "2 nginx"
 		read SERVER
