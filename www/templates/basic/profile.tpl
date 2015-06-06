@@ -25,7 +25,7 @@
 			<td>{$userInfo->user_name}</td>
 		</tr>
 		<tr>
-			<td>{'Mail'|gettext}</td>
+			<td>{'Email'|gettext}</td>
 			<td>{$userInfo->user_mail}</td>
 		</tr>
 		<tr>

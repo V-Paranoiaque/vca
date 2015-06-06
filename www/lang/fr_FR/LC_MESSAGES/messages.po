@@ -137,7 +137,7 @@ msgstr "Nom"
 #: templates/basic/user.tpl
 #: templates/basic/popup_profile.php
 #: templates/basic/popup_profile.php
-msgid "Mail"
+msgid "Email"
 msgstr "Mail"
 
 #: templates/basic/profile.tpl
@@ -605,7 +605,7 @@ msgid "new account created"
 msgstr "Nouveau compte créé"
 
 #: functions.php
-msgid "Invalid mail"
+msgid "Invalid email"
 msgstr "Adresse mail invalide"
 
 #: functions.php

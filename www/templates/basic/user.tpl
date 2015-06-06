@@ -13,7 +13,7 @@
 			<thead>
 				<tr>
 					<th>{'Name'|gettext}</th>
-					<th>{'Mail'|gettext}</th>
+					<th>{'Email'|gettext}</th>
 					<th>{'Vps'|gettext}</th>
 					<th></th>
 				</tr>
@@ -64,10 +64,10 @@
 			</div>
 			<br/>
 			<div class="input-group">
-				<span class="input-group-addon" id="spanMail">{'Mail'|gettext}</span>
+				<span class="input-group-addon" id="spanMail">{'Email'|gettext}</span>
 				<input type="text" class="form-control"
 				       name="mail" value="{$userInfo->user_mail}"
-				       placeholder="{'Mail'|gettext}" required>
+				       placeholder="{'Email'|gettext}" required>
 			</div>
 			<br/>
 			<div class="center">

@@ -18,9 +18,9 @@ echo
 			'</div>'.
 		'</div>'.
 		'<div class="row">'.
-			'<div class="col-sm-6">'._('Mail').'</div>'.
+			'<div class="col-sm-6">'._('Email').'</div>'.
 			'<div class="col-sm-6">'.
-				'<input id="mail" type="text" class="form-control" placeholder="'._('Mail').'">'.
+				'<input id="mail" type="text" class="form-control" placeholder="'._('Email').'">'.
 			'</div>'.
 		'</div>'.
 		'<div class="row">'.
