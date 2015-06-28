@@ -52,10 +52,10 @@ service vcadaemon start
 
 Supported systems
 * Centos 6, 7
-* Debian 7
+* Debian 7, 8
 * Fedora
 * Raspbian
-* Ubuntu 12.04 and 14.04
+* Ubuntu 12.04, 14.04 and 15.04
 
 Go to /usr/share/vca/scripts and run the installation script.
 ```bash
@@ -70,7 +70,7 @@ Use apache or nginx conf file from /usr/share/vca/conf to configure your access.
 Create your database and import /usr/share/vca/db/create
 Create database's user and configure his rights.
 Modify /usr/share/vca/www/config.php and define database access.
-
+Generate .mo language files in lang/ with gettext
 
 ## 5. Uninstallation
 

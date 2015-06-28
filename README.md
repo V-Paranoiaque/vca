@@ -23,7 +23,7 @@ This software is licensed under the terms of the MIT license.
 * Template management
 * Users Requests
 * Backups
-* Multilanguage support
+* Multilanguage support (English and French)
 * Automated backups
 * Moving virtual machines
 
