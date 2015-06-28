@@ -483,7 +483,7 @@ msgstr "Nom du serveur virtuel"
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsedit.php
 msgid "Start on Boot"
-msgstr "Lancé au démarrage"
+msgstr "Lancer au démarrage"
 
 #: templates/basic/popup_vpsadd.php
 #: templates/basic/popup_vpsclone.php
@@ -609,7 +609,7 @@ msgid "Invalid email"
 msgstr "Adresse mail invalide"
 
 #: functions.php
-msgid "Account username must be between 5 and 25 caracteres"
+msgid "Account username must be between 5 and 25 characters"
 msgstr "Les nom des utilisateurs doivent être entre 5 et 25 caractères"
 
 #: functions.php

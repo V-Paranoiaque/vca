@@ -75,7 +75,7 @@ function errorToText($erreur_no) {
 		break;
 		
 		case 10:
-			$text = _('Account username must be between 5 and 25 caracteres');
+			$text = _('Account username must be between 5 and 25 characters');
 		break;
 		
 		case 11:
