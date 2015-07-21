@@ -1,0 +1,986 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Virgil <virgil@paranoiaque.fr>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-17 21:53+0200\n"
+"PO-Revision-Date: 2013-09-17 21:59+0200\n"
+"Last-Translator: Virgil <virgil@paranoiaque.fr>\n"
+"Language-Team: spanish <>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#: templates/basic/connected_top.tpl
+msgid "Toggle navigation"
+msgstr "Saltar navegación"
+
+#: templates/basic/connected_top.tpl
+#: templates/basic/signin.tpl
+#: templates/basic/signin.php
+msgid "Virtual Control Admin"
+msgstr "Virtual Control Admin"
+
+#: templates/basic/connected_top.tpl
+msgid "Settings"
+msgstr "Ajustes"
+
+#: templates/basic/connected_top.tpl
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/basic/connected_top.tpl
+#: help.php
+msgid "Help"
+msgstr "Ayuda"
+
+#: templates/basic/connected_top.tpl
+msgid "Logout"
+msgstr "Desconectarse"
+
+#: templates/basic/connected_top.tpl
+msgid "Dashboard"
+msgstr "Salpicadero"
+
+#: templates/basic/connected_top.tpl
+#: templates/basic/home.tpl
+msgid "Physical servers"
+msgstr "Servidores dedicados"
+
+#: templates/basic/vps.php
+msgid "Virtual server"
+msgstr "Servidor virtual"
+
+#: templates/basic/connected_top.tpl
+#: templates/basic/home.tpl
+#: templates/basic/vpslist.php
+msgid "Virtual servers"
+msgstr "Servidores virtuales"
+
+#: templates/basic/connected_top.tpl
+msgid "IP Addresses"
+msgstr "Direcciones IP"
+
+#: templates/basic/connected_top.tpl
+msgid "Users"
+msgstr "Usuarios"
+
+#: templates/basic/home.tpl
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#: templates/basic/home.tpl
+msgid "Running virtual servers"
+msgstr "Ejecución de servidores virtuales"
+
+#: templates/basic/home.tpl
+msgid "Stopped virtual servers"
+msgstr "Parado los servidores virtuales"
+
+#: templates/basic/ip.tpl
+#: templates/basic/ip.php
+msgid "IP management"
+msgstr "Tratamiento de las IP"
+
+#: templates/basic/ip.tpl
+msgid "Add a new IP"
+msgstr "Añadir nueva IP"
+
+#: templates/basic/ip.tpl
+#: templates/basic/popup_ipadd.php
+msgid "IP"
+msgstr "IP"
+
+#: templates/basic/ip.tpl
+#: templates/basic/server.tpl
+#: templates/basic/user.tpl
+msgid "Vps"
+msgstr "Vps"
+
+#: templates/basic/ip.tpl
+msgid "Remove this IP"
+msgstr "Eliminar esta IP"
+
+#: templates/basic/ip.tpl
+msgid "You don't have any IP"
+msgstr "Usted no tiene ninguna IP"
+
+#: templates/basic/profile.tpl
+#: templates/basic/user.tpl
+#: templates/basic/popup_profile.php
+msgid "User information"
+msgstr "Informaciónes del usuario"
+
+#: templates/basic/profile.tpl
+#: templates/basic/popup_profile.php
+msgid "Edit your profile"
+msgstr "Edite su perfil"
+
+#: templates/basic/profile.tpl
+#: templates/basic/server.tpl
+#: templates/basic/user.tpl
+#: templates/basic/vpslist.tpl
+#: templates/basic/popup_profile.php
+#: templates/basic/popup_serveradd.tpl
+#: templates/basic/popup_serveredit.php
+msgid "Name"
+msgstr "Nombre"
+
+#: templates/basic/profile.tpl
+#: templates/basic/user.tpl
+#: templates/basic/popup_profile.php
+#: templates/basic/popup_profile.php
+msgid "Email"
+msgstr "Correo"
+
+#: templates/basic/profile.tpl
+msgid "Language"
+msgstr "Idioma"
+
+#: templates/basic/server.tpl
+msgid "Server list"
+msgstr "Lista de servidores"
+
+#: templates/basic/server.tpl
+#: templates/basic/load_serveradd.php
+msgid "Add a new server"
+msgstr "Añadir un nuevo servidor"
+
+#: templates/basic/server.tpl
+msgid "Address"
+msgstr "Dirección"
+
+#: templates/basic/server.tpl
+#: templates/basic/vpslist.php
+msgid "Vps list"
+msgstr "Servidores virtuales"
+
+#: templates/basic/server.tpl
+#: templates/basic/vpslist.php
+msgid "Reload the server"
+msgstr "Actualizar el servidor" 
+
+#: templates/basic/server.tpl
+#: templates/basic/load_serverrestart.php"
+msgid "Restart the server"
+msgstr "Reiniciar el servidor" 
+
+#: templates/basic/server.tpl
+#: templates/basic/user.tpl
+#: templates/basic/vps.tpl
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/basic/server.tpl
+msgid "Remove"
+msgstr "Quitar"
+
+#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
+msgid "Security key"
+msgstr "Clave de seguridad"
+
+#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
+msgid "Description"
+msgstr "Descripción"
+
+#: templates/basic/user.tpl
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/basic/signin.tpl
+#: templates/basic/user.tpl
+msgid "Close"
+msgstr "Cerrar"
+
+#: templates/basic/signin.tpl
+msgid "Login"
+msgstr "Login"
+
+#: templates/basic/signin.tpl
+msgid "Password"
+msgstr "Contraseña"
+
+#: templates/basic/signin.tpl
+msgid "Sign in"
+msgstr "Registrarse"
+
+#: templates/basic/user.tpl
+msgid "User list"
+msgstr "Usuarios"
+
+#: templates/basic/user.tpl
+msgid "Add a new user"
+msgstr "Añadir un nuevo usuario"
+
+#: templates/basic/user.tpl
+#: templates/basic/vps.tpl
+#: templates/basic/vpslist.tpl
+msgid "Delete"
+msgstr "Eliminar"
+
+#: templates/basic/user.tpl
+msgid "User password"
+msgstr "Contraseña de usuario"
+
+#: templates/basic/user.tpl
+#: templates/basic/popup_userpassword.php
+msgid "New password"
+msgstr "Nueva contraseña"
+
+#: templates/basic/user.tpl
+#: templates/basic/popup_ipadd.php
+#: templates/basic/popup_ipdelete.php
+#: templates/basic/popup_profile.php
+#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serverremove.php
+#: templates/basic/popup_userdelete.php
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsclone.php
+#: templates/basic/popup_vpsdelete.php
+#: templates/basic/popup_vpsedit.php
+#: templates/basic/popup_vpspassword.php
+#: templates/basic/popup_vpsreinstall.php
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: templates/basic/user.tpl
+msgid "Modify"
+msgstr "Cambiar"
+
+#: templates/basic/user.tpl
+#: templates/basic/vps.tpl
+#: templates/basic/vpslist.tpl
+msgid "Offline"
+msgstr "Desconectado"
+
+#: templates/basic/user.tpl
+#: templates/basic/vps.tpl
+#: templates/basic/vpslist.tpl
+msgid "Online"
+msgstr "Conectado"
+
+#: templates/basic/user.tpl
+#: templates/basic/vpslist.tpl
+msgid "Information"
+msgstr "informaciones"
+
+#: templates/basic/user.tpl
+msgid "No virtual server"
+msgstr "Sin servidor virtual"
+
+#: templates/basic/vps.tpl
+msgid "Reinstall"
+msgstr "Reinstalar"
+
+#: templates/basic/vps.tpl
+msgid "Root password"
+msgstr "Contraseña root"
+
+#: templates/basic/vps.tpl
+msgid "Backups"
+msgstr "Copia de seguridad"
+
+#: templates/basic/vps.tpl
+#: templates/basic/vpslist.tpl
+msgid "Start"
+msgstr "Empezar"
+
+#: templates/basic/vps.tpl
+#: templates/basic/vpslist.tpl
+msgid "Stop"
+msgstr "Parar"
+
+#: templates/basic/vps.tpl
+#: templates/basic/vpslist.tpl
+msgid "Restart"
+msgstr "Reintegrar"
+
+#: templates/basic/vps.tpl
+msgid "Reload"
+msgstr "Recargar"
+
+#: templates/basic/vps.tpl
+msgid "Move"
+msgstr "Transferir"
+
+#: templates/basic/vps.tpl
+#: templates/basic/popup_vpsclone.php
+msgid "Clone"
+msgstr "Clonar"
+
+#: templates/basic/vps.tpl
+msgid "Vps Statistics"
+msgstr "Estadísticas Vps"
+
+#: templates/basic/vps.tpl
+msgid "Cpu load"
+msgstr "Carga de la CPU"
+
+#: templates/basic/vps.tpl
+msgid "core"
+msgstr "núcleo"
+
+#: templates/basic/vps.tpl
+msgid "Disk usage"
+msgstr "Uso del disco"
+
+#: templates/basic/vps.tpl
+msgid "Memory usage"
+msgstr "Uso de la memoria"
+
+#: templates/basic/vps.tpl
+#: templates/basic/popup_vpsadd.php
+msgid "Swap"
+msgstr "Swap"
+
+#: templates/basic/vps.tpl
+msgid "Vps information"
+msgstr "Informaciones Vps"
+
+#: templates/basic/vps.tpl
+#: templates/basic/popup_vpsedit.php:38
+msgid "Owner"
+msgstr "Propietario"
+
+#: templates/basic/vps.tpl
+msgid "Nobody"
+msgstr "Nadie"
+
+#: templates/basic/vps.tpl
+msgid "On boot"
+msgstr "En el inicio"
+
+#: templates/basic/vps.tpl
+msgid "No"
+msgstr "No"
+
+#: templates/basic/vps.tpl
+msgid "Yes"
+msgstr "Sí"
+
+#: templates/basic/vps.tpl
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/vpslist.tpl
+msgid "OS Template"
+msgstr "Plantilla OS"
+
+#: templates/basic/vps.tpl
+#: templates/basic/vpslist.tpl
+msgid "IPv4"
+msgstr "IPv4"
+
+#: templates/basic/vps.tpl
+msgid "Shell"
+msgstr "Shell"
+
+#: templates/basic/vps.tpl
+msgid "Command"
+msgstr "Comando"
+
+#: templates/basic/vps.tpl
+msgid "Send"
+msgstr "Enviar"
+
+#: templates/basic/vpslist.tpl
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/load_vpsadd.php
+msgid "Create a new Vps"
+msgstr "Crear nueva Vps"
+
+#: templates/basic/vpslist.tpl
+#: templates/basic/popup_vpsadd.php
+msgid "Memory"
+msgstr "Memoria"
+
+#: templates/basic/vpslist.tpl
+msgid "Disk"
+msgstr "Disco Duro"
+
+#: templates/basic/popup_ipdelete.php:16
+msgid "Error"
+msgstr "Error"
+
+#: templates/basic/home.php
+msgid "Dashboard Virtual Control Admin"
+msgstr "Tablero de mandos de Virtual Control Admin"
+
+#: templates/basic/popup_ipadd.php
+#: templates/basic/popup_ipdelete.php
+#: templates/basic/popup_profile.php
+#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
+#: templates/basic/popup_serverremove.php
+#: templates/basic/popup_userdelete.php
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsclone.php
+#: templates/basic/popup_vpsdelete.php
+#: templates/basic/popup_vpsedit.php
+#: templates/basic/popup_vpspassword.php
+#: templates/basic/popup_vpsreinstall.php
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: templates/basic/popup_ipdelete.php:9
+msgid "Delete %s from VCA."
+msgstr "Eliminar %s de VCA."
+
+#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
+msgid "Server name"
+msgstr "Nombre del servidor"
+
+#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
+msgid "IP or Address"
+msgstr "IP o dirección"
+
+#: templates/basic/popup_serveradd.php
+#: templates/basic/popup_serveredit.php
+msgid "key"
+msgstr "clave"
+
+#: templates/basic/popup_userdelete.php
+msgid "Delete %s"
+msgstr "Eliminar %s"
+
+#: templates/basic/popup_serverremove.php
+msgid ""
+"If you remove %s from VCA, you will remove all his Vps from VCA but nothing "
+"will be deleted from your server. All information about this server and his "
+"Vps will be definitely deleted."
+msgstr ""
+"Si se quita %s de VCA, quitará todos sus Vps de VCA pero nada"
+"será borrado de su servidor. Todas las informaciones a propósito de este servidor y su"
+"VPS serían definitivamente eliminados."
+
+#: templates/basic/popup_userdelete.php
+msgid "If you delete this account, every servers of %s will be unattributed."
+msgstr "Si elimina este cuenta, todos los servidores %s serán anónimos"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "General"
+msgstr "General"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsclone.php
+#: templates/basic/popup_vpsclone.php
+#: templates/basic/popup_vpsedit.php
+#: templates/basic/popup_vpsedit.php
+msgid "Vps name"
+msgstr "Nombre vps"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "Start on Boot"
+msgstr "Iniciar en el arranque"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsclone.php
+#: templates/basic/popup_vpsedit.php
+msgid "Vps IPv4"
+msgstr "Servidor virtual IPv4"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "Limits"
+msgstr "Límites"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "Ram (MB or GB)"
+msgstr "Memoria (MB o GB)"
+
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "Swap (MB or GB)"
+msgstr "Memoria virtual (MB o GB)"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "Diskspace (MB or GB)"
+msgstr "Espacio en el disco (Mo ou Go)"
+
+#: templates/basic/popup_vpsadd.php
+msgid "Diskspace"
+msgstr "Espacio en el disco"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "Number of CPUs"
+msgstr "Número de procesadores"
+
+#: templates/basic/popup_vpsadd.php
+msgid "CPUs"
+msgstr "Procesadores"
+
+#: templates/basic/popup_vpsadd.php
+#: templates/basic/popup_vpsedit.php
+msgid "CPU limit (100% = 1 CPU)"
+msgstr "Procesador de límite (100% = 1 procesador)"
+
+#: templates/basic/popup_vpsadd.php
+msgid "Limit"
+msgstr "Límite"
+
+#: templates/basic/popup_vpsdelete.php
+msgid "If you delete %s from %s, you will definitely delete all datas"
+msgstr "Si elimina %s de %s, que sin duda eliminará todos los datos"
+
+#: templates/basic/popup_vpsedit.php
+msgid "Diskinodes"
+msgstr "Diskinodes"
+
+#: templates/basic/popup_vpsedit.php
+msgid "CPU units"
+msgstr "Procesadores"
+
+#: templates/basic/popup_vpspassword.php
+msgid "Change the root password of %s"
+msgstr "Cambiar la contraseña del root de %s"
+
+#: templates/basic/popup_vpspassword.php
+#: templates/basic/popup_vpspassword.php
+msgid "New root password"
+msgstr "Nueva contraseña del root"
+
+#: templates/basic/popup_vpsreinstall.php
+msgid "Reinstall %s, don't forget to redefine the root password."
+msgstr "Vuelva a instalar %s, asegúrese de establecer la contraseña de root."
+
+#: templates/basic/profile.php
+#: templates/basic/user.php
+msgid  "Panel users"
+msgstr "Panel Usuarios"
+
+#: templates/basic/server.php
+msgid "Servers Virtual Control Admin"
+msgstr "Servidores VCA"
+
+#: functions.php
+msgid "unlimited"
+msgstr "ilimitado"
+
+#: functions.php
+msgid "Bad information"
+msgstr "Informaciones malas"
+
+#: functions.php
+msgid "An user already exist with this username"
+msgstr "Un usuario ya existe con este nombre de usuario"
+
+#: functions.php
+msgid "This user does not exist"
+msgstr "Este usuario no existe"
+
+#: functions.php
+msgid "Error during account update"
+msgstr "Error de actualización de cuenta"
+
+#: functions.php
+msgid "Account updated"
+msgstr "Cuenta actualizada"
+
+#: functions.php
+msgid "You can't delete this account"
+msgstr "No se puede eliminar esta cuenta"
+
+#: functions.php
+msgid "Account deleted"
+msgstr "Cuenta eliminada"
+
+#: functions.php
+msgid "New account created"
+msgstr "Nueva cuenta creada"
+
+#: functions.php
+msgid "Invalid email"
+msgstr "Correo electrónico no es válido "
+
+#: functions.php
+msgid "Account username must be between 5 and 25 characters"
+msgstr "El nombre de usuario deben tener entre 5 y 25 caracteres"
+
+#: functions.php
+msgid "KB"
+msgstr "KB"
+
+#: functions.php
+msgid "MB"
+msgstr "MB"
+
+#: functions.php
+msgid "GB"
+msgstr "GB"
+
+#: templates/basic/popup_userdelete.php
+msgid "Delete an user"
+msgstr "Eliminar un usuario"
+
+#: templates/basic/popup_ipadd.php
+msgid "Add an IP in VCA"
+msgstr "Añadir una IP en VCA"
+
+#: templates/basic/popup_ipdelete.php
+msgid "Remove an IP from VCA"
+msgstr "Eliminar una IP del VCA"
+
+#: templates/basic/popup_vpsdelete.php
+msgid "Delete the Vps"
+msgstr "Eliminar los Vps"
+
+#: templates/basic/popup_vpsedit.php
+msgid "Edit a Vps"
+msgstr "Editar un VPS"
+
+#: templates/basic/popup_vpsreinstall.php
+msgid "Reinstall the Vps"
+msgstr "Reinstalar el Vps"
+
+#: templates/basic/popup_serveradd.php
+msgid "Add a new server to VCA"
+msgstr "Añadir un nuevo servidor a VCA"
+
+#: templates/basic/popup_serverremove.php
+msgid "Remove the server from VCA"
+msgstr "Extraigar el servidor del VCA"
+
+#: templates/basic/popup_vpsclone.php
+msgid "Clone the Vps"
+msgstr "Clonar el VPS"
+
+#: templates/basic/popup_vpspassword.php
+msgid "Change Vps password"
+msgstr "Cambiar Vps contraseña"
+
+#: templates/basic/load_vpsstart.php
+msgid "Vps starting"
+msgstr "Empezando Vps"
+
+#: templates/basic/load_vpsstart.php
+msgid "Starting in progress"
+msgstr "Comienzo en curso"
+
+#: templates/basic/load_vpsstop.php
+msgid "Vps stopping"
+msgstr "Vps parada"
+
+#: templates/basic/load_vpsstop.php
+msgid "Stopping in progress"
+msgstr "Parada en curso"
+
+#: templates/basic/load_vpsrestart.php
+msgid "Vps restarting"
+msgstr "Vps reiniciar"
+
+#: templates/basic/load_vpsrestart.php
+msgid "Restarting in progress"
+msgstr "Reinicio en curso"
+
+#: templates/basic/load_vpscmd.php
+msgid "Send a command"
+msgstr "Enviar un comando"
+
+#: templates/basic/load_vpscmd.php
+msgid "Command in execution"
+msgstr "Comando en ejecución"
+
+#: templates/basic/load_vpsreinstall.php
+msgid "Vps reinstallation"
+msgstr "Reinstalación del Vps"
+
+#: templates/basic/load_vpsreinstall.php
+msgid "Reinstallation in progress"
+msgstr "Reinstalación en curso"
+
+#: templates/basic/load_vpsadd.php
+#: templates/basic/load_serveradd.php
+msgid "Creation in progress"
+msgstr "Creación en curso"
+
+#: templates/basic/load_serverreload.php
+msgid "Server reload"
+msgstr "Servidor de recarga"
+
+#: templates/basic/load_serverreload.php
+msgid "Reload in progress"
+msgstr "Recarga en curso"
+
+#: templates/basic/popup_serverrestart.php
+msgid "Do you confirm?"
+msgstr "Puede usted confirmar?"
+
+#: templates/basic/load_vpsclone.php
+msgid "Cloning Vps"
+msgstr "Clonación de un Vps"
+
+#: templates/basic/load_vpsclone.php
+msgid "Cloning in progress"
+msgstr "Clonación en curso"
+
+#: templates/basic/load_vpspassword.php
+msgid "Modify Vps root password"
+msgstr "Cambiar la contraseña del root Vps"
+
+#: templates/basic/load_vpspassword.php
+msgid "Modification in progress"
+msgstr "Modificación en curso"
+
+#: templates/basic/popup_serveredit.php
+msgid "Edit a server"
+msgstr "Edición de un servidor"
+
+#: templates/basic/connected_top.tpl
+#: templates/basic/requests.php
+#: templates/basic/requests.tpl
+msgid "Requests"
+msgstr "Consultas"
+
+#: templates/basic/home.tpl
+msgid "Open requests"
+msgstr "Peticiones abiertas"
+
+#: templates/basic/requests.tpl
+msgid "Create a new request"
+msgstr "Crear una nueva consulta"
+
+#: templates/basic/popup_requestadd.php
+msgid "Your request"
+msgstr "Su petición"
+
+#: templates/basic/popup_requestadd.php
+msgid "Subject"
+msgstr "Tema"
+
+#: templates/basic/popup_requestadd.php
+msgid "Message"
+msgstr "Mensaje"
+
+#: templates/basic/requests.tpl
+msgid "You don't have request"
+msgstr "Usted no tiene solicitudes"
+
+#: templates/basic/popup_requestclose.php
+msgid "Close this request"
+msgstr "Cerrar esta solicitud"
+
+#: templates/basic/requests.tpl
+msgid "Open"
+msgstr "Abrir"
+
+#: templates/basic/requests.tpl
+msgid "Closed"
+msgstr "Cerrado"
+
+#: templates/basic/requests.tpl
+msgid "Author"
+msgstr "Autor"
+
+#: templates/basic/requests.tpl
+msgid "Status"
+msgstr "Estado"
+
+#: templates/basic/server.tpl
+msgid "Template list"
+msgstr "Lista de plantillas"
+
+#: templates/basic/server.php
+msgid "Template management"
+msgstr "Plantillas de tratamiento"
+
+#: templates/basic/server.tpl
+#: templates/basic/popup_templateadd.php
+msgid "Add a new template"
+msgstr "Añadir una nueva plantilla"
+
+#: templates/basic/popup_templatedelete.php
+msgid "Delete a template"
+msgstr "Eliminar una plantilla"
+
+#: templates/basic/popup_templateedit.php
+msgid "Enter the new name"
+msgstr "registrar el nuevo nombre"
+
+#: templates/basic/popup_templateedit.php
+msgid "Template name"
+msgstr "Nombre de la plantilla"
+
+#: templates/basic/popup_templateedit.php
+msgid "Rename a template"
+msgstr "Cambiar el nombre de una plantilla"
+
+#: templates/basic/popup_templateedit.php
+msgid "Download this template"
+msgstr "Descargar esta plantilla"
+
+#: templates/basic/popup_templateedit.php
+msgid "Normal"
+msgstr "Normal"
+
+#: templates/basic/popup_templateedit.php
+msgid "Minimal"
+msgstr "Mínimo"
+
+#: templates/basic/popup_templateedit.php
+msgid "Development"
+msgstr "Desarrollo"
+
+#: templates/basic/load_backuprestore.php
+msgid "Restoration in progress"
+msgstr "Restauración en curso"
+
+#: templates/basic/load_backupadd.php
+msgid "Backup in progress"
+msgstr "Copia de seguridad en curso"
+
+#: templates/basic/popup_backupdelete.php
+#: templates/basic/popup_serverbackupdelete.php
+msgid "Delete a backup"
+msgstr "Eliminar una copia de seguridad"
+
+#: templates/basic/popup_backuprestore.php
+msgid "Restore a backup"
+msgstr "Restaurar una copia de seguridad"
+
+#: templates/basic/popup_backuprestore.php
+msgid "Restore %s"
+msgstr "Restaurar %s"
+
+#: templates/basic/popup_backuplist.php
+msgid "Backups management"
+msgstr "Gestión de copias de seguridad"
+
+#: templates/basic/popup_backuplist.php
+msgid "Create a new backup"
+msgstr "Crear una nueva copia de seguridad"
+
+#: templates/basic/popup_backuplist.php
+msgid "Save on Dropbox with password"
+msgstr "Guardar en Dropbox con contraseña"
+
+#: templates/basic/popup_backuplist.php
+msgid "Save on Dropbox without password"
+msgstr "Guardar en Dropbox sin contraseña"
+
+#: templates/basic/popup_backuplist.php
+msgid "Restore"
+msgstr "Restaurar"
+
+#: templates/basic/backup.tpl
+msgid "Backup list"
+msgstr "Lista de copia de seguridad"
+
+#: templates/basic/backup.tpl
+msgid "Date"
+msgstr "Fecha"
+
+#: templates/basic/popup_serverbackupdelete.php
+msgid "Delete the backup of %s from %s."
+msgstr "Eliminar la copia de seguridad de %s de %s."
+
+#: templates/basic/popup_serverbackupdelete.php
+msgid "Delete the backup of %s."
+msgstr "Eliminar la copia de seguridad de %s."
+
+#: templates/basic/popup_backupschedule.php
+msgid "Backup schedule"
+msgstr "Programación de copia de seguridad"
+
+#: templates/basic/popup_backupschedule.php
+msgid "Modify backup schedule"
+msgstr "Modificar programación de copia de seguridad"
+
+#: templates/basic/popup_backupschedule.php
+msgid "Delete backup schedule"
+msgstr "Eliminar programación de copia de seguridad"
+
+#: templates/basic/popup_vpsedit.php
+msgid "Protected"
+msgstr "Protegido"
+
+#: templates/basic/popup_userpassword.php
+msgid "Change your password"
+msgstr "Cambiar su contraseña"
+
+#: templates/basic/popup_userpassword.php
+msgid "Current password"
+msgstr "Contraseña actual"
+
+#: templates/basic/popup_userpassword.php
+msgid "Confirm new password"
+msgstr "Confirmar nueva contraseña"
+
+#: templates/basic/form_userpassword.php
+msgid "Bad current password"
+msgstr "Mala contraseña actual"
+
+#: templates/basic/form_userpassword.php
+msgid "Both passwords are differents"
+msgstr "Las contraseñas son diferentes"
+
+#: templates/basic/form_userpassword.php
+msgid "Password updated"
+msgstr "Contraseña actualizada"
+
+#: templates/basic/popup_userbkppass.php
+msgid "Define the backup password"
+msgstr "Definir la contraseña de respaldo"
+
+#: templates/basic/popup_userbkppass.php
+msgid "Backup password"
+msgstr "Contraseña de copia de seguridad"
+
+#: templates/basic/avscan.php
+msgid "Antivirus scan"
+msgstr "Escaneo antivirus"
+
+#: templates/basic/avscan.php
+msgid "File"
+msgstr "Expediente"
+
+#: templates/basic/avscan.php
+msgid "Danger"
+msgstr "Peligro"
+
+#: templates/basic/avscan.php
+msgid "No antivirus scan informations for this server"
+msgstr "No informe de análisis antivirus para ese servidor"
+
+#: templates/basic/profile.tpl
+msgid "Accounts"
+msgstr "Cuentas"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Define a Dropbox account"
+msgstr "Establecer una cuenta de Dropbox"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Bad authorization code"
+msgstr "Código de autorización inadecuado"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Authorization code"
+msgstr "Código de Autorización"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Generate code"
+msgstr "Generar código"
+
+#: templates/basic/popup_userdropbox.php
+msgid "Configure Dropbox"
+msgstr "Configurar Dropbox"
+
+#: templates/basic/template.tpl
+msgid "Refresh templates"
+msgstr "Actualizar la lista de plantillas"

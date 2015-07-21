@@ -195,6 +195,15 @@ function tsdate($time, $type=1) {
 			}
 		break;
 		
+		case 'es_ES':
+			switch($type) {
+				case 1:
+					return utf8_encode(strftime('%A, %d \d\e %B', $time)).' a las '.
+							strftime('%H:%M', $time);
+							break;
+			}
+		break;
+		
 		default:
 			switch($type) {
 				case 1:

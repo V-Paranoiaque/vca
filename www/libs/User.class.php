@@ -273,6 +273,7 @@ class User extends Guest {
 	static function languageList() {
 		return array(
 			'en_GB' => 'English',
+			'es_ES' => 'Español',
 			'fr_FR' => 'Français'
 		);
 	}
