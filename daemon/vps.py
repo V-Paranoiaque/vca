@@ -3,7 +3,6 @@ import json
 import shutil
 import os
 import time
-import dropbox
 
 class Vps:
     
@@ -244,6 +243,8 @@ class Vps:
         shutil.rmtree(vzprivate+'/dump')
     
     def backupDropbox(self, access_token, password):
+        import dropbox
+        
         vzbackup = "/vz/dump/"
         file = self.backupAdd()
         
