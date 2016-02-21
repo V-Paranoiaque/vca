@@ -1062,6 +1062,38 @@ function popupUserDropbox() {
 	});
 }
 
+function popupUserToken() {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_usertoken.php",
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formUserToken() {
+	if($("#activatetoken").is(':checked')) {
+		var activatetoken = 1;
+	}
+	else {
+		var activatetoken = 0;
+	}
+	var pin = $("#newpin").val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_usertoken.php",
+		data: "pin="+pin+"&activated="+activatetoken,
+		success: function(msg) {
+			location.reload();
+		}
+	});
+}
+
 function popupRequestAdd() {
 	$.ajax({
 		type: "GET",
@@ -1248,6 +1280,35 @@ function formDropboxToken() {
 		},
 		error: function(xhr,status,error) {
 			$("#errorDropbox").show()
+		}
+	});
+}
+
+/*** Configuration ***/
+function popupConfToken() {
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/popup_conftoken.php",
+		success: function(msg) {
+			BootstrapDialog.show({
+				title: '<div id="popupTitle"></div>',
+				message: msg
+			});
+		}
+	});
+}
+
+function formConfToken() {
+	var domainkey= $("#domainkey").val();
+	var key_size = $("#key_size").val();
+	var validity = $("#validity").val();
+	
+	$.ajax({
+		type: "GET",
+		url: "/templates/basic/form_conftoken.php",
+		data:"domainkey="+encodeURI(domainkey)+"&key_size="+key_size+"&validity="+validity,
+		success: function(msg) {
+			location.reload();
 		}
 	});
 }

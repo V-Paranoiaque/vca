@@ -89,6 +89,10 @@ function errorToText($erreur_no) {
 		case 13:
 			$text = _('Password updated');
 		break;
+		
+		case 14:
+			$text = _('Token information updated');
+		break;
 	}
 	
 	return $text;

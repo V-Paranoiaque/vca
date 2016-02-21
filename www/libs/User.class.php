@@ -133,6 +133,9 @@ class User extends Guest {
 		);
 	}
 	
+	function configurationDefine($domainkey, $key_size,$validity) {
+		
+	}
 	/*** Users ***/
 	
 	/**
@@ -153,7 +156,8 @@ class User extends Guest {
 	function userProfile() {
 		$link = Db::link();
 		
-		$sql = 'SELECT user_id, user_name, user_rank, user_mail, v.nb
+		$sql = 'SELECT user_id, user_name, user_rank, user_mail, v.nb,
+		               user_strongauth, user_tokenid
 		        FROM uservca
 		        LEFT JOIN (SELECT vps_owner, count(vps_owner) as nb
 		                   FROM vps GROUP BY vps_owner) v
@@ -216,6 +220,7 @@ class User extends Guest {
 	}
 	
 	function userDefinePassword($password, $id=0) {}
+	function userDefineToken($tokenId, $pin, $activated, $userId) {}
 	
 	/**
 	 * Update password
@@ -247,6 +252,35 @@ class User extends Guest {
 		else {
 			return 11;
 		}
+	}
+	
+	/**
+	 * Define user token information
+	 * @param number  user pin
+	 * @param boolean activated or not
+	 */
+	function userToken($pin, $activated) {
+		$link = Db::link();
+		
+		$sql = 'UPDATE uservca
+		        SET user_strongauth=:user_strongauth
+		        WHERE user_id=:user_id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':user_strongauth', $activated, PDO::PARAM_INT);
+		$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+		$req->execute();
+		
+		if(!empty($pin)) {
+			$sql = 'UPDATE uservca
+			        SET user_pin=:user_pin
+			        WHERE user_id=:user_id';
+			$req = $link->prepare($sql);
+			$req->bindValue(':user_pin', $pin, PDO::PARAM_STR);
+			$req->bindValue(':user_id', $this->getId(), PDO::PARAM_INT);
+			$req->execute();
+		}
+		
+		return 14;
 	}
 	
 	function userNew($user_name='', $user_mail='', $user_password='') { return null; }

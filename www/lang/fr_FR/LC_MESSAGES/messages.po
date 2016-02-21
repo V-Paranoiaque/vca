@@ -984,3 +984,80 @@ msgstr "Configurer Dropbox"
 #: templates/basic/template.tpl
 msgid "Refresh templates"
 msgstr "Rafraichir la liste des templates"
+
+#: templates/basic/connected_top.tpl
+#: templates/basic/configuration.tpl
+msgid "Configuration"
+msgstr "Configuration"
+
+#: functions.php
+msgid "Token information updated"
+msgstr "Informations du token mises à jour"
+
+#: templates/basic/configuration.tpl
+#: templates/basic/popup_conftoken.tpl
+#: templates/basic/popup_usertoken.tpl
+#: templates/basic/profile.tpl
+#: templates/basic/user.tpl
+msgid "Strong authentication"
+msgstr "Authentification forte"
+
+#: templates/basic/configuration.tpl
+#: templates/basic/popup_conftoken.tpl
+#: templates/basic/profile.tpl
+msgid "Domain key"
+msgstr "Clé du domaine"
+
+#: templates/basic/configuration.tpl
+#: templates/basic/popup_conftoken.tpl
+#: templates/basic/profile.tpl
+msgid "Key size"
+msgstr "Taille de clé"
+
+#: templates/basic/configuration.tpl
+#: templates/basic/popup_conftoken.tpl
+#: templates/basic/profile.tpl
+msgid "Validity"
+msgstr "Validité"
+
+#: templates/basic/popup_conftoken.tpl
+msgid "characters"
+msgstr "caractères"
+
+#: templates/basic/popup_conftoken.tpl
+msgid "seconds"
+msgstr "secondes"
+
+#: templates/basic/popup_usertoken.tpl
+msgid "Use strong authentication"
+msgstr "Utiliser l'authentification forte"
+
+#: templates/basic/popup_usertoken.tpl
+#: templates/basic/user.tpl
+msgid "Activate token authentication"
+msgstr "Activer le token pour l'authentification"
+
+#: templates/basic/popup_usertoken.tpl
+msgid "New PIN code"
+msgstr "Nouveau code PIN"
+
+#: templates/basic/profile.tpl
+msgid "Token id"
+msgstr "Identifiant du token"
+
+#: templates/basic/profile.tpl
+msgid "Activated"
+msgstr "Activé"
+
+#: templates/basic/signin.tpl
+msgid "Token"
+msgstr "Token"
+
+#: templates/basic/user.tpl
+msgid "User token ID"
+msgstr "Token de l'utilisateur"
+
+#: templates/basic/user.tpl
+msgid "User PIN"
+msgstr "PIN de l'utilisateur"
+

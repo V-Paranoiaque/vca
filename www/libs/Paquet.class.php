@@ -121,7 +121,10 @@ class Paquet {
 		if(!empty($actions['connect'])) {
 			$var = $actions['connect'];
 			if(!empty($var[0]) && !empty($var[1])) {
-				$id = Guest::connect($var[0], $var[1]);
+				if(empty($var[2])) {
+					$var[2] = '';
+				}
+				$id = Guest::connect($var[0], $var[1], $var[2]);
 	
 				if(!empty($id)) {
 					$token = Guest::newToken($id);
@@ -147,7 +150,24 @@ class Paquet {
 						case 'vcaStats':
 							$res = $user->vcaStats();
 							break;
-	
+							
+						case 'configuration':
+							$res = Guest::loadConfiguration();
+						break;
+						
+						case 'configurationDefine':
+							if(empty($var[0])) {
+								$var[0] = '';
+							}
+							if(empty($var[1])) {
+								$var[1] = 0;
+							}
+							if(empty($var[2])) {
+								$var[2] = 0;
+							}
+							$user->configurationDefine($var[0],$var[1],$var[2]);
+						break;
+						
 							/*** Users ***/
 						case 'userProfile':
 							$res = $user->userProfile();
@@ -185,8 +205,53 @@ class Paquet {
 								}
 								$res = $user->userDefinePassword(trim($var[0]), $var[1]);
 							}
-							break;
-	
+						break;
+						
+						case 'userToken':
+							if(empty($var[0])) {
+								$var[0]='';
+							}
+							if(!empty($var[1])) {
+								$var[1] = 1;
+							}
+							else {
+								$var[1] = 0;
+							}
+							$res = $user->userToken($var[0], $var[1]);
+						break;
+						
+						case 'userDefineToken':
+							if(empty($var[0])) {
+								$var[0]='';
+							}
+							if(empty($var[1])) {
+								$var[1] = '';
+							}
+							if(!empty($var[2])) {
+								$var[2] = 1;
+							}
+							else {
+								$var[2] = 0;
+							}
+							if(empty($var[3])) {
+								$var[3] = 0;
+							}
+							$res = $user->userDefineToken($var[0],$var[1],$var[2],$var[3]);
+						break;
+
+						case 'userToken':
+							if(empty($var[0])) {
+								$var[0] = '';
+							}
+							if(!empty($var[1])) {
+								$var[1] = 1;
+							}
+							else {
+								$var[1] = 0;
+							}
+							$res = $user->userToken($var[0], $var[1]);
+						break;
+						
 						case 'userAdd':
 							if(!empty($var[0]) && !empty($var[1]) && !empty($var[2])) {
 								$res = $user->userNew(trim(ucfirst($var[0])), trim(strtolower($var[1])), trim($var[2]));

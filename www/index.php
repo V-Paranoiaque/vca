@@ -9,6 +9,7 @@ include('libs/Smarty.class.php');
 
 include('libs/Db.class.php');
 include('libs/Socket.class.php');
+include('libs/OOTFY.class.php');
 include('libs/Vps.class.php');
 include('libs/Server.class.php');
 include('libs/Guest.class.php');
@@ -72,6 +73,8 @@ else {
 		case 'vps':
 		
 		case 'user':
+		
+		case 'configuration':
 			$page = $_GET['page'];
 		break;
 		

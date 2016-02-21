@@ -8,11 +8,14 @@ class Guest {
 	 * @param user password
 	 * @return user id
 	 */
-	static function connect($login, $password) {
-		$sql = 'SELECT user_id, user_password
+	static function connect($login, $password, $token='') {
+		$link = Db::link();
+		$conf = self::loadConfiguration();
+				
+		$sql = 'SELECT user_id, user_password, user_strongauth, user_tokenid, 
+		               user_pin
 		        FROM uservca
 		        WHERE user_name= :user_name';
-		$link = Db::link();
 		$req = $link->prepare($sql);
 		$req->bindValue(':user_name', $login, PDO::PARAM_STR);
 		$req->execute();
@@ -20,7 +23,23 @@ class Guest {
 
 		//If user does not exist or the passwords missmatch
 		if(!empty($do) && hash('sha512', $do->user_id.$password) == $do->user_password) {
-			return $do->user_id;
+			//Don't use token
+			if(empty($do->user_strongauth)) {
+				return $do->user_id;
+			}
+			else {
+				//Token conf
+				$OOTFY = new OOTFY($conf['domain_key'], $do->user_tokenid);
+				$OOTFY->set_keysize($conf['key_size']);
+				$OOTFY->set_period($conf['key_period']);
+				
+				if($OOTFY->check_token($token, $do->user_pin) == 1) {
+					return $do->user_id;
+				}
+				else {
+					return 0;
+				}
+			}
 		}
 		else {
 			return 0;
@@ -83,6 +102,20 @@ class Guest {
 		$user->setDropbox($do->user_dropbox);
 		
 		return $user;
+	}
+	
+	static function loadConfiguration() {
+		$link = Db::link();
+		$conf = array();
+		$sql = 'SELECT conf_index, conf_value 
+		        FROM configuration';
+		$req = $link->prepare($sql);
+		$req->execute();
+		while($do = $req->fetch(PDO::FETCH_OBJ)) {
+			$conf[$do->conf_index] = $do->conf_value;
+		}
+		
+		return $conf;
 	}
 }
 

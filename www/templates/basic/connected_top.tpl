@@ -80,6 +80,12 @@
 							<span class="invisible-xs">{'Users'|gettext}</span>
 						</a>
 					</li>
+					<li {if $currentPage == 'configuration'} class="active" {/if}>
+						<a href="/configuration" title="{'Configuration'|gettext}">
+							<span aria-hidden="true" class="glyphicon glyphicon-cog"></span>
+							<span class="invisible-xs">{'Configuration'|gettext}</span>
+						</a>
+					</li>
 				{/if}
 			</ul>
 		</div>

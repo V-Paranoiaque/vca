@@ -66,6 +66,47 @@ class Admin extends User {
 		);
 	}
 	
+	function configurationDefine($domainkey, $key_size, $validity) {
+		if($key_size != 4  && $key_size != 8  && 
+		   $key_size != 16 && $key_size != 32) {
+			$key_size = 4;
+		}
+		
+		if($validity != 15 && $validity != 30 && $validity != 45 &&
+		   $validity != 60 && $validity != 90 && $validity != 120) {
+			$validity = 60;
+		}
+		
+		$link = Db::link();
+		
+		$sql1 = 'DELETE FROM configuration 
+		         WHERE conf_index="domain_key"';
+		$sql2 = 'DELETE FROM configuration
+		         WHERE conf_index="key_size"';
+		$sql3 = 'DELETE FROM configuration
+		         WHERE conf_index="key_period"';
+		
+		$req1 = $link->prepare($sql1);
+		$req2 = $link->prepare($sql2);
+		$req3 = $link->prepare($sql3);
+		
+		$req1->execute();
+		$req2->execute();
+		$req3->execute();
+		
+		$sql = 'INSERT INTO configuration
+		        (conf_index, conf_value) 
+		        VALUES
+		        ("domain_key", :domain_key),
+		        ("key_size",   :key_size),
+		        ("key_period", :key_period)';
+		$req = $link->prepare($sql);
+		$req->bindValue(':domain_key', $domainkey, PDO::PARAM_STR);
+		$req->bindValue(':key_size',   $key_size, PDO::PARAM_STR);
+		$req->bindValue(':key_period', $validity, PDO::PARAM_STR);
+		$req->execute();
+	}
+	
 	/**
 	 * Next free ID, for a new VPS
 	 * @return ID
@@ -129,7 +170,7 @@ class Admin extends User {
 		$list = array();
 			
 		$sql = 'SELECT user_id, user_name, user_rank, user_mail, v.nb,
-		               user_language
+		               user_language, user_tokenid, user_strongauth
 		        FROM uservca
 		        LEFT JOIN (SELECT vps_owner, count(vps_owner) as nb
 		                   FROM vps GROUP BY vps_owner) v
@@ -144,7 +185,9 @@ class Admin extends User {
 					'user_name' => $do->user_name,
 					'user_rank' => $do->user_rank,
 					'user_mail' => $do->user_mail,
-					'user_language' => $do->user_language,
+					'user_language'  => $do->user_language,
+					'user_tokenid'   => $do->user_tokenid,
+					'user_strongauth'=> $do->user_strongauth,
 					'nb_vps'    => $do->nb
 			);
 		}
@@ -230,6 +273,46 @@ class Admin extends User {
 		$req->execute();
 		
 		return 13;
+	}
+	
+	/**
+	 * Define user token information
+	 * @param string  user token id
+	 * @param number  user pin
+	 * @param boolean activated or not
+	 * @param int     user id
+	 */
+	function userDefineToken($tokenId, $pin, $activated, $userId) {
+		$link = Db::link();
+		
+		if(empty($userId)) {
+			return null;
+		}
+		if(empty($tokenId)) {
+			$tokenId = $this->getId();
+		}
+		
+		$sql = 'UPDATE uservca
+		        SET user_strongauth=:user_strongauth,
+		            user_tokenid=:user_tokenid
+		        WHERE user_id=:user_id';
+		$req = $link->prepare($sql);
+		$req->bindValue(':user_strongauth', $activated, PDO::PARAM_INT);
+		$req->bindValue(':user_tokenid', $tokenId, PDO::PARAM_STR);
+		$req->bindValue(':user_id', $userId, PDO::PARAM_INT);
+		$req->execute();
+		
+		if(!empty($pin)) {
+			$sql = 'UPDATE uservca
+			        SET user_pin=:user_pin
+			        WHERE user_id=:user_id';
+			$req = $link->prepare($sql);
+			$req->bindValue(':user_pin', $pin, PDO::PARAM_STR);
+			$req->bindValue(':user_id', $userId, PDO::PARAM_INT);
+			$req->execute();
+		}
+		
+		return 14;
 	}
 	
 	/**

@@ -11,6 +11,8 @@
 		       placeholder="{'Login'|gettext}" name="login" required autofocus>
 		<input type="password" class="form-control" 
 		       placeholder="{'Password'|gettext}" name="password" required>
+		<input type="password" class="form-control" 
+		       placeholder="{'Token'|gettext}" name="token">
 		<button class="btn btn-lg btn-danger btn-block" 
 		        type="submit">{'Sign in'|gettext}</button>
 	</form>

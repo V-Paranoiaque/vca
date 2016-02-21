@@ -119,6 +119,35 @@
 				<div class="center">{'No virtual server'|gettext}</div>
 			{/if}
 		</div>
+		<div class="col-sm-12 col-md-6">
+			<h3 class="sub-header">{'Strong authentication'|gettext}</h3>
+			<form method="post" role="form" action="/user/{$userInfo->user_id}">
+				<div class="input-group">
+					<input type="checkbox" 
+					       name="useractivated"
+					       {if {$userInfo-> user_strongauth } == 1}checked="checked"{/if}> {'Activate token authentication'|gettext}
+				</div>
+				<br/>
+				<div class="input-group">
+					<span class="input-group-addon" id="tokenId">{'User token ID'|gettext}</span>
+					<input type="text" class="form-control" 
+					       name="usertokenid" value="{$userInfo->user_tokenid}"
+					       placeholder="{'User token ID'|gettext}" required>
+				</div>
+				<br/>
+				<div class="input-group">
+					<span class="input-group-addon" id="pin">{'User PIN'|gettext}</span>
+					<input type="password" class="form-control"
+					       name="userpin" value=""
+					       placeholder="{'User PIN'|gettext}">
+				</div>
+				<br/>
+				<div class="center">
+					<button class="btn btn-danger" 
+					        type="submit">{'Save'|gettext}</button>
+				</div>
+			</form>
+		</div>
 	</div>
 	<script type="text/javascript">
 	if($("#spanNewPassord").width() > $("#spanConfirm").width()) {
@@ -132,6 +161,12 @@
 	}
 	else {
 		$("#spanName").width($("#spanMail").width()+"px");
+	}
+	if($("#pin").width() > $("#tokenId").width()) {
+		$("#tokenId").width($("#pin").width()+"px");
+	}
+	else {
+		$("#pin").width($("#tokenId").width()+"px");
 	}
 	</script>
 {/if}

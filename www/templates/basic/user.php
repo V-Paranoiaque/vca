@@ -16,6 +16,22 @@ if(!empty($_GET['user'])) {
 		$paquet -> add_action('userDefinePassword',
 		                      array($_POST['password'],$_GET['user']));
 	}
+	
+	if(!empty($_POST['usertokenid'])) {
+		if(empty($_POST['useractivated'])) {
+			$useractivated = 0;
+		}
+		else {
+			$useractivated = 1;
+		}
+		if(empty($_POST['userpin'])) {
+			$_POST['userpin'] = '';
+		}
+		
+		$paquet -> add_action('userDefineToken',
+		                      array($_POST['usertokenid'],$_POST['userpin'],
+		                            $useractivated,$_GET['user']));
+	}
 }
 
 $paquet -> add_action('userList');

@@ -26,11 +26,11 @@ This software is licensed under the terms of the MIT license.
 * Multilanguage support (English and French)
 * Automated backups
 * Moving virtual machines
+* Multifactor authentication
 
 ## Future features
 
 * Custom templates
-* Multi-factor authentication
 
 ## Installation
 
