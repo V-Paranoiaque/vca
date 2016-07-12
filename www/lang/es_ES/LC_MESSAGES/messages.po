@@ -1060,4 +1060,4 @@ msgstr "Usuario identificador identificación"
 #: templates/basic/user.tpl
 msgid "User PIN"
 msgstr "PIN del usuario"
-ᐧ
+
