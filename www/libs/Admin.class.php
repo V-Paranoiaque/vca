@@ -525,7 +525,8 @@ class Admin extends User {
 	 */
 	function ipNew($ip) {
 		$link = Db::link();
-	
+		$ip = trim($ip);
+		
 		if(!empty($ip) && filter_var($ip, FILTER_VALIDATE_IP)) {
 			$sql = 'SELECT ip FROM ipv4 WHERE ip= :ip';
 			$req = $link->prepare($sql);
@@ -551,9 +552,9 @@ class Admin extends User {
 	 */
 	function ipDelete($ip) {
 		$link = Db::link();
-	
+		$ip = trim($ip);
 		$list = $this->ipList();
-	
+		
 		if(!empty($ip) && !empty($list[$ip]) && empty($list[$ip]['id'])) {
 			$sql = 'DELETE FROM ipv4
 			        WHERE ip= :ip';
