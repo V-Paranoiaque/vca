@@ -9,9 +9,7 @@ if(!empty($_GET['current']) && !empty($_GET['new']) && !empty($_GET['confirm']))
 		                      array($_GET['current'],$_GET['new']));
 		$paquet -> send_actions();
 		
-		if(!empty($paquet->getAnswer('userPassword'))) {
-			$error = $paquet->getAnswer('userPassword');
-		}
+		$error = $paquet->getAnswer('userPassword');
 	}
 	else {
 		$error = 12;
