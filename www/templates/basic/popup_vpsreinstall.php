@@ -7,15 +7,15 @@ $paquet -> add_action('vpsList');
 $paquet -> add_action('vpsTemplate', array($_GET['vps']));
 $paquet -> send_actions();
 
-$vps = $paquet->getAnswer('vpsList')->$_GET['vps'];
+$vps  = $paquet->getAnswer('vpsList')->$_GET['vps'];
+$list = $paquet->getAnswer('vpsTemplate');
 
 echo '<div class="center">';
 printf(_('Reinstall %s, don\'t forget to redefine the root password.'), '<b>'.$vps->name.'</b>');
 echo '</div>';
-
-if(!empty($paquet->getAnswer('vpsTemplate'))) {
+if(!empty($list)) {
 	echo '<select name="os" id="os" class="form-control">';
-	foreach ($paquet->getAnswer('vpsTemplate') as $template) {
+	foreach ($list as $template) {
 		if($template == $vps->ostemplate) {
 			echo '<option value="'.$template.'" selected="selected">'.$template.'</option>';
 		}
