@@ -31,7 +31,7 @@ class Vps:
         self.ram_current = 0
     
     def loadConf(self):
-        conf = open("/etc/sysconfig/vz-scripts/"+self._id+".conf", "r")
+        conf = open("/etc/vz/conf/"+self._id+".conf", "r")
         content = conf.read()
         content = content.replace('"','')
         lines = content.split('\n')
