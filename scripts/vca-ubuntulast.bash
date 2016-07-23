@@ -87,6 +87,10 @@ if [ "${DAEMON}" == "1" ] ; then
 	cp /usr/share/vca/conf/vcadaemon.upstart /etc/init.d/vcadaemon
 	chmod 755 /etc/init.d/vcadaemon
 	systemctl enable vcadaemon
+	
+	if [ ! -d /vz ] ; then
+		ln -s /var/lib/vz /vz
+	fi
 fi
 
 if [ "${PANEL}" == "1" ] ; then 
