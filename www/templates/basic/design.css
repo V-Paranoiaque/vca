@@ -160,6 +160,7 @@ a.btn .glyphicon {
 .btn-invisible {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	opacity:0;
+	cursor: auto;
 }
 
 /* SIGNIN */
