@@ -49,7 +49,8 @@
 		<form method="post" role="form" action="/user/{$userInfo->user_id}">
 			{if {$userUpdate} != ''}
 			
-				<div class="alert alert-danger alert-dismissible" role="alert">
+				<div class="alert alert-danger alert-dismissible center" 
+				     role="alert">
 					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{'Close'|gettext}</span></button>
 					{$userUpdate}
 				</div>
@@ -70,9 +71,28 @@
 				       placeholder="{'Email'|gettext}" required>
 			</div>
 			<br/>
+			<div class="input-group">
+				<span class="input-group-addon" id="spanLang">{'Language'|gettext}</span>
+				<select class="selectpicker form-control" name="language"
+				        id="idLang">
+					{foreach $languageList as $key => $lang}
+						<option value="{$key}">{$lang}</option>
+					{/foreach}
+				</select>
+			</div>
+			<br/>
+			<div class="input-group">
+				<span class="input-group-addon" id="spanRank">{'Rank'|gettext}</span>
+				<select class="selectpicker form-control" name="rank"
+				        id="idRank">
+					<option value="0">User</option>
+					<option value="1">Admin</option>
+				</select>
+			</div>
+			<br/>
 			<div class="center">
 				<button class="btn btn-danger" 
-			          type="submit">{'Save'|gettext}</button>
+				        type="submit">{'Save'|gettext}</button>
 			</div>
 		</form>
 	</div>
@@ -93,7 +113,7 @@
 			<br/>
 			<div class="center">
 				<button class="btn btn-danger" 
-			          type="submit">{'Save'|gettext}</button>
+				        type="submit">{'Save'|gettext}</button>
 			</div>
 		</form>
 	</div>
@@ -156,17 +176,29 @@
 	else {
 		$("#spanNewPassord").width($("#spanConfirm").width()+"px");
 	}
-	if($("#spanName").width() > $("#spanMail").width()) {
-		$("#spanMail").width($("#spanName").width()+"px");
+	
+	var userinfo = $("#spanMail").width();
+	if($("#spanName").width() > userinfo) {
+		userinfo = $("#spanName").width();
 	}
-	else {
-		$("#spanName").width($("#spanMail").width()+"px");
+	if($("#spanRank").width() > userinfo) {
+		userinfo = $("#spanRank").width();
 	}
+	if($("#spanLang").width() > userinfo) {
+		userinfo = $("#spanLang").width();
+	}
+	$("#spanMail").width(userinfo+"px");
+	$("#spanName").width(userinfo+"px");
+	$("#spanRank").width(userinfo+"px");
+	$("#spanLang").width(userinfo+"px");
+	
 	if($("#pin").width() > $("#tokenId").width()) {
 		$("#tokenId").width($("#pin").width()+"px");
 	}
 	else {
 		$("#pin").width($("#tokenId").width()+"px");
 	}
+	$("#idLang").val('{$userInfo->user_language}');
+	$("#idRank").val({$userInfo->user_rank});
 	</script>
 {/if}

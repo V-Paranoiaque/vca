@@ -184,7 +184,7 @@ class User extends Guest {
 	 * @param user mail
 	 * @return error
 	 */
-	function userUpdate($id, $user_name='', $user_mail='', $language='') {
+	function userUpdate($id, $user_name='', $user_mail='', $language='', $rank=-1) {
 		$link = Db::link();
 		$id = $this->getId();
 		

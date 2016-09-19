@@ -185,7 +185,8 @@ class Paquet {
 								if(empty($var[3])) {
 									$var[3] = '';
 								}
-								$res = $user->userUpdate($var[0], trim(ucfirst($var[1])), trim(strtolower($var[2])), $var[3]);
+								
+								$res = $user->userUpdate($var[0], trim(ucfirst($var[1])), trim(strtolower($var[2])), $var[3], $var[4]);
 							}
 							else {
 								$res = 4;

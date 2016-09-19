@@ -141,8 +141,13 @@ msgid "Email"
 msgstr "Mail"
 
 #: templates/basic/profile.tpl
+#: templates/basic/user.tpl
 msgid "Language"
 msgstr "Langue"
+
+#: templates/basic/user.tpl
+msgid "Rank"
+msgstr "Rang"
 
 #: templates/basic/server.tpl
 msgid "Server list"
@@ -993,6 +998,10 @@ msgstr "Configuration"
 #: functions.php
 msgid "Token information updated"
 msgstr "Informations du token mises à jour"
+
+#: functions.php
+msgid "You can't remove your own admin rights"
+msgstr "Vous ne pouvez pas supprimer vos propres droits d'administrateur"
 
 #: templates/basic/configuration.tpl
 #: templates/basic/popup_conftoken.tpl

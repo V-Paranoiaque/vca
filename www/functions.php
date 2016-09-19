@@ -93,6 +93,10 @@ function errorToText($erreur_no) {
 		case 14:
 			$text = _('Token information updated');
 		break;
+		
+		case 15:
+			$text = _('You can\'t remove your own admin rights');
+		break;
 	}
 	
 	return $text;

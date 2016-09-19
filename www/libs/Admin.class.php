@@ -202,7 +202,7 @@ class Admin extends User {
 	 * @param user mail
 	 * @return error
 	 */
-	function userUpdate($id, $user_name='', $user_mail='', $language='') {
+	function userUpdate($id, $user_name='', $user_mail='', $language='', $rank=-1) {
 	
 		if(empty($id)) {
 			$id = $this->getId();
@@ -237,14 +237,24 @@ class Admin extends User {
 			$language = $do->user_language;
 		}
 		
+		if($rank != 0 && $rank != 1) {
+			$rank = $do->user_rank;
+		}
+		
+		if($id == $this->getId() && $rank != 1) {
+			return 15;
+		}
+		
 		$sql = 'UPDATE uservca
 		        SET user_name= :user_name,
 		            user_mail= :user_mail,
+		            user_rank= :user_rank,
 		            user_language=:user_language
 		        WHERE user_id= :user_id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':user_name', $user_name, PDO::PARAM_STR);
 		$req->bindValue(':user_mail', $user_mail, PDO::PARAM_STR);
+		$req->bindValue(':user_rank', $rank, PDO::PARAM_STR);
 		$req->bindValue(':user_language', $language, PDO::PARAM_STR);
 		$req->bindValue(':user_id', $id, PDO::PARAM_INT);
 		$req->execute();
