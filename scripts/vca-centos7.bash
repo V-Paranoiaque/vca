@@ -241,7 +241,7 @@ if [ "${PANEL}" == "1" ] ; then
 	
 	#Import Daemon config
 	if [ "${DAEMON}" == "1" ] && [ "${DAEMON_KEY}" != "" ] ; then
-		mysql -u vca -p${PASSWORD} -b vca -e "INSERT INTO server (server_name, server_address, server_key) VALUES ('Server', '127.0.0.1', '${DAEMON_KEY}')"
+		mysql -u root -p${MYSQL_PASSWORD} -b vca -e "INSERT INTO server (server_name, server_address, server_key) VALUES ('Server', '127.0.0.1', '${DAEMON_KEY}')"
 	fi
 fi
 
