@@ -1,11 +1,16 @@
 <?php 
 
+/**
+ * Guest class
+ * @author V_paranoiaque
+ */
 class Guest {
 
 	/**
 	 * Connection
-	 * @param user login
-	 * @param user password
+	 * @param string $login user login
+	 * @param string $password user password
+	 * @param string $token strong authentication token
 	 * @return user id
 	 */
 	static function connect($login, $password, $token='') {
@@ -48,7 +53,7 @@ class Guest {
 	
 	/**
 	 * Generate a new token
-	 * @param user id
+	 * @param number $id user id
 	 * @return new token
 	 */
 	static function newToken($id) {
@@ -69,7 +74,7 @@ class Guest {
 	
 	/**
 	 * Load user information
-	 * @param user token
+	 * @param string $token user token
 	 * @return user (NULL, User, Admin, SuperAdmin)
 	 */
 	static function loadUser($token) {
@@ -104,6 +109,9 @@ class Guest {
 		return $user;
 	}
 	
+	/**
+	 * Load VCA configuration from the DB
+	 */
 	static function loadConfiguration() {
 		$link = Db::link();
 		$conf = array();

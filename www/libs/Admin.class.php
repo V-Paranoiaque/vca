@@ -1,5 +1,9 @@
 <?php 
 
+/**
+ * Administrator class
+ * @author V_paranoiaque
+ */
 class Admin extends User {
 
 	/*** VCA ***/
@@ -66,6 +70,12 @@ class Admin extends User {
 		);
 	}
 	
+	/**
+	 * Define the Token configuration
+	 * @param string $domainkey shared domain key
+	 * @param number $key_size generated code size
+	 * @param timestamp $validity generated code validity
+	 */
 	function configurationDefine($domainkey, $key_size, $validity) {
 		if($key_size != 4  && $key_size != 8  && 
 		   $key_size != 16 && $key_size != 32) {
@@ -141,8 +151,8 @@ class Admin extends User {
 		}
 		else {
 			$sql = 'SELECT vps_id
-		        FROM vps
-			    ORDER BY vps_id ASC';
+			        FROM vps
+			        ORDER BY vps_id ASC';
 			$req = $link->prepare($sql);
 			$req->execute();
 			while ($do = $req->fetch(PDO::FETCH_OBJ)) {
@@ -197,9 +207,11 @@ class Admin extends User {
 		
 	/**
 	 * Update user information
-	 * @param user id
-	 * @param user name
-	 * @param user mail
+	 * @param number $id user id
+	 * @param string $user_name user name
+	 * @param string $user_mail user mail
+	 * @param string $language user language
+	 * @param number $rank user rank (-1, 0 or 1)
 	 * @return error
 	 */
 	function userUpdate($id, $user_name='', $user_mail='', $language='', $rank=-1) {
@@ -264,8 +276,8 @@ class Admin extends User {
 	
 	/**
 	 * Update password
-	 * @param new password
-	 * @param user id
+	 * @param string $password new password
+	 * @param number $id user id
 	 */
 	function userDefinePassword($password, $id=0) {
 		$link = Db::link();
@@ -287,10 +299,10 @@ class Admin extends User {
 	
 	/**
 	 * Define user token information
-	 * @param string  user token id
-	 * @param number  user pin
-	 * @param boolean activated or not
-	 * @param int     user id
+	 * @param number $tokenId user token id
+	 * @param number $pin user pin
+	 * @param boolean $activated activated or not
+	 * @param number $userId user id
 	 */
 	function userDefineToken($tokenId, $pin, $activated, $userId) {
 		$link = Db::link();
@@ -327,9 +339,10 @@ class Admin extends User {
 	
 	/**
 	 * Create a new user
-	 * @param user name
-	 * @param user mail
-	 * @return error
+	 * @param string $user_name user name
+	 * @param string $user_mail user mail
+	 * @param string $user_password user password
+	 * @return number error
 	 */
 	function userNew($user_name='', $user_mail='', $user_password='') {
 	
@@ -386,7 +399,7 @@ class Admin extends User {
 	
 	/**
 	 * Delete an user
-	 * @param user id
+	 * @param number $id user id
 	 * @return error number
 	 */
 	function userDelete($id) {
@@ -419,7 +432,7 @@ class Admin extends User {
 	
 	/**
 	 * Return User Vps
-	 * @param user id
+	 * @param number $id user id
 	 */
 	function userVps($id) {
 		$user = new User($id);
@@ -428,6 +441,9 @@ class Admin extends User {
 
 	/*** Requests ***/
 	
+	/**
+	 * Return all the requests
+	 */
 	function requestList() {
 		$list = array();
 	
@@ -531,7 +547,7 @@ class Admin extends User {
 	
 	/**
 	 * Add a new IP
-	 * @param IP
+	 * @param string $ip new IP to add
 	 */
 	function ipNew($ip) {
 		$link = Db::link();
@@ -558,7 +574,7 @@ class Admin extends User {
 	
 	/**
 	 * Delete an IP
-	 * @param IP
+	 * @param string $ip an IP
 	 */
 	function ipDelete($ip) {
 		$link = Db::link();
@@ -577,9 +593,9 @@ class Admin extends User {
 	/*** Serveur ***/
 	
 	/**
-	 * Return all servers
+	 * Return all physical servers
 	 */
-	function serverList($id=0) {
+	function serverList() {
 		$list = array();
 	
 		$link = Db::link();
@@ -610,10 +626,11 @@ class Admin extends User {
 
 	/**
 	 * Add a new server on the panel
-	 * @param name
-	 * @param address (name or IP)
-	 * @param key
-	 * @param description
+	 * @param string $name name
+	 * @param string $address address (name or IP)
+	 * @param number $port communication port
+	 * @param string $key key
+	 * @param string $description description
 	 */
 	function serverAdd($name,$address,$port,$key,$description='') {
 		$link = Db::link();
@@ -648,7 +665,7 @@ class Admin extends User {
 	
 	/**
 	 * Remove a server from the panel
-	 * @param server id
+	 * @param number $id server id
 	 */
 	function serverDelete($id) {
 		$link = Db::link();
@@ -668,8 +685,8 @@ class Admin extends User {
 	
 	/**
 	 * Update server information
-	 * @param server id
-	 * @param all information
+	 * @param number $id server id
+	 * @param string $var all information
 	 */
 	function serverUpdate($id, $var)  {
 		$servers = $this->serverList();
@@ -739,7 +756,7 @@ class Admin extends User {
 	
 	/**
 	 * Reload server information
-	 * @param number $id
+	 * @param number $id server id, all servers by default
 	 */
 	function serverReload($id=0) {
 	
@@ -771,7 +788,7 @@ class Admin extends User {
 
 	/**
 	 * Restart server
-	 * @param server id
+	 * @param number $id server id
 	 */
 	function serverRestart($id=0) {
 	
@@ -797,7 +814,7 @@ class Admin extends User {
 	
 	/**
 	 * Return server template
-	 * @param server id
+	 * @param number $id server id
 	 * @return template list
 	 */
 	function serverTemplate($id=0) {
@@ -862,6 +879,12 @@ class Admin extends User {
 		return null;
 	}
 	
+	/**
+	 * Rename an OS template
+	 * @param number $id server's id
+	 * @param string $old old name
+	 * @param string $new new name
+	 */
 	function serverTemplateRename($id, $old, $new) {
 		$link = Db::link();
 		$sql = 'SELECT server_id, server_name, server_address,
@@ -886,6 +909,11 @@ class Admin extends User {
 		}
 	}
 	
+	/**
+	 * Download/Upload a template
+	 * @param number $id server id
+	 * @param string $name template name
+	 */
 	function serverTemplateAdd($id, $name) {
 		$link = Db::link();
 		$sql = 'SELECT server_id, server_name, server_address,
@@ -917,6 +945,11 @@ class Admin extends User {
 		}
 	}
 	
+	/**
+	 * Delete a template
+	 * @param number $id server id
+	 * @param string $name template name
+	 */
 	function serverTemplateDelete($id, $name) {
 		$link = Db::link();
 		$sql = 'SELECT server_id, server_name, server_address,
@@ -941,6 +974,10 @@ class Admin extends User {
 		}
 	}
 	
+	/**
+	 * Refresh the template list
+	 * @param number $server server id
+	 */
 	function serverTemplateRefresh($server) {
 		$link = Db::link();
 		$sql = 'SELECT server_id
@@ -957,6 +994,10 @@ class Admin extends User {
 		}
 	}
 	
+	/**
+	 * List VPS backups
+	 * @param number $server server id
+	 */
 	function serverBackup($server) {
 		$link = Db::link();
 		$sql = 'SELECT server_id, server_name, server_address,
@@ -985,6 +1026,12 @@ class Admin extends User {
 		}
 	}
 	
+	/**
+	 * Delete a backup
+	 * @param number $server server id
+	 * @param number $idVps vps id
+	 * @param string $name backup name
+	 */
 	function serverBackupDelete($server, $idVps, $name) {
 		$link = Db::link();
 	
@@ -1004,6 +1051,10 @@ class Admin extends User {
 		}
 	}
 	
+	/**
+	 * Scan a server with clamav
+	 * @param number $server the server's id
+	 */
 	function serverScan($server) {
 		$link = Db::link();
 		
@@ -1029,7 +1080,7 @@ class Admin extends User {
 	
 	/**
 	 * Return Vps list
-	 * @param server id
+	 * @param number $server server id, if egal to 0, return all Vps of all Servers
 	 */
 	function vpsList($server=0) {
 	
@@ -1043,10 +1094,10 @@ class Admin extends User {
 			               vps.server_id, user_name, vps_cpus as cpus,
 			               diskspace_current, loadavg,
 			               swap, onboot, diskinodes, vps_cpulimit,
-					       vps_cpuunits, backup_limit, server_name,
+			               vps_cpuunits, backup_limit, server_name,
 			               vps_protected
 			        FROM vps
-					LEFT JOIN uservca ON vps_owner=user_id
+			        LEFT JOIN uservca ON vps_owner=user_id
 			        JOIN server ON server.server_id=vps.server_id';
 			$req = $link->prepare($sql);
 			$req->execute();
@@ -1068,8 +1119,7 @@ class Admin extends User {
 			$req->bindValue(':server_id', $server, PDO::PARAM_INT);
 			$req->execute();
 		}
-	
-			while ($do = $req->fetch(PDO::FETCH_OBJ)) {
+		while ($do = $req->fetch(PDO::FETCH_OBJ)) {
 			$list[$do->vps_id] = array(
 				'id'          => $do->vps_id,
 				'name'        => $do->vps_name,
@@ -1103,8 +1153,8 @@ class Admin extends User {
 	
 	/**
 	 * Set VPS configuration
-	 * @param unknown $id
-	 * @param unknown $var
+	 * @param number $id server's id
+	 * @param array $var all configuration
 	 */
 	function vpsAdd($id, $var) {
 		$link = Db::link();
@@ -1259,8 +1309,8 @@ class Admin extends User {
 	
 	/**
 	 * Set VPS configuration
-	 * @param unknown $id
-	 * @param unknown $var
+	 * @param number $id Vps's id
+	 * @param array $var all the parameters
 	 */
 	function vpsUpdate($id, $var) {
 		$link = Db::link();
@@ -1451,8 +1501,8 @@ class Admin extends User {
 	}
 	
 	/**
-	 * Delete Vps
-	 * @param vps id
+	 * Delete a Vps
+	 * @param number $id vps id
 	 */
 	function vpsDelete($id) {
 		$link = Db::link();
@@ -1477,8 +1527,8 @@ class Admin extends User {
 	}
 	
 	/**
-	 * Start Vps
-	 * @param vps id
+	 * Start a Vps
+	 * @param number $id vps id
 	 */
 	function vpsStart($id) {
 		$link = Db::link();
@@ -1503,8 +1553,8 @@ class Admin extends User {
 	}
 	
 	/**
-	 * Stop Vps
-	 * @param vps id
+	 * Stop a Vps
+	 * @param number $id vps id
 	 */
 	function vpsStop($id) {
 		$link = Db::link();
@@ -1529,8 +1579,8 @@ class Admin extends User {
 	}
 	
 	/**
-	 * Restart Vps
-	 * @param vps id
+	 * Restart a Vps
+	 * @param number $id vps id
 	 */
 	function vpsRestart($id) {
 		$link = Db::link();
@@ -1555,10 +1605,10 @@ class Admin extends User {
 	}
 	
 	/**
-	 *
-	 * @param unknown $idVps
-	 * @param unknown $ip
-	 * @param unknown $hostname
+	 * Clone a VPS
+	 * @param number $idVps Vps's id
+	 * @param string $ip Ip of the new Vps
+	 * @param string $hostname Hostname of the new Vps
 	 */
 	function vpsClone($idVps, $ip, $hostname) {
 		$link = Db::link();
@@ -1587,11 +1637,11 @@ class Admin extends User {
 			$data = json_decode($connect -> read());
 		}
 	}
-
+	
 	/**
 	 * Execute a command on a VPS
-	 * @param vps id
-	 * @param command
+	 * @param number $idVps vps id
+	 * @param string $command command
 	 * @return command answer
 	 */
 	function vpsCmd($idVps, $command) {
@@ -1617,8 +1667,8 @@ class Admin extends User {
 	
 	/**
 	 * Modifie Vps root password
-	 * @param vps id
-	 * @param new password
+	 * @param number $idVps vps id
+	 * @param string $password new root password
 	 */
 	function vpsPassword($idVps, $password) {
 		$link = Db::link();
@@ -1642,8 +1692,8 @@ class Admin extends User {
 	
 	/**
 	 * Reinstall a VPS
-	 * @param vps id
-	 * @param operating system
+	 * @param number $idVps vps id
+	 * @param string $os operating system template
 	 */
 	function vpsReinstall($idVps, $os) {
 		$link = Db::link();
@@ -1673,6 +1723,9 @@ class Admin extends User {
 	
 	/**
 	 * Move a VPS
+	 * @param number $serverFrom server id source
+	 * @param number $vps vps id
+	 * @param number $serverDest server id destination
 	 */
 	function vpsMove($serverFrom, $vps, $serverDest) {
 		$link = Db::link();
@@ -1710,20 +1763,21 @@ class Admin extends User {
 	
 	/**
 	 * Scan server with Clamav
+	 * @param number $id the server's id, scan all servers if the id is empty
 	 */
 	function avScan($id=0) {
 		$link = Db::link();
 		if($id == 0) {
 			$sql = 'SELECT server_id, server_name, server_address,
-	               server_description, server_key, server_port
-		        FROM server';
+			               server_description, server_key, server_port
+			        FROM server';
 			$req = $link->query($sql);
 		}
 		else {
 			$sql = 'SELECT server_id, server_name, server_address,
-	               server_description, server_key, server_port
-		        FROM server
-		        WHERE server_id= :server_id';
+			               server_description, server_key, server_port
+			        FROM server
+			        WHERE server_id= :server_id';
 			$req = $link->prepare($sql);
 			$req->bindValue(':server_id', $id, PDO::PARAM_INT);
 			$req->execute();
@@ -1738,6 +1792,9 @@ class Admin extends User {
 		}
 	}
 	
+	/**
+	 * Return if Dropbox is configured
+	 */
 	static function dropboxPossible() {
 		if(APP_KEY == '' or APP_SECRET == '') {
 			return 0;

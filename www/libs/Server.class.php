@@ -1,5 +1,9 @@
 <?php 
 
+/**
+ * Physical Server class
+ * @author V_paranoiaque
+ */
 class Server {
 	
 	private $id;
@@ -13,62 +17,107 @@ class Server {
 	
 	/*** Get/Set ***/
 	
+	/**
+	 * Constructor
+	 * @param number $id server id
+	 */
 	function __construct($id) {
 		$this->id = $id;
 	}
 	
+	/**
+	 * Return server id
+	 */
 	function getId() {
 		return $this->id;
 	}
 	
+	/**
+	 * Return server name
+	 */
 	function getName() {
 		return $this->name;
 	}
 	
+	/**
+	 * Set server name
+	 * @param string $name server name
+	 */
 	function setName($name) {
 		$this->name = $name;
 	}
 	
+	/**
+	 * Get server address
+	 */
 	function getAddress() {
 		return $this->address;
 	}
 	
+	/**
+	 * Setr server address
+	 * @param string $address server address, ip or name
+	 */
 	function setAddress($address) {
 		$this->address = $address;
 	}
 	
+	/**
+	 * Get server description
+	 */
 	function getDescription() {
 		return $this->description;
 	}
 	
+	/**
+	 * Set server description
+	 * @param string $description server description
+	 */
 	function setDescription($description) {
 		$this->description = $description;
 	}
 	
+	/**
+	 * Get the number of VPS
+	 */
+	function getNbVps() {
+	 return $this->nbVps;
+	}
+	
+	/**
+	 * Set the number of VPS
+	 * @param number $nb number of VPS
+	 */
 	function setNbVps($nb) {
 		$this->nbVps = $nb;
 	}
 	
-	function getNbVps() {
-		return $this->nbVps;
-	}
-	
-	function vpsList() {
-		
-	}
-	
+	/**
+	 * Get the server key
+	 */
 	function getKey() {
 		return $this->key;
 	}
 	
+	/**
+	 * Set the server key
+	 * @param string $key server key
+	 */
 	function setKey($key) {
 		$this->key = $key;
 	}
 	
+	/**
+	 * Get the daemon port
+	 */
 	function getPort() {
 		return $this->port;
 	}
 	
+	/** 
+	 * Set the server port
+	 * @param number $port server oirt
+	 */
 	function setPort($port) {
 		$this->port = $port;
 	}
@@ -138,7 +187,7 @@ class Server {
 				            origin_sample= :origin_sample,
 				            onboot= :onboot,
 				            quotatime= :quotatime,
-							diskspace= :diskspace,
+				            diskspace= :diskspace,
 				            ram= :ram,
 				            ram_current= :ram_current,
 				            swap= :swap,
@@ -212,9 +261,7 @@ class Server {
 	}
 	
 	/**
-	 * Start a Vps
-	 * @param vps id
-	 * @return unknown
+	 * List available templates
 	 */
 	function templateList() {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -226,8 +273,8 @@ class Server {
 	
 	/**
 	 * Rename a template
-	 * @param old name
-	 * @param new name
+	 * @param string $old the old name
+	 * @param string $new the new name
 	 */
 	function templateRename($old, $new) {
 		$para = array('old' => $old, 'new' => $new);
@@ -237,7 +284,7 @@ class Server {
 	
 	/**
 	 * Add a template
-	 * @param template name
+	 * @param string $name template's name
 	 */
 	function templateAdd($name) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -246,7 +293,7 @@ class Server {
 	
 	/**
 	 * Delete a template
-	 * @param template name
+	 * @param string $name template's name
 	 */
 	function templateDelete($name) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -257,8 +304,8 @@ class Server {
 	
 	/**
 	 * Create a new Vps
-	 * @param Vps id
-	 * @param all parameters
+	 * @param number $id Vps id
+	 * @param array $para all parameters
 	 */
 	function setVpsAdd($id, $para) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -268,8 +315,8 @@ class Server {
 	
 	/**
 	 * Modifie a Vps
-	 * @param Vps id
-	 * @param parameters
+	 * @param number $id Vps id
+	 * @param array $para parameters
 	 */
 	function vpsUpdate($id, $para) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -279,7 +326,7 @@ class Server {
 	
 	/**
 	 * Start a Vps
-	 * @param vps id
+	 * @param number $id vps id
 	 */
 	function start($id=0) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -289,7 +336,7 @@ class Server {
 	
 	/**
 	 * Stop a Vps
-	 * @param vps id
+	 * @param number $id vps id
 	 */
 	function stop($id=0) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -299,7 +346,7 @@ class Server {
 	
 	/**
 	 * Restart a Vps
-	 * @param vps id
+	 * @param number $id vps id
 	 */
 	function restart($id=0) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -309,7 +356,7 @@ class Server {
 	
 	/**
 	 * Delete a Vps
-	 * @param vps id
+	 * @param number $id vps id
 	 */
 	function delete($id) {
 		$connect = new Socket($this->address, $this->port, $this->key);
@@ -354,6 +401,9 @@ class Server {
 		fclose($file);
 	}
 	
+	/**
+	 * Get Antivirus scan result
+	 */
 	function scanResult() {
 		$logFile = '/usr/share/vca/www/scanlogs/'.$this->getId().'.log';
 		

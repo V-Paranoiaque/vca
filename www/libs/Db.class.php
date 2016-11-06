@@ -2,13 +2,16 @@
 
 /**
  * Database class
- * @author mighty
+ * @author V_paranoiaque
  */
 class Db {
 
-	protected static $instance;
-	protected $db;
-
+	protected static $instance; /*!< Access to the DB */
+	protected $db; /*!< Store the DB connection */
+	
+	/**
+	 * Make the connexion to the DB with PDO
+	 */
 	function __construct() {
 		if(DB_TYPE == 'MYSQL') {
 			$this->db = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
@@ -22,6 +25,9 @@ class Db {
 		}
 	}
 	
+	/**
+	 * Return the link to the DB
+	 */
 	static function link() {
 		//If link to database does not exist
 		if(!self::$instance) {

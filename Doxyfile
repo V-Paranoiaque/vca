@@ -1,0 +1,12 @@
+RECURSIVE        = YES
+PROJECT_NAME     = VCA
+OUTPUT_DIRECTORY = doc/
+
+ENABLE_PREPROCESSING = YES
+MACRO_EXPANSION      = YES
+EXPAND_ONLY_PREDEF   = YES
+
+EXCLUDE_PATTERNS  = */www/dropbox-sdk/*
+EXCLUDE_PATTERNS += */www/libs/plugins/*
+EXCLUDE_PATTERNS += */www/libs/Smarty*
+EXCLUDE_PATTERNS += */www/libs/sysplugins/*

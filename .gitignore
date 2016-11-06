@@ -1,3 +1,5 @@
 daemon/__pycache__/*
 .project
 .pydevproject
+doc/
+

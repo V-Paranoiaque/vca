@@ -54,15 +54,29 @@ def handle(connection, address):
         logger.debug("Closing socket")
         connection.close()
 
+##Physical Server class
 class VcaServer(object):
+    
+    ##Constructor
+    #
+     ##@param pidfile pid file
+     ##@param stdin stdin
+     ##@param stdout stdout
+     ##@param stderr stderr
     def __init__(self, pidfile='/var/run/vcadaemon.pid', stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
         import logging
+        ##Loger
         self.logger = logging.getLogger("server")
+        ##stdin
         self.stdin = stdin
+        ##stdout
         self.stdout = stdout
+        ##stderr
         self.stderr = stderr
+        ##pid file
         self.pidfile = pidfile
    
+   ##Daemonize the Daemon
     def daemonize(self):
         try:
             pid = os.fork()
@@ -86,9 +100,11 @@ class VcaServer(object):
         open(self.pidfile,'w+').write("%s\n" % pid)
         return 1
    
+   ##Remove the Daemon's pid file
     def delpid(self):
         os.remove(self.pidfile)
-
+    
+    ##Start the Daemon
     def start(self):
         try:
             pf = open(self.pidfile,'r')
@@ -104,7 +120,8 @@ class VcaServer(object):
         
         if self.daemonize() > 0:
             self.run()
-
+    
+    ##Stop the Daemon
     def stop(self):
         try:
             pf = open(self.pidfile,'r')
@@ -129,11 +146,13 @@ class VcaServer(object):
             else:
                 print(str(err))
                 sys.exit(1)
-
+    
+    ##Restart the Daemon
     def restart(self):
         self.stop()
         self.start()
 
+    ##Launch the Daemon main loop
     def run(self):
         if os.path.isfile('/usr/share/vca/daemon/vca.cfg'):
             global vcakey
@@ -141,10 +160,13 @@ class VcaServer(object):
             config = configparser.ConfigParser()
             config.read("/usr/share/vca/daemon/vca.cfg")
             vcakey = hashlib.md5(config.get('DEFAULT', 'key').encode()).hexdigest()
+            ##Daemon port
             self.port = int(config.get('DEFAULT', 'port'))
+            ##Daemon host
             self.host = config.get('DEFAULT', 'host')
             
             self.logger.debug("listening")
+            ##Store socket
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket.bind((self.host, self.port))
             self.socket.listen(1)
@@ -157,6 +179,7 @@ class VcaServer(object):
                 process.start()
                 self.logger.debug("Started process %r", process)
     
+    ##Load Tun and fuse modules
     def loadModules(self):
         tun = subprocess.Popen('lsmod | grep tun | wc -l', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         if tun.stdout.readline().decode().strip() == '1':

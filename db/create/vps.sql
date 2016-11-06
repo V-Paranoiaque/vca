@@ -22,7 +22,9 @@ CREATE TABLE IF NOT EXISTS `vps` (
   `nproc` int(10) unsigned NOT NULL,
   `loadavg` varchar(63) NOT NULL,
   `diskspace_current` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `backup_limit` tinyint(3) unsigned NOT NULL
+  `backup_limit` tinyint(3) unsigned NOT NULL,
+  `mod_fuse` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `mod_tun` tinyint(3) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `vps`

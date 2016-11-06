@@ -4,32 +4,46 @@ import shutil
 import os
 import time
 
+##Vps manipulation class
 class Vps:
     
+    ##Constructor
+    #
+    #@param id the Vps's id
     def __init__(self, id):
         self._id = id
+        ##Load average
         self.loadavg = 0
         
         #Default value
-        #self.physpages
-        #self.swappages
-        #self.diskspace
+        ##Current used disk space
         self.diskspace_current = 0
         #self.diskinodes
+        
+        ##Grace period for the disk quota overusage defined in seconds
         self.quotatime = 0
+        ##CPU prioriti (vps cpu units)/(total of vps cpu units)
         self.cpuunits = 1000
+        ##Name of the Operating System template
         self.ostemplate = ''
-        #self.origin_sample
+        ##The Vps hostname
         self.hostname = ''
+        ##Number of CPU
         self.cpus = 1
+        ##Limit of CPU (max : number of cpu * 100)
         self.cpulimit = 100
+        ##The Vps's ipv4
         self.ip = ''
+        ##1 if the Vps start on the server startup, else 0
         self.onboot = 1
         
         #Other var
+        ##Memory
         self.ram         = 0
+        ##Current used memory
         self.ram_current = 0
     
+    ##Load Vps's configuration file
     def loadConf(self):
         conf = open("/etc/vz/conf/"+self._id+".conf", "r")
         content = conf.read()
@@ -41,8 +55,10 @@ class Vps:
                 line = line[1].split('=')
                 
                 if line[0] == 'PHYSPAGES':
+                    ##Total number of RAM pages used by processes in a container
                     self.physpages = line[1][2:]
                 elif line[0] == 'SWAPPAGES':
+                    ##The amount of swap space to show in container
                     self.swappages = line[1][2:]
                     if self.swappages[-1] == 'M':
                         self.swappages = int(self.swappages[:-1])*1024
@@ -51,6 +67,7 @@ class Vps:
                 elif line[0] == 'DISKSPACE':
                     var = line[1].split(':')
                     if len(var) == 1 : 
+                        ##Size of disk space the VPS may consume, in Kb
                         self.diskspace = line[1]
                     else:
                         self.diskspace = var[1]
@@ -61,6 +78,7 @@ class Vps:
                         self.diskspace = int(float(self.diskspace[:-1])*1024*1024)
                     
                 elif line[0] == 'DISKINODES':
+                    ##Total number of disk inodes the Container can allocate 
                     self.diskinodes = line[1]
                 elif line[0] == 'QUOTATIME':
                     self.quotatime = line[1]
@@ -69,6 +87,7 @@ class Vps:
                 elif line[0] == 'OSTEMPLATE':
                     self.ostemplate = line[1]
                 elif line[0] == 'ORIGIN_SAMPLE':
+                    ##VPS specifications template
                     self.origin_sample = line[1]
                 elif line[0] == 'HOSTNAME':
                     self.hostname = line[1]
@@ -96,6 +115,9 @@ class Vps:
         
         conf.close()
     
+    ##Modify the configuration of the Vps
+    #
+    ##@param para array of parameter and new values
     def modConf(self, para):
         for (index, val) in para.items():
             if index == 'name':
@@ -133,21 +155,31 @@ class Vps:
             elif index == 'cpuunits':
                 subprocess.call('vzctl set '+str(self._id)+' --cpuunits '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
+    ##Start the Vps
     def start(self):
         subprocess.Popen('vzctl start '+str(self._id)+' --wait', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
+    ##Stop the Vps
     def stop(self):
         subprocess.call('vzctl stop '+str(self._id)+' --fast', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
+    ##Restart the Vps
     def restart(self):
         subprocess.Popen('vzctl restart '+str(self._id)+' --wait', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
+    ##Destroy the Vps
     def destroy(self):
         subprocess.call('vzctl delete '+str(self._id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            
+    
+    ##Modify the root password of the Vps
+    #
+    #@param password the new password
     def password(self, password):
         subprocess.Popen('vzctl set '+str(self._id)+' --userpasswd root:'+password, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
+    ##Run a command on the Vps
+    #
+    #@param cmd the Unix command
     def cmd(self, cmd):
         p = subprocess.Popen('vzctl exec '+str(self._id)+' '+str(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         text = ''
@@ -156,6 +188,9 @@ class Vps:
         
         return json.dumps(text)
 
+    ##Reinstall the Vps
+    #
+    #@param ostpl name of the used OS template
     def reinstall(self, ostpl):
         shutil.copyfile('/etc/vz/conf/'+str(self._id)+'.conf', '/etc/vz/conf/ve-'+str(self._id)+'.conf-sample')
         self.stop()
@@ -163,9 +198,11 @@ class Vps:
         subprocess.call('vzctl create '+str(self._id)+' --ostemplate '+ostpl+' --config '+str(self._id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         os.remove('/etc/vz/conf/ve-'+str(self._id)+'.conf-sample')
     
+    ##Migrate a Vps from the current server to an other server
     def move(self, destination):
         subprocess.Popen('vzmigrate '+destination+' '+str(self._id), shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     
+    ##Make a backup
     def backupAdd(self):
         #Sys var
         vzprivate = "/vz/private/"+self._id
@@ -196,12 +233,16 @@ class Vps:
         
         return backup
     
+    ##Delete a backup
+    #
+    ##@param name the timestamp of the backup
     def backupDelete(self, name):
         if os.path.isfile('/vz/dump/ve-dump.'+self._id+'.'+name+'.tar'):
             os.remove('/vz/dump/ve-dump.'+self._id+'.'+name+'.tar')
         elif os.path.isfile('/vz/dump/ve-dump.'+self._id+'.'+name+'.tar.gz'):
             os.remove('/vz/dump/ve-dump.'+self._id+'.'+name+'.tar.gz')
-        
+    
+    ##Return all the backups of the current Vps
     def backupList(self):
         backup=[]
         begin = 've-dump.'+self._id+'.'
@@ -211,6 +252,9 @@ class Vps:
                     backup.append(i)
         return json.dumps(backup)
     
+    ##Restore a backup
+    #
+    ##@param name the timestamp of the backup
     def backupRestore(self, name):
         #Sys var
         vzprivate = "/vz/private/"+self._id
@@ -242,6 +286,10 @@ class Vps:
         self.snapshotClean()        
         shutil.rmtree(vzprivate+'/dump')
     
+    ##Make a backup and upload it on Dropbox
+    #
+    #@param access_token Dropbox's API access token
+    #@param password secret password to protect the backup
     def backupDropbox(self, access_token, password):
         import dropbox
         
@@ -263,6 +311,7 @@ class Vps:
         
         return response
     
+    ##Delete all the backups of the current Vps
     def snapshotClean(self):
         list = subprocess.Popen('vzctl snapshot-list '+self._id+' -H -o UUID', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         for line in list.stdout.readlines():

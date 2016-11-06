@@ -1,5 +1,9 @@
 <?php 
 
+/**
+ * User class
+ * @author V_paranoiaque
+ */
 class User extends Guest {
 	
 	private $id;
@@ -7,82 +11,129 @@ class User extends Guest {
 	private $rank;
 	private $mail;
 	private $nbVps;
-	private $key;
 	private $language;
 	private $bkppass;
 	private $dropbox;
 	
 	/*** Get/Set ***/
 	
+	/**
+	 * Constructor
+	 * @param number $id user's id
+	 * @param string $name user's name
+	 */
 	function __construct($id, $name='') {
 		$this->id   = $id;
 		$this->name = $name;
 	}
 	
+	/**
+	 * Return the user's ID
+	 */
 	function getId() {
 		return $this->id;
 	}
 	
+	/**
+	 * Return the user's name
+	 */
 	function getName() {
 		return $this->name;
 	}
 	
+	/**
+	 * Set the user's name
+	 * @param string $name the name
+	 */
 	function setName($name) {
 		$this->name = $name;
 	}
 	
+	/**
+	 * Return the user's rank
+	 */
 	function getRank() {
 		return $this->rank;
 	}
 	
+	/**
+	 * Set the user's rank
+	 * @param number $rank the rank
+	 */
 	function setRank($rank) {
 		$this->rank = $rank;
 	}
 	
+	/**
+	 * Return the user's email
+	 */
 	function getMail() {
 		return $this->mail;
 	}
 	
-	function setMail($mail) {
-		$this->mail = $mail;
+	/**
+	 * Set the user's email
+	 * @param string $email user email
+	 */
+	function setMail($email) {
+		$this->mail = $email;
 	}
 	
+	/**
+	 * Return the number of user's VPS
+	 */
 	function getNbVps() {
 		return $this->nbVps;
 	}
 	
+	/**
+	 * Set the number of user's VPS
+	 * @param number $nb number of VPS
+	 */
 	function setNbVps($nb) {
 		$this->nbVps = $nb;
 	}
 	
-	function getKey() {
-		return $this->key;
-	}
-	
-	function setKey($key) {
-		$this->key = $key;
-	}
-	
+	/**
+	 * Return the user's language
+	 */
 	function getLanguage() {
 		return $this->language;
 	}
 	
+	/**
+	 * Set the user's language
+	 */
 	function setLanguage($language) {
 		$this->language = $language;
 	}
 	
+	/**
+	 * Get Backup password
+	 */
 	function getBkppass() {
 		return $this->bkppass;
 	}
 	
+	/**
+	 * Set Backup password
+	 * @param string $pass Backup password
+	 */
 	function setBkppass($pass) {
 		$this->bkppass = $pass;
 	}
 	
+	/**
+	 * Get Dropbox token
+	 */
 	function getDropbox() {
 		return $this->dropbox;
 	}
 	
+	/**
+	 * Set Dropbox token
+	 * @param string $token Dropbox identication token
+	 */
 	function setDropbox($token) {
 		$this->dropbox = $token;
 	}
@@ -133,9 +184,16 @@ class User extends Guest {
 		);
 	}
 	
+	/**
+	 * Define the Token configuration
+	 * @param string $domainkey shared domain key
+	 * @param number $key_size generated code size
+	 * @param timestamp $validity generated code validity
+	 */
 	function configurationDefine($domainkey, $key_size,$validity) {
 		
 	}
+	
 	/*** Users ***/
 	
 	/**
@@ -153,6 +211,9 @@ class User extends Guest {
 		$req->execute();
 	}
 	
+	/**
+	 * User's profile information
+	 */
 	function userProfile() {
 		$link = Db::link();
 		
@@ -175,14 +236,19 @@ class User extends Guest {
 		return $do;
 	}
 	
+	/**
+	 * Return all users
+	 */
 	function userList() { return null; }
 	
 	/**
 	 * Update user information
-	 * @param user id
-	 * @param user name
-	 * @param user mail
-	 * @return error
+	 * @param number $id user id
+	 * @param string $user_name user name
+	 * @param string $user_mail user mail
+	 * @param string $language user language
+	 * @param number $rank user rank (not used)
+	 * @return error id
 	 */
 	function userUpdate($id, $user_name='', $user_mail='', $language='', $rank=-1) {
 		$link = Db::link();
@@ -219,13 +285,26 @@ class User extends Guest {
 		return 5;
 	}
 	
+	/**
+	 * Update password
+	 * @param string $password new password
+	 * @param number $id user id
+	 */
 	function userDefinePassword($password, $id=0) {}
+	
+	/**
+	 * Define user token information
+	 * @param number $tokenId user token id
+	 * @param number $pin user pin
+	 * @param boolean $activated activated or not
+	 * @param number $userId user id
+	 */
 	function userDefineToken($tokenId, $pin, $activated, $userId) {}
 	
 	/**
 	 * Update password
-	 * @param new password
-	 * @param unused parameter
+	 * @param string $old old password
+	 * @param string $new new password
 	 */
 	function userPassword($old, $new) {
 		$link = Db::link();
@@ -256,8 +335,8 @@ class User extends Guest {
 	
 	/**
 	 * Define user token information
-	 * @param number  user pin
-	 * @param boolean activated or not
+	 * @param number $pin user pin
+	 * @param boolean $activated activated or not
 	 */
 	function userToken($pin, $activated) {
 		$link = Db::link();
@@ -283,10 +362,31 @@ class User extends Guest {
 		return 14;
 	}
 	
+	/**
+	 * Create a new user
+	 * @param string $user_name user name
+	 * @param string $user_mail user mail
+	 * @param string $user_password user password
+	 * @return number error
+	 */
 	function userNew($user_name='', $user_mail='', $user_password='') { return null; }
+
+	/**
+	 * Delete an user
+	 * @param number $id user id
+	 */
 	function userDelete($id) { return null; }
+
+	/**
+	 * Return the current user VPS list
+	 * @param number $id user id (not used)
+	 */
 	function userVps($id) { return $this->vpsList(); }
 	
+	/**
+	 * Modify the user's language
+	 * @param string $lang new language
+	 */
 	function userLanguage($lang) {
 		$link = Db::link();
 		$langList = self::languageList();
@@ -304,6 +404,10 @@ class User extends Guest {
 	
 	/*** Language ***/
 	
+	/**
+	 * List all available languages
+	 * @return array language list
+	 */
 	static function languageList() {
 		return array(
 			'en_GB' => 'English',
@@ -314,6 +418,9 @@ class User extends Guest {
 	
 	/*** Requests ***/
 	
+	/**
+	 * List all user's requests
+	 */
 	function requestList() {
 		$list = array();
 	
@@ -339,6 +446,11 @@ class User extends Guest {
 		return $list;
 	}
 	
+	/**
+	 * Send a new request to the panel's admin
+	 * @param string $title the title of the message
+	 * @param string $message the message
+	 */
 	function requestNew($title, $message) {
 		$link = Db::link();
 		
@@ -377,6 +489,10 @@ class User extends Guest {
 		$req->execute();
 	}
 	
+	/**
+	 * Get all information for a request
+	 * @param number $request request id
+	 */
 	function requestInfo($request) {
 		$link = Db::link();
 		$requestList = $this->requestList();
@@ -429,11 +545,16 @@ class User extends Guest {
 		);
 	}
 	
-	function requestAnswer($topic, $message) {
+	/**
+	 * Anwser to a request
+	 * @param number $request request id
+	 * @param string $message message
+	 */
+	function requestAnswer($request, $message) {
 		$link = Db::link();
 		$requestList = $this->requestList();
 		
-		if(empty($requestList[$topic]) or !empty($requestList[$topic]['resolved'])) {
+		if(empty($requestList[$request]) or !empty($requestList[$request]['resolved'])) {
 			return null;
 		}
 		
@@ -442,13 +563,17 @@ class User extends Guest {
 		        VALUES
 		        (:topic, :message, :date, :user)';
 		$req = $link->prepare($sql);
-		$req->bindValue(':topic', $topic, PDO::PARAM_INT);
+		$req->bindValue(':topic', $request, PDO::PARAM_INT);
 		$req->bindValue(':message', $message, PDO::PARAM_STR);
 		$req->bindValue(':date', $_SERVER['REQUEST_TIME'], PDO::PARAM_INT);
 		$req->bindValue(':user', $this->getId(), PDO::PARAM_INT);
 		$req->execute();
 	}
 	
+	/**
+	 * Close a request
+	 * @param number $request request id
+	 */
 	function requestClose($request) {
 		$link = Db::link();
 		$sql = 'UPDATE request_topic
@@ -461,32 +586,131 @@ class User extends Guest {
 	}
 	
 	/*** IP ***/
+
+	/**
+	 * List available IP
+	 */
 	function ipFree() { return null; }
+
+	/**
+	 * List all IP
+	 */
 	function ipList() { return null; }
+
+	/**
+	 * Add a new IP
+	 * @param string $ip IP
+	 */
 	function ipNew($ip) { return null; }
+
+	/**
+	 * Delete an IP
+	 * @param string $ip IP
+	 */
 	function ipDelete($ip) { return null; }
 	
 	/*** Serveur ***/
+	
+	/**
+	 * Return all physical servers
+	 */
 	function serverList() { return null; }
+	
+	/**
+	 * Add a new server on the panel
+	 * @param string $name name
+	 * @param string $address address (name or IP)
+	 * @param number $port communication port
+	 * @param string $key key
+	 * @param string $description description
+	 */
 	function serverAdd($name,$address,$port,$key,$description='') { return null; }
+	
+	/**
+	 * Remove a server from the panel
+	 * @param number $id server id
+	 */
 	function serverDelete($id) { }
+	
+	/**
+	 * Update server information
+	 * @param number $id server id
+	 * @param string $var all information
+	 */
 	function serverUpdate($id, $var)  { return null; }
+	
+	/**
+	 * Reload server information
+	 * @param number $id server id, all servers by default
+	 */
 	function serverReload($id=0) { return null; }
+	
+	/**
+	 * Restart server
+	 * @param number $id server id
+	 */
 	function serverRestart($id=0) { }
+	
+	/**
+	 * Return server template
+	 * @param number $id server id
+	 * @return template list
+	 */
 	function serverTemplate($id=0) { return null; }
+	
+	/**
+	 * Rename an OS template
+	 * @param number $id server's id
+	 * @param string $old old name
+	 * @param string $new new name
+	 */
 	function serverTemplateRename($id, $old, $new) { return null; }
+	
+	/**
+	 * Download/Upload a template
+	 * @param number $id server id
+	 * @param string $name template name
+	 */
 	function serverTemplateAdd($id, $name) { return null; }
+	
+	/**
+	 * Delete a template
+	 * @param number $id server id
+	 * @param string $name template name
+	 */
 	function serverTemplateDelete($id, $name) { return null; }
+	
+	/**
+	 * Refresh the template list
+	 * @param number $server server id
+	 */
 	function serverTemplateRefresh($server) { return null; }
+	
+	/**
+	 * List VPS backups
+	 * @param number $server server id
+	 */
 	function serverBackup($server) { return null; }
+	
+	/**
+	 * Delete a backup
+	 * @param number $server server id
+	 * @param number $idVps vps id
+	 * @param string $name backup name
+	 */
 	function serverBackupDelete($server, $idVps, $name) { return null; }
+	
+	/**
+	 * Scan a server with clamav
+	 * @param number $server the server's id
+	 */
 	function serverScan($server) { return null; }
 	
 	/*** VPS ***/
 	
 	/**
 	 * Return Vps list
-	 * @param server id
+	 * @param number $server server id
 	 */
 	function vpsList($server=0) {
 	
@@ -543,12 +767,17 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Set VPS configuration
+	 * @param number $id server's id
+	 * @param array $var all configuration
+	 */
 	function vpsAdd($id, $var) {}
 	
 	/**
 	 * Set VPS configuration
-	 * @param unknown $id
-	 * @param unknown $var
+	 * @param number $id Vps id
+	 * @param array $var Vps parameters
 	 */
 	function vpsUpdate($id, $var) {
 		$link = Db::link();
@@ -580,7 +809,7 @@ class User extends Guest {
 		$sql = 'SELECT server.server_id, server_address, vps_id,
 		               server_key, server_port
 		        FROM vps
-				JOIN server ON vps.server_id=server.server_id
+		        JOIN server ON vps.server_id=server.server_id
 		        WHERE vps_id=:vps_id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':vps_id', $vps['id'], PDO::PARAM_INT);
@@ -598,15 +827,15 @@ class User extends Guest {
 	
 	/**
 	 * Reload server information
-	 * @param number $id
+	 * @param number $id vps id
 	 */
 	function vpsReload($id=0) {
 	
 		$link = Db::link();
 		$sql = 'SELECT vps.server_id, server_name, server_address,
-	               server_description, server_key, server_port
+		               server_description, server_key, server_port
 		        FROM vps
-				JOIN server ON server.server_id=vps.server_id
+		        JOIN server ON server.server_id=vps.server_id
 		        WHERE vps_id= :vps_id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':vps_id', $id, PDO::PARAM_INT);
@@ -621,11 +850,15 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Delete a Vps
+	 * @param number $id vps id
+	 */
 	function vpsDelete($id) {}
 	
 	/**
 	 * Start Vps
-	 * @param vps id
+	 * @param number $id vps id
 	 */
 	function vpsStart($id) {
 		$link = Db::link();
@@ -651,7 +884,7 @@ class User extends Guest {
 	
 	/**
 	 * Stop Vps
-	 * @param vps id
+	 * @param number $id vps id
 	 */
 	function vpsStop($id) {
 		$link = Db::link();
@@ -677,7 +910,7 @@ class User extends Guest {
 	
 	/**
 	 * Restart Vps
-	 * @param vps id
+	 * @param number $id vps id
 	 */
 	function vpsRestart($id) {
 		$link = Db::link();
@@ -701,13 +934,26 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Clone a VPS
+	 * @param number $idVps Vps's id
+	 * @param string $ip Ip of the new Vps
+	 * @param string $hostname Hostname of the new Vps
+	 */
 	function vpsClone($idVps, $ip, $hostname) {}
+	
+	/**
+	 * Execute a command on a VPS
+	 * @param number $idVps vps id
+	 * @param string $command command
+	 * @return command answer
+	 */
 	function vpsCmd($idVps, $command) {}
 	
 	/**
 	 * Modifie Vps root password
-	 * @param vps id
-	 * @param new password
+	 * @param number $idVps vps id
+	 * @param string $password new password
 	 */
 	function vpsPassword($idVps, $password) {
 		$link = Db::link();
@@ -731,15 +977,15 @@ class User extends Guest {
 	
 	/**
 	 * Return server template
-	 * @param server id
-	 * @return template list
+	 * @param number $id server id
+	 * @return array template list
 	 */
 	function vpsTemplate($id=0) {
 		$link = Db::link();
 		$sql = 'SELECT vps.server_id, server_name, server_address,
 		               server_description, server_key, server_port
 		        FROM vps
-				JOIN server ON vps.server_id=server.server_id
+		        JOIN server ON vps.server_id=server.server_id
 		        WHERE vps_id= :server_id';
 		$req = $link->prepare($sql);
 		$req->bindValue(':server_id', $id, PDO::PARAM_INT);
@@ -799,8 +1045,8 @@ class User extends Guest {
 	
 	/**
 	 * Reinstall a VPS
-	 * @param vps id
-	 * @param operating system
+	 * @param number $idVps vps id
+	 * @param string $os operating system
 	 */
 	function vpsReinstall($idVps, $os) {
 		$link = Db::link();
@@ -831,11 +1077,17 @@ class User extends Guest {
 	
 	/**
 	 * Move a VPS
+	 * @param number $serverFrom server id source
+	 * @param number $vps vps id
+	 * @param number $serverDest server id destination
 	 */
 	function vpsMove($serverFrom, $vps, $serverDest) {
 		return null;
 	}
 	
+	/**
+	 * Return the number of VPS of the current user
+	 */
 	function vpsNb() {
 		$link = Db::link();
 		
@@ -850,6 +1102,10 @@ class User extends Guest {
 		return $do->nb;
 	}
 	
+	/**
+	 * List all the backups of a Vps
+	 * @param number $idVps Vps's id
+	 */
 	static function vpsBackup($idVps) {
 		$link = Db::link();
 	
@@ -870,6 +1126,10 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Create a num backup
+	 * @param number $idVps vps id
+	 */
 	static function vpsBackupAdd($idVps) {
 		$link = Db::link();
 	
@@ -898,6 +1158,11 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Restore a backup
+	 * @param number $idVps vps id
+	 * @param string $name backup name
+	 */
 	function vpsBackupRestore($idVps, $name) {
 		$link = Db::link();
 	
@@ -918,6 +1183,11 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Delete a backup
+	 * @param number $idVps vps id
+	 * @param string $name backup name
+	 */
 	function vpsBackupDelete($idVps, $name) {
 		$link = Db::link();
 	
@@ -938,6 +1208,12 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Make a backup on Dropbox
+	 * @param number  $idVps vps id
+	 * @param boolean $protected use a password or not (0: no, 1: yes)
+	 * @return unknown
+	 */
 	function vpsDropboxAdd($idVps, $protected=1) {
 		$link = Db::link();
 	
@@ -964,6 +1240,10 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * List backup scheduling
+	 * @param number $idVps vps id
+	 */
 	function vpsSchedule($idVps) {
 		$link = Db::link();
 		$list = array();
@@ -982,6 +1262,17 @@ class User extends Guest {
 		return $list;
 	}
 	
+	/**
+	 * Add/Update a scheduled backup
+	 * @param number $vps vps id
+	 * @param number $save new schedule or update
+	 * @param string $name name
+	 * @param number $minute minutes
+	 * @param number $hour hours
+	 * @param number $dayw days of the week
+	 * @param number $dayn days of the month
+	 * @param number $month months
+	 */
 	function vpsScheduleAdd($vps, $save, $name, $minute, $hour, $dayw, $dayn, $month) {
 		$link = Db::link();
 		
@@ -1022,6 +1313,10 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Delete a VPS schedule backup
+	 * @param number $save schedule id
+	 */
 	function vpsScheduleDelete($save) {
 		$link = Db::link();
 		
@@ -1033,6 +1328,10 @@ class User extends Guest {
 	}
 	
 	/*** Backup password ***/
+	
+	/**
+	 * Backup password is defined or not
+	 */
 	function bkppassStatus() {
 		if($this->bkppass == '') {
 			return 0;
@@ -1042,6 +1341,10 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Define a backup password
+	 * @param string $bkppass backup password
+	 */
 	function bkppassDefine($bkppass) {
 		$link = Db::link();
 		
@@ -1056,6 +1359,9 @@ class User extends Guest {
 		$this->bkppass = $bkppass;
 	}
 	
+	/**
+	 * Get Dropbox URL for authentication
+	 */
 	function dropboxGetUrl() {
 		$appInfo = new Dropbox\AppInfo(APP_KEY, APP_SECRET);
 		$clientIdentifier = "VCA";
@@ -1066,6 +1372,9 @@ class User extends Guest {
 		return $authorizeUrl;
 	}
 	
+	/**
+	 * Get Dropbox Token for authentication
+	 */
 	function dropboxGetToken($authCode) {
 		$link = Db::link();
 		$appInfo = new Dropbox\AppInfo(APP_KEY, APP_SECRET);
@@ -1086,6 +1395,9 @@ class User extends Guest {
 		}
 	}
 	
+	/**
+	 * Return if Dropbox is configured or not
+	 */
 	function dropboxStatus() {
 		if($this->dropbox == '') {
 			return 0;

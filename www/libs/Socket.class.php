@@ -1,11 +1,21 @@
 <?php 
 
+/**
+ * The Socket class used to communicate between servers
+ * @author V_paranoiaque
+ */
 class Socket {
 
-	private $link=false;
-	private $iv;
-	private $key;
+	private $link=false; /*!< Store Socket connection */
+	private $iv; /*!< IV */
+	private $key; /*!< Secret Key */
 
+	/**
+	 * Connect by socket to a host
+	 * @param string $address host ip or name
+	 * @param number $port used port
+	 * @param string $key secret key
+	 */
 	function __construct($address, $port, $key) {
 		
 		if(!filter_var($address, FILTER_VALIDATE_IP)) {
@@ -22,6 +32,12 @@ class Socket {
 		$this->key = md5($key);
 	}
 	
+	/**
+	 * Send an action to a server
+	 * @param string $action action
+	 * @param number $id vps id
+	 * @param array $para parameters
+	 */
 	function write($action, $id=0, $para='') {
 		$data = array(
 			'action' => $action,
@@ -40,6 +56,9 @@ class Socket {
 		fwrite($this->link, json_encode($trame));
 	}
 	
+	/**
+	 * Read the answer from a socket write
+	 */
 	function read() {
 		$fullResult = '';
 		

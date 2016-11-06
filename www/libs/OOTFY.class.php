@@ -14,8 +14,8 @@ class OOTFY
 	/**
 	 * Define user parameters
 	 * There is no control on domainkey and userid
-	 * @param domainkey string can be unique or the same for every users
-	 * @param userid    string must be specific to only one user
+	 * @param string $domainkey can be unique or the same for every users
+	 * @param string $userid    must be specific to only one user
 	 **/
 	function __construct($domainkey='', $userid='')
 	{
@@ -25,7 +25,7 @@ class OOTFY
 	
 	/**
 	 * Set new key size
-	 * @param int $keysize_new new key size
+	 * @param number $keysize_new new key size
 	 */
 	function set_keysize($keysize_new=4)
 	{
@@ -43,8 +43,8 @@ class OOTFY
 	
 	/**
 	 * Define period between two keys generation, in seconds
-	 * @param period_new int period between two key generation
-	 *                       must be between 15 and 90
+	 * @param number $period_new period between two key generation
+	 *                           must be between 15 and 90
 	 **/
 	function set_period($period_new=30)
 	{
@@ -60,6 +60,11 @@ class OOTFY
 		}
 	}
 	
+	/**
+	 * Calcul token
+	 * @param string $pin user pin
+	 * @return string token
+	 */
 	private function calcul_token($pin) {
 		$time = $_SERVER['REQUEST_TIME'] - $_SERVER['REQUEST_TIME']%$this->period;
 		
@@ -72,8 +77,8 @@ class OOTFY
 	/**
 	 * Check token authentification
 	 * Please log bad try
-	 * @param token string the token
-	 * @param pin   int    user's PIN
+	 * @param string $token the token
+	 * @param number $pin   user's PIN
 	 * @return 1 : Bad  token
 	 *         2 : Good token
 	 **/

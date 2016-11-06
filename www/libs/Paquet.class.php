@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Paquet class
+ * @author V_paranoiaque
+ * Used to send actions to VCA API
+ */
 class Paquet {
 	private $token   = '';
 	private $actions = array();
@@ -7,6 +12,9 @@ class Paquet {
 	private $answer=null;
 	private $rank=0;
 	
+	/**
+	 * Constructor
+	 */
 	function __construct() {
 		if(empty($_COOKIE['token'])) {
 			$_COOKIE['token'] = '';
@@ -18,6 +26,11 @@ class Paquet {
 		}
 	}
 	
+	/**
+	 * Add an action to the Stack
+	 * @param string $action action
+	 * @param array $para parameters
+	 */
 	function add_action($action, $para='') {
 		if($para == '') {
 			$para=array('');
@@ -25,6 +38,9 @@ class Paquet {
 		$this->actions[$action] = $para;
 	}
 	
+	/**
+	 * Send actions to the API
+	 */
 	function send_actions() {
 		$data = self::vcaAction($this->actions, $this->token);
 	 	
@@ -45,16 +61,16 @@ class Paquet {
 				}
 	
 				setcookie('token', $this->user->token, $temps, '/',
-	    				  $_SERVER['HTTP_HOST']);
+					  $_SERVER['HTTP_HOST']);
 				setcookie('temps', $temps, $temps, '/',
-	    				  $_SERVER['HTTP_HOST']);
+					  $_SERVER['HTTP_HOST']);
 			}
 			else {			
 				if($_COOKIE['temps'] < $temps) {
 					setcookie('token', $_COOKIE['token'], $temps, '/',
-		    				  $_SERVER['HTTP_HOST']);
+						  $_SERVER['HTTP_HOST']);
 					setcookie('temps', $temps, $temps, '/',
-		    				  $_SERVER['HTTP_HOST']);
+						  $_SERVER['HTTP_HOST']);
 				}
 			}
 			
@@ -86,26 +102,32 @@ class Paquet {
 		}
 	}
 	
+	/**
+	 * Get current language
+	 */
 	function getLanguage() {
 		if(defined('LANGUAGE')) {
 			return LANGUAGE;
 		}
 	}
 	
-	function getAnswer($action='', $num=0) {
+	/**
+	 * Get the anwser to an action
+	 * @param string $action action
+	 */
+	function getAnswer($action='') {
 		if(!empty($this->answer) && !empty($this->answer->$action)) {
-			if(!empty($num)) {
-				return $this->answer->$action->$num;
-			}
-			else {
-				return $this->answer->$action;
-			}
+			return $this->answer->$action;
 		}
 		else {
 			return '';
 		}
 	}
 	
+	/**
+	 * Return user information
+	 * @param string $arg requested information
+	 */
 	function userInfo($arg) {
 			
 		if($this->user == null) {
@@ -115,6 +137,11 @@ class Paquet {
 		return $this->user->$arg;
 	}
 	
+	/**
+	 * Execute actions
+	 * @param array $actions list of actions
+	 * @param string $token user token
+	 */
 	static function vcaAction($actions=array(), $token='') {
 		$answer = array('user', 'answer');
 	
