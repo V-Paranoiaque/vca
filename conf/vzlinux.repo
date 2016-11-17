@@ -1,0 +1,39 @@
+# virtuozzolinux.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for VirtuozzoLinux updates
+# unless you are manually picking other mirrors.
+#
+[virtuozzolinux-base]
+name=VirtuozzoLinux-$releasever - Base
+mirrorlist=http://repo.virtuozzo.com/vzlinux/mirrorlist/mirrors-7-os
+#baseurl=http://repo.virtuozzo.com/vzlinux/7.2/$basearch/os/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/VZLINUX_GPG_KEY
+
+#released updates
+[virtuozzolinux-updates]
+name=VirtuozzoLinux-$releasever - Updates
+mirrorlist=http://repo.virtuozzo.com/vzlinux/mirrorlist/mirrors-7-updates
+#baseurl=http://repo.virtuozzo.com/vzlinux/7.2/$basearch/updates/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/VZLINUX_GPG_KEY
+
+[virtuozzolinux-base-debuginfo]
+name=VirtuozzoLinux-$releasever - Base
+mirrorlist=http://repo.virtuozzo.com/vzlinux/mirrorlist/mirrors-7-os-debug
+#baseurl=http://repo.virtuozzo.com/vzlinux/7.2/$basearch/debug/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/VZLINUX_GPG_KEY
+
+[virtuozzolinux-updates-debuginfo]
+name=VirtuozzoLinux-$releasever - Base
+mirrorlist=http://repo.virtuozzo.com/vzlinux/mirrorlist/mirrors-7-updates-debug
+#baseurl=http://repo.virtuozzo.com/vzlinux/7.2/$basearch/updates-debug/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/VZLINUX_GPG_KEY

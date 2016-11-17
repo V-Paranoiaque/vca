@@ -1,0 +1,33 @@
+[openvz-os]
+name=OpenVZ
+mirrorlist=http://download.openvz.org/virtuozzo/mirrorlists/7.0/releases-os.mirrorlist
+#baseurl=http://download.openvz.org/virtuozzo/releases/7.0/$basearch/os/
+enabled=1
+gpgcheck=1
+priority=50
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Virtuozzo-7
+
+[openvz-updates]
+name=OpenVZ Updates
+mirrorlist=http://download.openvz.org/virtuozzo/mirrorlists/7.0/updates-os.mirrorlist
+#baseurl=http://download.openvz.org/virtuozzo/updates/7.0/$basearch/os/
+enabled=1
+gpgcheck=1
+priority=50
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Virtuozzo-7
+
+[openvz-os-debuginfo]
+name=OpenVZ os Debug packages
+mirrorlist=http://download.openvz.org/virtuozzo/mirrorlists/7.0/releases-debug.mirrorlist
+#baseurl=http://download.openvz.org/virtuozzo/releases/7.0/$basearch/debug/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Virtuozzo-7
+
+[openvz-updates-debuginfo]
+name=OpenVZ updates Debug packages
+mirrorlist=http://download.openvz.org/virtuozzo/mirrorlists/7.0/updates-debug.mirrorlist
+#baseurl=http://download.openvz.org/virtuozzo/updates/7.0/$basearch/debug/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Virtuozzo-7
