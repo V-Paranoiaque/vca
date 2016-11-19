@@ -17,7 +17,18 @@ if [ -f /etc/redhat-release ] ; then
 	if [ "${VERSION}" == "6" ] ; then 
 		SCRIPT="vca-centos6.bash"
 	elif [ "${VERSION}" == "7" ] ; then 
-		SCRIPT="vca-centos7.bash"
+		OPENVZ=0
+		while [ ${OPENVZ} != 1 ] && [ ${OPENVZ} != 2 ]; do
+			echo "Which server do you use?"
+			echo "1 OpenVZ 6"
+			echo "2 OpenVZ 7"
+			read OPENVZ
+		done
+		if [ "${OPENVZ}" == "1" ] ; then 
+			SCRIPT="vca-centos7.bash"
+		else
+			SCRIPT="vca-centos7-openvz7.bash"
+		fi
 	fi
 #Debian/Ubuntu
 elif [ -f /etc/debian_version ] ; then 
