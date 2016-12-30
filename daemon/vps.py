@@ -132,10 +132,12 @@ class Vps:
                 subprocess.call('vzctl set '+str(self._id)+' --ipadd '+str(val)+' --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             elif index == 'ram':
                 if int(val) == 0:
+                    subprocess.call('vzctl set '+str(self._id)+' --physpages unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                     subprocess.call('vzctl set '+str(self._id)+' --vmguarpages unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                     subprocess.call('vzctl set '+str(self._id)+' --oomguarpages unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                     subprocess.call('vzctl set '+str(self._id)+' --privvmpages unlimited:unlimited --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 else:
+                    subprocess.call('vzctl set '+str(self._id)+' --physpages '+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                     subprocess.call('vzctl set '+str(self._id)+' --vmguarpages '+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                     subprocess.call('vzctl set '+str(self._id)+' --oomguarpages '+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                     subprocess.call('vzctl set '+str(self._id)+' --privvmpages '+str(val)+'M:'+str(val)+'M --save', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
