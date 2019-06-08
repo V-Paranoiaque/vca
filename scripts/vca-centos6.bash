@@ -67,21 +67,10 @@ if [ "${DAEMON}" == "1" ] ; then
 	yum install centos-release-SCL -y
 	
 	# All needed packages
-	yum install clamav fuse ploop python33-python python33-python-devel python33-python-setuptools gcc gmp-devel screen vzctl -y
-	ln -s /opt/rh/python33/root/usr/bin/python3 /usr/bin/python3
-	
-	# Python install
-	cd /root/
-	
-	#PATH
-	if ! grep -q python33 /root/.bashrc ; then 
-		echo "" >> /root/.bashrc
-		echo "export PATH=$PATH:/opt/rh/python33/root/usr/bin" >> /root/.bashrc
-		echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/python33/root/usr/lib64" >> /root/.bashrc
-	fi
+	yum install clamav fuse ploop python34 python34-devel python34-setuptools gcc gmp-devel screen vzctl -y
 	
 	source /root/.bashrc
-	easy_install-3.3 pip
+	easy_install-3.4 pip
 	pip3 install dropbox pycrypto
 	
 	if [ ! -f /usr/share/vca/daemon/vca.cfg ] ; then 
